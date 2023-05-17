@@ -1,5 +1,5 @@
 # 455 Project
-Project repository for full-stack fitness app. 
+Project repository for an AI powered full-stack fitness app. 
 
 # Final Project Submission Requirements for README
 1. Top of README – clear description of app (can be like an elevator pitch!) [2-3 sentences]
