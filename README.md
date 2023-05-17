@@ -1,4 +1,4 @@
-# 455
+# 455 Project
 Project repository for full-stack fitness app. 
 
 # Final Project Submission Requirements for README
