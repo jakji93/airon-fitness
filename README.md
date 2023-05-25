@@ -18,7 +18,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://github.com/d-x-s/airon-fitness">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -27,14 +27,14 @@
   <p align="center">
     AI-powered fitness app to help you kickstart your training journey.
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/d-x-s/airon-fitness"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/d-x-s/airon-fitness">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/d-x-s/airon-fitness">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/d-x-s/airon-fitness">Request Feature</a>
   </p>
 </div>
 
@@ -88,11 +88,11 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 <!-- GROUP -->
 ## The Team
 
-Davis Song  - [@Linkedin](https://www.linkedin.com/in/davissong/)<br>
-Jack Ji     - [@Linkedin](https://www.linkedin.com/in/jack-ji-5643a011a/)<br>
-Kenny Cheng - [@Linkedin](https://www.linkedin.com/in/kennyjhcheng/)<br>
-Kevin Chung - [@Linkedin](https://www.linkedin.com/in/kevin-chung07/)<br>
-Kevin Wu    - [@Linkedin](https://www.linkedin.com/in/kevin-wu1/)<br>
+[@Davis Song](https://www.linkedin.com/in/davissong/)<br>
+[@Jack Ji](https://www.linkedin.com/in/jack-ji-5643a011a/)<br>
+[@Kenny Cheng](https://www.linkedin.com/in/kennyjhcheng/)<br>
+[@Kevin Chung](https://www.linkedin.com/in/kevin-chung07/)<br>
+[@Kevin Wu](https://www.linkedin.com/in/kevin-wu1/)<br>
 
 
 Project Link: [https://github.com/d-x-s/airon-fitness](https://github.com/d-x-s/airon-fitness)
@@ -101,9 +101,9 @@ Project Link: [https://github.com/d-x-s/airon-fitness](https://github.com/d-x-s/
 
 
 
-### Built With
+## Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+What we plan to use for our project.
 
 * [![React][React.js]][React-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
