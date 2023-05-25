@@ -1,7 +1,5 @@
 <a name="readme-top"></a>
 
-
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -15,8 +13,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 
 
 <!-- PROJECT LOGO -->
@@ -200,10 +196,15 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
 
-<!-- CONTACT -->
-## Contact
+<!-- GROUP -->
+## The Team
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Davis Song  - [@Linkedin](https://www.linkedin.com/in/davissong/)
+Jack Ji     - [@Linkedin](https://www.linkedin.com/in/jack-ji-5643a011a/)
+Kenny Cheng - [@Linkedin](https://www.linkedin.com/in/kennyjhcheng/)
+Kevin Chung - [@Linkedin](https://www.linkedin.com/in/kevin-chung07/)
+Kevin Wu    - [@Linkedin](https://www.linkedin.com/in/kevin-wu1/)
+
 
 Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
 
