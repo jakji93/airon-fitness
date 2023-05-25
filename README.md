@@ -71,18 +71,31 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/d-x-s/airon-fitness)
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+Introducing AIron Fitness, an innovative fitness companion designed to support individuals on their personal fitness journey. AIron Fitness utilizes artificial intelligence to deliver customized fitness plans tailored to each user's goals and preferences. Whether you're a beginner looking to start a fitness routine or an experienced enthusiast aiming to level up, AIron Fitness has got you covered.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+With AIron Fitness, users can create their profiles, input their fitness goals, and receive a comprehensive fitness plan perfectly suited to their needs. The platform stores valuable user data, including personal profiles and fitness progress, allowing users to track their journey and witness their achievements over time.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+But AIron Fitness goes beyond just providing static plans. Time permitting, additional functionality such as computer vision can be incorporated to enhance the user experience. Through computer vision, the platform can analyze and provide real-time feedback on exercise form and technique, ensuring users perform exercises correctly and maximize their results. Furthermore, dynamic fitness plans can be generated based on live user data, allowing the platform to adapt and optimize the workout regimen as users progress.
 
-Use the `BLANK_README.md` to get started.
+AIron Fitness empowers individuals to take control of their fitness goals and enjoy a personalized fitness experience. Say goodbye to generic workouts and hello to a tailored fitness solution with AIron Fitness by your side.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GROUP -->
+## The Team
+
+Davis Song  - [@Linkedin](https://www.linkedin.com/in/davissong/)<br>
+Jack Ji     - [@Linkedin](https://www.linkedin.com/in/jack-ji-5643a011a/)<br>
+Kenny Cheng - [@Linkedin](https://www.linkedin.com/in/kennyjhcheng/)<br>
+Kevin Chung - [@Linkedin](https://www.linkedin.com/in/kevin-chung07/)<br>
+Kevin Wu    - [@Linkedin](https://www.linkedin.com/in/kevin-wu1/)<br>
+
+
+Project Link: [https://github.com/d-x-s/airon-fitness](https://github.com/d-x-s/airon-fitness)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -92,20 +105,60 @@ Use the `BLANK_README.md` to get started.
 
 This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-* [![Next][Next.js]][Next-url]
 * [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 * [![JQuery][JQuery.com]][JQuery-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+<!-- Project Progress 1 -->
+## Project Progress 1
 
-<!-- GETTING STARTED -->
+### Minimal Requirements
+- [ ] A user can create a profile that can be saved
+    - [ ] Develop Frontend UI
+    - [ ] Fetch/Upload Profile Image
+    - [ ] Store input JSON (Name, Age, Email, Birthdate, Image) in database
+    - [ ] API Integration - Birthdate Entry
+    - [ ] Investigate Email Authentication
+- [ ] A user can update their profile with details such as diet, current training plan, etc.
+- [ ] A user can ask their personal trainer for a new fitness plan based on their profile and any additional information (e.g. workout frequency,  experience, specific goals)
+    - [ ] Investigate OpenAI
+    - [ ] Setup input prompt format
+    - [ ] Setup Frontend UI
+    - [ ] Setup backend API calls to ChatGPT
+    - [ ] Parse output JSON to Fitness Plan
+    - [ ] Store output JSON in datebase
+
+### Standard Requirements
+- [ ] Leverage ChatGPT AI to return a custom fitness plan
+- [ ] Allow users to log their workout history
+- [ ] Progress tracking of fitness plan
+- [ ] Account for user illness / physical constraints
+- [ ] Secure authentication system
+
+### Stretch Goals
+- [ ] Computer Vision that analyzes a users posture
+- [ ] Dynamically update fitness plans as users log their history
+- [ ] Live audio feedback during a workout 
+
+### Prototyping (Figma)
+Figma Link: [https://www.figma.com/file/1DCkl66gauCtiH0Btjx1VZ/AI-ron-Fitness-Prototyping?type=design&node-id=36-3&t=dtoPdy8njmD3d0tK-0
+](https://www.figma.com/file/1DCkl66gauCtiH0Btjx1VZ/AI-ron-Fitness-Prototyping?type=design&node-id=36-3&t=dtoPdy8njmD3d0tK-0
+)
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
@@ -142,18 +195,18 @@ _Below is an example of how you can instruct your audience on installing and set
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+<!-- ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 
 
 <!-- ROADMAP -->
-## Roadmap
+<!-- ## Roadmap
 
 - [x] Add Changelog
 - [x] Add back to top links
@@ -165,57 +218,14 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- GROUP -->
-## The Team
-
-Davis Song  - [@Linkedin](https://www.linkedin.com/in/davissong/)
-Jack Ji     - [@Linkedin](https://www.linkedin.com/in/jack-ji-5643a011a/)
-Kenny Cheng - [@Linkedin](https://www.linkedin.com/in/kennyjhcheng/)
-Kevin Chung - [@Linkedin](https://www.linkedin.com/in/kevin-chung07/)
-Kevin Wu    - [@Linkedin](https://www.linkedin.com/in/kevin-wu1/)
-
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p> --> -->
 
 
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+Resources we found helpful along the way! 
 
 * [Choose an Open Source License](https://choosealicense.com)
 * [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
