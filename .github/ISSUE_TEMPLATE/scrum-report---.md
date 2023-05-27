@@ -1,5 +1,5 @@
 ---
-name: "Feature request \U0001F680"
+name: "Scrum Update"
 about: scrum updates for sprint (2 weeks)
 labels: scrum
 
