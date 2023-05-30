@@ -25,17 +25,20 @@ fi
 
 $ESLINT_CLIENT "${STAGED_FILES[@]}" --fix
 
+ESLINT_EXIT_CLIENT="$?"
+
 if [[  -x "$ESLINT_SERVER" ]]; then
   $ESLINT_SERVER "${STAGED_FILES[@]}" --fix
+  ESLINT_EXIT_SERVER="$?"
 fi
 
-ESLINT_EXIT="$?"
+ESLINT_EXIT=$((ESLINT_EXIT_CLIENT + ESLINT_EXIT_SERVER))
 
 # Re-add files since they may have been fixed
 git add "${STAGED_FILES[@]}"
 
 if [[ "${ESLINT_EXIT}" == 0 ]]; then
-  printf "\n\033[42mCOMMIT SUCCEEDED\033[0m\n"
+  printf "\n\033[42mCLIENT: COMMIT SUCCEEDED\033[0m\n"
 else
   printf "\n\033[41mCOMMIT FAILED:\033[0m Fix eslint errors and try again\n"
   exit 1
