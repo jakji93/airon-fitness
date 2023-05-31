@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "checkJs": true,
+        "jsx": "react-jsx",
+        "paths": {
+            "@client/*": ["./client/*"],
+            "@server/*": ["./server/*"]
+        }
+    },
+    "include": ["**/src/**/*"],
+    "exclude": ["node_modules"]
+}

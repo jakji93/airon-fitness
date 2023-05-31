@@ -11,10 +11,9 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
   },
   // {
@@ -23,9 +22,9 @@ const router = createBrowserRouter([
   // }
 ]);
 
-const store = configureStore({ 
-  reducer:  rootReducer
-})
+const store = configureStore({
+  reducer: rootReducer,
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -33,5 +32,5 @@ root.render(
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
