@@ -106,8 +106,9 @@ Project Link: [https://github.com/d-x-s/airon-fitness](https://github.com/d-x-s/
 What we plan to use for our project.
 
 * [![React][React.js]][React-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* Material UI with [Emotion](https://emotion.sh/docs/introduction) for styling
+* [Redux](https://redux.js.org)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
