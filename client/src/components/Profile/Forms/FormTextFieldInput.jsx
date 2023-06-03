@@ -1,5 +1,7 @@
 import React from 'react';
-import { Grid, InputLabel, TextField } from '@mui/material';
+import {
+  Grid, InputAdornment, InputLabel, TextField,
+} from '@mui/material';
 import PropTypes from 'prop-types';
 
 export default function FormTextFieldInput(props) {
@@ -11,6 +13,7 @@ export default function FormTextFieldInput(props) {
     setValue,
     type,
     multiline,
+    endAdornment,
   } = props;
 
   return (
@@ -44,6 +47,9 @@ export default function FormTextFieldInput(props) {
           onChange={(e) => setValue(e.target.value)}
           type={type}
           multiline={multiline}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">{endAdornment}</InputAdornment>,
+          }}
         />
       </Grid>
     </>
@@ -61,10 +67,12 @@ FormTextFieldInput.propTypes = {
   ]).isRequired,
   setValue: PropTypes.func.isRequired,
   type: PropTypes.string,
+  endAdornment: PropTypes.string,
 };
 
 FormTextFieldInput.defaultProps = {
   half: false,
   multiline: false,
   type: null,
+  endAdornment: null,
 };
