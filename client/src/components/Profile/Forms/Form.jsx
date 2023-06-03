@@ -1,28 +1,44 @@
 import {
-  Paper, Typography, Grid, InputLabel, TextField, FormControl, Select, MenuItem, Button,
+  Paper, Typography, Grid, Button,
 } from '@mui/material';
 import { Box } from '@mui/system';
-import React from 'react';
-import UploadFileIcon from '@mui/icons-material/UploadFile';
-import FormInput from './FormInput';
+import React, { useState } from 'react';
+import FormTextFieldInput from './FormTextFieldInput';
+import FormSelect from './FormSelect';
+import FormDatePicker from './FormDatePicker';
 
 export default function Form() {
-  const [age, setAge] = React.useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [birthDate, setBirthDate] = useState(null);
+  const [gender, setGender] = useState('');
+  const [weight, setWeight] = useState(0);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const clear = () => {
+    setFirstName('');
+    setLastName('');
+    setBirthDate(null);
   };
 
-  const categories = [
-    'science',
-    'sports',
-    'business',
-    'politics',
-    'entertainment',
-    'technology',
-    'world',
-    'all',
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log({
+      'firstName:': firstName,
+      'lastName:': lastName,
+      'birthDate:': birthDate,
+    });
+
+    clear();
+  };
+
+  const genders = [
+    'Female',
+    'Male',
+    'Non-binary',
+    'Prefer not to say',
+    'Other',
   ];
+
   return (
 
     <Paper elevation={3} sx={{ marginRight: '15%', marginLeft: '15%' }}>
@@ -30,135 +46,55 @@ export default function Form() {
         <Typography variant="h6" gutterBottom sx={{ paddingBottom: 5 }}>
           Update Basic Profile
         </Typography>
-        <Grid container spacing={3}>
-          <FormInput
-            id="first-name"
-            label="First Name"
-            half
-          />
-          <FormInput
-            id="last-name"
-            label="Last Name"
-            half
-          />
-          <Grid item xs={12} sm={2}>
-            <InputLabel
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                fontWeight: 700,
-              }}
-            >
-              Content
-            </InputLabel>
-          </Grid>
-          <Grid item xs={12} sm={10}>
-            <TextField
-              id="outlined-multiline-static"
-              label="Content"
-              multiline
-              fullWidth
-              rows={4}
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={3}>
+            <FormTextFieldInput
+              id="first-name"
+              label="First Name"
+              half
+              value={firstName}
+              setValue={setFirstName}
             />
-          </Grid>
-          <Grid item xs={12} sm={2}>
-            <InputLabel
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                fontWeight: 700,
-              }}
-            >
-              URL
-            </InputLabel>
-          </Grid>
-          <Grid item xs={12} sm={10}>
-            <TextField
-              required
-              id="url"
-              name="url"
-              label="URL"
-              fullWidth
-              size="small"
-              autoComplete="off"
-              variant="outlined"
+            <FormTextFieldInput
+              id="last-name"
+              label="Last Name"
+              half
+              value={lastName}
+              setValue={setLastName}
             />
-          </Grid>
-          <Grid item xs={12} sm={2}>
-            <InputLabel
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                fontWeight: 700,
-              }}
-            >
-              Category
-            </InputLabel>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <FormControl fullWidth size="small">
-              <InputLabel id="demo-simple-select-label">Age</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={age}
-                label="Age"
-                onChange={handleChange}
-              >
-                {categories.map((item) => (
-                  <MenuItem value={item}>{item}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={2}>
-            <InputLabel
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                fontWeight: 700,
-              }}
-            >
-              Author
-            </InputLabel>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <TextField
-              required
-              id="author"
-              name="author"
-              label="Author"
-              fullWidth
-              size="small"
-              autoComplete="off"
-              variant="outlined"
+            <FormDatePicker
+              half
+              id="birthdate"
+              label="Born"
+              setValue={setBirthDate}
+              value={birthDate}
             />
+            <FormSelect
+              half
+              id="gender"
+              label="Gender"
+              options={genders}
+              setValue={setGender}
+              value={gender}
+            />
+            <FormTextFieldInput
+              id="weight"
+              label="Weight"
+              half
+              value={weight}
+              setValue={setWeight}
+              type="number"
+            />
+            <Grid item xs={12} sm={6} />
+            <Grid item xs={12} sm={5} />
+            <Grid item xs={12} sm={4}>
+              <Button variant="contained" type="submit">
+                Save
+              </Button>
+            </Grid>
+            <Grid item xs={12} sm={5} />
           </Grid>
-          <Grid item xs={12} sm={2}>
-            <InputLabel
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                fontWeight: 700,
-              }}
-            >
-              Img Upload
-            </InputLabel>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Button>
-              <UploadFileIcon />
-            </Button>
-          </Grid>
-          <Grid item xs={12} sm={6} />
-          <Grid item xs={12} sm={5} />
-          <Grid item xs={12} sm={4}>
-            <Button variant="contained" sx={{ color: '#ff781f' }}>
-              Save
-            </Button>
-          </Grid>
-          <Grid item xs={12} sm={5} />
-        </Grid>
+        </form>
       </Box>
     </Paper>
 
