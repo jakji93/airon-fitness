@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 import AvatarUpload from '../components/Profile/AvatarUpload';
+import Form from '../components/Profile/Forms/Form';
 
 export default function Profile() {
   return (
@@ -9,6 +10,7 @@ export default function Profile() {
         Profile Page
       </Typography>
       <AvatarUpload />
+      <Form />
     </>
   );
 }
