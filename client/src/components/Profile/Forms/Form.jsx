@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import FormTextFieldInput from './FormTextFieldInput';
 import FormSelect from './FormSelect';
 import FormDatePicker from './FormDatePicker';
+import FormTextFieldWithRadio from './FormTextWithRadio';
 
 export default function Form() {
   const [firstName, setFirstName] = useState('');
@@ -77,13 +78,13 @@ export default function Form() {
               setValue={setGender}
               value={gender}
             />
-            <FormTextFieldInput
+            <FormTextFieldWithRadio
               id="weight"
               label="Weight"
-              half
               value={weight}
               setValue={setWeight}
               type="number"
+              radioGroups={['lb', 'kg']}
             />
             <Grid item xs={12} sm={6} />
             <Grid item xs={12} sm={5} />
