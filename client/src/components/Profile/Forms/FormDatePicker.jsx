@@ -1,13 +1,17 @@
 import React from 'react';
-import { Grid, InputLabel, TextField } from '@mui/material';
+import { Grid, InputLabel } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers';
 import PropTypes from 'prop-types';
 
-export default function FormInput(props) {
+export default function FormDatePicker(props) {
   const {
     id,
     label,
     half,
+    value,
+    setValue,
   } = props;
+
   return (
     <>
       <Grid item xs={12} sm={2}>
@@ -16,35 +20,28 @@ export default function FormInput(props) {
             display: 'flex',
             justifyContent: 'center',
             fontWeight: 700,
-            wordWrap: 'break-word',
-            whiteSpace: 'normal',
           }}
+          id={`${id}-label`}
         >
           {label}
         </InputLabel>
       </Grid>
       <Grid item xs={12} sm={half ? 4 : 10}>
-        <TextField
-          required
-          id={id}
-          name={id}
-          label={label}
-          fullWidth
-          size="small"
-          autoComplete="off"
-          variant="outlined"
-        />
+        <DatePicker value={value} onChange={(val) => setValue(val)} />
       </Grid>
     </>
   );
 }
 
-FormInput.propTypes = {
+FormDatePicker.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   half: PropTypes.bool,
+  value: PropTypes.string,
+  setValue: PropTypes.func.isRequired,
 };
 
-FormInput.defaultProps = {
+FormDatePicker.defaultProps = {
   half: false,
+  value: null,
 };
