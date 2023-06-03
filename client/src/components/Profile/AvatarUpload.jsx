@@ -17,6 +17,9 @@ const BigAvatar = styled(Avatar)(({ theme }) => ({
 
 }));
 
+/**
+ * Inspired from: https://gist.github.com/Pacheco95/aa5c28b7a61dacba5b8f55f84d1fa591
+ */
 export default function AvatarUpload() {
   const [image, _setImage] = useState(null);
   const inputFileRef = createRef();
