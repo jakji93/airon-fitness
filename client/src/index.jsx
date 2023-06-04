@@ -13,6 +13,7 @@ import '@fontsource/roboto/700.css';
 import About from './pages/About';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import SignupFlow from './pages/SignupFlow';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <Profile />,
+      },
+      {
+        path: 'signup',
+        element: <SignupFlow />,
       },
     ],
   },
