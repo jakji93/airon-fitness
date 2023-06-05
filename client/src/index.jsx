@@ -1,20 +1,21 @@
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { configureStore } from '@reduxjs/toolkit';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
 import App from './App';
+import About from './pages/About';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
 import rootReducer from './reducers';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import About from './pages/About';
-import Home from './pages/Home';
-import Profile from './pages/Profile';
 
 const router = createBrowserRouter([
   {
