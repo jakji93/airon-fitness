@@ -20,6 +20,8 @@ export default function FormDatePicker(props) {
             display: 'flex',
             justifyContent: 'center',
             fontWeight: 700,
+            wordWrap: 'break-word',
+            whiteSpace: 'normal',
           }}
           id={`${id}-label`}
         >
