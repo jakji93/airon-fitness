@@ -3,11 +3,11 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
-import Form from './Form';
-import FormDatePicker from './FormDatePicker';
-import FormSelect from './FormSelect';
-import FormTextFieldInput from './FormTextFieldInput';
-import FormTextFieldWithRadio from './FormTextWithRadio';
+import Form from './Forms/Form';
+import FormDatePicker from './Forms/FormDatePicker';
+import FormSelect from './Forms/FormSelect';
+import FormTextFieldInput from './Forms/FormTextFieldInput';
+import FormTextFieldWithRadio from './Forms/FormTextWithRadio';
 
 export default function BasicInfoForm() {
   const [firstName, setFirstName] = useState('');
