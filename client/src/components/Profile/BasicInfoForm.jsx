@@ -18,6 +18,7 @@ export default function BasicInfoForm() {
   const [gender, setGender] = useState('');
   const [weight, setWeight] = useState(0);
   const [height, setHeight] = useState(0);
+  const [experience, setExperience] = useState('');
 
   const clear = () => {
     setFirstName('');
@@ -34,17 +35,24 @@ export default function BasicInfoForm() {
       'gender: ': gender,
       'weight: ': weight,
       'height: ': height,
+      'fitnessLevel: ': experience,
     });
 
     clear();
   };
 
-  const genders = [
+  const genderOptions = [
     'Female',
     'Male',
     'Non-binary',
     'Prefer not to say',
     'Other',
+  ];
+
+  const experienceOptions = [
+    'Beginner',
+    'Intermediate',
+    'Advanced',
   ];
 
   return (
@@ -77,7 +85,7 @@ export default function BasicInfoForm() {
         half
         id="gender"
         label="Gender"
-        options={genders}
+        options={genderOptions}
         setValue={setGender}
         value={gender}
       />
@@ -98,6 +106,14 @@ export default function BasicInfoForm() {
         type="number"
         radioGroups={['cm', 'inch']}
         conversionFunctions={[_.noop, convertInchesToCm]}
+      />
+      <FormSelect
+        half
+        id="experience"
+        label="Experience"
+        options={experienceOptions}
+        setValue={setExperience}
+        value={experience}
       />
       <Grid item xs={12} sm={6} />
       <Grid item xs={12} sm={5} />
