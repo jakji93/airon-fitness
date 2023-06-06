@@ -26,6 +26,11 @@ export default function BasicInfoForm() {
     setFirstName('');
     setLastName('');
     setBirthDate(null);
+    setGender('');
+    setWeight(0);
+    setHeight(0);
+    setExperience('');
+    setGoals([]);
   };
 
   const handleSubmit = (event) => {
