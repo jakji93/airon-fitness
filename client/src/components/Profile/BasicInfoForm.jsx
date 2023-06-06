@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 
 import Form from './Forms/Form';
 import FormDatePicker from './Forms/FormDatePicker';
+import FormMultiSelect from './Forms/FormMultiSelect';
 import FormSelect from './Forms/FormSelect';
 import FormTextFieldInput from './Forms/FormTextFieldInput';
 import FormTextFieldWithRadio from './Forms/FormTextWithRadio';
@@ -19,6 +20,7 @@ export default function BasicInfoForm() {
   const [weight, setWeight] = useState(0);
   const [height, setHeight] = useState(0);
   const [experience, setExperience] = useState('');
+  const [goals, setGoals] = useState([]);
 
   const clear = () => {
     setFirstName('');
@@ -35,7 +37,8 @@ export default function BasicInfoForm() {
       'gender: ': gender,
       'weight: ': weight,
       'height: ': height,
-      'fitnessLevel: ': experience,
+      'experience: ': experience,
+      'goals: ': goals,
     });
 
     clear();
@@ -53,6 +56,13 @@ export default function BasicInfoForm() {
     'Beginner',
     'Intermediate',
     'Advanced',
+  ];
+
+  const goalsOptions = [
+    'weight loss',
+    'muscle growth',
+    'endurance',
+    'overall health',
   ];
 
   return (
@@ -114,6 +124,14 @@ export default function BasicInfoForm() {
         options={experienceOptions}
         setValue={setExperience}
         value={experience}
+      />
+      <Grid item xs={12} sm={6} />
+      <FormMultiSelect
+        id="goals"
+        label="Goals"
+        value={goals}
+        setValue={setGoals}
+        options={goalsOptions}
       />
       <Grid item xs={12} sm={6} />
       <Grid item xs={12} sm={5} />
