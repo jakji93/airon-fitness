@@ -1,5 +1,6 @@
 import { Grid, InputLabel } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -35,11 +36,24 @@ export default function FormDatePicker(props) {
   );
 }
 
+const dayjsValidator = (props, propName, componentName, location, propFullName) => {
+  let error;
+  const propValue = props[propName];
+  // Check if propValue is a valid Day.js object
+  if (!dayjs.isDayjs(propValue) && propValue !== null) {
+    error = new Error(
+      `Invalid ${location} '${propFullName}' supplied to '${componentName}'. 
+      Expected a Day.js object.`,
+    );
+  }
+  return error;
+};
+
 FormDatePicker.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   half: PropTypes.bool,
-  value: PropTypes.string,
+  value: dayjsValidator,
   setValue: PropTypes.func.isRequired,
 };
 

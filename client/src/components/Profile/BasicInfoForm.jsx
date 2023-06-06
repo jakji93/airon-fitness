@@ -1,6 +1,7 @@
 import {
   Grid, Button,
 } from '@mui/material';
+import _ from 'lodash';
 import React, { useState } from 'react';
 
 import Form from './Forms/Form';
@@ -8,6 +9,7 @@ import FormDatePicker from './Forms/FormDatePicker';
 import FormSelect from './Forms/FormSelect';
 import FormTextFieldInput from './Forms/FormTextFieldInput';
 import FormTextFieldWithRadio from './Forms/FormTextWithRadio';
+import { convertInchesToCm, convertLbToKg } from '../../util';
 
 export default function BasicInfoForm() {
   const [firstName, setFirstName] = useState('');
@@ -15,6 +17,7 @@ export default function BasicInfoForm() {
   const [birthDate, setBirthDate] = useState(null);
   const [gender, setGender] = useState('');
   const [weight, setWeight] = useState(0);
+  const [height, setHeight] = useState(0);
 
   const clear = () => {
     setFirstName('');
@@ -25,9 +28,12 @@ export default function BasicInfoForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log({
-      'firstName:': firstName,
-      'lastName:': lastName,
-      'birthDate:': birthDate,
+      'firstName: ': firstName,
+      'lastName: ': lastName,
+      'birthDate: ': birthDate,
+      'gender: ': gender,
+      'weight: ': weight,
+      'height: ': height,
     });
 
     clear();
@@ -81,7 +87,17 @@ export default function BasicInfoForm() {
         value={weight}
         setValue={setWeight}
         type="number"
-        radioGroups={['lb', 'kg']}
+        radioGroups={['kg', 'lb']}
+        conversionFunctions={[_.noop, convertLbToKg]}
+      />
+      <FormTextFieldWithRadio
+        id="height"
+        label="Height"
+        value={height}
+        setValue={setHeight}
+        type="number"
+        radioGroups={['cm', 'inch']}
+        conversionFunctions={[_.noop, convertInchesToCm]}
       />
       <Grid item xs={12} sm={6} />
       <Grid item xs={12} sm={5} />
