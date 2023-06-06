@@ -1,0 +1,97 @@
+import {
+  Grid, Button,
+} from '@mui/material';
+import React, { useState } from 'react';
+
+import Form from './Form';
+import FormDatePicker from './FormDatePicker';
+import FormSelect from './FormSelect';
+import FormTextFieldInput from './FormTextFieldInput';
+import FormTextFieldWithRadio from './FormTextWithRadio';
+
+export default function BasicInfoForm() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [birthDate, setBirthDate] = useState(null);
+  const [gender, setGender] = useState('');
+  const [weight, setWeight] = useState(0);
+
+  const clear = () => {
+    setFirstName('');
+    setLastName('');
+    setBirthDate(null);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log({
+      'firstName:': firstName,
+      'lastName:': lastName,
+      'birthDate:': birthDate,
+    });
+
+    clear();
+  };
+
+  const genders = [
+    'Female',
+    'Male',
+    'Non-binary',
+    'Prefer not to say',
+    'Other',
+  ];
+
+  return (
+    <Form
+      handleSubmit={handleSubmit}
+      formTitle="Update Basic Profile"
+    >
+      <FormTextFieldInput
+        id="first-name"
+        label="First Name"
+        half
+        value={firstName}
+        setValue={setFirstName}
+      />
+      <FormTextFieldInput
+        id="last-name"
+        label="Last Name"
+        half
+        value={lastName}
+        setValue={setLastName}
+      />
+      <FormDatePicker
+        half
+        id="birthdate"
+        label="Born"
+        setValue={setBirthDate}
+        value={birthDate}
+      />
+      <FormSelect
+        half
+        id="gender"
+        label="Gender"
+        options={genders}
+        setValue={setGender}
+        value={gender}
+      />
+      <FormTextFieldWithRadio
+        id="weight"
+        label="Weight"
+        value={weight}
+        setValue={setWeight}
+        type="number"
+        radioGroups={['lb', 'kg']}
+      />
+      <Grid item xs={12} sm={6} />
+      <Grid item xs={12} sm={5} />
+      <Grid item xs={12} sm={4}>
+        <Button variant="contained" type="submit">
+          Save
+        </Button>
+      </Grid>
+      <Grid item xs={12} sm={5} />
+    </Form>
+
+  );
+}
