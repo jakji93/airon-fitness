@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import {
   FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Grid,
 } from '@mui/material';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+
 import FormTextFieldInput from './FormTextFieldInput';
 
 export default function FormTextFieldWithRadio(props) {

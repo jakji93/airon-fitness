@@ -3,9 +3,10 @@ import {
 } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
-import FormTextFieldInput from './FormTextFieldInput';
-import FormSelect from './FormSelect';
+
 import FormDatePicker from './FormDatePicker';
+import FormSelect from './FormSelect';
+import FormTextFieldInput from './FormTextFieldInput';
 import FormTextFieldWithRadio from './FormTextWithRadio';
 
 export default function Form() {
@@ -23,12 +24,6 @@ export default function Form() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({
-      'firstName:': firstName,
-      'lastName:': lastName,
-      'birthDate:': birthDate,
-    });
-
     clear();
   };
 

@@ -1,12 +1,12 @@
-import React, { createRef, useState } from 'react';
-import {
-  Avatar, Box, Button, styled,
-} from '@mui/material';
 import {
   CloudUpload as UploadIcon,
   Delete as DeleteIcon,
 } from '@mui/icons-material';
+import {
+  Avatar, Box, Button, styled,
+} from '@mui/material';
 import { grey } from '@mui/material/colors';
+import React, { createRef, useState } from 'react';
 
 const BigAvatar = styled(Avatar)(({ theme }) => ({
   width: '120px',
