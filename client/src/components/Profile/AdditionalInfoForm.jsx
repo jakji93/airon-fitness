@@ -1,3 +1,4 @@
+import { Grid, Button } from '@mui/material';
 import React, { useState } from 'react';
 
 import Form from './Forms/Form';
@@ -138,6 +139,14 @@ export default function AdditionalInfoForm() {
         setValue={setWeeklyAvailability}
         options={weeklyAvailabilityOptions}
       />
+      <Grid item xs={12} sm={6} />
+      <Grid item xs={12} sm={5} />
+      <Grid item xs={12} sm={4}>
+        <Button variant="contained" type="submit">
+          Save
+        </Button>
+      </Grid>
+      <Grid item xs={12} sm={5} />
     </Form>
   );
 }
