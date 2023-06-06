@@ -12,6 +12,27 @@ import FormTextFieldInput from './Forms/FormTextFieldInput';
 import FormTextFieldWithRadio from './Forms/FormTextWithRadio';
 import { convertInchesToCm, convertLbToKg } from '../../util';
 
+const genderOptions = [
+  'Female',
+  'Male',
+  'Non-binary',
+  'Prefer not to say',
+  'Other',
+];
+
+const experienceOptions = [
+  'Beginner',
+  'Intermediate',
+  'Advanced',
+];
+
+const goalsOptions = [
+  'weight loss',
+  'muscle growth',
+  'endurance',
+  'overall health',
+];
+
 export default function BasicInfoForm() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -48,27 +69,6 @@ export default function BasicInfoForm() {
 
     clear();
   };
-
-  const genderOptions = [
-    'Female',
-    'Male',
-    'Non-binary',
-    'Prefer not to say',
-    'Other',
-  ];
-
-  const experienceOptions = [
-    'Beginner',
-    'Intermediate',
-    'Advanced',
-  ];
-
-  const goalsOptions = [
-    'weight loss',
-    'muscle growth',
-    'endurance',
-    'overall health',
-  ];
 
   return (
     <Form
