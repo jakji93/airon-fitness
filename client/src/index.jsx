@@ -1,19 +1,21 @@
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { configureStore } from '@reduxjs/toolkit';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
 import App from './App';
+import About from './pages/About';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
 import rootReducer from './reducers';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import About from './pages/About';
-import Home from './pages/Home';
-import Profile from './pages/Profile';
-import SignupFlow from './pages/SignupFlow';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +23,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: 'home',
+        path: '',
         element: <Home />,
       },
       {
@@ -49,7 +51,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <RouterProvider router={router} />
+      </LocalizationProvider>
     </Provider>
   </React.StrictMode>,
 );
