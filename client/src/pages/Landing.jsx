@@ -1,13 +1,11 @@
 import { Button, Typography } from '@mui/material';
 import React from 'react';
 import TypewriterComponent from 'typewriter-effect';
-import '../index.css';
 
 import videoBackground from '../assets/LandingVideoBackgroundCrop.mp4';
 
 const styles = {
   container: {
-    // display: 'flex',
     flexDirection: 'column',
     height: '100vh',
   },
@@ -30,8 +28,6 @@ const styles = {
     flexDirection: 'column',
     padding: '25px 50px 25px 75px',
     zIndex: 9999,
-  },
-  typewriterContainer: {
   },
   typewriter: {
     color: '#F3F3F0',
@@ -57,7 +53,7 @@ export default function Landing() {
     <div className="video-container" style={styles.container}>
       <div className="overlay" style={styles.overlay} />
       <div className="action-container" style={styles.actionContainer}>
-        <div className="typewriter-container" style={styles.typewriterContainer}>
+        <div className="typewriter-container">
           <div className="typewriter" style={styles.typewriter}>
             <TypewriterComponent
               options={{
