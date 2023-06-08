@@ -9,6 +9,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import About from './pages/About';
+import DesignLibrary from './pages/DesignLibrary';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import rootReducer from './reducers';
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <Profile />,
+      },
+      {
+        path: 'lib',
+        element: <DesignLibrary />,
       },
     ],
   },
