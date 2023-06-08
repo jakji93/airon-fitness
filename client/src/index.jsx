@@ -10,6 +10,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import About from './pages/About';
 import Home from './pages/Home';
+import Landing from './pages/Landing';
 import Profile from './pages/Profile';
 import rootReducer from './reducers';
 import '@fontsource/roboto/300.css';
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
+        element: <Landing />,
+      },
+      {
+        path: 'home',
         element: <Home />,
       },
       {
