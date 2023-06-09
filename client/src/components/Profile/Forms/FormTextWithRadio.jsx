@@ -10,6 +10,7 @@ export default function FormTextFieldWithRadio(props) {
   const {
     id,
     label,
+    showTitleLabel,
     value,
     setValue,
     type,
@@ -17,12 +18,12 @@ export default function FormTextFieldWithRadio(props) {
     radioLabel,
   } = props;
   const [selectedValue, setSelectedValue] = useState(radioGroups[0]);
-
   return (
     <>
       <FormTextFieldInput
         id={id}
         label={label}
+        showTitleLabel={showTitleLabel}
         half
         value={value}
         setValue={setValue}
@@ -58,6 +59,7 @@ export default function FormTextFieldWithRadio(props) {
 FormTextFieldWithRadio.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  showTitleLabel: PropTypes.bool,
   radioLabel: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -70,5 +72,6 @@ FormTextFieldWithRadio.propTypes = {
 
 FormTextFieldWithRadio.defaultProps = {
   type: 'number',
+  showTitleLabel: true,
   radioLabel: null,
 };

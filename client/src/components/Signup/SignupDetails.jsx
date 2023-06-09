@@ -1,11 +1,18 @@
 import {
-  Box, Typography, Grid, TextField, Button, Select, MenuItem,
+  Box, Typography, Grid, TextField, Button,
 } from '@mui/material';
-import * as React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
-export default function SignupDetails() {
-  const handleSubmit = () => {
+import { genders } from '../../utils/userUtils';
+import FormSelect from '../Profile/Forms/FormSelect';
 
+export default function SignupDetails({ nextStage, updateUser }) {
+  const [gender, setGender] = useState('');
+  const handleSubmit = (e) => {
+    updateUser({});
+    nextStage(e);
   };
 
   return (
@@ -47,15 +54,15 @@ export default function SignupDetails() {
             />
           </Grid>
           <Grid item xs={12}>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+            <FormSelect
+              half
+              id="gender"
               label="Gender"
-            >
-              <MenuItem value="male">Male</MenuItem>
-              <MenuItem value="female">Female</MenuItem>
-              <MenuItem value="other">Other</MenuItem>
-            </Select>
+              showTitleLabel={false}
+              options={genders}
+              setValue={setGender}
+              value={gender}
+            />
           </Grid>
         </Grid>
         <Button
@@ -70,3 +77,13 @@ export default function SignupDetails() {
     </Box>
   );
 }
+
+SignupDetails.propTypes = {
+  nextStage: PropTypes.func,
+  updateUser: PropTypes.func,
+};
+
+SignupDetails.defaultProps = {
+  nextStage: null,
+  updateUser: null,
+};

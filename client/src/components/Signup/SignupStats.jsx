@@ -1,11 +1,17 @@
 import {
-  Box, Typography, Grid, TextField, Button,
+  Box, Typography, Grid, Button,
 } from '@mui/material';
-import * as React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+
+import { experienceLevels } from '../../utils/userUtils';
+import FormSelect from '../Profile/Forms/FormSelect';
+import FormTextFieldWithRadio from '../Profile/Forms/FormTextWithRadio';
 
 export default function SignupStats({ updateUser, nextStage }) {
+  const [weight, setWeight] = useState(0);
+  const [height, setHeight] = useState(0);
+  const [experience, setExperience] = useState('');
   const handleSubmit = (e) => {
     updateUser({});
     nextStage(e);
@@ -21,32 +27,38 @@ export default function SignupStats({ updateUser, nextStage }) {
       }}
     >
       <Typography component="h1" variant="h5">
-        Welcome to AI-ron Fitness!
-      </Typography>
-      <Typography component="h3" variant="h5">
-        Let&apos;s get a profile tailored for you
+        Lastly, let&apos;s get some stats
       </Typography>
       <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <TextField
-              autoComplete="given-name"
-              name="firstName"
-              required
-              fullWidth
-              id="firstName"
-              label="First Name"
-              autoFocus
+            <FormSelect
+              id="experience"
+              label="Experience"
+              showTitleLabel={false}
+              options={experienceLevels}
+              setValue={setExperience}
+              value={experience}
             />
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              id="lastName"
-              label="Last Name"
-              name="lastName"
-              autoComplete="family-name"
+          <Grid item xs={12} sx={{ display: 'flex' }}>
+            <FormTextFieldWithRadio
+              id="weight"
+              label="Weight"
+              showTitleLabel={false}
+              value={weight}
+              setValue={setWeight}
+              type="number"
+              radioGroups={['lb', 'kg']}
+            />
+            <FormTextFieldWithRadio
+              id="height"
+              label="Height"
+              showTitleLabel={false}
+              value={height}
+              setValue={setHeight}
+              type="number"
+              radioGroups={['cm', 'in']}
             />
           </Grid>
         </Grid>

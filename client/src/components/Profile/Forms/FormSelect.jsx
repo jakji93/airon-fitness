@@ -8,6 +8,7 @@ export default function FormSelect(props) {
   const {
     id,
     label,
+    showTitleLabel,
     half,
     value,
     setValue,
@@ -17,15 +18,21 @@ export default function FormSelect(props) {
   return (
     <>
       <Grid item xs={12} sm={2}>
-        <InputLabel
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            fontWeight: 700,
-          }}
-        >
-          {label}
-        </InputLabel>
+        {
+        showTitleLabel
+          ? (
+            <InputLabel
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                fontWeight: 700,
+              }}
+            >
+              {label}
+            </InputLabel>
+          )
+          : ''
+      }
       </Grid>
       <Grid item xs={12} sm={half ? 4 : 10}>
         <FormControl fullWidth size="small">
@@ -58,6 +65,7 @@ export default function FormSelect(props) {
 FormSelect.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  showTitleLabel: PropTypes.bool,
   half: PropTypes.bool,
   value: PropTypes.string.isRequired,
   setValue: PropTypes.func.isRequired,
@@ -66,4 +74,5 @@ FormSelect.propTypes = {
 
 FormSelect.defaultProps = {
   half: false,
+  showTitleLabel: true,
 };

@@ -1,7 +1,3 @@
-import * as React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import PropTypes from 'prop-types';
-
 import {
   Button,
   CssBaseline,
@@ -12,6 +8,8 @@ import {
   Typography,
   Container,
 } from '@mui/material';
+import PropTypes from 'prop-types';
+import * as React from 'react';
 
 export default function SignupLanding({ nextStage, updateUser }) {
   const handleSubmit = (e) => {

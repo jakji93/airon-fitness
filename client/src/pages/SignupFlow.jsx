@@ -1,17 +1,20 @@
+import {
+  Stepper, Step, StepLabel, Box,
+} from '@mui/material';
 import React, { useState } from 'react';
-import { Box } from '@mui/material';
 
-import SignupLanding from '../components/Signup/SignupLanding';
 import SignupDetails from '../components/Signup/SignupDetails';
+import SignupLanding from '../components/Signup/SignupLanding';
 import SignupStats from '../components/Signup/SignupStats';
 
 export default function SignupFlow() {
   const [user, setUser] = useState({});
   const [step, setStep] = useState(0);
+  const steps = ['Account Creation', 'Personal', 'Health'];
 
-  const nextStage = (e) => {
+  const handleNext = (e) => {
     e.preventDefault();
-    setStep(step + 1);
+    setStep((prevStep) => prevStep + 1);
   };
 
   const updateUser = (data) => {
@@ -22,13 +25,13 @@ export default function SignupFlow() {
     let stage;
     switch (step) {
       case 0:
-        stage = <SignupLanding nextStage={nextStage} updateUser={updateUser} />;
+        stage = <SignupLanding nextStage={handleNext} updateUser={updateUser} />;
         break;
       case 1:
-        stage = <SignupDetails nextStage={nextStage} updateUser={updateUser} />;
+        stage = <SignupDetails nextStage={handleNext} updateUser={updateUser} />;
         break;
       case 2:
-        stage = <SignupStats nextStage={nextStage} updateUser={updateUser} />;
+        stage = <SignupStats nextStage={handleNext} updateUser={updateUser} />;
         break;
       default:
         break;
@@ -39,6 +42,13 @@ export default function SignupFlow() {
 
   return (
     <Box>
+      <Stepper activeStep={step} sx={{ margin: '3%' }}>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
       { getCurrentStage() }
     </Box>
   );
