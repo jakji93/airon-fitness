@@ -1,8 +1,9 @@
 import { Typography } from '@mui/material';
 import React from 'react';
 
+import AdditionalInfoForm from '../components/Profile/AdditionalInfoForm';
 import AvatarUpload from '../components/Profile/AvatarUpload';
-import Form from '../components/Profile/Forms/Form';
+import BasicInfoForm from '../components/Profile/BasicInfoForm';
 
 export default function Profile() {
   return (
@@ -11,7 +12,8 @@ export default function Profile() {
         Profile Page
       </Typography>
       <AvatarUpload />
-      <Form />
+      <BasicInfoForm />
+      <AdditionalInfoForm />
     </>
   );
 }

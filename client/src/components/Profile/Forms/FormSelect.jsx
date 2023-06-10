@@ -18,10 +18,13 @@ export default function FormSelect(props) {
     <>
       <Grid item xs={12} sm={2}>
         <InputLabel
+          id={`${id}-label`}
           sx={{
             display: 'flex',
             justifyContent: 'center',
             fontWeight: 700,
+            wordWrap: 'break-word',
+            whiteSpace: 'normal',
           }}
         >
           {label}
