@@ -138,6 +138,7 @@ What we plan to use for our project.
 - [ ] Progress tracking of fitness plan
 - [ ] Account for user illness / physical constraints
 - [ ] Secure authentication system
+- [ ] Login using Google Accounts
 
 ### Stretch Goals
 - [ ] Computer Vision that analyzes a users posture

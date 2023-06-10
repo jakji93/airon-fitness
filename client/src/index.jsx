@@ -9,7 +9,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import About from './pages/About';
+import DesignLibrary from './pages/DesignLibrary';
 import Home from './pages/Home';
+import Landing from './pages/Landing';
 import Profile from './pages/Profile';
 import SignupFlow from './pages/SignupFlow';
 import rootReducer from './reducers';
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
+        element: <Landing />,
+      },
+      {
+        path: 'home',
         element: <Home />,
       },
       {
@@ -38,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: 'signup',
         element: <SignupFlow />,
+      },
+      {
+        path: 'lib',
+        element: <DesignLibrary />,
       },
     ],
   },
