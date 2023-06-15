@@ -24,3 +24,13 @@ export const GOAL_OPTIONS = {
 };
 
 export const goalsOptions = Object.values(GOAL_OPTIONS);
+
+export const WEIGHT_UNITS = {
+  KG: 'kg',
+  LB: 'lb',
+};
+
+export const HEIGHT_UNITS = {
+  IN: 'in',
+  CM: 'cm',
+};
