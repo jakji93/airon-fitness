@@ -7,7 +7,7 @@ import {
 } from '../constants';
 
 const basicInfoSlice = createSlice({
-  name: 'basicInfo',
+  name: 'basicProfile',
   initialState: {
     firstName: '',
     lastName: '',
