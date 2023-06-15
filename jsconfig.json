@@ -6,8 +6,10 @@
         "paths": {
             "@client/*": ["./client/*"],
             "@server/*": ["./server/*"]
-        }
+        },
+        "target": "ES2021",
+        "moduleResolution": "node"
     },
     "include": ["**/src/**/*"],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules"],
 }

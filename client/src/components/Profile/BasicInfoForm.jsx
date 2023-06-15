@@ -10,28 +10,8 @@ import FormMultiSelect from './Forms/FormMultiSelect';
 import FormSelect from './Forms/FormSelect';
 import FormTextFieldInput from './Forms/FormTextFieldInput';
 import FormTextFieldWithRadio from './Forms/FormTextWithRadio';
+import { genderOptions, experienceOptions, goalsOptions } from '../../constants';
 import { convertInchesToCm, convertLbToKg } from '../../util';
-
-const genderOptions = [
-  'Female',
-  'Male',
-  'Non-binary',
-  'Prefer not to say',
-  'Other',
-];
-
-const experienceOptions = [
-  'Beginner',
-  'Intermediate',
-  'Advanced',
-];
-
-const goalsOptions = [
-  'weight loss',
-  'muscle growth',
-  'endurance',
-  'overall health',
-];
 
 export default function BasicInfoForm() {
   const [firstName, setFirstName] = useState('');
