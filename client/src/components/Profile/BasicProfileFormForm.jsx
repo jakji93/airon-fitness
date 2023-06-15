@@ -10,10 +10,10 @@ import FormMultiSelect from './Forms/FormMultiSelect';
 import FormSelect from './Forms/FormSelect';
 import FormTextFieldInput from './Forms/FormTextFieldInput';
 import FormTextFieldWithRadio from './Forms/FormTextWithRadio';
-import { genderOptions, experienceOptions, goalsOptions } from '../../constants';
+import { genderOptions, experienceOptions, goalsOptions } from '../../constants/BasicProfile';
 import { convertInchesToCm, convertLbToKg } from '../../util';
 
-export default function BasicInfoForm() {
+export default function BasicProfileForm() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [birthDate, setBirthDate] = useState(null);

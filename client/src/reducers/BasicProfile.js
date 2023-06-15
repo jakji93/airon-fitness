@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 
 import {
   EXPERIENCE_OPTIONS, GENDER_OPTIONS, HEIGHT_UNITS, WEIGHT_UNITS,
-} from '../constants';
+} from '../constants/BasicProfile';
 
 const basicInfoSlice = createSlice({
   name: 'basicProfile',
@@ -48,6 +48,9 @@ const basicInfoSlice = createSlice({
     },
     updateGoals: (state, action) => {
       state.goals = action.payload;
+    },
+    updateBasicProfile: (state, action) => {
+      state = action.payload;
     },
   },
 });
