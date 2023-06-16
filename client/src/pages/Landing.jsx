@@ -76,11 +76,9 @@ export default function Landing() {
           </div>
         </div>
         <div className="info" style={styles.info}>
-          <Typography>
-            <body>
-              AIron Fitness is an innovative AI trainer
-              designed to support individuals on their workout journey.
-            </body>
+          <Typography variant="body1">
+            AIron Fitness is an innovative AI trainer
+            designed to support individuals on their workout journey.
           </Typography>
         </div>
         <Button variant="outlined" fontWeight="light" style={styles.actionButton}>
