@@ -6,7 +6,7 @@ import {
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-const pages = ['Home', 'About', 'Profile'];
+const pages = ['home', 'about', 'profile'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
