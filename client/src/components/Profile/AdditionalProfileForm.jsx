@@ -25,12 +25,13 @@ export default function AdditionalProfileForm() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (additionalProfile.loading && additionalProfile.error) return;
+    // TODO: uncomment this when backend api is set up
+    // if (additionalProfile.loading || additionalProfile.error) return;
     setHealthConditionsAndInjuries(additionalProfile.profile.healthConditionsInjuries);
     setDietaryRestrictions(additionalProfile.profile.dietaryRestrictions);
     setAllergiesIntolerances(additionalProfile.profile.allergiesIntolerances);
     setWeeklyAvailability(additionalProfile.profile.weeklyAvailability);
-  }, [additionalProfile]);
+  }, []);
 
   const clear = () => {
     setHealthConditionsAndInjuries([]);

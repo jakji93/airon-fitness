@@ -33,7 +33,8 @@ export default function BasicProfileForm() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (basicProfile.loading && basicProfile.error) return;
+    // TODO: uncomment this when backend api is set up
+    // if (basicProfile.loading || basicProfile.error !== '') return;
     setFirstName(basicProfile.profile.firstName);
     setLastName(basicProfile.profile.lastName);
     setDateOfBirth(dayjs(basicProfile.profile.dateOfBirth));
@@ -42,7 +43,7 @@ export default function BasicProfileForm() {
     setHeight(basicProfile.profile.height.value);
     setExperience(basicProfile.profile.experience);
     setGoals(basicProfile.profile.goals);
-  }, [basicProfile]);
+  }, []);
 
   const clear = () => {
     setFirstName('');
