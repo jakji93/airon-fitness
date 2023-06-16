@@ -1,69 +1,54 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import dayjs from 'dayjs';
 
 import {
-  EXPERIENCE_OPTIONS, GENDER_OPTIONS, HEIGHT_UNITS, WEIGHT_UNITS,
+  EXPERIENCE_OPTIONS, GENDER_OPTIONS, GOAL_OPTIONS, HEIGHT_UNITS, WEIGHT_UNITS,
 } from '../constants/BasicProfile';
 
-const basicInfoSlice = createSlice({
+// TODO: when api setup, change the initial state to empty
+const basicProfileSlice = createSlice({
   name: 'basicProfile',
   initialState: {
-    firstName: '',
-    lastName: '',
-    dateOfBirth: dayjs('2001-02-23'),
-    gender: GENDER_OPTIONS.PREFER_NOT_TO_SAY,
-    weight: {
-      value: 0,
-      unit: WEIGHT_UNITS.KG,
+    loading: false,
+    error: '',
+    profile: {
+      firstName: 'test',
+      lastName: 'test',
+      dateOfBirth: '2001-02-23',
+      gender: GENDER_OPTIONS.PREFER_NOT_TO_SAY,
+      weight: {
+        value: 123,
+        unit: WEIGHT_UNITS.KG,
+      },
+      height: {
+        value: 123,
+        unit: HEIGHT_UNITS.IN,
+      },
+      experience: EXPERIENCE_OPTIONS.BEGINNER,
+      goals: [GOAL_OPTIONS.ENDURANCE, GOAL_OPTIONS.MUSCLE_GROWTH],
     },
-    height: {
-      value: 0,
-      unit: HEIGHT_UNITS.IN,
-    },
-    experience: EXPERIENCE_OPTIONS.BEGINNER,
-    goals: [],
   },
   reducers: {
-    updateFirstName: (state, action) => {
-      state.firstName = action.payload;
+    FETCH_BASIC_PROFILE_REQUESTED: (state) => {
+      state.loading = true;
     },
-    updateLastName: (state, action) => {
-      state.lastName = action.payload;
+    FETCH_BASIC_PROFILE_SUCCESS: (state, action) => {
+      state.loading = false;
+      state.profile = action.payload;
+      state.error = '';
     },
-    updateDateOfBirth: (state, action) => {
-      state.dateOfBirth = action.payload;
-    },
-    updateGender: (state, action) => {
-      state.gender = action.payload;
-    },
-    updateWeight: (state, action) => {
-      state.weight = action.payload;
-    },
-    updateHeight: (state, action) => {
-      state.height = action.payload;
-    },
-    updateExperience: (state, action) => {
-      state.experience = action.payload;
-    },
-    updateGoals: (state, action) => {
-      state.goals = action.payload;
-    },
-    updateBasicProfile: (state, action) => {
-      state = action.payload;
+    FETCH_BASIC_PROFILE_ERROR: (state, action) => {
+      state.loading = false;
+      state.profile = basicProfileSlice.getInitialState().profile;
+      state.error = action.payload;
     },
   },
 });
 
 export const {
-  updateFirstName,
-  updateLastName,
-  updateDateOfBirth,
-  updateGender,
-  updateWeight,
-  updateHeight,
-  updateExperience,
-  updateGoals,
-} = basicInfoSlice.actions;
+  FETCH_BASIC_PROFILE_REQUESTED,
+  FETCH_BASIC_PROFILE_SUCCESS,
+  FETCH_BASIC_PROFILE_ERROR,
+} = basicProfileSlice.actions;
 
-export default basicInfoSlice.reducer;
+export default basicProfileSlice.reducer;

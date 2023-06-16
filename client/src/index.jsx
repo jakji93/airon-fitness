@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { Provider } from 'react-redux';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import thunk from 'redux-thunk';
 
 import App from './App';
 import About from './pages/About';
@@ -49,8 +50,10 @@ const router = createBrowserRouter([
 
 ]);
 
-const store = configureStore({
+// eslint-disable-next-line import/prefer-default-export
+export const store = configureStore({
   reducer: rootReducer,
+  middleware: (gDM) => gDM().concat(thunk),
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

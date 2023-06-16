@@ -1,8 +1,10 @@
 import { Grid, Button } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Form from './Forms/Form';
 import FormMultiSelect from './Forms/FormMultiSelect';
+import fetchAdditionalProfile from '../../actionCreators/AdditionalProfile';
 import {
   healthConditionsAndInjuriesOptions,
   dietaryRestrictionsOptions,
@@ -15,6 +17,20 @@ export default function AdditionalProfileForm() {
   const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
   const [allergiesIntolerances, setAllergiesIntolerances] = useState([]);
   const [weeklyAvailability, setWeeklyAvailability] = useState([]);
+  const additionalProfile = useSelector((state) => state.additionalProfile);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAdditionalProfile());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (additionalProfile.loading && additionalProfile.error) return;
+    setHealthConditionsAndInjuries(additionalProfile.profile.healthConditionsInjuries);
+    setDietaryRestrictions(additionalProfile.profile.dietaryRestrictions);
+    setAllergiesIntolerances(additionalProfile.profile.allergiesIntolerances);
+    setWeeklyAvailability(additionalProfile.profile.weeklyAvailability);
+  }, [additionalProfile]);
 
   const clear = () => {
     setHealthConditionsAndInjuries([]);

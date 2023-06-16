@@ -1,62 +1,64 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-const profileSlice = createSlice({
-  name: 'profile',
+import {
+  ALLERGIES_INTOLERANCES_OPTIONS,
+  DIETARY_RESTRICTIONS_OPTIONS,
+  HEALTH_CONDITIONS_AND_INJURIES_OPTIONS,
+  WEEKLY_AVAILABILITY_OPTIONS,
+} from '../constants/AdditionalProfile';
+
+// TODO: when api setup, change the initial state to empty
+const additionalProfileSlice = createSlice({
+  name: 'additionalProfile',
   initialState: {
-    bodyFatPercentage: 0,
-    muscleMassPercentage: 0,
-    healthConditionsInjuries: [],
-    dietaryRestrictions: [],
-    allergiesIntolerances: [],
-    weeklyAvailability: [],
-    workoutDuration: 0,
-    exercisePreferences: [],
-    equipmentAvailability: [],
+    loading: false,
+    error: '',
+    profile: {
+      bodyFatPercentage: 0,
+      muscleMassPercentage: 0,
+      healthConditionsInjuries: [
+        HEALTH_CONDITIONS_AND_INJURIES_OPTIONS.ANXIETY_OR_DEPRESSION,
+        HEALTH_CONDITIONS_AND_INJURIES_OPTIONS.ASTHMA,
+      ],
+      dietaryRestrictions: [
+        DIETARY_RESTRICTIONS_OPTIONS.DAIRY_FREE,
+        DIETARY_RESTRICTIONS_OPTIONS.HALAL,
+      ],
+      allergiesIntolerances: [
+        ALLERGIES_INTOLERANCES_OPTIONS.ALMONDS,
+        ALLERGIES_INTOLERANCES_OPTIONS.CASHEWS,
+      ],
+      weeklyAvailability: [
+        WEEKLY_AVAILABILITY_OPTIONS.MONDAY,
+        WEEKLY_AVAILABILITY_OPTIONS.FRIDAY,
+      ],
+      workoutDuration: 0,
+      exercisePreferences: [],
+      equipmentAvailability: [],
+    },
   },
   reducers: {
-    updateBodyFatPercentage: (state, action) => {
-      state.bodyFatPercentage = action.payload;
+    FETCH_ADDITIONAL_PROFILE_REQUESTED: (state) => {
+      state.loading = true;
     },
-    updateMuscleMassPercentage: (state, action) => {
-      state.muscleMassPercentage = action.payload;
+    FETCH_ADDITIONAL_PROFILE_SUCCESS: (state, action) => {
+      state.loading = false;
+      state.profile = action.payload;
+      state.error = '';
     },
-    updateHealthConditionsInjuries: (state, action) => {
-      state.healthConditionsInjuries = action.payload;
-    },
-    updateDietaryRestrictions: (state, action) => {
-      state.dietaryRestrictions = action.payload;
-    },
-    updateAllergiesIntolerances: (state, action) => {
-      state.allergiesIntolerances = action.payload;
-    },
-    updateWeeklyAvailability: (state, action) => {
-      state.weeklyAvailability = action.payload;
-    },
-    updateWorkoutDuration: (state, action) => {
-      state.workoutDuration = action.payload;
-    },
-    updateExercisePreferences: (state, action) => {
-      state.exercisePreferences = action.payload;
-    },
-    updateEquipmentAvailability: (state, action) => {
-      state.equipmentAvailability = action.payload;
-    },
-    updateAdditionalProfile: (state, action) => {
-      state = action.payload;
+    FETCH_ADDITIONAL_PROFILE_ERROR: (state, action) => {
+      state.loading = false;
+      state.profile = additionalProfileSlice.getInitialState().profile;
+      state.error = action.payload;
     },
   },
 });
 
 export const {
-  updateBodyFatPercentage,
-  updateMuscleMassPercentage,
-  updateHealthConditionsInjuries,
-  updateDietaryRestrictions,
-  updateAllergiesIntolerances,
-  updateWorkoutDuration,
-  updateExercisePreferences,
-  updateEquipmentAvailability,
-} = profileSlice.actions;
+  FETCH_ADDITIONAL_PROFILE_REQUESTED,
+  FETCH_ADDITIONAL_PROFILE_SUCCESS,
+  FETCH_ADDITIONAL_PROFILE_ERROR,
+} = additionalProfileSlice.actions;
 
-export default profileSlice.reducer;
+export default additionalProfileSlice.reducer;
