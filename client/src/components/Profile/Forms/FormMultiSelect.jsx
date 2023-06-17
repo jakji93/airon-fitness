@@ -36,7 +36,7 @@ export default function FormMultiSelect(props) {
         <Autocomplete
           value={value}
           onChange={(e, newValue) => setValue(newValue)}
-          sx={{ m: 1, width: 'fit-content' }}
+          sx={{ m: 1, width: '100%' }}
           multiple
           id="tags-standard"
           options={options}
