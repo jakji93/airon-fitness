@@ -8,10 +8,14 @@ import React, { useState } from 'react';
 import { genders } from '../../utils/userUtils';
 import FormSelect from '../Profile/Forms/FormSelect';
 
-export default function SignupDetails({ nextStage, updateUser }) {
-  const [gender, setGender] = useState('');
+export default function SignupDetails({ nextStage, setUser }) {
+  const [userGender, setUserGender] = useState('');
   const handleSubmit = (e) => {
-    updateUser({});
+    const { firstName, lastName } = e.target;
+
+    setUser((prevState) => ({
+      ...prevState, firstName: firstName.value, lastName: lastName.value, gender: userGender,
+    }));
     nextStage(e);
   };
 
@@ -30,7 +34,14 @@ export default function SignupDetails({ nextStage, updateUser }) {
       <Typography component="h3" variant="h5">
         Let&apos;s get a profile tailored for you
       </Typography>
-      <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+      <Box
+        component="form"
+        noValidate
+        onSubmit={handleSubmit}
+        sx={{
+          mt: 3, display: 'flex', flexDirection: 'column', alignItems: 'center',
+        }}
+      >
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -60,8 +71,8 @@ export default function SignupDetails({ nextStage, updateUser }) {
               label="Gender"
               showTitleLabel={false}
               options={genders}
-              setValue={setGender}
-              value={gender}
+              setValue={setUserGender}
+              value={userGender}
             />
           </Grid>
         </Grid>
@@ -69,7 +80,7 @@ export default function SignupDetails({ nextStage, updateUser }) {
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+          sx={{ mt: 3, mb: 2, width: '300px' }}
         >
           Continue
         </Button>
@@ -79,11 +90,6 @@ export default function SignupDetails({ nextStage, updateUser }) {
 }
 
 SignupDetails.propTypes = {
-  nextStage: PropTypes.func,
-  updateUser: PropTypes.func,
-};
-
-SignupDetails.defaultProps = {
-  nextStage: null,
-  updateUser: null,
+  nextStage: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
 };

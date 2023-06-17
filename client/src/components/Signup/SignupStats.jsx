@@ -4,16 +4,51 @@ import {
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import { experienceLevels } from '../../utils/userUtils';
+import {
+  experienceLevels, healthConditionsAndInjuriesOptions, dietaryRestrictionsOptions,
+  allergiesIntolerancesOptions,
+// eslint-disable-next-line import/no-duplicates
+} from '../../utils/userUtils';
+// eslint-disable-next-line import/no-duplicates
+import { weeklyAvailabilityOptions } from '../../utils/userUtils';
+import FormMultiSelect from '../Profile/Forms/FormMultiSelect';
 import FormSelect from '../Profile/Forms/FormSelect';
 import FormTextFieldWithRadio from '../Profile/Forms/FormTextWithRadio';
 
-export default function SignupStats({ updateUser, nextStage }) {
+const classes = {
+  root: {
+    flexGrow: 1,
+    margin: '2px',
+    width: '80%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  gridItem: {
+    padding: '2px',
+  },
+  selectForm: {
+    marginTop: '12px',
+    marginLeft: '12px',
+  },
+  toggleForm: {
+    marginTop: '12px',
+  },
+};
+
+export default function SignupStats({ setUser, nextStage }) {
   const [weight, setWeight] = useState(0);
   const [height, setHeight] = useState(0);
   const [experience, setExperience] = useState('');
+  const [healthConditionsAndInjuries, setHealthConditionsAndInjuries] = useState([]);
+  const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
+  const [allergiesIntolerances, setAllergiesIntolerances] = useState([]);
+  const [weeklyAvailability, setWeeklyAvailability] = useState([]);
+
   const handleSubmit = (e) => {
-    updateUser({});
+    setUser((prevState) => ({
+      ...prevState, weight, height, experience,
+    }));
     nextStage(e);
   };
 
@@ -27,21 +62,11 @@ export default function SignupStats({ updateUser, nextStage }) {
       }}
     >
       <Typography component="h1" variant="h5">
-        Lastly, let&apos;s get some stats
+        Lastly, we will need some background information
       </Typography>
-      <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <FormSelect
-              id="experience"
-              label="Experience"
-              showTitleLabel={false}
-              options={experienceLevels}
-              setValue={setExperience}
-              value={experience}
-            />
-          </Grid>
-          <Grid item xs={12} sx={{ display: 'flex' }}>
+      <Box component="form" noValidate onSubmit={handleSubmit} sx={classes.root}>
+        <Grid container spacing={2} sx={classes.toggleForm}>
+          <Grid container item spacing={3}>
             <FormTextFieldWithRadio
               id="weight"
               label="Weight"
@@ -61,14 +86,66 @@ export default function SignupStats({ updateUser, nextStage }) {
               radioGroups={['cm', 'in']}
             />
           </Grid>
+          <Grid container spacing={2} sx={classes.selectForm}>
+            <Grid item xs={6}>
+              <FormSelect
+                id="experience"
+                label="Experience"
+                showTitleLabel={false}
+                options={experienceLevels}
+                setValue={setExperience}
+                value={experience}
+                limitWidth
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <FormMultiSelect
+                id="health-conditions-and-injuries"
+                label="Health Conditions & Injuries"
+                value={healthConditionsAndInjuries}
+                setValue={setHealthConditionsAndInjuries}
+                options={healthConditionsAndInjuriesOptions}
+                showTitleLabel={false}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <FormMultiSelect
+                id="allergies-intolerances"
+                label="Allergies & Intolerances"
+                value={allergiesIntolerances}
+                setValue={setAllergiesIntolerances}
+                options={allergiesIntolerancesOptions}
+                showTitleLabel={false}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <FormMultiSelect
+                id="weekly-availability"
+                label="Weekly Availability"
+                value={weeklyAvailability}
+                setValue={setWeeklyAvailability}
+                options={weeklyAvailabilityOptions}
+                showTitleLabel={false}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <FormMultiSelect
+                id="dietary-restrictions"
+                label="Dietary Restrictions"
+                value={dietaryRestrictions}
+                setValue={setDietaryRestrictions}
+                options={dietaryRestrictionsOptions}
+                showTitleLabel={false}
+              />
+            </Grid>
+          </Grid>
         </Grid>
         <Button
           type="submit"
-          fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+          sx={{ mt: 3, mb: 2, width: '300px' }}
         >
-          Continue
+          Create
         </Button>
       </Box>
     </Box>
@@ -76,11 +153,6 @@ export default function SignupStats({ updateUser, nextStage }) {
 }
 
 SignupStats.propTypes = {
-  nextStage: PropTypes.func,
-  updateUser: PropTypes.func,
-};
-
-SignupStats.defaultProps = {
-  nextStage: null,
-  updateUser: null,
+  nextStage: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
 };

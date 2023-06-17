@@ -15,23 +15,20 @@ export default function SignupFlow() {
   const handleNext = (e) => {
     e.preventDefault();
     setStep((prevStep) => prevStep + 1);
-  };
-
-  const updateUser = (data) => {
-    setUser({ ...user, ...data });
+    console.log(user);
   };
 
   const getCurrentStage = () => {
     let stage;
     switch (step) {
       case 0:
-        stage = <SignupLanding nextStage={handleNext} updateUser={updateUser} />;
+        stage = <SignupLanding nextStage={handleNext} setUser={setUser} />;
         break;
       case 1:
-        stage = <SignupDetails nextStage={handleNext} updateUser={updateUser} />;
+        stage = <SignupDetails nextStage={handleNext} setUser={setUser} />;
         break;
       case 2:
-        stage = <SignupStats nextStage={handleNext} updateUser={updateUser} />;
+        stage = <SignupStats nextStage={handleNext} setUser={setUser} />;
         break;
       default:
         break;

@@ -11,9 +11,11 @@ import {
 import PropTypes from 'prop-types';
 import * as React from 'react';
 
-export default function SignupLanding({ nextStage, updateUser }) {
+export default function SignupLanding({ nextStage, setUser }) {
   const handleSubmit = (e) => {
-    updateUser({});
+    const { email, username, password } = e.target;
+
+    setUser({ email: email.value, username: username.value, password: password.value });
     nextStage(e);
   };
 
@@ -32,7 +34,14 @@ export default function SignupLanding({ nextStage, updateUser }) {
           <Typography component="h1" variant="h5">
             Create Your Account
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{
+              mt: 3, display: 'flex', flexDirection: 'column', alignItems: 'center',
+            }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -80,7 +89,7 @@ export default function SignupLanding({ nextStage, updateUser }) {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, width: '300px' }}
             >
               Create Account
             </Button>
@@ -99,11 +108,6 @@ export default function SignupLanding({ nextStage, updateUser }) {
 }
 
 SignupLanding.propTypes = {
-  nextStage: PropTypes.func,
-  updateUser: PropTypes.func,
-};
-
-SignupLanding.defaultProps = {
-  nextStage: null,
-  updateUser: null,
+  nextStage: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
 };

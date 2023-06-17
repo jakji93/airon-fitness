@@ -13,29 +13,32 @@ export default function FormSelect(props) {
     value,
     setValue,
     options,
+    limitWidth,
   } = props;
 
   return (
     <>
-      <Grid item xs={12} sm={2}>
-        {
-        showTitleLabel
-          ? (
-            <InputLabel
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                fontWeight: 700,
-              }}
-            >
-              {label}
-            </InputLabel>
-          )
-          : ''
-      }
-      </Grid>
+      {
+          showTitleLabel
+            ? (
+              <Grid item xs={12} sm={2}>
+                <InputLabel
+                  id={`${id}-label`}
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    fontWeight: 700,
+                    wordWrap: 'break-word',
+                    whiteSpace: 'normal',
+                  }}
+                >
+                  {label}
+                </InputLabel>
+              </Grid>
+            ) : ''
+        }
       <Grid item xs={12} sm={half ? 4 : 10}>
-        <FormControl fullWidth size="small">
+        <FormControl fullWidth sx={limitWidth ? { m: 1, width: 500 } : {}}>
           <InputLabel
             id={`${id}-label`}
             sx={{
@@ -70,9 +73,11 @@ FormSelect.propTypes = {
   value: PropTypes.string.isRequired,
   setValue: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  limitWidth: PropTypes.bool,
 };
 
 FormSelect.defaultProps = {
   half: false,
   showTitleLabel: true,
+  limitWidth: false,
 };
