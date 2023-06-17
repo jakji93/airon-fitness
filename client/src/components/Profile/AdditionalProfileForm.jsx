@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Form from './Forms/Form';
+import FormMultiInput from './Forms/FormMultiInput';
 import FormMultiSelect from './Forms/FormMultiSelect';
+import FormTextFieldInput from './Forms/FormTextFieldInput';
 import fetchAdditionalProfile from '../../actionCreators/AdditionalProfile';
 import {
   healthConditionsAndInjuriesOptions,
@@ -17,6 +19,11 @@ export default function AdditionalProfileForm() {
   const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
   const [allergiesIntolerances, setAllergiesIntolerances] = useState([]);
   const [weeklyAvailability, setWeeklyAvailability] = useState([]);
+  const [bodyFatPercentage, setBodyFatPercentage] = useState(0);
+  const [muscleMassPercentage, setMuscleMassPercentage] = useState(0);
+  const [workoutDuration, setWorkoutDuration] = useState(0);
+  const [exercisePreferences, setExercisePreferences] = useState([]);
+  const [equipmentAvailability, setEquipmentAvailability] = useState([]);
   const additionalProfile = useSelector((state) => state.additionalProfile);
   const dispatch = useDispatch();
 
@@ -31,6 +38,11 @@ export default function AdditionalProfileForm() {
     setDietaryRestrictions(additionalProfile.profile.dietaryRestrictions);
     setAllergiesIntolerances(additionalProfile.profile.allergiesIntolerances);
     setWeeklyAvailability(additionalProfile.profile.weeklyAvailability);
+    setBodyFatPercentage(additionalProfile.profile.bodyFatPercentage);
+    setMuscleMassPercentage(additionalProfile.profile.muscleMassPercentage);
+    setWorkoutDuration(additionalProfile.profile.workoutDuration);
+    setExercisePreferences(additionalProfile.profile.exercisePreferences);
+    setEquipmentAvailability(additionalProfile.profile.equipmentAvailability);
   }, []);
 
   const clear = () => {
@@ -43,14 +55,23 @@ export default function AdditionalProfileForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log({
-      'healthConditionsAndInjuries: ': healthConditionsAndInjuries,
-      'dietaryRestrictions: ': dietaryRestrictions,
-      'allergiesIntolerances: ': allergiesIntolerances,
-      'workoutDayOfWeek: ': weeklyAvailability,
-
+      healthConditionsAndInjuries,
+      dietaryRestrictions,
+      allergiesIntolerances,
+      weeklyAvailability,
+      bodyFatPercentage,
+      muscleMassPercentage,
+      workoutDuration,
     });
 
     clear();
+  };
+
+  const restrictPercentageValue = (input, set) => {
+    const zeroToHundredRegex = /^(?:100|[1-9]\d|\d)$/;
+    if (input === '' || zeroToHundredRegex.test(input)) {
+      set(input);
+    }
   };
 
   return (
@@ -58,6 +79,22 @@ export default function AdditionalProfileForm() {
       handleSubmit={handleSubmit}
       formTitle="Update Additional Profile"
     >
+      <FormTextFieldInput
+        id="body-fat-percentage"
+        label="Body Fat Percentage"
+        half
+        value={bodyFatPercentage}
+        setValue={(val) => restrictPercentageValue(val, setBodyFatPercentage)}
+        endAdornment="%"
+      />
+      <FormTextFieldInput
+        id="muscle-mass-percentage"
+        label="Muscle Mass Percentage"
+        half
+        value={muscleMassPercentage}
+        setValue={(val) => restrictPercentageValue(val, setMuscleMassPercentage)}
+        endAdornment="%"
+      />
       <FormMultiSelect
         id="health-conditions-and-injuries"
         label="Health Conditions & Injuries"
@@ -85,6 +122,27 @@ export default function AdditionalProfileForm() {
         value={weeklyAvailability}
         setValue={setWeeklyAvailability}
         options={weeklyAvailabilityOptions}
+      />
+      <FormTextFieldInput
+        id="workout-duration"
+        label="Workout Duration"
+        half
+        value={workoutDuration}
+        setValue={setWorkoutDuration}
+        endAdornment="minutes"
+      />
+      <Grid item xs={12} sm={6} />
+      <FormMultiInput
+        id="exercise-preferences"
+        label="Exercise Preferences"
+        value={exercisePreferences}
+        setValue={setExercisePreferences}
+      />
+      <FormMultiInput
+        id="equipment-availability"
+        label="Equipment Availability"
+        value={equipmentAvailability}
+        setValue={setEquipmentAvailability}
       />
       <Grid item xs={12} sm={6} />
       <Grid item xs={12} sm={5} />

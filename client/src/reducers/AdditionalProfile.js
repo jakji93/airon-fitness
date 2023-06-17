@@ -15,8 +15,8 @@ const additionalProfileSlice = createSlice({
     loading: false,
     error: '',
     profile: {
-      bodyFatPercentage: 0,
-      muscleMassPercentage: 0,
+      bodyFatPercentage: 69,
+      muscleMassPercentage: 69,
       healthConditionsInjuries: [
         HEALTH_CONDITIONS_AND_INJURIES_OPTIONS.ANXIETY_OR_DEPRESSION,
         HEALTH_CONDITIONS_AND_INJURIES_OPTIONS.ASTHMA,
@@ -33,9 +33,9 @@ const additionalProfileSlice = createSlice({
         WEEKLY_AVAILABILITY_OPTIONS.MONDAY,
         WEEKLY_AVAILABILITY_OPTIONS.FRIDAY,
       ],
-      workoutDuration: 0,
-      exercisePreferences: [],
-      equipmentAvailability: [],
+      workoutDuration: 69,
+      exercisePreferences: ['Bench Press', 'Squat'],
+      equipmentAvailability: ['Dumbbells', 'Squat Rack'],
     },
   },
   reducers: {

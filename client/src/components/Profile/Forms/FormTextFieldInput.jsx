@@ -1,8 +1,11 @@
 import {
-  Grid, InputAdornment, InputLabel, TextField,
+  Grid, InputAdornment, TextField,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
+
+import { inputGridSizing } from './Form';
+import GridInputLabel from './GridInputLabel';
 
 export default function FormTextFieldInput(props) {
   const {
@@ -18,22 +21,11 @@ export default function FormTextFieldInput(props) {
 
   return (
     <>
-      <Grid item xs={12} sm={2}>
-        <InputLabel
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            fontWeight: 700,
-            wordWrap: 'break-word',
-            whiteSpace: 'normal',
-          }}
-          htmlFor={id}
-          id={`${id}-label`}
-        >
-          {label}
-        </InputLabel>
-      </Grid>
-      <Grid item xs={12} sm={half ? 4 : 10}>
+      <GridInputLabel
+        id={id}
+        label={label}
+      />
+      <Grid item xs={12} sm={inputGridSizing(half)}>
         <TextField
           required
           id={id}
