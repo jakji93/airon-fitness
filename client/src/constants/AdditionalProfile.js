@@ -79,13 +79,13 @@ export const ALLERGIES_INTOLERANCES_OPTIONS = {
 export const allergiesIntolerancesOptions = Object.values(ALLERGIES_INTOLERANCES_OPTIONS);
 
 export const WEEKLY_AVAILABILITY_OPTIONS = {
-  SUNDAY: 'Sunday',
-  MONDAY: 'Monday',
-  TUESDAY: 'Tuesday',
-  WEDNESDAY: 'Wednesday',
-  THURSDAY: 'Thursday',
-  FRIDAY: 'Friday',
-  SATURDAY: 'Saturday',
+  SUNDAY: '0',
+  MONDAY: '1',
+  TUESDAY: '2',
+  WEDNESDAY: '3',
+  THURSDAY: '4',
+  FRIDAY: '5',
+  SATURDAY: '6',
 };
 
 export const weeklyAvailabilityOptions = Object.values(WEEKLY_AVAILABILITY_OPTIONS);

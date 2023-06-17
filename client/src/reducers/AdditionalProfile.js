@@ -5,7 +5,6 @@ import {
   ALLERGIES_INTOLERANCES_OPTIONS,
   DIETARY_RESTRICTIONS_OPTIONS,
   HEALTH_CONDITIONS_AND_INJURIES_OPTIONS,
-  WEEKLY_AVAILABILITY_OPTIONS,
 } from '../constants/AdditionalProfile';
 
 // TODO: when api setup, change the initial state to empty
@@ -29,10 +28,7 @@ const additionalProfileSlice = createSlice({
         ALLERGIES_INTOLERANCES_OPTIONS.ALMONDS,
         ALLERGIES_INTOLERANCES_OPTIONS.CASHEWS,
       ],
-      weeklyAvailability: [
-        WEEKLY_AVAILABILITY_OPTIONS.MONDAY,
-        WEEKLY_AVAILABILITY_OPTIONS.FRIDAY,
-      ],
+      weeklyAvailability: 5,
       workoutDuration: 69,
       exercisePreferences: ['Bench Press', 'Squat'],
       equipmentAvailability: ['Dumbbells', 'Squat Rack'],
