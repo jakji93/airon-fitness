@@ -1,8 +1,10 @@
 import {
   Grid, Button,
 } from '@mui/material';
+import dayjs from 'dayjs';
 import _ from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Form from './Forms/Form';
 import FormDatePicker from './Forms/FormDatePicker';
@@ -10,43 +12,43 @@ import FormMultiSelect from './Forms/FormMultiSelect';
 import FormSelect from './Forms/FormSelect';
 import FormTextFieldInput from './Forms/FormTextFieldInput';
 import FormTextFieldWithRadio from './Forms/FormTextWithRadio';
+import fetchBasicProfile from '../../actionCreators/BasicProfile';
+import { genderOptions, experienceOptions, goalsOptions } from '../../constants/BasicProfile';
 import { convertInchesToCm, convertLbToKg } from '../../util';
 
-const genderOptions = [
-  'Female',
-  'Male',
-  'Non-binary',
-  'Prefer not to say',
-  'Other',
-];
-
-const experienceOptions = [
-  'Beginner',
-  'Intermediate',
-  'Advanced',
-];
-
-const goalsOptions = [
-  'weight loss',
-  'muscle growth',
-  'endurance',
-  'overall health',
-];
-
-export default function BasicInfoForm() {
+export default function BasicProfileForm() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [birthDate, setBirthDate] = useState(null);
+  const [dateOfBirth, setDateOfBirth] = useState(null);
   const [gender, setGender] = useState('');
   const [weight, setWeight] = useState(0);
   const [height, setHeight] = useState(0);
   const [experience, setExperience] = useState('');
   const [goals, setGoals] = useState([]);
+  const basicProfile = useSelector((state) => state.basicProfile);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchBasicProfile());
+  }, [dispatch]);
+
+  useEffect(() => {
+    // TODO: uncomment this when backend api is set up
+    // if (basicProfile.loading || basicProfile.error !== '') return;
+    setFirstName(basicProfile.profile.firstName);
+    setLastName(basicProfile.profile.lastName);
+    setDateOfBirth(dayjs(basicProfile.profile.dateOfBirth));
+    setGender(basicProfile.profile.gender);
+    setWeight(basicProfile.profile.weight.value);
+    setHeight(basicProfile.profile.height.value);
+    setExperience(basicProfile.profile.experience);
+    setGoals(basicProfile.profile.goals);
+  }, []);
 
   const clear = () => {
     setFirstName('');
     setLastName('');
-    setBirthDate(null);
+    setDateOfBirth(null);
     setGender('');
     setWeight(0);
     setHeight(0);
@@ -59,7 +61,7 @@ export default function BasicInfoForm() {
     console.log({
       'firstName: ': firstName,
       'lastName: ': lastName,
-      'birthDate: ': birthDate,
+      'birthDate: ': dateOfBirth,
       'gender: ': gender,
       'weight: ': weight,
       'height: ': height,
@@ -93,8 +95,8 @@ export default function BasicInfoForm() {
         half
         id="birthdate"
         label="Born"
-        setValue={setBirthDate}
-        value={birthDate}
+        setValue={setDateOfBirth}
+        value={dateOfBirth}
       />
       <FormSelect
         half
