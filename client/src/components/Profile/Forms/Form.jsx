@@ -10,6 +10,9 @@ export const handleKeyPress = (e) => {
   }
 };
 
+export const inputLabelSizing = 3;
+export const inputGridSizing = (half) => (half ? 3 : 9);
+
 export default function Form(props) {
   const {
     handleSubmit,

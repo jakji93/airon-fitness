@@ -34,8 +34,8 @@ const additionalProfileSlice = createSlice({
         WEEKLY_AVAILABILITY_OPTIONS.FRIDAY,
       ],
       workoutDuration: 69,
-      exercisePreferences: [],
-      equipmentAvailability: [],
+      exercisePreferences: ['Bench Press', 'Squat'],
+      equipmentAvailability: ['Dumbbells', 'Squat Rack'],
     },
   },
   reducers: {

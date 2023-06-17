@@ -4,6 +4,9 @@ import {
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { inputGridSizing } from './Form';
+import GridInputLabel from './GridInputLabel';
+
 export default function FormSelect(props) {
   const {
     id,
@@ -16,21 +19,11 @@ export default function FormSelect(props) {
 
   return (
     <>
-      <Grid item xs={12} sm={2}>
-        <InputLabel
-          id={`${id}-label`}
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            fontWeight: 700,
-            wordWrap: 'break-word',
-            whiteSpace: 'normal',
-          }}
-        >
-          {label}
-        </InputLabel>
-      </Grid>
-      <Grid item xs={12} sm={half ? 4 : 10}>
+      <GridInputLabel
+        id={id}
+        label={label}
+      />
+      <Grid item xs={12} sm={inputGridSizing(half)}>
         <FormControl fullWidth size="small">
           <InputLabel
             id={`${id}-label`}

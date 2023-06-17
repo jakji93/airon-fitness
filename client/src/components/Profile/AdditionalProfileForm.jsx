@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Form from './Forms/Form';
+import FormMultiInput from './Forms/FormMultiInput';
 import FormMultiSelect from './Forms/FormMultiSelect';
 import FormTextFieldInput from './Forms/FormTextFieldInput';
 import fetchAdditionalProfile from '../../actionCreators/AdditionalProfile';
@@ -21,6 +22,8 @@ export default function AdditionalProfileForm() {
   const [bodyFatPercentage, setBodyFatPercentage] = useState(0);
   const [muscleMassPercentage, setMuscleMassPercentage] = useState(0);
   const [workoutDuration, setWorkoutDuration] = useState(0);
+  const [exercisePreferences, setExercisePreferences] = useState([]);
+  const [equipmentAvailability, setEquipmentAvailability] = useState([]);
   const additionalProfile = useSelector((state) => state.additionalProfile);
   const dispatch = useDispatch();
 
@@ -38,6 +41,8 @@ export default function AdditionalProfileForm() {
     setBodyFatPercentage(additionalProfile.profile.bodyFatPercentage);
     setMuscleMassPercentage(additionalProfile.profile.muscleMassPercentage);
     setWorkoutDuration(additionalProfile.profile.workoutDuration);
+    setExercisePreferences(additionalProfile.profile.exercisePreferences);
+    setEquipmentAvailability(additionalProfile.profile.equipmentAvailability);
   }, []);
 
   const clear = () => {
@@ -120,11 +125,24 @@ export default function AdditionalProfileForm() {
       />
       <FormTextFieldInput
         id="workout-duration"
-        label="Preferred Workout Duration"
+        label="Workout Duration"
         half
         value={workoutDuration}
         setValue={setWorkoutDuration}
         endAdornment="minutes"
+      />
+      <Grid item xs={12} sm={6} />
+      <FormMultiInput
+        id="exercise-preferences"
+        label="Exercise Preferences"
+        value={exercisePreferences}
+        setValue={setExercisePreferences}
+      />
+      <FormMultiInput
+        id="equipment-availability"
+        label="Equipment Availability"
+        value={equipmentAvailability}
+        setValue={setEquipmentAvailability}
       />
       <Grid item xs={12} sm={6} />
       <Grid item xs={12} sm={5} />
