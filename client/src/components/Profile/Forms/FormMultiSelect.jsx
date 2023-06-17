@@ -15,6 +15,7 @@ export default function FormMultiSelect(props) {
     setValue,
     options,
     showTitleLabel,
+    constantWidth,
   } = props;
 
   return (
@@ -43,7 +44,7 @@ export default function FormMultiSelect(props) {
         <Autocomplete
           value={value}
           onChange={(e, newValue) => setValue(newValue)}
-          sx={{ m: 1, width: 'fit-content' }}
+          sx={{ m: 1, width: constantWidth ? '500px' : 'fit-content' }}
           multiple
           id="tags-standard"
           options={options}
@@ -82,9 +83,11 @@ FormMultiSelect.propTypes = {
   setValue: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   showTitleLabel: PropTypes.bool,
+  constantWidth: PropTypes.bool,
 };
 
 FormMultiSelect.defaultProps = {
   half: false,
   showTitleLabel: true,
+  constantWidth: false,
 };

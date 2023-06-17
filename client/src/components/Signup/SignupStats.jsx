@@ -103,6 +103,7 @@ export default function SignupStats({ setUser, nextStage }) {
                 setValue={setHealthConditionsAndInjuries}
                 options={healthConditionsAndInjuriesOptions}
                 showTitleLabel={false}
+                constantWidth
               />
             </Grid>
             <Grid item sm={12} md={8} lg={6} xl={4}>
@@ -113,6 +114,7 @@ export default function SignupStats({ setUser, nextStage }) {
                 setValue={setAllergiesIntolerances}
                 options={allergiesIntolerancesOptions}
                 showTitleLabel={false}
+                constantWidth
               />
             </Grid>
             <Grid item sm={12} md={8} lg={6} xl={4}>
@@ -123,6 +125,7 @@ export default function SignupStats({ setUser, nextStage }) {
                 setValue={setWeeklyAvailability}
                 options={weeklyAvailabilityOptions}
                 showTitleLabel={false}
+                constantWidth
               />
             </Grid>
             <Grid item sm={12} md={8} lg={6} xl={4}>
@@ -133,6 +136,7 @@ export default function SignupStats({ setUser, nextStage }) {
                 setValue={setDietaryRestrictions}
                 options={dietaryRestrictionsOptions}
                 showTitleLabel={false}
+                constantWidth
               />
             </Grid>
           </Grid>
