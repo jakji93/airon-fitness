@@ -6,11 +6,8 @@ import React, { useState } from 'react';
 
 import {
   experienceLevels, healthConditionsAndInjuriesOptions, dietaryRestrictionsOptions,
-  allergiesIntolerancesOptions,
-// eslint-disable-next-line import/no-duplicates
+  allergiesIntolerancesOptions, weeklyAvailabilityOptions,
 } from '../../utils/userUtils';
-// eslint-disable-next-line import/no-duplicates
-import { weeklyAvailabilityOptions } from '../../utils/userUtils';
 import FormMultiSelect from '../Profile/Forms/FormMultiSelect';
 import FormSelect from '../Profile/Forms/FormSelect';
 import FormTextFieldWithRadio from '../Profile/Forms/FormTextWithRadio';
@@ -87,7 +84,7 @@ export default function SignupStats({ setUser, nextStage }) {
             />
           </Grid>
           <Grid container spacing={2} sx={classes.selectForm}>
-            <Grid item xs={6}>
+            <Grid item sm={12} lg={6} xl={4}>
               <FormSelect
                 id="experience"
                 label="Experience"
@@ -98,7 +95,7 @@ export default function SignupStats({ setUser, nextStage }) {
                 limitWidth
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item sm={12} md={8} lg={6} xl={4}>
               <FormMultiSelect
                 id="health-conditions-and-injuries"
                 label="Health Conditions & Injuries"
@@ -108,7 +105,7 @@ export default function SignupStats({ setUser, nextStage }) {
                 showTitleLabel={false}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item sm={12} md={8} lg={6} xl={4}>
               <FormMultiSelect
                 id="allergies-intolerances"
                 label="Allergies & Intolerances"
@@ -118,7 +115,7 @@ export default function SignupStats({ setUser, nextStage }) {
                 showTitleLabel={false}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item sm={12} md={8} lg={6} xl={4}>
               <FormMultiSelect
                 id="weekly-availability"
                 label="Weekly Availability"
@@ -128,7 +125,7 @@ export default function SignupStats({ setUser, nextStage }) {
                 showTitleLabel={false}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item sm={12} md={8} lg={6} xl={4}>
               <FormMultiSelect
                 id="dietary-restrictions"
                 label="Dietary Restrictions"

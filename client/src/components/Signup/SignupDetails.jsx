@@ -1,7 +1,6 @@
 import {
   Box, Typography, Grid, TextField, Button,
 } from '@mui/material';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 

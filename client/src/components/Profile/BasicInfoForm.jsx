@@ -1,7 +1,6 @@
 import {
   Grid, Button,
 } from '@mui/material';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import _ from 'lodash';
 import React, { useState } from 'react';
 
@@ -12,6 +11,7 @@ import FormSelect from './Forms/FormSelect';
 import FormTextFieldInput from './Forms/FormTextFieldInput';
 import FormTextFieldWithRadio from './Forms/FormTextWithRadio';
 import { convertInchesToCm, convertLbToKg } from '../../util';
+// import { genders, experienceLevels, goalsOptions,   } from '../../utils/userUtils';
 
 const genderOptions = [
   'Female',
