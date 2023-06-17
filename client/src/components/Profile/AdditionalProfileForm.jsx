@@ -20,6 +20,7 @@ export default function AdditionalProfileForm() {
   const [weeklyAvailability, setWeeklyAvailability] = useState([]);
   const [bodyFatPercentage, setBodyFatPercentage] = useState(0);
   const [muscleMassPercentage, setMuscleMassPercentage] = useState(0);
+  const [workoutDuration, setWorkoutDuration] = useState(0);
   const additionalProfile = useSelector((state) => state.additionalProfile);
   const dispatch = useDispatch();
 
@@ -34,6 +35,9 @@ export default function AdditionalProfileForm() {
     setDietaryRestrictions(additionalProfile.profile.dietaryRestrictions);
     setAllergiesIntolerances(additionalProfile.profile.allergiesIntolerances);
     setWeeklyAvailability(additionalProfile.profile.weeklyAvailability);
+    setBodyFatPercentage(additionalProfile.profile.bodyFatPercentage);
+    setMuscleMassPercentage(additionalProfile.profile.muscleMassPercentage);
+    setWorkoutDuration(additionalProfile.profile.workoutDuration);
   }, []);
 
   const clear = () => {
@@ -46,11 +50,13 @@ export default function AdditionalProfileForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log({
-      'healthConditionsAndInjuries: ': healthConditionsAndInjuries,
-      'dietaryRestrictions: ': dietaryRestrictions,
-      'allergiesIntolerances: ': allergiesIntolerances,
-      'workoutDayOfWeek: ': weeklyAvailability,
-
+      healthConditionsAndInjuries,
+      dietaryRestrictions,
+      allergiesIntolerances,
+      weeklyAvailability,
+      bodyFatPercentage,
+      muscleMassPercentage,
+      workoutDuration,
     });
 
     clear();
@@ -77,7 +83,7 @@ export default function AdditionalProfileForm() {
         endAdornment="%"
       />
       <FormTextFieldInput
-        id="muscle"
+        id="muscle-mass-percentage"
         label="Muscle Mass Percentage"
         half
         value={muscleMassPercentage}
@@ -111,6 +117,14 @@ export default function AdditionalProfileForm() {
         value={weeklyAvailability}
         setValue={setWeeklyAvailability}
         options={weeklyAvailabilityOptions}
+      />
+      <FormTextFieldInput
+        id="workout-duration"
+        label="Preferred Workout Duration"
+        half
+        value={workoutDuration}
+        setValue={setWorkoutDuration}
+        endAdornment="minutes"
       />
       <Grid item xs={12} sm={6} />
       <Grid item xs={12} sm={5} />
