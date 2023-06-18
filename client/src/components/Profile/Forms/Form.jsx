@@ -1,7 +1,17 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { Paper, Typography, Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
 import React from 'react';
+
+export const handleKeyPress = (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+  }
+};
+
+export const inputLabelSizing = 3;
+export const inputGridSizing = (half) => (half ? 3 : 9);
 
 export default function Form(props) {
   const {
@@ -16,7 +26,7 @@ export default function Form(props) {
         <Typography variant="h6" gutterBottom sx={{ paddingBottom: 5 }}>
           {formTitle}
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} onKeyPress={handleKeyPress}>
           <Grid container spacing={3}>
             {children}
           </Grid>

@@ -12,6 +12,13 @@ export const experienceLevels = [
   'Advanced',
 ];
 
+export const goalsOptions = [
+  'weight loss',
+  'muscle growth',
+  'endurance',
+  'overall health',
+];
+
 export const healthConditionsAndInjuriesOptions = [
   'Heart disease',
   'Asthma',

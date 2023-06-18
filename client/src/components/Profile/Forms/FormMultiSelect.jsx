@@ -1,10 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import CheckIcon from '@mui/icons-material/Check';
 import {
-  Autocomplete, Grid, InputLabel, MenuItem, TextField,
+  Autocomplete, Container, Grid, MenuItem, TextField,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
+
+import { inputGridSizing } from './Form';
+import GridInputLabel from './GridInputLabel';
 
 export default function FormMultiSelect(props) {
   const {
@@ -19,28 +22,22 @@ export default function FormMultiSelect(props) {
   } = props;
 
   return (
-    <>
+    <Container sx={{
+      display: 'flex',
+      alignItems: 'center',
+    }}
+    >
       {
       showTitleLabel
         ? (
-          <Grid item xs={12} sm={2}>
-            <InputLabel
-              id={`${id}-label`}
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                fontWeight: 700,
-                wordWrap: 'break-word',
-                whiteSpace: 'normal',
-              }}
-            >
-              {label}
-            </InputLabel>
-          </Grid>
+          <GridInputLabel
+            id={id}
+            label={label}
+          />
         )
         : ''
     }
-      <Grid item xs={12} sm={half ? 4 : 10}>
+      <Grid item xs={12} sm={inputGridSizing(half)}>
         <Autocomplete
           value={value}
           onChange={(e, newValue) => setValue(newValue)}
@@ -71,7 +68,7 @@ export default function FormMultiSelect(props) {
           )}
         />
       </Grid>
-    </>
+    </Container>
   );
 }
 

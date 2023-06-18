@@ -1,8 +1,11 @@
 import {
-  Grid, InputLabel, FormControl, Select, MenuItem,
+  Grid, InputLabel, Container, FormControl, Select, MenuItem,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
+
+import { inputGridSizing } from './Form';
+import GridInputLabel from './GridInputLabel';
 
 export default function FormSelect(props) {
   const {
@@ -14,31 +17,26 @@ export default function FormSelect(props) {
     setValue,
     options,
     limitWidth,
+    flexbox,
   } = props;
 
   return (
-    <>
+    <Container sx={flexbox ? {
+      display: 'flex',
+      alignItems: 'center',
+    } : { display: 'contents' }}
+    >
       {
           showTitleLabel
             ? (
-              <Grid item xs={12} sm={2}>
-                <InputLabel
-                  id={`${id}-label`}
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    fontWeight: 700,
-                    wordWrap: 'break-word',
-                    whiteSpace: 'normal',
-                  }}
-                >
-                  {label}
-                </InputLabel>
-              </Grid>
+              <GridInputLabel
+                id={id}
+                label={label}
+              />
             ) : ''
         }
-      <Grid item xs={12} sm={half ? 4 : 10}>
-        <FormControl fullWidth sx={limitWidth ? { m: 1, width: 500 } : {}}>
+      <Grid item xs={12} sm={inputGridSizing(half)}>
+        <FormControl fullWidth size={limitWidth ? '' : 'small'} sx={limitWidth ? { m: 1, width: 500 } : {}}>
           <InputLabel
             id={`${id}-label`}
             sx={{
@@ -61,7 +59,7 @@ export default function FormSelect(props) {
           </Select>
         </FormControl>
       </Grid>
-    </>
+    </Container>
   );
 }
 
@@ -74,10 +72,12 @@ FormSelect.propTypes = {
   setValue: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   limitWidth: PropTypes.bool,
+  flexbox: PropTypes.bool,
 };
 
 FormSelect.defaultProps = {
   half: false,
   showTitleLabel: true,
   limitWidth: false,
+  flexbox: false,
 };

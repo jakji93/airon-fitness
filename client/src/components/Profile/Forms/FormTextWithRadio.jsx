@@ -20,6 +20,7 @@ export default function FormTextFieldWithRadio(props) {
     // First value in array should be noop
     conversionFunctions,
     radioLabel,
+    displayFlex,
   } = props;
   const [radioSelection, setRadioSelection] = useState(radioGroups[0]);
   const [inputValue, setInputValue] = useState(value);
@@ -55,7 +56,7 @@ export default function FormTextFieldWithRadio(props) {
         type={type}
         endAdornment={radioSelection}
       />
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={displayFlex ? '' : 12} sm={displayFlex ? '' : 12}>
         <FormControl>
           {radioLabel
             && <FormLabel id={`${id}-row-radio-buttons-group-label`}>{radioLabel}</FormLabel>}
@@ -94,6 +95,7 @@ FormTextFieldWithRadio.propTypes = {
   type: PropTypes.string,
   radioGroups: PropTypes.arrayOf(PropTypes.string).isRequired,
   conversionFunctions: PropTypes.arrayOf(PropTypes.func).isRequired,
+  displayFlex: PropTypes.bool,
 };
 
 FormTextFieldWithRadio.defaultProps = {
@@ -101,4 +103,5 @@ FormTextFieldWithRadio.defaultProps = {
   showTitleLabel: true,
   radioLabel: null,
   value: 0,
+  displayFlex: false,
 };

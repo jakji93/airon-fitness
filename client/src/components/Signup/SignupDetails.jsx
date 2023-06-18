@@ -4,7 +4,7 @@ import {
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import { genders } from '../../utils/userUtils';
+import { genderOptions } from '../../constants/BasicProfile';
 import FormSelect from '../Profile/Forms/FormSelect';
 
 export default function SignupDetails({ nextStage, setUser }) {
@@ -69,7 +69,7 @@ export default function SignupDetails({ nextStage, setUser }) {
               id="gender"
               label="Gender"
               showTitleLabel={false}
-              options={genders}
+              options={genderOptions}
               setValue={setUserGender}
               value={userGender}
             />

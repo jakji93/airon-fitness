@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import {
-  experienceLevels, healthConditionsAndInjuriesOptions, dietaryRestrictionsOptions,
+  healthConditionsAndInjuriesOptions, dietaryRestrictionsOptions,
   allergiesIntolerancesOptions, weeklyAvailabilityOptions,
-} from '../../utils/userUtils';
+} from '../../constants/AdditionalProfile';
+import { experienceOptions } from '../../constants/BasicProfile';
 import FormMultiSelect from '../Profile/Forms/FormMultiSelect';
 import FormSelect from '../Profile/Forms/FormSelect';
 import FormTextFieldWithRadio from '../Profile/Forms/FormTextWithRadio';
@@ -63,7 +64,7 @@ export default function SignupStats({ setUser, nextStage }) {
       </Typography>
       <Box component="form" noValidate onSubmit={handleSubmit} sx={classes.root}>
         <Grid container spacing={2} sx={classes.toggleForm}>
-          <Grid container item spacing={3}>
+          <Grid container item spacing={1} sx={{ display: 'flex', justifyContent: 'center' }}>
             <FormTextFieldWithRadio
               id="weight"
               label="Weight"
@@ -72,6 +73,7 @@ export default function SignupStats({ setUser, nextStage }) {
               setValue={setWeight}
               type="number"
               radioGroups={['lb', 'kg']}
+              displayFlex
             />
             <FormTextFieldWithRadio
               id="height"
@@ -81,6 +83,7 @@ export default function SignupStats({ setUser, nextStage }) {
               setValue={setHeight}
               type="number"
               radioGroups={['cm', 'in']}
+              displayFlex
             />
           </Grid>
           <Grid container spacing={2} sx={classes.selectForm}>
@@ -89,10 +92,11 @@ export default function SignupStats({ setUser, nextStage }) {
                 id="experience"
                 label="Experience"
                 showTitleLabel={false}
-                options={experienceLevels}
+                options={experienceOptions}
                 setValue={setExperience}
                 value={experience}
                 limitWidth
+                flexbox
               />
             </Grid>
             <Grid item sm={12} md={8} lg={6} xl={4}>
