@@ -1,17 +1,10 @@
 import { Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import fetchFitnessPlan from '../../../actionCreators/FitnessPlan';
+import { useSelector } from 'react-redux';
 
 export default function ExistingFitnessPlan() {
   const [plan, setPlan] = useState();
   const fitnessPlan = useSelector((state) => state.fitnessPlan);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchFitnessPlan());
-  }, [dispatch]);
 
   useEffect(() => {
     // TODO: uncomment this when backend api is set up
