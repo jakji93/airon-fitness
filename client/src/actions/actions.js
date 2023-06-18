@@ -8,7 +8,3 @@ export const exampleAction2 = (payload) => ({
   payload,
 });
 
-export const createFitnessPlan = (payload) => ({
-  type: 'CREATE',
-  payload,
-});
