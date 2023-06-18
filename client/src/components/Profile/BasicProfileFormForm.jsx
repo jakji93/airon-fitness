@@ -15,7 +15,6 @@ import FormTextFieldWithRadio from './Forms/FormTextWithRadio';
 import fetchBasicProfile from '../../actionCreators/BasicProfile';
 import { genderOptions, experienceOptions, goalsOptions } from '../../constants/BasicProfile';
 import { convertInchesToCm, convertLbToKg } from '../../util';
-// import { genders, experienceLevels, goalsOptions,   } from '../../utils/userUtils';
 
 export default function BasicProfileForm() {
   const [firstName, setFirstName] = useState('');
