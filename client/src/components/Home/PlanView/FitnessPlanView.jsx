@@ -8,7 +8,7 @@ import ExistingFitnessPlan from './ExistingFitnessPlan';
 import NoFitnessPlan from './NoFitnessPlan';
 
 export default function FitnessPlanView() {
-  const hasFitnessPlan = useSelector((state) => state.hasFitnessPlan);
+  const fitnessPlan = useSelector((state) => state.fitnessPlan);
   return (
     <div>
       <Grid container>
@@ -16,7 +16,7 @@ export default function FitnessPlanView() {
           <Typography variant="h5" className="header-message">Fitness Plan</Typography>
         </Grid>
       </Grid>
-      {hasFitnessPlan ? <ExistingFitnessPlan /> : <NoFitnessPlan />}
+      {fitnessPlan.created ? <ExistingFitnessPlan /> : <NoFitnessPlan />}
     </div>
   );
 }
