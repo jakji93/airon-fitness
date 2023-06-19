@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Form from './Forms/Form';
 import FormMultiInput from './Forms/FormMultiInput';
 import FormMultiSelect from './Forms/FormMultiSelect';
+import FormSelect from './Forms/FormSelect';
 import FormTextFieldInput from './Forms/FormTextFieldInput';
 import fetchAdditionalProfile from '../../actionCreators/AdditionalProfile';
 import {
@@ -18,7 +19,7 @@ export default function AdditionalProfileForm() {
   const [healthConditionsAndInjuries, setHealthConditionsAndInjuries] = useState([]);
   const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
   const [allergiesIntolerances, setAllergiesIntolerances] = useState([]);
-  const [weeklyAvailability, setWeeklyAvailability] = useState([]);
+  const [weeklyAvailability, setWeeklyAvailability] = useState(0);
   const [bodyFatPercentage, setBodyFatPercentage] = useState(0);
   const [muscleMassPercentage, setMuscleMassPercentage] = useState(0);
   const [workoutDuration, setWorkoutDuration] = useState(0);
@@ -116,12 +117,14 @@ export default function AdditionalProfileForm() {
         setValue={setAllergiesIntolerances}
         options={allergiesIntolerancesOptions}
       />
-      <FormMultiSelect
+      <FormSelect
         id="weekly-availability"
         label="Weekly Availability"
         value={weeklyAvailability}
         setValue={setWeeklyAvailability}
         options={weeklyAvailabilityOptions}
+        half
+        endAdornment="days"
       />
       <FormTextFieldInput
         id="workout-duration"
