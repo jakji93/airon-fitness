@@ -95,26 +95,25 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 [@Kevin Wu](https://www.linkedin.com/in/kevin-wu1/)<br>
 
 
-Project Link: [https://github.com/d-x-s/airon-fitness](https://github.com/d-x-s/airon-fitness)
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 ## Built With
-
-What we plan to use for our project.
-
-* [![NPM][NPM][NPM-url]
+* [![NPM][NPM]][NPM-url]
+* [![Node.js][Node.js]][Node-url]
 * [![React][React.js]][React-url]
-* [![MongoDB][MongoDB][MongoDB-url]
+* [![MaterialUI][MaterialUI]][MaterialUI-url]
+* [![MongoDB][MongoDB]][MongoDB-url]
+* [![Express][Express.js]][Express-url]
+* [![Redux][Redux]][Redux-url]
+* [![OpenAI][OpenAI]][OpenAI-url]
+* [![JWT][JWT]][JWT-url]
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-<!-- Project Progress 1 -->
-## Project Progress 1
-
+<!-- Roadmap -->
 ### Minimal Requirements
 - [ ] A user can create a profile that can be saved
     - [ ] Develop Frontend UI
@@ -145,9 +144,10 @@ What we plan to use for our project.
 - [ ] Live audio feedback during a workout 
 
 ### Prototyping (Figma)
-Figma Link: [https://www.figma.com/file/1DCkl66gauCtiH0Btjx1VZ/AI-ron-Fitness-Prototyping?type=design&node-id=36-3&t=dtoPdy8njmD3d0tK-0
-](https://www.figma.com/file/1DCkl66gauCtiH0Btjx1VZ/AI-ron-Fitness-Prototyping?type=design&node-id=36-3&t=dtoPdy8njmD3d0tK-0
-)
+[![Prototyping with Figma][Figma]][Figma-url]
+
+### Agile Development
+[![Planning with Jira][Jira]][Jira-url]
 
 
 <!-- LICENSE -->
