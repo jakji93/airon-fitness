@@ -10,7 +10,7 @@ const customInputRoute = require('./src/routes/CustomInput');
 const app = express();
 const port = 3000;
 
-app.use(cors());s
+app.use(cors());
 app.use(express.json());
 app.use('/userInfo', userInfoRoute);
 app.use('/userProfile', userProfileRoute);
