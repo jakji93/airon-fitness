@@ -12,18 +12,11 @@ import FormMultiSelect from './Forms/FormMultiSelect';
 import FormSelect from './Forms/FormSelect';
 import FormTextFieldInput from './Forms/FormTextFieldInput';
 import FormTextFieldWithRadio from './Forms/FormTextWithRadio';
-<<<<<<< HEAD:client/src/components/Profile/BasicProfileFormForm.jsx
 import fetchBasicProfile from '../../actionCreators/BasicProfile';
 import { genderOptions, experienceOptions, goalsOptions } from '../../constants/BasicProfile';
 import { convertInchesToCm, convertLbToKg } from '../../util';
 
 export default function BasicProfileForm() {
-=======
-import { genderOptions, experienceOptions, goalsOptions } from '../../constants';
-import { convertInchesToCm, convertLbToKg } from '../../util';
-
-export default function BasicInfoForm() {
->>>>>>> 3ba45fa (refactor: constants for gender, experience, goals):client/src/components/Profile/BasicInfoForm.jsx
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState(null);
