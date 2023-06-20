@@ -19,7 +19,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/d-x-s/airon-fitness">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="assets/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">AIron Fitness</h3>
