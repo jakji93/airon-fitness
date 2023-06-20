@@ -46,12 +46,57 @@ const schedules = [
   }
 ];
 
+// GET /mealschedule - get meal schedule for user (userID)
+// request format:
+//     body: n/a
+//     params: userID
+//     query params: n/a
+// returns:
+//     {userID: string, 
+//      schedule: 
+//        {Monday: 
+//          {breakfast: string,
+//           snack1: string,
+//           lunch: string,
+//           snack2: string
+//           dinner: string}
+//         Tuesday:...
+//         Wednesday:...
+//         ...}}
 router.get('/:userID', (req, res) => {
   const foundItem = schedules.find(item => item.userID === req.params.userID);
   if (!foundItem) return res.status(404).send({ message: 'Item not found' });
   res.send(foundItem);
 });
 
+// POST /mealschedule - create meal schedule for user (userID)
+// request format:
+//     body:
+//     {userID: string, 
+//      schedule: 
+//        {Monday: 
+//          {breakfast: string,
+//           snack1: string,
+//           lunch: string,
+//           snack2: string
+//           dinner: string}
+//          Tuesday:...
+//          Wednesday:...
+//          ...}}
+//     params: n/a
+//     query params: n/a
+// returns:
+//     {userID: string, 
+//      schedule: 
+//        {Monday: 
+//          {breakfast: string,
+//           snack1: string,
+//           lunch: string,
+//           snack2: string
+//           dinner: string}
+//         Tuesday:...
+//         Wednesday:...
+//         ...}}
 router.post('/', (req, res) => {
   if(!req.body.schedule) {
     return res.status(400).send({message: "Missing Payload"});
@@ -61,6 +106,34 @@ router.post('/', (req, res) => {
   return res.send(item);
 });
 
+// PUT /mealschedule - update meal schedule for user (userID)
+// request format:
+//     body:
+//     {userID: string, 
+//      schedule: 
+//        {Monday: 
+//          {breakfast: string,
+//           snack1: string,
+//           lunch: string,
+//           snack2: string
+//           dinner: string}
+//          Tuesday:...
+//          Wednesday:...
+//          ...}}
+//     params: userID
+//     query params: n/a
+// returns:
+//     {userID: string, 
+//      schedule: 
+//        {Monday: 
+//          {breakfast: string,
+//           snack1: string,
+//           lunch: string,
+//           snack2: string
+//           dinner: string}
+//         Tuesday:...
+//         Wednesday:...
+//         ...}}
 router.put('/:userID', (req, res) => {
   const foundItemIndex = schedules.findIndex(item => item.userID === req.params.userID);
 
