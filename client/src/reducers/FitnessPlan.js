@@ -46,6 +46,7 @@ const initialPlan = {
 const fitnessPlanSlice = createSlice({
   name: 'fitnessPlan',
   initialState: {
+    created: false,
     loading: false,
     error: '',
     plan: initialPlan,
@@ -55,6 +56,7 @@ const fitnessPlanSlice = createSlice({
       state.loading = true;
     },
     FETCH_FITNESS_PLAN_SUCCESS: (state, action) => {
+      state.created = true;
       state.loading = false;
       state.plan = action.payload;
       state.error = '';
