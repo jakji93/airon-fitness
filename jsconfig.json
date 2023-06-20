@@ -10,11 +10,6 @@
         "target": "ES2021",
         "moduleResolution": "node"
     },
-<<<<<<< HEAD
-    "include": ["**/src/**/*", "server/app.js"],
-    "exclude": ["node_modules"]
-=======
     "include": ["**/src/**/*"],
     "exclude": ["node_modules"],
->>>>>>> 561d042 (refactor: constants for gender, experience, goals)
 }
