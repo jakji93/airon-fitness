@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "231998d1-9bc7-4421-ae22-f2ffed489a98",
+		"name": "455: UserProfile Routes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24642677",
+		"_collection_link": "https://crimson-flare-723439.postman.co/workspace/airon-fitness~716a4b60-a568-4c07-a7a1-7b65ce02e561/collection/24642677-231998d1-9bc7-4421-ae22-f2ffed489a98?action=share&creator=24642677&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/userprofile/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/userprofile/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"userprofile",
+						""
+					]
+				},
+				"description": "Return a list of all user profiles."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/userprofile/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/userprofile/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"userprofile",
+						"1"
+					]
+				},
+				"description": "Get a specific user (success)"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/userprofile/4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/userprofile/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"userprofile",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/userprofile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userID\": \"4\",\n    \"api_key\": \"mnop5678\",\n    \"first_name\": \"Sarah\",\n    \"last_name\": \"Johnson\",\n    \"image\": \"https://example.com/profile4.jpg\",\n    \"birthday\": \"1992-08-20\",\n    \"height\": 170,\n    \"height_unit\": \"cm\",\n    \"weight\": 68,\n    \"weight_unit\": \"kg\",\n    \"experience\": \"Intermediate\",\n    \"body_mass\": 23,\n    \"muscle_mass\": 57,\n    \"duration\": 60,\n    \"num_day_of_week\": 4,\n    \"preference\": \"HIIT\",\n    \"equipment\": [\n        \"Jump rope\",\n        \"Resistance bands\"\n    ],\n    \"allergyList\": [],\n    \"goalList\": [\n        \"Weight loss\",\n        \"Toning\"\n    ],\n    \"healthList\": [],\n    \"dietList\": [\n        \"Vegetarian\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/userprofile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"userprofile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/userprofile/4",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"userID\": \"4\",\n  \"api_key\": \"mnop5678\",\n  \"first_name\": \"Sarah\",\n  \"last_name\": \"Johnson\",\n  \"image\": \"https://example.com/profile4.jpg\",\n  \"birthday\": \"1992-08-20\",\n  \"height\": 175,\n  \"height_unit\": \"cm\",\n  \"weight\": 65,\n  \"weight_unit\": \"kg\",\n  \"experience\": \"Intermediate\",\n  \"body_mass\": 23,\n  \"muscle_mass\": 57,\n  \"duration\": 60,\n  \"num_day_of_week\": 4,\n  \"preference\": \"HIIT\",\n  \"equipment\": [\"Jump rope\", \"Resistance bands\"],\n  \"allergyList\": [\"Dairy\"],\n  \"goalList\": [\"Weight loss\", \"Toning\"],\n  \"healthList\": [\"Asthma\"],\n  \"dietList\": [\"Vegetarian\"]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/userprofile/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"userprofile",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/userprofile/4",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/userprofile/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"userprofile",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
