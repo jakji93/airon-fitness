@@ -8,19 +8,19 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:3000/userprofile/",
+			"name": "http://localhost:3000/userProfile/",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/userprofile/",
+					"raw": "http://localhost:3000/userProfile/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"userprofile",
+						"userProfile",
 						""
 					]
 				},
@@ -29,19 +29,19 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/userprofile/1",
+			"name": "http://localhost:3000/userProfile/1",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/userprofile/1",
+					"raw": "http://localhost:3000/userProfile/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"userprofile",
+						"userProfile",
 						"1"
 					]
 				},
@@ -50,19 +50,19 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/userprofile/4",
+			"name": "http://localhost:3000/userProfile/4",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/userprofile/4",
+					"raw": "http://localhost:3000/userProfile/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"userprofile",
+						"userProfile",
 						"4"
 					]
 				}
@@ -70,7 +70,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/userprofile",
+			"name": "http://localhost:3000/userProfile",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -84,21 +84,21 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/userprofile",
+					"raw": "http://localhost:3000/userProfile",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"userprofile"
+						"userProfile"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/userprofile/4",
+			"name": "http://localhost:3000/userProfile/4",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -112,14 +112,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/userprofile/4",
+					"raw": "http://localhost:3000/userProfile/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"userprofile",
+						"userProfile",
 						"4"
 					]
 				}
@@ -127,19 +127,19 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/userprofile/4",
+			"name": "http://localhost:3000/userProfile/4",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/userprofile/4",
+					"raw": "http://localhost:3000/userProfile/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"userprofile",
+						"userProfile",
 						"4"
 					]
 				}

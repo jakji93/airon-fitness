@@ -5,7 +5,7 @@ const { schedule } = require('./mock/WorkoutScheduleMockData');
 const schedules = [
   {
     userID: "1",
-    schedule: scheudle
+    schedule: schedule
   }
 ];
 
