@@ -1,7 +1,5 @@
 const express = require('express');
-let cors = require('cors');
-const app = express();
-const port = 3000;
+const cors = require('cors');
 
 const userInfoRoute = require('./src/routes/UserInfo');
 const userProfileRoute = require('./src/routes/UserProfile');
@@ -9,16 +7,19 @@ const workoutScheduleRoute = require('./src/routes/WorkoutSchedule');
 const mealScheduleRoute = require('./src/routes/MealSchedule');
 const customInputRoute = require('./src/routes/CustomInput');
 
-app.use(cors());
+const app = express();
+const port = 3000;
+
+app.use(cors());s
 app.use(express.json());
-app.use('/userinfo', userInfoRoute);
+app.use('/userInfo', userInfoRoute);
 app.use('/userProfile', userProfileRoute);
-app.use('/workoutschedule', workoutScheduleRoute);
-app.use('/mealschedule', mealScheduleRoute);
-app.use('/custominput', customInputRoute);
+app.use('/workoutSchedule', workoutScheduleRoute);
+app.use('/mealSchedule', mealScheduleRoute);
+app.use('/customInput', customInputRoute);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Server connection established!')
 })
 
 app.listen(port, () => {

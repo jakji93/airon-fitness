@@ -9,7 +9,7 @@ const schedules = [
   }
 ];
 
-// GET /mealschedule - get meal schedule for user (userID)
+// GET /mealSchedule - get meal schedule for user (userID)
 // request format:
 //     body: n/a
 //     params: userID
@@ -32,7 +32,7 @@ router.get('/:userID', (req, res) => {
   res.send(foundItem);
 });
 
-// POST /mealschedule - create meal schedule for user (userID)
+// POST /mealSchedule - create meal schedule for user (userID)
 // request format:
 //     body:
 //     {userID: string, 
@@ -69,7 +69,7 @@ router.post('/', (req, res) => {
   return res.send(item);
 });
 
-// PUT /mealschedule - update meal schedule for user (userID)
+// PUT /mealSchedule - update meal schedule for user (userID)
 // request format:
 //     body:
 //     {userID: string, 

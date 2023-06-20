@@ -9,7 +9,7 @@ const schedules = [
   }
 ];
 
-// GET /workoutschedule - get workout schedule for user (userID)
+// GET /workoutSchedule - get workout schedule for user (userID)
 // request format:
 //     body: n/a
 //     params: userID
@@ -33,7 +33,7 @@ router.get('/:userID', (req, res) => {
   res.send(foundItem);
 });
 
-// POST /workoutschedule - create workout schedule for user (userID)
+// POST /workoutSchedule - create workout schedule for user (userID)
 // request format:
 //     body:
 //     {userID: string, 
@@ -72,7 +72,7 @@ router.post('/', (req, res) => {
   return res.send(item);
 });
 
-// PUT /workoutschedule - update workout schedule for user (userID)
+// PUT /workoutSchedule - update workout schedule for user (userID)
 // request format:
 //     body:
 //     {userID: string, 

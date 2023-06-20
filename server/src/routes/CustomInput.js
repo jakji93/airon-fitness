@@ -3,7 +3,7 @@ const router = express.Router();
 
 const list = [];
 
-// GET /custominput - retrieves every user inputs in chat function for user (userID)
+// GET /customInput - retrieves every user inputs in chat function for user (userID)
 // request format:
 //     body: n/a
 //     params: userID
@@ -16,7 +16,7 @@ router.get('/:userID', (req, res) => {
 });
 
 
-// POST /custominput - create new user input for user (userID)
+// POST /customInput - create new user input for user (userID)
 // request format:
 //     body: {userID: string, input: string, timestamp: string}
 //     params: n/a
