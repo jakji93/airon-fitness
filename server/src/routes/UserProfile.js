@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const { userProfile1, userProfile2, userProfile3 } = require('./mock/UserProfileMockData');
+const { userProfile1, userProfile2, userProfile3 } = require('../mock/UserProfileMockData');
 
 // mocking with this object, acting as in-memory data store
 // contains key-value pairs, where key is the userID and value is the profile object

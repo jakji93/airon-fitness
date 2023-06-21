@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const { schedule } = require('./mock/WorkoutScheduleMockData');
+const { schedule } = require('../mock/WorkoutScheduleMockData');
 
 const schedules = [
   {
