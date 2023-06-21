@@ -1,14 +1,13 @@
 {
 	"info": {
-		"_postman_id": "231998d1-9bc7-4421-ae22-f2ffed489a98",
+		"_postman_id": "85298b25-980a-46a8-9d09-9d60cfceeb91",
 		"name": "455: UserProfile Routes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24642677",
-		"_collection_link": "https://crimson-flare-723439.postman.co/workspace/airon-fitness~716a4b60-a568-4c07-a7a1-7b65ce02e561/collection/24642677-231998d1-9bc7-4421-ae22-f2ffed489a98?action=share&creator=24642677&source=collection_link"
+		"_exporter_id": "15754192"
 	},
 	"item": [
 		{
-			"name": "http://localhost:3000/userProfile/",
+			"name": "/userProfile",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -29,7 +28,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/userProfile/1",
+			"name": "/userProfile/1",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -50,7 +49,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/userProfile/4",
+			"name": "userProfile/4",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -70,7 +69,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/userProfile",
+			"name": "userProfile",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -98,7 +97,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/userProfile/4",
+			"name": "userProfile/4",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -127,7 +126,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3000/userProfile/4",
+			"name": "userProfile/4",
 			"request": {
 				"method": "DELETE",
 				"header": [],
