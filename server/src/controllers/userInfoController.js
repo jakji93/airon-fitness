@@ -10,15 +10,6 @@ const generateToken = (userID) => jwt.sign({ userID }, process.env.JWT_SECRET, {
   expiresIn: '30d',
 });
 
-/**
- * @desc    Register new user
- * @route   POST /userInfo
- * @access  Public
- */
-const getUserInfo = (req, res) => {
-  res.send({});
-};
-
 const registerUser = asyncHandler(async (req, res) => {
   const {
     userID, password, email, gptAPIKey, firstName, lastName, profileImage,
@@ -109,7 +100,6 @@ const getMe = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  getUserInfo,
   loginUser,
   registerUser,
   getMe,

@@ -265,31 +265,19 @@
 				},
 				{
 					"name": "/userInfo/login Copy",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cI6IkpXVCJ9.eyJ1c2VySUQiOiJ0ZXN0SWQiLCJpYXQiOjE2ODczNzg0MDUsImV4cCI6MTY4OTk3MDQwNX0.RCVqvL89mwjQuy6d509Q6nZYwM7NGxvYahLN-16yxzU",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJ0ZXN0SWQiLCJpYXQiOjE2ODczNzg4ODgsImV4cCI6MTY4OTk3MDg4OH0.limWwcgxCvmguHxGIXINqp4wXdg0dUEuiav-IzAvyFs",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"password\": \"testPassword\", \n    \"email\": \"testEmail\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "http://localhost:3001/userInfo/me",
 							"protocol": "http",
