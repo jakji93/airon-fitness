@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const { userProfile1, userProfile2, userProfile3 } = require('./mock/UserProfileMockData');
 
@@ -18,20 +19,20 @@ userProfiles[userProfile3.userID] = userProfile3;
 // [
 //   {
 //       "userID": string,
-//       "api_key": string,
-//       "first_name": string,
-//       "last_name": string,
+//       "apiKey": string,
+//       "firstName": string,
+//       "lastName": string,
 //       "image": string,
 //       "birthday": string,
 //       "height": number,
-//       "height_unit": string,
+//       "heightUnit": string,
 //       "weight": number,
-//       "weight_unit": string,
+//       "weightUnit": string,
 //       "experience": string,
-//       "body_mass": number,
-//       "muscle_mass": number,
+//       "bodyMass": number,
+//       "muscleMass": number,
 //       "duration": number.
-//       "num_day_of_week": number
+//       "numDayOfWeek": number
 //       "preference": string,
 //       "equipment": [
 //           ...string
@@ -68,20 +69,20 @@ router.get('/', (req, res) => {
 // returns:
 // {
 //     "userID": string,
-//     "api_key": string,
-//     "first_name": string,
-//     "last_name": string,
+//     "apiKey": string,
+//     "firstName": string,
+//     "lastName": string,
 //     "image": string,
 //     "birthday": string,
 //     "height": number,
-//     "height_unit": string,
+//     "heightUnit": string,
 //     "weight": number,
-//     "weight_unit": string,
+//     "weightUnit": string,
 //     "experience": string,
-//     "body_mass": number,
-//     "muscle_mass": number,
+//     "bodyMass": number,
+//     "muscleMass": number,
 //     "duration": number.
-//     "num_day_of_week": number
+//     "numDayOfWeek": number
 //     "preference": string,
 //     "equipment": [
 //         ...string
@@ -112,23 +113,23 @@ router.get('/:userID', (req, res) => {
 
 // POST /userProfile - create a new user profile
 // request format:
-//     body: 
+//     body:
 //     {
 //        "userID": string,
-//        "api_key": string,
-//        "first_name": string,
-//        "last_name": string,
+//        "apiKey": string,
+//        "firstName": string,
+//        "lastName": string,
 //        "image": string,
 //        "birthday": string,
 //        "height": number,
-//        "height_unit": string,
+//        "heightUnit": string,
 //        "weight": number,
-//        "weight_unit": string,
+//        "weightUnit": string,
 //        "experience": string,
-//        "body_mass": number,
-//        "muscle_mass": number,
+//        "bodyMass": number,
+//        "muscleMass": number,
 //        "duration": number.
-//        "num_day_of_week": number
+//        "numDayOfWeek": number
 //        "preference": string,
 //        "equipment": [
 //            ...string
@@ -151,53 +152,31 @@ router.get('/:userID', (req, res) => {
 // returns:
 //     status code + copy of above request body on success
 router.post('/', (req, res) => {
-  const userProfile = {
-    userID,
-    api_key,
-    first_name,
-    last_name,
-    image,
-    birthday,
-    height,
-    height_unit,
-    weight,
-    weight_unit,
-    experience,
-    body_mass,
-    muscle_mass,
-    duration,
-    num_day_of_week,
-    preference,
-    equipment,
-    allergyList,
-    goalList,
-    healthList,
-    dietList
-  } = req.body;
+  const userProfile = req.body;
 
-  userProfiles[userID] = userProfile;
+  userProfiles[userProfile.userID] = userProfile;
   res.status(201).json(userProfile);
 });
 
 // PUT /userProfile/:userID - update a user profile with userID
 // request format:
-//     body: 
+//     body:
 //     {
 //        "userID": string,
-//        "api_key": string,
-//        "first_name": string,
-//        "last_name": string,
+//        "apiKey": string,
+//        "firstName": string,
+//        "lastName": string,
 //        "image": string,
 //        "birthday": string,
 //        "height": number,
-//        "height_unit": string,
+//        "heightUnit": string,
 //        "weight": number,
-//        "weight_unit": string,
+//        "weightUnit": string,
 //        "experience": string,
-//        "body_mass": number,
-//        "muscle_mass": number,
+//        "bodyMass": number,
+//        "muscleMass": number,
 //        "duration": number.
-//        "num_day_of_week": number
+//        "numDayOfWeek": number
 //        "preference": string,
 //        "equipment": [
 //            ...string
@@ -222,51 +201,51 @@ router.post('/', (req, res) => {
 router.put('/:userID', (req, res) => {
   const { userID } = req.params;
   const {
-    api_key,
-    first_name,
-    last_name,
+    apiKey,
+    firstName,
+    lastName,
     image,
     birthday,
     height,
-    height_unit,
+    heightUnit,
     weight,
-    weight_unit,
+    weightUnit,
     experience,
-    body_mass,
-    muscle_mass,
+    bodyMass,
+    muscleMass,
     duration,
-    num_day_of_week,
+    numDayOfWeek,
     preference,
     equipment,
     allergyList,
     goalList,
     healthList,
-    dietList
+    dietList,
   } = req.body;
 
   if (userProfiles[userID]) {
     userProfiles[userID] = {
       ...userProfiles[userID],
-      api_key,
-      first_name,
-      last_name,
+      apiKey,
+      firstName,
+      lastName,
       image,
       birthday,
       height,
-      height_unit,
+      heightUnit,
       weight,
-      weight_unit,
+      weightUnit,
       experience,
-      body_mass,
-      muscle_mass,
+      bodyMass,
+      muscleMass,
       duration,
-      num_day_of_week,
+      numDayOfWeek,
       preference,
       equipment,
       allergyList,
       goalList,
       healthList,
-      dietList
+      dietList,
     };
     res.json(userProfiles[userID]);
   } else {

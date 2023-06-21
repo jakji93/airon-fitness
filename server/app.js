@@ -19,9 +19,9 @@ app.use('/mealSchedule', mealScheduleRoute);
 app.use('/customInput', customInputRoute);
 
 app.get('/', (req, res) => {
-  res.send('Server connection established!')
-})
+  res.send('Server connection established!');
+});
 
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`)
-})
+  console.log(`Server listening on port ${port}`);
+});
