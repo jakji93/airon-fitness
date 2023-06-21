@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
 
 const userInfoRoute = require('./src/routes/UserInfo');
 const userProfileRoute = require('./src/routes/UserProfile');
@@ -8,7 +9,7 @@ const mealScheduleRoute = require('./src/routes/MealSchedule');
 const customInputRoute = require('./src/routes/CustomInput');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
