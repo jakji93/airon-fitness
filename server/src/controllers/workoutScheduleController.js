@@ -7,12 +7,22 @@ const schedules = [
   },
 ];
 
+/**
+ * @desc    get workout schedule for user (userID)
+ * @route   GET /workoutSchedule
+ * @access  Private
+ */
 const getWorkoutScheduleByUserID = (req, res) => {
   const foundItem = schedules.find((item) => item.userID === req.params.userID);
   if (!foundItem) return res.status(404).send({ message: 'Item not found' });
   return res.send(foundItem);
 };
 
+/**
+ * @desc    create workout schedule for user (userID)
+ * @route   POST /workoutSchedule
+ * @access  Private
+ */
 const createWorkoutSchedule = (req, res) => {
   if (!req.body.schedule) {
     return res.status(400).send({ message: 'Missing Payload' });
@@ -22,6 +32,11 @@ const createWorkoutSchedule = (req, res) => {
   return res.send(item);
 };
 
+/**
+ * @desc    update workout schedule for user (userID)
+ * @route   PUT /workoutSchedule
+ * @access  Private
+ */
 const updateUserWorkoutScheduleByUserID = (req, res) => {
   const foundItemIndex = schedules.findIndex((item) => item.userID === req.params.userID);
 

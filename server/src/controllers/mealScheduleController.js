@@ -7,12 +7,22 @@ const schedules = [
   },
 ];
 
+/**
+ * @desc    get meal schedule for user (userID)
+ * @route   GET /mealSchedule
+ * @access  Private
+ */
 const getMealScheduleByUser = (req, res) => {
   const foundItem = schedules.find((item) => item.userID === req.params.userID);
   if (!foundItem) return res.status(404).send({ message: 'Item not found' });
   return res.send(foundItem);
 };
 
+/**
+ * @desc    create meal schedule for user (userID)
+ * @route   POST /mealSchedule
+ * @access  Private
+ */
 const createMealScheduleForUser = (req, res) => {
   if (!req.body.schedule) {
     return res.status(400).send({ message: 'Missing Payload' });
@@ -22,6 +32,11 @@ const createMealScheduleForUser = (req, res) => {
   return res.send(item);
 };
 
+/**
+ * @desc    update meal schedule for user (userID)
+ * @route   PUT /mealSchedule
+ * @access  Private
+ */
 const updateMealScheduleForUser = (req, res) => {
   const foundItemIndex = schedules.findIndex((item) => item.userID === req.params.userID);
 
