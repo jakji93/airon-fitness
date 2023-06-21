@@ -122,14 +122,16 @@ export default function SignupStats({ setUser, nextStage }) {
               />
             </Grid>
             <Grid item sm={12} md={8} lg={6} xl={4}>
-              <FormMultiSelect
+              <FormSelect
                 id="weekly-availability"
                 label="Weekly Availability"
                 value={weeklyAvailability}
                 setValue={setWeeklyAvailability}
                 options={weeklyAvailabilityOptions}
                 showTitleLabel={false}
-                constantWidth
+                limitWidth
+                flexbox
+                endAdornment="days"
               />
             </Grid>
             <Grid item sm={12} md={8} lg={6} xl={4}>

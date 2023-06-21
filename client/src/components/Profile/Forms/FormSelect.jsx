@@ -1,5 +1,6 @@
 import {
-  Grid, InputLabel, Container, FormControl, Select, MenuItem,
+  Grid, InputLabel, FormControl, Select, MenuItem, InputAdornment,
+  Container,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -16,6 +17,7 @@ export default function FormSelect(props) {
     value,
     setValue,
     options,
+    endAdornment,
     limitWidth,
     flexbox,
   } = props;
@@ -52,6 +54,16 @@ export default function FormSelect(props) {
             value={value}
             label={label}
             onChange={(e) => setValue(e.target.value)}
+            endAdornment={(
+              <InputAdornment
+                sx={{
+                  marginRight: '10px',
+                }}
+                position="end"
+              >
+                {endAdornment}
+              </InputAdornment>
+            )}
           >
             {options.map((val) => (
               <MenuItem value={val} key={val}>{val}</MenuItem>
@@ -73,10 +85,12 @@ FormSelect.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   limitWidth: PropTypes.bool,
   flexbox: PropTypes.bool,
+  endAdornment: PropTypes.string,
 };
 
 FormSelect.defaultProps = {
   half: false,
+  endAdornment: null,
   showTitleLabel: true,
   limitWidth: false,
   flexbox: false,

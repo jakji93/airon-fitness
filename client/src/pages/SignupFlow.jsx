@@ -15,7 +15,11 @@ export default function SignupFlow() {
   const handleNext = (e) => {
     e.preventDefault();
     setStep((prevStep) => prevStep + 1);
-    console.log(user);
+
+    if (step === 3) {
+      console.log(user);
+      // TODO: Implement API call to create user
+    }
   };
 
   const getCurrentStage = () => {
