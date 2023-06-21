@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 
 const list = [];
@@ -11,10 +12,9 @@ const list = [];
 // returns:
 //     [{userID: string, input: string, timestamp: string}]
 router.get('/:userID', (req, res) => {
-  const userInputs = list.filter(item => item.userID === req.params.userID)
+  const userInputs = list.filter((item) => item.userID === req.params.userID);
   res.send(userInputs);
 });
-
 
 // POST /customInput - create new user input for user (userID)
 // request format:
@@ -24,10 +24,10 @@ router.get('/:userID', (req, res) => {
 // returns:
 //     {userID: string, input: string, timestamp: string}
 router.post('/', (req, res) => {
-  if(!req.body.input) {
-    return res.status(400).send({message: "Missing Payload"});
+  if (!req.body.input) {
+    return res.status(400).send({ message: 'Missing Payload' });
   }
-  const item = {userID: req.body.userID, input: req.body.input, timestamp: req.body.timestamp};
+  const item = { userID: req.body.userID, input: req.body.input, timestamp: req.body.timestamp };
   list.push(item);
   return res.send(item);
 });

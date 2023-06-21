@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "lint": "eslint \"src/**/*.{js}\"",
-    "lint:fix": "eslint --fix \"src/**/*.{js}\""
+    "lint": "eslint \"**/*.js\"",
+    "lint:fix": "eslint --fix \"**/*.js\""
   },
   "author": "AI-ron Fitness",
   "license": "ISC",
@@ -17,6 +17,9 @@
     "nodemon": "^2.0.22"
   },
   "devDependencies": {
-    "eslint": "^8.43.0"
+    "eslint": "^8.43.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
   }
 }

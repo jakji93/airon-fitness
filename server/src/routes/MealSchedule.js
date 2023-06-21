@@ -1,12 +1,13 @@
 const express = require('express');
+
 const router = express.Router();
 const { schedule } = require('./mock/MealScheduleMockData');
 
 const schedules = [
   {
-    userID: "1",
-    schedule: schedule
-  }
+    userID: '1',
+    schedule,
+  },
 ];
 
 // GET /mealSchedule - get meal schedule for user (userID)
@@ -15,9 +16,9 @@ const schedules = [
 //     params: userID
 //     query params: n/a
 // returns:
-//     {userID: string, 
-//      schedule: 
-//        {Monday: 
+//     {userID: string,
+//      schedule:
+//        {Monday:
 //          {breakfast: string,
 //           snack1: string,
 //           lunch: string,
@@ -27,17 +28,17 @@ const schedules = [
 //         Wednesday:...
 //         ...}}
 router.get('/:userID', (req, res) => {
-  const foundItem = schedules.find(item => item.userID === req.params.userID);
+  const foundItem = schedules.find((item) => item.userID === req.params.userID);
   if (!foundItem) return res.status(404).send({ message: 'Item not found' });
-  res.send(foundItem);
+  return res.send(foundItem);
 });
 
 // POST /mealSchedule - create meal schedule for user (userID)
 // request format:
 //     body:
-//     {userID: string, 
-//      schedule: 
-//        {Monday: 
+//     {userID: string,
+//      schedule:
+//        {Monday:
 //          {breakfast: string,
 //           snack1: string,
 //           lunch: string,
@@ -49,9 +50,9 @@ router.get('/:userID', (req, res) => {
 //     params: n/a
 //     query params: n/a
 // returns:
-//     {userID: string, 
-//      schedule: 
-//        {Monday: 
+//     {userID: string,
+//      schedule:
+//        {Monday:
 //          {breakfast: string,
 //           snack1: string,
 //           lunch: string,
@@ -61,10 +62,10 @@ router.get('/:userID', (req, res) => {
 //         Wednesday:...
 //         ...}}
 router.post('/', (req, res) => {
-  if(!req.body.schedule) {
-    return res.status(400).send({message: "Missing Payload"});
+  if (!req.body.schedule) {
+    return res.status(400).send({ message: 'Missing Payload' });
   }
-  const item = {userID: req.body.userID, schedule: req.body.schedule};
+  const item = { userID: req.body.userID, schedule: req.body.schedule };
   schedules.push(item);
   return res.send(item);
 });
@@ -72,9 +73,9 @@ router.post('/', (req, res) => {
 // PUT /mealSchedule - update meal schedule for user (userID)
 // request format:
 //     body:
-//     {userID: string, 
-//      schedule: 
-//        {Monday: 
+//     {userID: string,
+//      schedule:
+//        {Monday:
 //          {breakfast: string,
 //           snack1: string,
 //           lunch: string,
@@ -86,9 +87,9 @@ router.post('/', (req, res) => {
 //     params: userID
 //     query params: n/a
 // returns:
-//     {userID: string, 
-//      schedule: 
-//        {Monday: 
+//     {userID: string,
+//      schedule:
+//        {Monday:
 //          {breakfast: string,
 //           snack1: string,
 //           lunch: string,
@@ -98,7 +99,7 @@ router.post('/', (req, res) => {
 //         Wednesday:...
 //         ...}}
 router.put('/:userID', (req, res) => {
-  const foundItemIndex = schedules.findIndex(item => item.userID === req.params.userID);
+  const foundItemIndex = schedules.findIndex((item) => item.userID === req.params.userID);
 
   if (foundItemIndex < 0) return res.status(404).send({ message: 'Item not found' });
   if (!req.body.schedule) {
