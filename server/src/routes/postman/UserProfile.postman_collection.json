@@ -75,7 +75,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"userID\": \"4\",\n    \"api_key\": \"mnop5678\",\n    \"first_name\": \"Sarah\",\n    \"last_name\": \"Johnson\",\n    \"image\": \"https://example.com/profile4.jpg\",\n    \"birthday\": \"1992-08-20\",\n    \"height\": 170,\n    \"height_unit\": \"cm\",\n    \"weight\": 68,\n    \"weight_unit\": \"kg\",\n    \"experience\": \"Intermediate\",\n    \"body_mass\": 23,\n    \"muscle_mass\": 57,\n    \"duration\": 60,\n    \"num_day_of_week\": 4,\n    \"preference\": \"HIIT\",\n    \"equipment\": [\n        \"Jump rope\",\n        \"Resistance bands\"\n    ],\n    \"allergyList\": [],\n    \"goalList\": [\n        \"Weight loss\",\n        \"Toning\"\n    ],\n    \"healthList\": [],\n    \"dietList\": [\n        \"Vegetarian\"\n    ]\n}",
+					"raw": "{\n    \"userID\": \"4\",\n    \"apiKey\": \"mnop5678\",\n    \"firstName\": \"Sarah\",\n    \"lastName\": \"Johnson\",\n    \"image\": \"https://example.com/profile4.jpg\",\n    \"birthday\": \"1992-08-20\",\n    \"height\": 170,\n    \"heightUnit\": \"cm\",\n    \"weight\": 68,\n    \"weightUnit\": \"kg\",\n    \"experience\": \"Intermediate\",\n    \"bodyMass\": 23,\n    \"muscleMass\": 57,\n    \"duration\": 60,\n    \"numDayOfWeek\": 4,\n    \"preference\": \"HIIT\",\n    \"equipment\": [\n        \"Jump rope\",\n        \"Resistance bands\"\n    ],\n    \"allergyList\": [],\n    \"goalList\": [\n        \"Weight loss\",\n        \"Toning\"\n    ],\n    \"healthList\": [],\n    \"dietList\": [\n        \"Vegetarian\"\n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -103,7 +103,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"userID\": \"4\",\n  \"api_key\": \"mnop5678\",\n  \"first_name\": \"Sarah\",\n  \"last_name\": \"Johnson\",\n  \"image\": \"https://example.com/profile4.jpg\",\n  \"birthday\": \"1992-08-20\",\n  \"height\": 175,\n  \"height_unit\": \"cm\",\n  \"weight\": 65,\n  \"weight_unit\": \"kg\",\n  \"experience\": \"Intermediate\",\n  \"body_mass\": 23,\n  \"muscle_mass\": 57,\n  \"duration\": 60,\n  \"num_day_of_week\": 4,\n  \"preference\": \"HIIT\",\n  \"equipment\": [\"Jump rope\", \"Resistance bands\"],\n  \"allergyList\": [\"Dairy\"],\n  \"goalList\": [\"Weight loss\", \"Toning\"],\n  \"healthList\": [\"Asthma\"],\n  \"dietList\": [\"Vegetarian\"]\n}\n",
+					"raw": "{\n  \"userID\": \"4\",\n  \"apiKey\": \"mnop5678\",\n  \"firstName\": \"Sarah\",\n  \"lastName\": \"Johnson\",\n  \"image\": \"https://example.com/profile4.jpg\",\n  \"birthday\": \"1992-08-20\",\n  \"height\": 175,\n  \"heightUnit\": \"cm\",\n  \"weight\": 65,\n  \"weightUnit\": \"kg\",\n  \"experience\": \"Intermediate\",\n  \"bodyMass\": 23,\n  \"muscleMass\": 57,\n  \"duration\": 60,\n  \"numDayOfWeek\": 4,\n  \"preference\": \"HIIT\",\n  \"equipment\": [\"Jump rope\", \"Resistance bands\"],\n  \"allergyList\": [\"Dairy\"],\n  \"goalList\": [\"Weight loss\", \"Toning\"],\n  \"healthList\": [\"Asthma\"],\n  \"dietList\": [\"Vegetarian\"]\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
