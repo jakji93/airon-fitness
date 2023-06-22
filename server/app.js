@@ -1,12 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const connectDB = require('./src/config');
 
 const userInfoRoute = require('./src/routes/UserInfo');
 const userProfileRoute = require('./src/routes/UserProfile');
 const workoutScheduleRoute = require('./src/routes/WorkoutSchedule');
 const mealScheduleRoute = require('./src/routes/MealSchedule');
 const customInputRoute = require('./src/routes/CustomInput');
+
+connectDB.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const app = express();
 const port = process.env.PORT || 3001;
