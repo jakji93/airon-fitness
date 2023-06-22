@@ -1,35 +1,30 @@
 const express = require('express');
+const { getCustomInputsByUser, addCustomInput } = require('../controllers/customInputController');
 
 const router = express.Router();
 
-const list = [];
+/**
+ * @desc retrieves every user inputs in chat function for user (userID)
+ * @route GET /customInput/:userID
+ * @request
+ *  body: n/a
+ *  params: userID
+ *  query params: n/a
+ * @response array of customInputs
+ *  [{userID: string, input: string, timestamp: string}]
+ */
+router.get('/:userID', getCustomInputsByUser);
 
-// GET /customInput - retrieves every user inputs in chat function for user (userID)
-// request format:
-//     body: n/a
-//     params: userID
-//     query params: n/a
-// returns:
-//     [{userID: string, input: string, timestamp: string}]
-router.get('/:userID', (req, res) => {
-  const userInputs = list.filter((item) => item.userID === req.params.userID);
-  res.send(userInputs);
-});
-
-// POST /customInput - create new user input for user (userID)
-// request format:
-//     body: {userID: string, input: string, timestamp: string}
-//     params: n/a
-//     query params: n/a
-// returns:
-//     {userID: string, input: string, timestamp: string}
-router.post('/', (req, res) => {
-  if (!req.body.input) {
-    return res.status(400).send({ message: 'Missing Payload' });
-  }
-  const item = { userID: req.body.userID, input: req.body.input, timestamp: req.body.timestamp };
-  list.push(item);
-  return res.send(item);
-});
+/**
+ * @desc create new user input for user (userID)
+ * @route POST /customInput
+ * @request
+ *  body: {userID: string, input: string, timestamp: string}
+ *  params: n/a
+ *  query params: n/a
+ * @response added customInputs
+ *  {userID: string, input: string, timestamp: string}
+ */
+router.post('/', addCustomInput);
 
 module.exports = router;
