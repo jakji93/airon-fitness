@@ -12,7 +12,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      { location[location.length - 1] !== 'lib' ? <ResponsiveAppBar /> : ''}
+      { location[location.length - 1] !== 'lib' && location[location.length - 1] !== 'signup' ? <ResponsiveAppBar /> : ''}
       <Outlet />
     </ThemeProvider>
   );

@@ -11,6 +11,7 @@ export default function FormTextFieldInput(props) {
   const {
     id,
     label,
+    showTitleLabel,
     half,
     value,
     setValue,
@@ -21,10 +22,17 @@ export default function FormTextFieldInput(props) {
 
   return (
     <>
-      <GridInputLabel
-        id={id}
-        label={label}
-      />
+      {
+        showTitleLabel
+          ? (
+            <Grid item xs={12} sm={2}>
+              <GridInputLabel
+                id={id}
+                label={label}
+              />
+            </Grid>
+          ) : ''
+      }
       <Grid item xs={12} sm={inputGridSizing(half)}>
         <TextField
           required
@@ -51,6 +59,7 @@ export default function FormTextFieldInput(props) {
 FormTextFieldInput.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  showTitleLabel: PropTypes.bool,
   half: PropTypes.bool,
   multiline: PropTypes.bool,
   value: PropTypes.oneOfType([
@@ -65,6 +74,7 @@ FormTextFieldInput.propTypes = {
 FormTextFieldInput.defaultProps = {
   half: false,
   multiline: false,
+  showTitleLabel: true,
   type: null,
   endAdornment: null,
 };

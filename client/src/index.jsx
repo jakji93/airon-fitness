@@ -14,6 +14,7 @@ import DesignLibrary from './pages/DesignLibrary';
 import Home from './pages/Home';
 import Landing from './pages/Landing';
 import Profile from './pages/Profile';
+import SignupFlow from './pages/SignupFlow';
 import rootReducer from './reducers';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <Profile />,
+      },
+      {
+        path: 'signup',
+        element: <SignupFlow />,
       },
       {
         path: 'lib',

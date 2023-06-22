@@ -17,6 +17,8 @@ export default function FormMultiSelect(props) {
     value,
     setValue,
     options,
+    showTitleLabel,
+    constantWidth,
   } = props;
 
   return (
@@ -25,16 +27,21 @@ export default function FormMultiSelect(props) {
       alignItems: 'center',
     }}
     >
-
-      <GridInputLabel
-        id={id}
-        label={label}
-      />
+      {
+      showTitleLabel
+        ? (
+          <GridInputLabel
+            id={id}
+            label={label}
+          />
+        )
+        : ''
+    }
       <Grid item xs={12} sm={inputGridSizing(half)}>
         <Autocomplete
           value={value}
           onChange={(e, newValue) => setValue(newValue)}
-          sx={{ m: 1, width: '100%' }}
+          sx={{ m: 1, width: constantWidth ? '500px' : 'fit-content' }}
           multiple
           id="tags-standard"
           options={options}
@@ -72,8 +79,12 @@ FormMultiSelect.propTypes = {
   value: PropTypes.arrayOf(PropTypes.string).isRequired,
   setValue: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  showTitleLabel: PropTypes.bool,
+  constantWidth: PropTypes.bool,
 };
 
 FormMultiSelect.defaultProps = {
   half: false,
+  showTitleLabel: true,
+  constantWidth: false,
 };
