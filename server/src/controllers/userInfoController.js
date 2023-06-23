@@ -1,27 +1,24 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
-// const UserInfo = require('../models/userInfoModel')
+const UserInfo = require('../models/UserInfoModel');
 
-// local user storage
-const users = [];
-
-const generateToken = (userID) => jwt.sign({ userID }, process.env.JWT_SECRET, {
+const generateToken = (_id) => jwt.sign({ _id }, process.env.JWT_SECRET, {
   expiresIn: '30d',
 });
 
 const registerUser = asyncHandler(async (req, res) => {
   const {
-    userID, password, email, gptAPIKey, firstName, lastName, profileImage,
+    password, email,
   } = req.body;
-  if (!userID || !email || !password) {
+  if (!email || !password) {
     res.status(400);
-    throw new Error('Please add required fields');
+    throw new Error('Please include an email and password');
   }
 
   // check user exists
-  // const userExists = await UserInfo.findOne({email})
-  const userExists = users.some((user) => user.email === email || user.userID === userID);
+  const userExists = await UserInfo.findOne({ email });
+
   if (userExists) {
     res.status(400);
     throw new Error('User already exists');
@@ -32,26 +29,16 @@ const registerUser = asyncHandler(async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, salt);
 
   // Create user in MongoDB
-  // const user = await UserInfo.create({
-  //   User_ID: userID,
-  //   Password: hashedPassword,
-  //   Email: email,
-  //   GPT_API_KEY: gptAPIKey,
-  //   First_name: firstName,
-  //   Last_name: lastName,
-  // });
-  const user = {
-    userID, password: hashedPassword, email, gptAPIKey, firstName, lastName, profileImage,
-  };
-  const userCount = users.push(user);
+  const user = await UserInfo.create({
+    email,
+    password: hashedPassword,
+  });
 
-  if (userCount) {
+  if (user) {
     res.status(201).json({
-      userID: user.userID,
+      id: user._id,
       email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      token: generateToken(user.userID),
+      token: generateToken(user._id),
     });
   }
 
@@ -68,15 +55,13 @@ const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   // Check for user email
-  // const user = await User.findOne({ email });
-  const user = users.find((u) => u.email === email);
+  const user = await UserInfo.findOne({ email });
+
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
-      userID: user.userID,
+      id: user._id,
       email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      token: generateToken(user.userID),
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -91,11 +76,12 @@ const loginUser = asyncHandler(async (req, res) => {
  */
 const getMe = asyncHandler(async (req, res) => {
   const {
-    userID, email, gptAPIKey, firstName, lastName, profileImage,
-  } = users.find((u) => req.user.userID === u.userID);
+    _id, email,
+  } = await UserInfo.findOne({ _id: req.user._id });
 
   res.status(200).json({
-    userID, email, gptAPIKey, firstName, lastName, profileImage,
+    id: _id,
+    email,
   });
 });
 
@@ -103,5 +89,4 @@ module.exports = {
   loginUser,
   registerUser,
   getMe,
-  users,
 };

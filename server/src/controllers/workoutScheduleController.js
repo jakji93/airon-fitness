@@ -42,7 +42,7 @@ const updateUserWorkoutScheduleByUserID = (req, res) => {
 
   if (foundItemIndex < 0) return res.status(404).send({ message: 'Item not found' });
   if (!req.body.schedule) {
-    return res.status(400).send({ message: 'Missing paylod' });
+    return res.status(400).send({ message: 'Missing payload' });
   }
   schedules[foundItemIndex].schedule = req.body.schedule;
   return res.send(schedules[foundItemIndex]);
