@@ -10,10 +10,19 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import * as React from 'react';
+import { useContext } from 'react';
 
-export default function SignupLanding({ nextStage, setUser }) {
+import { ToastContext } from '../common/context/Toast';
+
+export default function SignupRegisterAccount({ nextStage, setUser }) {
+  const openToast = useContext(ToastContext);
   const handleSubmit = (e) => {
-    const { email, username, password } = e.target;
+    e.preventDefault();
+    const {
+      email, username, password, confirmPassword,
+    } = e.target;
+
+    if (password !== confirmPassword) openToast('error', "Password's do not match");
 
     setUser({ email: email.value, username: username.value, password: password.value });
     nextStage(e);
@@ -59,7 +68,7 @@ export default function SignupLanding({ nextStage, setUser }) {
                   fullWidth
                   id="username"
                   label="Username"
-                  name="username"
+                  name="peepoo"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -77,7 +86,7 @@ export default function SignupLanding({ nextStage, setUser }) {
                 <TextField
                   required
                   fullWidth
-                  name="confirm-password"
+                  name="confirmPassword"
                   label="Confirm Password"
                   type="password"
                   id="confirm-password"
@@ -107,7 +116,7 @@ export default function SignupLanding({ nextStage, setUser }) {
   );
 }
 
-SignupLanding.propTypes = {
+SignupRegisterAccount.propTypes = {
   nextStage: PropTypes.func.isRequired,
   setUser: PropTypes.func.isRequired,
 };

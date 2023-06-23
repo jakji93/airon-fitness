@@ -4,7 +4,7 @@ import {
 import React, { useState } from 'react';
 
 import SignupDetails from '../components/Signup/SignupDetails';
-import SignupLanding from '../components/Signup/SignupLanding';
+import SignupRegisterAccount from '../components/Signup/SignupRegisterAccount';
 import SignupStats from '../components/Signup/SignupStats';
 
 export default function SignupFlow() {
@@ -26,7 +26,7 @@ export default function SignupFlow() {
     let stage;
     switch (step) {
       case 0:
-        stage = <SignupLanding nextStage={handleNext} setUser={setUser} />;
+        stage = <SignupRegisterAccount nextStage={handleNext} setUser={setUser} />;
         break;
       case 1:
         stage = <SignupDetails nextStage={handleNext} setUser={setUser} />;
