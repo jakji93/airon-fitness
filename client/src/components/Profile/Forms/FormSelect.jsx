@@ -1,6 +1,5 @@
 import {
   Grid, InputLabel, FormControl, Select, MenuItem, InputAdornment,
-  Container,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -18,27 +17,14 @@ export default function FormSelect(props) {
     setValue,
     options,
     endAdornment,
-    limitWidth,
-    flexbox,
+    customTextFieldGridSize,
   } = props;
 
   return (
-    <Container sx={flexbox ? {
-      display: 'flex',
-      alignItems: 'center',
-    } : { display: 'contents' }}
-    >
-      {
-          showTitleLabel
-            ? (
-              <GridInputLabel
-                id={id}
-                label={label}
-              />
-            ) : ''
-        }
-      <Grid item xs={12} sm={inputGridSizing(half)}>
-        <FormControl fullWidth size={limitWidth ? '' : 'small'} sx={limitWidth ? { m: 1, width: 500 } : {}}>
+    <>
+      { showTitleLabel && <GridInputLabel id={id} label={label} /> }
+      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)}>
+        <FormControl fullWidth size="small">
           <InputLabel
             id={`${id}-label`}
             sx={{
@@ -71,7 +57,7 @@ export default function FormSelect(props) {
           </Select>
         </FormControl>
       </Grid>
-    </Container>
+    </>
   );
 }
 
@@ -83,15 +69,13 @@ FormSelect.propTypes = {
   value: PropTypes.string.isRequired,
   setValue: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  limitWidth: PropTypes.bool,
-  flexbox: PropTypes.bool,
   endAdornment: PropTypes.string,
+  customTextFieldGridSize: PropTypes.number,
 };
 
 FormSelect.defaultProps = {
   half: false,
   endAdornment: null,
   showTitleLabel: true,
-  limitWidth: false,
-  flexbox: false,
+  customTextFieldGridSize: 0,
 };
