@@ -27,7 +27,7 @@ export default function ChatArea() {
             <Grid item xs={11}>
               <TextField id="outlined-basic-email" label="Type to request/update a plan" fullWidth />
             </Grid>
-            <Grid xs={1}>
+            <Grid item xs={1}>
               <Fab color="primary" aria-label="add"><SendIcon /></Fab>
             </Grid>
           </Grid>
