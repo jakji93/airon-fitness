@@ -52,7 +52,7 @@ const mealPlanSlice = createSlice({
     },
     FETCH_MEAL_PLAN_ERROR: (state, action) => {
       state.loading = false;
-      state.plan = fitnessPlanSlice.getInitialState().plan;
+      state.plan = mealPlanSlice.getInitialState().plan;
       state.error = action.payload;
     },
   },
