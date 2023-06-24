@@ -8,11 +8,16 @@ import Toast from './components/common/context/Toast';
 import ResponsiveAppBar from './components/Navbar';
 import theme from './theme';
 
-const noAppBarRoutes = ['lib', 'signup'];
+const noAppBarRoutes = ['lib', 'signup', 'login'];
 
 export default function App() {
   const location = window.location.href.split('/');
-  const showAppBar = !noAppBarRoutes.includes(location[location.length - 1]);
+  const showAppBar = noAppBarRoutes
+    .reduce(
+      (prevVal, currVal) => !location[location.length - 1]
+        .startsWith(currVal) && prevVal,
+      true,
+    );
 
   return (
     <Toast>

@@ -13,6 +13,7 @@ import About from './pages/About';
 import DesignLibrary from './pages/DesignLibrary';
 import Home from './pages/Home';
 import Landing from './pages/Landing';
+import Login from './pages/Login';
 import Profile from './pages/Profile';
 import SignupFlow from './pages/SignupFlow';
 import rootReducer from './reducers';
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: 'signup',
         element: <SignupFlow />,
+      },
+      {
+        path: 'login',
+        element: <Login />,
       },
       {
         path: 'lib',

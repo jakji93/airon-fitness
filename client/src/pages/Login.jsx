@@ -1,35 +1,51 @@
 import {
-  Button,
-  CssBaseline,
-  TextField,
-  Link,
-  Grid,
-  Box,
-  Typography,
-  Container,
+  Box, Button, CssBaseline, Grid, TextField, Typography,
 } from '@mui/material';
-import PropTypes from 'prop-types';
-import * as React from 'react';
-import { useContext } from 'react';
+import { Container } from '@mui/system';
+import React, { useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { ToastContext } from '../common/context/Toast';
+import { ToastContext } from '../components/common/context/Toast';
+import Spinner from '../components/common/Spinner';
+import { login, resetAuth } from '../reducers/Auth';
 
-export default function SignupRegisterAccount({ nextStage, setUser }) {
+export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const openToast = useContext(ToastContext);
-  const handleSubmit = (e) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const {
+    user, isLoading, isError, isSuccess, message,
+  } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isError) {
+      openToast('error', message);
+    }
+
+    if (isSuccess || user) {
+      openToast('success', 'You\'ve been logged in');
+      navigate('/');
+    }
+
+    dispatch(resetAuth);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const {
-      email, password, confirmPassword,
-    } = e.target;
 
-    if (password !== confirmPassword) openToast('error', "Password's do not match");
-
-    setUser({ email: email.value, password: password.value });
-    nextStage(e);
+    dispatch(login({ email, password }));
   };
 
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
-    <div>
+    <Box>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -41,7 +57,7 @@ export default function SignupRegisterAccount({ nextStage, setUser }) {
           }}
         >
           <Typography component="h1" variant="h5">
-            Create Your Account
+            Login
           </Typography>
           <Box
             component="form"
@@ -60,6 +76,8 @@ export default function SignupRegisterAccount({ nextStage, setUser }) {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -71,17 +89,8 @@ export default function SignupRegisterAccount({ nextStage, setUser }) {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="confirmPassword"
-                  label="Confirm Password"
-                  type="password"
-                  id="confirm-password"
-                  autoComplete="new-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Grid>
             </Grid>
@@ -91,23 +100,18 @@ export default function SignupRegisterAccount({ nextStage, setUser }) {
               variant="contained"
               sx={{ mt: 3, mb: 2, width: '300px' }}
             >
-              Create Account
+              Login
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/" variant="body2">
-                  Already have an account? Sign in
+                <Link to="/signup" variant="body2">
+                  Don&apos;t have an account? Create one.
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
       </Container>
-    </div>
+    </Box>
   );
 }
-
-SignupRegisterAccount.propTypes = {
-  nextStage: PropTypes.func.isRequired,
-  setUser: PropTypes.func.isRequired,
-};
