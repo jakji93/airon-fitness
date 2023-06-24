@@ -4,14 +4,27 @@ import {
   AppBar, Container, Toolbar, Typography, Box, IconButton, Menu, MenuItem, Button, Tooltip, Avatar,
 } from '@mui/material';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { useMemo } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { logout, resetAuth } from '../reducers/Auth';
 
 const pages = ['home', 'about', 'profile'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const settings = useMemo(() => [
+    ['Profile', () => navigate('/app/profile')],
+    ['Logout', () => {
+      dispatch(logout());
+      dispatch(resetAuth());
+      navigate('/login');
+    }],
+  ], [navigate, dispatch]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -143,8 +156,14 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem
+                  key={setting[0]}
+                  onClick={() => {
+                    setting[1]();
+                    handleCloseUserMenu();
+                  }}
+                >
+                  <Typography textAlign="center">{setting[0]}</Typography>
                 </MenuItem>
               ))}
             </Menu>
