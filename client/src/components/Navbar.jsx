@@ -10,7 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { logout, resetAuth } from '../reducers/Auth';
 
-const pages = ['home', 'about', 'profile'];
+const pages = [['home', '/app'], ['about', '/app/about'], ['profile', '/app/profile']];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -94,9 +94,9 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page[0]} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <Link to={`/app/${page}`}>{page}</Link>
+                    <Link to={page[1]}>{page[0]}</Link>
                   </Typography>
                 </MenuItem>
               ))}
@@ -124,11 +124,11 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page[0]}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                <Link style={{ textDecoration: 'none', color: 'white' }} to={`/app/${page}`}>{page}</Link>
+                <Link style={{ textDecoration: 'none', color: 'white' }} to={page[1]}>{page[0]}</Link>
               </Button>
             ))}
           </Box>

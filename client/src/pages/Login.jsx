@@ -28,7 +28,7 @@ export default function Login() {
 
     if (isSuccess || user) {
       openToast('success', 'You\'ve been logged in');
-      navigate('/app/home');
+      navigate('/app');
     }
 
     dispatch(resetAuth);

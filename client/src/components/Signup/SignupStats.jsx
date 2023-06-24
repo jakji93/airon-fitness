@@ -4,6 +4,7 @@ import {
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {
   healthConditionsAndInjuriesOptions, dietaryRestrictionsOptions,
@@ -24,12 +25,14 @@ export default function SignupStats({ setUser, nextStage }) {
   const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
   const [allergiesIntolerances, setAllergiesIntolerances] = useState([]);
   const [weeklyAvailability, setWeeklyAvailability] = useState('1');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     setUser((prevState) => ({
       ...prevState, weight, height, experience,
     }));
     nextStage(e);
+    navigate('/app');
   };
 
   return (

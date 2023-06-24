@@ -13,7 +13,7 @@ export default function SignupFlow() {
   const steps = ['Account Creation', 'Personal', 'Health'];
 
   const handleNext = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     setStep((prevStep) => prevStep + 1);
 
     if (step === 3) {

@@ -10,23 +10,50 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { register, resetAuth } from '../../reducers/Auth';
 import { ToastContext } from '../common/context/ToastContextProvider';
+import Spinner from '../common/Spinner';
 
 export default function SignupRegisterAccount({ nextStage, setUser }) {
   const openToast = useContext(ToastContext);
+  const dispatch = useDispatch();
+  const {
+    user, isLoading, isError, isSuccess, message,
+  } = useSelector((state) => state.auth);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const {
       email, password, confirmPassword,
     } = e.target;
 
-    if (password !== confirmPassword) openToast('error', "Password's do not match");
-
+    if (password.value !== confirmPassword.value) {
+      openToast('error', "Password's do not match");
+      return;
+    }
+    dispatch(register({ email: email.value, password: password.value }));
     setUser({ email: email.value, password: password.value });
-    nextStage(e);
   };
+
+  useEffect(() => {
+    if (isError) {
+      openToast('error', message);
+    }
+
+    if (isSuccess || user) {
+      openToast('success', 'You\'re account has been created!');
+      nextStage();
+    }
+
+    dispatch(resetAuth);
+  }, [user, isError, isSuccess, message, dispatch]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div>
