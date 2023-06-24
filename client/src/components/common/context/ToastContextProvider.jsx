@@ -14,6 +14,7 @@ export default function ToastContextProvider(props) {
   const [severity, setSeverity] = useState('success');
 
   const openToast = useCallback((_severity = 'success', _message = '', _autoHideDuration = 6000) => {
+    setOpen(false);
     setautoHideDuration(_autoHideDuration);
     setSeverity(_severity);
     setMessage(_message);

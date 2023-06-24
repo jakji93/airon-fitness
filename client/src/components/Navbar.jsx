@@ -8,6 +8,7 @@ import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { ToastContext } from './common/context/ToastContextProvider';
 import { logout, resetAuth } from '../reducers/Auth';
 
 const pages = [['home', '/app'], ['about', '/app/about'], ['profile', '/app/profile']];
@@ -15,6 +16,8 @@ const pages = [['home', '/app'], ['about', '/app/about'], ['profile', '/app/prof
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const openToast = React.useContext(ToastContext);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const settings = useMemo(() => [
@@ -23,6 +26,7 @@ function ResponsiveAppBar() {
       dispatch(logout());
       dispatch(resetAuth());
       navigate('/login');
+      openToast('success', 'You have been logged out');
     }],
   ], [navigate, dispatch]);
 

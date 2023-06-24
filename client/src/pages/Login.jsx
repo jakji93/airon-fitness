@@ -26,10 +26,8 @@ export default function Login() {
       openToast('error', message);
     }
 
-    if (isSuccess || user) {
-      openToast('success', 'You\'ve been logged in');
-      navigate('/app');
-    }
+    if (isSuccess && user) openToast('success', 'You\'ve been logged in');
+    if (isSuccess || user) navigate('/app');
 
     dispatch(resetAuth);
   }, [user, isError, isSuccess, message, navigate, dispatch]);
