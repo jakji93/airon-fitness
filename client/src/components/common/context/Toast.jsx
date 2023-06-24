@@ -4,7 +4,7 @@ import React, { createContext, useCallback, useState } from 'react';
 
 export const ToastContext = createContext();
 
-export default function Toast(props) {
+export default function ToastContextProvider(props) {
   const {
     children,
   } = props;
@@ -34,13 +34,13 @@ export default function Toast(props) {
           {message}
         </Alert>
       </Snackbar>
-      <ToastContext.Provider value={openToast}>
+      <ToastContextProvider.Provider value={openToast}>
         {children}
-      </ToastContext.Provider>
+      </ToastContextProvider.Provider>
     </>
   );
 }
 
-Toast.propTypes = {
+ToastContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
