@@ -6,7 +6,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { ToastContext } from '../components/common/context/Toast';
+import { ToastContext } from '../components/common/context/ToastContextProvider';
 import Spinner from '../components/common/Spinner';
 import { login, resetAuth } from '../reducers/Auth';
 
@@ -28,7 +28,7 @@ export default function Login() {
 
     if (isSuccess || user) {
       openToast('success', 'You\'ve been logged in');
-      navigate('/');
+      navigate('/app/home');
     }
 
     dispatch(resetAuth);

@@ -34,9 +34,9 @@ export default function ToastContextProvider(props) {
           {message}
         </Alert>
       </Snackbar>
-      <ToastContextProvider.Provider value={openToast}>
+      <ToastContext.Provider value={openToast}>
         {children}
-      </ToastContextProvider.Provider>
+      </ToastContext.Provider>
     </>
   );
 }

@@ -10,7 +10,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
 
 import App from './App';
-import ToastContextProvider from './components/common/context/Toast';
+import ToastContextProvider from './components/common/context/ToastContextProvider';
 import About from './pages/About';
 import DesignLibrary from './pages/DesignLibrary';
 import Home from './pages/Home';
@@ -27,11 +27,11 @@ import theme from './theme';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/app',
     element: <App />,
     children: [
       {
-        path: '',
+        path: 'home',
         element: <Home />,
       },
       {
@@ -73,11 +73,11 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <ThemeProvider theme={theme}>
-          <ToastContextProvider>
+        <ToastContextProvider>
+          <ThemeProvider theme={theme}>
             <RouterProvider router={router} />
-          </ToastContextProvider>
-        </ThemeProvider>
+          </ThemeProvider>
+        </ToastContextProvider>
       </LocalizationProvider>
     </Provider>
   </React.StrictMode>,

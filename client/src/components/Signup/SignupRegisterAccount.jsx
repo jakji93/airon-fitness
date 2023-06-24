@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext } from 'react';
 
-import { ToastContext } from '../common/context/Toast';
+import { ToastContext } from '../common/context/ToastContextProvider';
 
 export default function SignupRegisterAccount({ nextStage, setUser }) {
   const openToast = useContext(ToastContext);
