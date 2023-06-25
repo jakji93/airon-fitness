@@ -11,6 +11,7 @@ const router = express.Router();
 
 /**
  * @desc creturns a list of all the user profiles
+ * @access Private
  * @route GET /userProfile
  * @request
  *  body: n/a
@@ -59,6 +60,7 @@ router.get('/', getAllUserProfiles);
 
 /**
  * @desc return the user profile with userID
+ * @access Private
  * @route GET /userProfile/:userID
  * @request
  *  body: n/a
@@ -103,6 +105,7 @@ router.get('/:userID', getUserProfileById);
 
 /**
  * @desc create a new user profile
+ * @access Private
  * @route POST /userProfile
  * @request
  *  body:
@@ -147,6 +150,7 @@ router.post('/', createUserProfile);
 
 /**
  * @desc update a user profile with userID
+ * @access Private
  * @route PUT /userProfile/:userID
  * @request
  *  body:
@@ -191,6 +195,7 @@ router.put('/:userID', updateUserProfile);
 
 /**
  * @desc delete a user profile with userID
+ * @access Private
  * @route DELETE /userProfile/:userID
  * @request
  *  body: n/a

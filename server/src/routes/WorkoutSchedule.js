@@ -5,6 +5,7 @@ const router = express.Router();
 
 /**
  * @desc get workout schedule for user (userID)
+ * @access Private
  * @route GET /workoutSchedule
  * @request
  *  body: n/a
@@ -28,6 +29,7 @@ router.get('/:userID', getWorkoutScheduleByUserID);
 
 /**
  * @desc create workout schedule for user (userID)
+ * @access Private
  * @route POST /workoutSchedule
  * @request
  *  body:
@@ -63,6 +65,7 @@ router.post('/', createWorkoutSchedule);
 
 /**
  * @desc update workout schedule for user (userID)
+ * @access Private
  * @route PUT /workoutSchedule
  * @request
  *  body:

@@ -5,6 +5,7 @@ const router = express.Router();
 
 /**
  * @desc get meal schedule for user (userID)
+ * @access Private
  * @route GET /mealSchedule
  * @request
  *  body: n/a
@@ -27,6 +28,7 @@ router.get('/:userID', getMealScheduleByUser);
 
 /**
  * @desc create meal schedule for user (userID)
+ * @access Private
  * @route POST /mealSchedule
  * @request
  *  body:
@@ -60,6 +62,7 @@ router.post('/', createMealScheduleForUser);
 
 /**
  * @desc update meal schedule for user (userID)
+ * @access Private
  * @route PUT /mealSchedule
  * @request
  *  body:
