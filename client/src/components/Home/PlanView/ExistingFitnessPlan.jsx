@@ -1,4 +1,6 @@
-import { Typography } from '@mui/material';
+import {
+  Grid, List, ListItem, ListItemText,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -12,25 +14,32 @@ export default function ExistingFitnessPlan() {
     setPlan(fitnessPlan.plan);
   }, []);
   return (
-    <>
-      <Typography variant="h1">
-        Home Page
-      </Typography>
-      {plan && Object.keys(plan).map((day) => {
-        const dayPlan = plan[day];
-        return (
-          <>
-            <Typography key={day} variant="h1">{day}</Typography>
-            {dayPlan && dayPlan.map((workout) => (
-              <Typography key={`${day}-${workout.exercise}`} variant="body1">
-                {`Do ${workout.exercise} for ${workout.sets} sets, 
-              ${workout.reps} reps with a ${workout.rest} 
-              second break between sets.`}
-              </Typography>
-            ))}
-          </>
-        );
-      })}
-    </>
+    <Grid container>
+      <List
+        sx={{
+          width: '100%', maxheight: '100%', overflow: 'auto', bgcolor: 'background.paper',
+        }}
+      >
+        {plan && Object.keys(plan).map((day) => {
+          const dayPlan = plan[day];
+          return (
+            <div>
+              <ListItem divider>
+                <ListItemText primary={day} />
+              </ListItem>
+              {dayPlan && dayPlan.map((workout) => (
+                <ListItem>
+                  <ListItemText
+                    secondary={`Do ${workout.exercise} for ${workout.sets} sets, 
+                    ${workout.reps} reps with a ${workout.rest} 
+                    second break between sets.`}
+                  />
+                </ListItem>
+              ))}
+            </div>
+          );
+        })}
+      </List>
+    </Grid>
   );
 }
