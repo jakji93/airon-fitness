@@ -1,5 +1,5 @@
 import {
-  Box, Typography, Grid, TextField, Button,
+  Box, Typography, Grid, TextField, Button, Container,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -64,15 +64,17 @@ export default function SignupDetails({ nextStage, setUser }) {
             />
           </Grid>
           <Grid item xs={12}>
-            <FormSelect
-              half
-              id="gender"
-              label="Gender"
-              showTitleLabel={false}
-              options={genderOptions}
-              setValue={setUserGender}
-              value={userGender}
-            />
+            <Container sx={{ display: 'contents' }}>
+              <FormSelect
+                half
+                id="gender"
+                label="Gender"
+                showTitleLabel={false}
+                options={genderOptions}
+                setValue={setUserGender}
+                value={userGender}
+              />
+            </Container>
           </Grid>
         </Grid>
         <Button

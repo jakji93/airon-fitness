@@ -13,22 +13,15 @@ const { protect } = require('../middleware/authMiddleware');
  * @request
  *  body:
  *    {
- *      "userID": string,
  *      "password": string,
  *      "email": string,
- *      "gptAPIKey": string,
- *      "firstName": string,
- *      "lastName": string,
- *      "profileImage": "testProfileImage"
  *    }
  *  params: n/a
  *  query params: n/a
  * @response
  *    {
- *      "userID": string,
+ *      "id": string,
  *      "email": string,
- *      "firstName": string,
- *      "lastName": string,
  *      "token": string"
  *    }
  */
@@ -48,10 +41,8 @@ router.post('/', registerUser);
  *  query params: n/a
  * @response
  *    {
- *      "userID": string,
+ *      "id": string,
  *      "email": string,
- *      "firstName": string,
- *      "lastName": string,
  *      "token": string"
  *    }
  */
@@ -68,12 +59,8 @@ router.post('/login', loginUser);
  *  Auth: Bearer token
  * @response
  *    {
- *      "userID": string,
+ *      "id": string,
  *      "email": string,
- *      "gptAPIKey": string,
- *      "firstName": string,
- *      "lastName": string,
- *      "profileImage": string,
  *    }
  */
 router.get('/me', protect, getMe);

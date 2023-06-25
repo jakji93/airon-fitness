@@ -1,19 +1,20 @@
 import {
-  CssBaseline, ThemeProvider,
+  CssBaseline,
 } from '@mui/material';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
+import useNoUserRedirect from './components/common/hooks/useNoUserRedirect';
 import ResponsiveAppBar from './components/Navbar';
-import theme from './theme';
 
 export default function App() {
-  const location = window.location.href.split('/');
+  useNoUserRedirect('/login');
+
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <CssBaseline />
-      { location[location.length - 1] !== 'lib' && location[location.length - 1] !== 'signup' ? <ResponsiveAppBar /> : ''}
+      <ResponsiveAppBar />
       <Outlet />
-    </ThemeProvider>
+    </>
   );
 }

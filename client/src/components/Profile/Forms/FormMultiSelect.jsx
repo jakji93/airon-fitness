@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import CheckIcon from '@mui/icons-material/Check';
 import {
-  Autocomplete, Container, Grid, MenuItem, TextField,
+  Autocomplete, Grid, MenuItem, TextField,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -18,30 +18,17 @@ export default function FormMultiSelect(props) {
     setValue,
     options,
     showTitleLabel,
-    constantWidth,
+    customTextFieldGridSize,
   } = props;
 
   return (
-    <Container sx={{
-      display: 'flex',
-      alignItems: 'center',
-    }}
-    >
-      {
-      showTitleLabel
-        ? (
-          <GridInputLabel
-            id={id}
-            label={label}
-          />
-        )
-        : ''
-    }
-      <Grid item xs={12} sm={inputGridSizing(half)}>
+    <>
+      { showTitleLabel && <GridInputLabel id={id} label={label} /> }
+      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)}>
         <Autocomplete
           value={value}
           onChange={(e, newValue) => setValue(newValue)}
-          sx={{ m: 1, width: constantWidth ? '500px' : 'fit-content' }}
+          sx={{ m: 1, width: '100%', margin: 0 }}
           multiple
           id="tags-standard"
           options={options}
@@ -68,7 +55,7 @@ export default function FormMultiSelect(props) {
           )}
         />
       </Grid>
-    </Container>
+    </>
   );
 }
 
@@ -80,11 +67,11 @@ FormMultiSelect.propTypes = {
   setValue: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   showTitleLabel: PropTypes.bool,
-  constantWidth: PropTypes.bool,
+  customTextFieldGridSize: PropTypes.number,
 };
 
 FormMultiSelect.defaultProps = {
   half: false,
   showTitleLabel: true,
-  constantWidth: false,
+  customTextFieldGridSize: 0,
 };

@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const UserInfoSchema = new Schema(
   {
+    _id: {
+      type: Schema.Types.ObjectId,
+      auto: true,
+    },
     email: {
       type: String,
       required: [true, 'Please add an email'],

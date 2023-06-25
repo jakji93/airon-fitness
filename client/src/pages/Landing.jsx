@@ -81,7 +81,7 @@ export default function Landing() {
             designed to support individuals on their workout journey.
           </Typography>
         </div>
-        <Button variant="outlined" fontWeight="light" style={styles.actionButton}>
+        <Button variant="outlined" fontWeight="light" style={styles.actionButton} href="/login">
           Let&apos;s get started.
         </Button>
       </div>

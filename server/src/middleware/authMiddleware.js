@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
-const { users: UserInfo } = require('../controllers/userInfoController');
-// const UserInfo = require('../models/userInfoModel')
+const UserInfo = require('../models/UserInfoModel');
 
 // ref: https://www.youtube.com/watch?v=enopDSs3DRw
 const protect = asyncHandler(async (req, res, next) => {
@@ -19,8 +18,7 @@ const protect = asyncHandler(async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
       // Get user from the token
-      // req.user = await User.findById(decoded.id).select('-password');
-      req.user = UserInfo.find((user) => user.userID === decoded.userID);
+      req.user = await UserInfo.findById(decoded._id).select('-password');
       next();
     } catch (error) {
       res.status(401);

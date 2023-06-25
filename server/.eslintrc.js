@@ -12,6 +12,7 @@ module.exports = {
   },
   rules: {
     'prefer-destructuring': 'off',
+    'no-underscore-dangle': 'off',
     'linebreak-style': ['error', process.platform === 'win32' ? 'windows' : 'unix'],
   },
 };
