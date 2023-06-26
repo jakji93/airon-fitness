@@ -13,6 +13,10 @@ const WorkoutSchema = new Schema(
       type: Object,
       required: [true, 'Please add a schedule'],
     },
+    inputs: {
+      type: [String],
+      required: false,
+    },
   },
   { timestamps: true },
 );
