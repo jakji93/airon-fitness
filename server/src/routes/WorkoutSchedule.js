@@ -4,11 +4,11 @@ const { getWorkoutScheduleByUserID, createWorkoutSchedule, updateUserWorkoutSche
 const router = express.Router();
 
 /**
- * @desc get workout schedule for user (userID)
+ * @desc get workout schedule for user (Get userID from JWT token)
  * @route GET /workoutSchedule
  * @request
  *  body: n/a
- *  params: userID
+ *  params: n/a
  *  query params: n/a
  * @response workoutSchedule for user
  *    {userID: string,
@@ -23,26 +23,15 @@ const router = express.Router();
  *        Tuesday:...
  *        Wednesday:...
  *        ...}}
+ *     inputs: [string]}
  */
-router.get('/:userID', getWorkoutScheduleByUserID);
+router.get('/', getWorkoutScheduleByUserID);
 
 /**
- * @desc create workout schedule for user (userID)
+ * @desc create workout schedule for user (Get userID from JWT token)
  * @route POST /workoutSchedule
  * @request
- *  body:
- *    {userID: string,
- *     schedule:
- *       {Monday:
- *         {exercise: string,
- *          sets: num,
- *          reps: num,
- *          rest: num
- *          duration: num
- *          intensity: num}
- *        Tuesday:...
- *        Wednesday:...
- *        ...}}
+ *  body: n/a
  *  params: n/a
  *  query params: n/a
  * @response created workoutSchedule for User
@@ -58,29 +47,19 @@ router.get('/:userID', getWorkoutScheduleByUserID);
  *        Tuesday:...
  *        Wednesday:...
  *        ...}}
+ *     inputs: [string]}
  */
 router.post('/', createWorkoutSchedule);
 
 /**
- * @desc update workout schedule for user (userID)
+ * @desc update workout schedule for user (Get userID from JWT token)
  * @route PUT /workoutSchedule
  * @request
  *  body:
- *    {userID: string,
- *     schedule:
- *       {Monday:
- *         {exercise: string,
- *          sets: num,
- *          reps: num,
- *          rest: num
- *          duration: num
- *          intensity: num}
- *        Tuesday:...
- *        Wednesday:...
- *        ...}}
+ *    {input: string}
  *  params: n/a
  *  query params: n/a
- * @response created workoutSchedule for User
+ * @response updated workoutSchedule for User
  *    {userID: string,
  *     schedule:
  *       {Monday:
@@ -93,6 +72,7 @@ router.post('/', createWorkoutSchedule);
  *        Tuesday:...
  *        Wednesday:...
  *        ...}}
+ *     inputs: [string]}
  */
 router.put('/:userID', updateUserWorkoutScheduleByUserID);
 
