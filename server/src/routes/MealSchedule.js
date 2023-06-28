@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { schedule } = require('./mock/MealScheduleMockData');
+const openAI = require('../utils/openaiUtil');
 
 const schedules = [
   {
@@ -60,13 +61,27 @@ router.get('/:userID', (req, res) => {
 //         Tuesday:...
 //         Wednesday:...
 //         ...}}
-router.post('/', (req, res) => {
-  if(!req.body.schedule) {
-    return res.status(400).send({message: "Missing Payload"});
+router.post('/:userID', async (req, res) => {
+  const tempUser = {
+    age: 25,
+    sex: 'male',
+    weight: '160',
+    BMI: '19',
+    fitness: 'high',
+    healthConditions: 'asthma',
+    height: '180',
+    timePreference: '5 days per week',
+    durationPreference: '60',
+    equipmentAcess: 'dumbbells',
+    goal: 'gaining muscle'
   }
-  const item = {userID: req.body.userID, schedule: req.body.schedule};
-  schedules.push(item);
-  return res.send(item);
+
+  try {
+    const schedule = await openAI.generateMealSchedule(tempUser);
+    res.send(schedule);
+  } catch (e) {
+    res.sendStatus(500);
+  }
 });
 
 // PUT /mealSchedule - update meal schedule for user (userID)
