@@ -4,11 +4,11 @@ const { getMealScheduleByUser, createMealScheduleForUser, updateMealScheduleForU
 const router = express.Router();
 
 /**
- * @desc get meal schedule for user (userID)
+ * @desc get meal schedule for user (Get userID from JWT token)
  * @route GET /mealSchedule
  * @request
  *  body: n/a
- *  params: userID
+ *  params: n/a
  *  query params: n/a
  * @response mealSchedule for user
  *   {userID: string,
@@ -21,26 +21,16 @@ const router = express.Router();
  *         dinner: string}
  *       Tuesday:...
  *       Wednesday:...
- *       ...}}
+ *       ...}
+ *    inputs: [string]}
  */
-router.get('/:userID', getMealScheduleByUser);
+router.get('/', getMealScheduleByUser);
 
 /**
- * @desc create meal schedule for user (userID)
+ * @desc create meal schedule for user (Get userID from JWT token)
  * @route POST /mealSchedule
  * @request
- *  body:
- *    {userID: string,
- *    schedule:
- *      {Monday:
- *        {breakfast: string,
- *         snack1: string,
- *         lunch: string,
- *         snack2: string
- *         dinner: string}
- *        Tuesday:...
- *        Wednesday:...
- *        ...}}
+ *  body: n/a
  *  params: n/a
  *  query params: n/a
  * @response created mealSchedule
@@ -55,25 +45,16 @@ router.get('/:userID', getMealScheduleByUser);
  *       Tuesday:...
  *       Wednesday:...
  *       ...}}
+ *    inputs: [string]}
  */
 router.post('/', createMealScheduleForUser);
 
 /**
- * @desc update meal schedule for user (userID)
+ * @desc update meal schedule for user (Get userID from JWT token)
  * @route PUT /mealSchedule
  * @request
  *  body:
- *    {userID: string,
- *    schedule:
- *      {Monday:
- *        {breakfast: string,
- *         snack1: string,
- *         lunch: string,
- *         snack2: string
- *         dinner: string}
- *        Tuesday:...
- *        Wednesday:...
- *        ...}}
+ *    {input: string}
  *  params: n/a
  *  query params: n/a
  * @response created mealSchedule
@@ -88,7 +69,8 @@ router.post('/', createMealScheduleForUser);
  *       Tuesday:...
  *       Wednesday:...
  *       ...}}
+ *    inputs: [string]}
  */
-router.put('/:userID', updateMealScheduleForUser);
+router.put('/', updateMealScheduleForUser);
 
 module.exports = router;
