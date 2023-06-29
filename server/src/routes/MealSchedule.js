@@ -4,7 +4,8 @@ const { getMealScheduleByUser, createMealScheduleForUser, updateMealScheduleForU
 const router = express.Router();
 
 /**
- * @desc get meal schedule for user (Get userID from JWT token)
+ * @desc get meal schedule for user (userID)
+ * @access Private
  * @route GET /mealSchedule
  * @request
  *  body: n/a
@@ -27,7 +28,8 @@ const router = express.Router();
 router.get('/', getMealScheduleByUser);
 
 /**
- * @desc create meal schedule for user (Get userID from JWT token)
+ * @desc create meal schedule for user (userID)
+ * @access Private
  * @route POST /mealSchedule
  * @request
  *  body: n/a
@@ -50,7 +52,8 @@ router.get('/', getMealScheduleByUser);
 router.post('/', createMealScheduleForUser);
 
 /**
- * @desc update meal schedule for user (Get userID from JWT token)
+ * @desc update meal schedule for user (userID)
+ * @access Private
  * @route PUT /mealSchedule
  * @request
  *  body:

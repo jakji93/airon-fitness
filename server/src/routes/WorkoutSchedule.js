@@ -4,7 +4,8 @@ const { getWorkoutScheduleByUserID, createWorkoutSchedule, updateUserWorkoutSche
 const router = express.Router();
 
 /**
- * @desc get workout schedule for user (Get userID from JWT token)
+ * @desc get workout schedule for user (userID)
+ * @access Private
  * @route GET /workoutSchedule
  * @request
  *  body: n/a
@@ -28,7 +29,8 @@ const router = express.Router();
 router.get('/', getWorkoutScheduleByUserID);
 
 /**
- * @desc create workout schedule for user (Get userID from JWT token)
+ * @desc create workout schedule for user (userID)
+ * @access Private
  * @route POST /workoutSchedule
  * @request
  *  body: n/a
@@ -52,7 +54,8 @@ router.get('/', getWorkoutScheduleByUserID);
 router.post('/', createWorkoutSchedule);
 
 /**
- * @desc update workout schedule for user (Get userID from JWT token)
+ * @desc update workout schedule for user (userID)
+ * @access Private
  * @route PUT /workoutSchedule
  * @request
  *  body:
