@@ -3,6 +3,7 @@ const {
   getUserProfileById,
   createUserProfile,
   updateUserProfile,
+  deleteUserProfileById,
 } = require('../controllers/userProfileController');
 const { protect } = require('../middleware/authMiddleware');
 
@@ -146,7 +147,6 @@ router.post('/', protect, createUserProfile);
  */
 router.put('/', protect, updateUserProfile);
 
-// May not implement this, maybe we allow profile to exist forever
 /**
  * @desc delete a user profile with userInfoID (get userInfoID from JWT token)
  * @access Private
@@ -159,6 +159,6 @@ router.put('/', protect, updateUserProfile);
  *    { "message": "User profile deleted successfully." }
  *    { "error": "User profile not found." }
  */
-// router.delete('/', deleteUserProfileById);
+router.delete('/', protect, deleteUserProfileById);
 
 module.exports = router;

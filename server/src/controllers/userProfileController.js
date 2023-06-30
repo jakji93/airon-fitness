@@ -90,21 +90,20 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     throw new Error('Please include all required fields');
   }
   userProfile.userInfoID = req.user._id;
-  const newProfile = await UserProfile.findOneAndUpdate(
+  const updatedProfile = await UserProfile.findOneAndUpdate(
     { userInfoID: req.user._id },
     userProfile,
     {
       new: true,
     },
   );
-  if (newProfile) {
-    res.status(201).json(newProfile);
+  if (updatedProfile) {
+    res.status(201).json(updatedProfile);
   }
   res.status(400).json({ message: 'Failed to update profile' });
   throw new Error('Failed to update profile');
 });
 
-// May not use this, maybe profile should exist forever
 /**
  * @desc    delete a user profile with userID
  * @route   DELETE /userProfile/
