@@ -8,9 +8,11 @@ const {
 } = require('../controllers/userProfileController');
 
 const router = express.Router();
+const { protect } = require('../middleware/authMiddleware');
 
 /**
  * @desc creturns a list of all the user profiles
+ * @access Private
  * @route GET /userProfile
  * @request
  *  body: n/a
@@ -55,10 +57,11 @@ const router = express.Router();
  *     ...
  *   ]
  */
-router.get('/', getAllUserProfiles);
+router.get('/', protect, getAllUserProfiles);
 
 /**
  * @desc return the user profile with userID
+ * @access Private
  * @route GET /userProfile/:userID
  * @request
  *  body: n/a
@@ -99,10 +102,11 @@ router.get('/', getAllUserProfiles);
  *    ]
  *  }
  */
-router.get('/:userID', getUserProfileById);
+router.get('/:userID', protect, getUserProfileById);
 
 /**
  * @desc create a new user profile
+ * @access Private
  * @route POST /userProfile
  * @request
  *  body:
@@ -143,10 +147,11 @@ router.get('/:userID', getUserProfileById);
  *  query params: n/a
  * @response status code + copy of above request body on success
  */
-router.post('/', createUserProfile);
+router.post('/', protect, createUserProfile);
 
 /**
  * @desc update a user profile with userID
+ * @access Private
  * @route PUT /userProfile/:userID
  * @request
  *  body:
@@ -187,10 +192,11 @@ router.post('/', createUserProfile);
  *  query params: n/a
  * @response status code + copy of above request body on success
  */
-router.put('/:userID', updateUserProfile);
+router.put('/:userID', protect, updateUserProfile);
 
 /**
  * @desc delete a user profile with userID
+ * @access Private
  * @route DELETE /userProfile/:userID
  * @request
  *  body: n/a
@@ -200,6 +206,6 @@ router.put('/:userID', updateUserProfile);
  *    { "message": "User profile deleted successfully." }
  *    { "error": "User profile not found." }
  */
-router.delete('/:userID', deleteUserProfileById);
+router.delete('/:userID', protect, deleteUserProfileById);
 
 module.exports = router;

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const MealSchema = new Schema(
   {
-    userInfoID: {
+    _userInfoID: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'UserInfo',

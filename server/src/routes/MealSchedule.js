@@ -2,9 +2,11 @@ const express = require('express');
 const { getMealScheduleByUser, createMealScheduleForUser, updateMealScheduleForUser } = require('../controllers/mealScheduleController');
 
 const router = express.Router();
+const { protect } = require('../middleware/authMiddleware');
 
 /**
  * @desc get meal schedule for user (Get userID from JWT token)
+ * @access Private
  * @route GET /mealSchedule
  * @request
  *  body: n/a
@@ -24,10 +26,11 @@ const router = express.Router();
  *       ...}
  *    inputs: [string]}
  */
-router.get('/', getMealScheduleByUser);
+router.get('/', protect, getMealScheduleByUser);
 
 /**
  * @desc create meal schedule for user (Get userID from JWT token)
+ * @access Private
  * @route POST /mealSchedule
  * @request
  *  body: n/a
@@ -47,10 +50,11 @@ router.get('/', getMealScheduleByUser);
  *       ...}}
  *    inputs: [string]}
  */
-router.post('/', createMealScheduleForUser);
+router.post('/', protect, createMealScheduleForUser);
 
 /**
  * @desc update meal schedule for user (Get userID from JWT token)
+ * @access Private
  * @route PUT /mealSchedule
  * @request
  *  body:
@@ -71,6 +75,6 @@ router.post('/', createMealScheduleForUser);
  *       ...}}
  *    inputs: [string]}
  */
-router.put('/', updateMealScheduleForUser);
+router.put('/', protect, updateMealScheduleForUser);
 
 module.exports = router;
