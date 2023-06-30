@@ -7,16 +7,6 @@ const UserProfile = require('../models/UserProfileModel');
  * @access  Private
  */
 
-// Dont' think we should give access to all user profiles
-const getAllUserProfiles = asyncHandler(async (req, res) => {
-  const allProfiles = await UserProfile.find({});
-  if (!allProfiles) {
-    res.status(400);
-    throw new Error('No Profile found');
-  }
-  res.status(200).json(allProfiles);
-});
-
 /**
  * @desc    return the user profile with userID
  * @route   GET /userProfile/:userID
@@ -25,7 +15,7 @@ const getAllUserProfiles = asyncHandler(async (req, res) => {
 const getUserProfileById = asyncHandler(async (req, res) => {
   const userProfile = await UserProfile.findOne({ userInfoID: req.user._id });
   if (!userProfile) {
-    res.status(400);
+    res.status(400).json({ message: 'Profile not found' });
     throw new Error('Profile not found');
   }
   res.status(200).json(userProfile);
@@ -146,7 +136,6 @@ const deleteUserProfileById = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  getAllUserProfiles,
   getUserProfileById,
   createUserProfile,
   updateUserProfile,

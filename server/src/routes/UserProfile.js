@@ -4,58 +4,9 @@ const {
   createUserProfile,
   updateUserProfile,
 } = require('../controllers/userProfileController');
+const { protect } = require('../middleware/authMiddleware');
 
 const router = express.Router();
-
-// Don't think we should give access to all profiles
-/**
- * @desc creturns a list of all the user profiles
- * @access Private
- * @route GET /userProfile
- * @request
- *  body: n/a
- *  params: n/a
- *  query params: n/a
- * @response list of all user profile objects
- *   [
- *     {
- *         "userID": string,
- *         "apiKey": string,
- *         "firstName": string,
- *         "lastName": string,
- *         "image": string,
- *         "birthday": string,
- *         "height": number,
- *         "heightUnit": string,
- *         "weight": number,
- *         "weightUnit": string,
- *         "experience": string,
- *         "bodyMass": number,
- *         "muscleMass": number,
- *         "duration": number.
- *         "numDayOfWeek": number
- *         "preference": string,
- *         "equipment": [
- *             ...string
- *         ],
- *         "allergyList": [
- *             ...string
- *         ],
- *         "goalList": [
- *             ...string
- *         ],
- *         "healthList": [
- *             ...string
- *         ],
- *         "dietList": [
- *             ..string
- *         ]
- *     },
- *     {...},
- *     ...
- *   ]
- */
-// router.get('/', getAllUserProfiles);
 
 /**
  * @desc return the user profile with userInfoID (get userInfoID from JWT token)
@@ -101,7 +52,7 @@ const router = express.Router();
  *    ]
  *  }
  */
-router.get('/', getUserProfileById);
+router.get('/', protect, getUserProfileById);
 
 /**
  * @desc create a new user profile (get userInfoID from JWT token)
@@ -147,7 +98,7 @@ router.get('/', getUserProfileById);
  *  query params: n/a
  * @response status code + copy of above request body on success
  */
-router.post('/', createUserProfile);
+router.post('/', protect, createUserProfile);
 
 /**
  * @desc update a user profile with userInfoID (get userInfoID from JWT token)
@@ -193,7 +144,7 @@ router.post('/', createUserProfile);
  *  query params: n/a
  * @response status code + copy of above request body on success
  */
-router.put('/', updateUserProfile);
+router.put('/', protect, updateUserProfile);
 
 // May not implement this, maybe we allow profile to exist forever
 /**
