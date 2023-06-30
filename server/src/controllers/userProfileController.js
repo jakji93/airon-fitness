@@ -1,129 +1,140 @@
-const { userProfile1, userProfile2, userProfile3 } = require('../mock/UserProfileMockData');
-
-// mocking with this object, acting as in-memory data store
-// contains key-value pairs, where key is the userID and value is the profile object
-const userProfiles = {};
-userProfiles[userProfile1.userID] = userProfile1;
-userProfiles[userProfile2.userID] = userProfile2;
-userProfiles[userProfile3.userID] = userProfile3;
+const asyncHandler = require('express-async-handler');
+const UserProfile = require('../models/UserProfileModel');
 
 /**
  * @desc    creturns a list of all the user profiles
  * @route   GET /userProfile
  * @access  Private
  */
-const getAllUserProfiles = (req, res) => {
-  const allProfiles = Object.values(userProfiles);
-
-  res.json(allProfiles);
-};
 
 /**
  * @desc    return the user profile with userID
  * @route   GET /userProfile/:userID
  * @access  Private
  */
-const getUserProfileById = (req, res) => {
-  const { userID } = req.params;
-  const userProfile = userProfiles[userID];
-
-  if (userProfile) {
-    res.json(userProfile);
-  } else {
-    res.status(404).json({ error: 'User profile not found' });
+const getUserProfileById = asyncHandler(async (req, res) => {
+  const userProfile = await UserProfile.findOne({ userInfoID: req.user._id });
+  if (!userProfile) {
+    res.status(400).json({ message: 'Profile not found' });
+    throw new Error('Profile not found');
   }
-};
+  res.status(200).json(userProfile);
+});
 
 /**
  * @desc    create a new user profile
  * @route   POST /userProfile
  * @access  Private
  */
-const createUserProfile = (req, res) => {
+const createUserProfile = asyncHandler(async (req, res) => {
+  // check profile exists
+  const profileExists = await UserProfile.findOne({ userInfoID: req.user._id });
+  if (profileExists) {
+    res.status(400).json({ message: 'Profile already exists' });
+    throw new Error('Profile already exists');
+  }
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
   const userProfile = req.body;
-
-  userProfiles[userProfile.userID] = userProfile;
-  res.status(201).json(userProfile);
-};
+  if (!userProfile.birthday
+      || !userProfile.experience
+      || !userProfile.goals
+      || !userProfile.apiKey
+      || !userProfile.firstName
+      || !userProfile.lastName) {
+    res.status(400).json({ message: 'Please include all required fields' });
+    throw new Error('Please include all required fields');
+  }
+  userProfile.userInfoID = req.user._id;
+  const newProfile = await UserProfile.create(userProfile);
+  if (newProfile) {
+    res.status(201).json(newProfile);
+  }
+  res.status(400).json({ message: 'Failed to create profile' });
+  throw new Error('Failed to create profile');
+});
 
 /**
  * @desc    update a user profile with userID
- * @route   PUT /userProfile/:userID
+ * @route   PUT /userProfile/
  * @access  Private
  */
-const updateUserProfile = (req, res) => {
-  const { userID } = req.params;
-  const {
-    apiKey,
-    firstName,
-    lastName,
-    image,
-    birthday,
-    height,
-    heightUnit,
-    weight,
-    weightUnit,
-    experience,
-    bodyMass,
-    muscleMass,
-    duration,
-    numDayOfWeek,
-    preference,
-    equipment,
-    allergyList,
-    goalList,
-    healthList,
-    dietList,
-  } = req.body;
-
-  if (userProfiles[userID]) {
-    userProfiles[userID] = {
-      ...userProfiles[userID],
-      apiKey,
-      firstName,
-      lastName,
-      image,
-      birthday,
-      height,
-      heightUnit,
-      weight,
-      weightUnit,
-      experience,
-      bodyMass,
-      muscleMass,
-      duration,
-      numDayOfWeek,
-      preference,
-      equipment,
-      allergyList,
-      goalList,
-      healthList,
-      dietList,
-    };
-    res.json(userProfiles[userID]);
-  } else {
-    res.status(404).json({ error: 'User profile not found.' });
+const updateUserProfile = asyncHandler(async (req, res) => {
+  // check profile exists
+  const profileExists = await UserProfile.findOne({ userInfoID: req.user._id });
+  if (!profileExists) {
+    res.status(400).json({ message: 'Profile not found' });
+    throw new Error('Profile not found');
   }
-};
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
+  // Make sure the logged in user matches the profile user
+  if (profileExists.userInfoID.toString() !== req.user._id) {
+    res.status(401);
+    throw new Error('User not authorized');
+  }
+  const userProfile = req.body;
+  if (!userProfile.birthday
+      || !userProfile.experience
+      || !userProfile.goals
+      || !userProfile.apiKey
+      || !userProfile.firstName
+      || !userProfile.lastName) {
+    res.status(400).json({ message: 'Please include all required fields' });
+    throw new Error('Please include all required fields');
+  }
+  userProfile.userInfoID = req.user._id;
+  const updatedProfile = await UserProfile.findOneAndUpdate(
+    { userInfoID: req.user._id },
+    userProfile,
+    {
+      new: true,
+    },
+  );
+  if (updatedProfile) {
+    res.status(201).json(updatedProfile);
+  }
+  res.status(400).json({ message: 'Failed to update profile' });
+  throw new Error('Failed to update profile');
+});
 
 /**
  * @desc    delete a user profile with userID
- * @route   DELETE /userProfile/:userID
+ * @route   DELETE /userProfile/
  * @access  Private
  */
-const deleteUserProfileById = (req, res) => {
-  const { userID } = req.params;
-
-  if (userProfiles[userID]) {
-    delete userProfiles[userID];
-    res.json({ message: 'User profile deleted successfully.' });
-  } else {
-    res.status(404).json({ error: 'User profile not found.' });
+const deleteUserProfileById = asyncHandler(async (req, res) => {
+  // check profile exists
+  const profileExists = await UserProfile.findOne({ userInfoID: req.user._id });
+  if (!profileExists) {
+    res.status(400).json({ message: 'Profile not found' });
+    throw new Error('Profile not found');
   }
-};
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
+  // Make sure the logged in user matches the profile user
+  if (profileExists.userInfoID.toString() !== req.user._id) {
+    res.status(401);
+    throw new Error('User not authorized');
+  }
+  const deletedProfile = await UserProfile.findOneAndDelete({ userInfoID: req.user._id });
+  if (deletedProfile) {
+    res.status(201).json(deletedProfile);
+  }
+  res.status(400).json({ message: 'Failed to delete profile' });
+  throw new Error('Failed to delete profile');
+});
 
 module.exports = {
-  getAllUserProfiles,
   getUserProfileById,
   createUserProfile,
   updateUserProfile,

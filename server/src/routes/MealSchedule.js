@@ -11,7 +11,7 @@ const router = express.Router();
  *  params: n/a
  *  query params: n/a
  * @response mealSchedule for user
- *   {userID: string,
+ *   {userInfoID: string,
  *    schedule:
  *      {Monday:
  *        {breakfast: string,
@@ -34,7 +34,7 @@ router.get('/', getMealScheduleByUser);
  *  params: n/a
  *  query params: n/a
  * @response created mealSchedule
- *   {userID: string,
+ *   {userInfoID: string,
  *    schedule:
  *      {Monday:
  *        {breakfast: string,
@@ -58,7 +58,7 @@ router.post('/', createMealScheduleForUser);
  *  params: n/a
  *  query params: n/a
  * @response created mealSchedule
- *   {userID: string,
+ *   {userInfoID: string,
  *    schedule:
  *      {Monday:
  *        {breakfast: string,
