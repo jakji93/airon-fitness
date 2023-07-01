@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 const openAI = require('../utils/openaiUtil');
 const MealSchedule = require('../models/MealScheduleModel');
+const UserProfile = require('../models/UserProfileModel');
 
 /**
  * @desc    get meal schedule for user (userID)
@@ -30,30 +31,35 @@ const getMealScheduleByUser = asyncHandler(async (req, res) => {
  * @access  Private
  */
 const createMealScheduleForUser = asyncHandler(async (req, res) => {
+  console.log(req.user);
   const id = req.user._id;
+  console.log(id);
 
   // Check if user already has a meal schedule
   const mealScheduleExists = await MealSchedule.findOne({ _userInfoID: id });
+  console.log(mealScheduleExists);
 
   if (mealScheduleExists) {
     res.status(400).json({ message: 'Meal schedule already exists' });
     throw new Error('Meal schedule already exists');
   }
 
-  // Generate the schedule
+  // Look up the profile of the user
+  const userProfile = await UserProfile.findOne({ userInfoID: id });
+  console.log(userProfile);
   const tempUser = {
-    age: 25,
-    sex: 'male',
-    weight: '186',
-    BMI: '23',
-    fitness: 'high',
-    healthConditions: 'asthma',
-    height: '180',
-    timePreference: '5 days per week',
-    durationPreference: '60',
-    equipmentAcess: 'dumbbells',
-    goal: 'weight loss'
+    age: userProfile.birthday,
+    sex: userProfile.gender,
+    weight: userProfile.weight,
+    fitness: userProfile.experience,
+    healthConditions: [...userProfile.healthConditions].join(','),
+    height: userProfile.height,
+    timePreference: userProfile.weeklyAvailability,
+    durationPreference: userProfile.duration,
+    equipmentAcess: userProfile.equipment,
+    goal: [...userProfile.goals].join(','),
   }
+  console.log(tempUser);
   const generatedSchedule = await openAI.generateMealSchedule(tempUser);
 
   // Create meal in MongoDB
