@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@mui/material';
 import React from 'react';
 
-import ChatArea from '../components/Home/ChatArea';
+import ChatArea from '../components/Home/ChatArea/ChatArea';
 import FitnessPlanView from '../components/Home/PlanView/FitnessPlanView';
 import StatsView from '../components/Home/StatsView/StatsView';
 

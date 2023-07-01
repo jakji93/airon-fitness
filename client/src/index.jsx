@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
 
-import App from './App';
+// import App from './App';
 import ToastContextProvider from './components/common/context/ToastContextProvider';
 import About from './pages/About';
 import DesignLibrary from './pages/DesignLibrary';
@@ -28,7 +28,7 @@ import theme from './theme';
 const router = createBrowserRouter([
   {
     path: '/app',
-    element: <App />,
+    element: <Home />,
     children: [
       {
         path: '',
