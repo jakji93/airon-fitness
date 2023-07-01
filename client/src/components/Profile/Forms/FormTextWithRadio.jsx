@@ -10,6 +10,7 @@ export default function FormTextFieldWithRadio(props) {
   const {
     id,
     label,
+    showTitleLabel,
     value,
     setValue,
     type,
@@ -19,6 +20,7 @@ export default function FormTextFieldWithRadio(props) {
     // First value in array should be noop
     conversionFunctions,
     radioLabel,
+    half,
   } = props;
   const [radioSelection, setRadioSelection] = useState(radioGroups[0]);
   const [inputValue, setInputValue] = useState(value);
@@ -47,13 +49,15 @@ export default function FormTextFieldWithRadio(props) {
       <FormTextFieldInput
         id={id}
         label={label}
+        showTitleLabel={showTitleLabel}
         half
         value={inputValue}
         setValue={setInputValue}
         type={type}
         endAdornment={radioSelection}
+        customTextFieldGridSize={half && 3}
       />
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={half ? 3 : 6}>
         <FormControl>
           {radioLabel
             && <FormLabel id={`${id}-row-radio-buttons-group-label`}>{radioLabel}</FormLabel>}
@@ -82,6 +86,7 @@ export default function FormTextFieldWithRadio(props) {
 FormTextFieldWithRadio.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  showTitleLabel: PropTypes.bool,
   radioLabel: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -91,10 +96,13 @@ FormTextFieldWithRadio.propTypes = {
   type: PropTypes.string,
   radioGroups: PropTypes.arrayOf(PropTypes.string).isRequired,
   conversionFunctions: PropTypes.arrayOf(PropTypes.func).isRequired,
+  half: PropTypes.bool,
 };
 
 FormTextFieldWithRadio.defaultProps = {
   type: 'number',
+  showTitleLabel: true,
   radioLabel: null,
   value: 0,
+  half: false,
 };

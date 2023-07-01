@@ -6,12 +6,12 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Form from './Forms/Form';
 import FormDatePicker from './Forms/FormDatePicker';
 import FormMultiSelect from './Forms/FormMultiSelect';
 import FormSelect from './Forms/FormSelect';
 import FormTextFieldInput from './Forms/FormTextFieldInput';
 import FormTextFieldWithRadio from './Forms/FormTextWithRadio';
+import PaperForm from './Forms/PaperForm';
 import fetchBasicProfile from '../../actionCreators/BasicProfile';
 import { genderOptions, experienceOptions, goalsOptions } from '../../constants/BasicProfile';
 import { convertInchesToCm, convertLbToKg } from '../../util';
@@ -73,7 +73,7 @@ export default function BasicProfileForm() {
   };
 
   return (
-    <Form
+    <PaperForm
       handleSubmit={handleSubmit}
       formTitle="Update Basic Profile"
     >
@@ -83,6 +83,7 @@ export default function BasicProfileForm() {
         half
         value={firstName}
         setValue={setFirstName}
+        showTitleLabel
       />
       <FormTextFieldInput
         id="last-name"
@@ -90,6 +91,7 @@ export default function BasicProfileForm() {
         half
         value={lastName}
         setValue={setLastName}
+        showTitleLabel
       />
       <FormDatePicker
         half
@@ -97,6 +99,7 @@ export default function BasicProfileForm() {
         label="Born"
         setValue={setDateOfBirth}
         value={dateOfBirth}
+        showTitleLabel
       />
       <FormSelect
         half
@@ -105,6 +108,7 @@ export default function BasicProfileForm() {
         options={genderOptions}
         setValue={setGender}
         value={gender}
+        showTitleLabel
       />
       <FormTextFieldWithRadio
         id="weight"
@@ -114,6 +118,7 @@ export default function BasicProfileForm() {
         type="number"
         radioGroups={['kg', 'lb']}
         conversionFunctions={[_.noop, convertLbToKg]}
+        showTitleLabel
       />
       <FormTextFieldWithRadio
         id="height"
@@ -123,6 +128,7 @@ export default function BasicProfileForm() {
         type="number"
         radioGroups={['cm', 'inch']}
         conversionFunctions={[_.noop, convertInchesToCm]}
+        showTitleLabel
       />
       <FormSelect
         half
@@ -131,6 +137,7 @@ export default function BasicProfileForm() {
         options={experienceOptions}
         setValue={setExperience}
         value={experience}
+        showTitleLabel
       />
       <Grid item xs={12} sm={6} />
       <FormMultiSelect
@@ -139,6 +146,7 @@ export default function BasicProfileForm() {
         value={goals}
         setValue={setGoals}
         options={goalsOptions}
+        showTitleLabel
       />
       <Grid item xs={12} sm={6} />
       <Grid item xs={12} sm={5} />
@@ -148,7 +156,7 @@ export default function BasicProfileForm() {
         </Button>
       </Grid>
       <Grid item xs={12} sm={5} />
-    </Form>
+    </PaperForm>
 
   );
 }

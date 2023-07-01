@@ -1,66 +1,54 @@
 const express = require('express');
+const { getMealScheduleByUser, createMealScheduleForUser, updateMealScheduleForUser } = require('../controllers/mealScheduleController');
+
 const router = express.Router();
 const { schedule } = require('./mock/MealScheduleMockData');
 const openAI = require('../utils/openaiUtil');
 
-const schedules = [
-  {
-    userID: "1",
-    schedule: schedule
-  }
-];
+/**
+ * @desc get meal schedule for user (Get userID from JWT token)
+ * @route GET /mealSchedule
+ * @request
+ *  body: n/a
+ *  params: n/a
+ *  query params: n/a
+ * @response mealSchedule for user
+ *   {userInfoID: string,
+ *    schedule:
+ *      {Monday:
+ *        {breakfast: string,
+ *         snack1: string,
+ *         lunch: string,
+ *         snack2: string
+ *         dinner: string}
+ *       Tuesday:...
+ *       Wednesday:...
+ *       ...}
+ *    inputs: [string]}
+ */
+router.get('/', getMealScheduleByUser);
 
-// GET /mealSchedule - get meal schedule for user (userID)
-// request format:
-//     body: n/a
-//     params: userID
-//     query params: n/a
-// returns:
-//     {userID: string, 
-//      schedule: 
-//        {Monday: 
-//          {breakfast: string,
-//           snack1: string,
-//           lunch: string,
-//           snack2: string
-//           dinner: string}
-//         Tuesday:...
-//         Wednesday:...
-//         ...}}
-router.get('/:userID', (req, res) => {
-  const foundItem = schedules.find(item => item.userID === req.params.userID);
-  if (!foundItem) return res.status(404).send({ message: 'Item not found' });
-  res.send(foundItem);
-});
-
-// POST /mealSchedule - create meal schedule for user (userID)
-// request format:
-//     body:
-//     {userID: string, 
-//      schedule: 
-//        {Monday: 
-//          {breakfast: string,
-//           snack1: string,
-//           lunch: string,
-//           snack2: string
-//           dinner: string}
-//          Tuesday:...
-//          Wednesday:...
-//          ...}}
-//     params: n/a
-//     query params: n/a
-// returns:
-//     {userID: string, 
-//      schedule: 
-//        {Monday: 
-//          {breakfast: string,
-//           snack1: string,
-//           lunch: string,
-//           snack2: string
-//           dinner: string}
-//         Tuesday:...
-//         Wednesday:...
-//         ...}}
+/**
+ * @desc create meal schedule for user (Get userID from JWT token)
+ * @route POST /mealSchedule
+ * @request
+ *  body: n/a
+ *  params: n/a
+ *  query params: n/a
+ * @response created mealSchedule
+ *   {userInfoID: string,
+ *    schedule:
+ *      {Monday:
+ *        {breakfast: string,
+ *         snack1: string,
+ *         lunch: string,
+ *         snack2: string
+ *         dinner: string}
+ *       Tuesday:...
+ *       Wednesday:...
+ *       ...}}
+ *    inputs: [string]}
+ */
 router.post('/:userID', async (req, res) => {
   const tempUser = {
     age: 25,
@@ -84,34 +72,28 @@ router.post('/:userID', async (req, res) => {
   }
 });
 
-// PUT /mealSchedule - update meal schedule for user (userID)
-// request format:
-//     body:
-//     {userID: string, 
-//      schedule: 
-//        {Monday: 
-//          {breakfast: string,
-//           snack1: string,
-//           lunch: string,
-//           snack2: string
-//           dinner: string}
-//          Tuesday:...
-//          Wednesday:...
-//          ...}}
-//     params: userID
-//     query params: n/a
-// returns:
-//     {userID: string, 
-//      schedule: 
-//        {Monday: 
-//          {breakfast: string,
-//           snack1: string,
-//           lunch: string,
-//           snack2: string
-//           dinner: string}
-//         Tuesday:...
-//         Wednesday:...
-//         ...}}
+/**
+ * @desc update meal schedule for user (Get userID from JWT token)
+ * @route PUT /mealSchedule
+ * @request
+ *  body:
+ *    {input: string}
+ *  params: n/a
+ *  query params: n/a
+ * @response created mealSchedule
+ *   {userInfoID: string,
+ *    schedule:
+ *      {Monday:
+ *        {breakfast: string,
+ *         snack1: string,
+ *         lunch: string,
+ *         snack2: string
+ *         dinner: string}
+ *       Tuesday:...
+ *       Wednesday:...
+ *       ...}}
+ *    inputs: [string]}
+ */
 router.put('/:userID', (req, res) => {
   const foundItemIndex = schedules.findIndex(item => item.userID === req.params.userID);
 

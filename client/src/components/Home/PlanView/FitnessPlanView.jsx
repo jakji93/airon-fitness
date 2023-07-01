@@ -9,6 +9,7 @@ import NoFitnessPlan from './NoFitnessPlan';
 
 export default function FitnessPlanView() {
   const fitnessPlan = useSelector((state) => state.fitnessPlan);
+  console.log(fitnessPlan);
   return (
     <div>
       <Grid container>

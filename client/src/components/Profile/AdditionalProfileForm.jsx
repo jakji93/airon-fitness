@@ -2,11 +2,11 @@ import { Grid, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Form from './Forms/Form';
 import FormMultiInput from './Forms/FormMultiInput';
 import FormMultiSelect from './Forms/FormMultiSelect';
 import FormSelect from './Forms/FormSelect';
 import FormTextFieldInput from './Forms/FormTextFieldInput';
+import PaperForm from './Forms/PaperForm';
 import fetchAdditionalProfile from '../../actionCreators/AdditionalProfile';
 import {
   healthConditionsAndInjuriesOptions,
@@ -19,7 +19,7 @@ export default function AdditionalProfileForm() {
   const [healthConditionsAndInjuries, setHealthConditionsAndInjuries] = useState([]);
   const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
   const [allergiesIntolerances, setAllergiesIntolerances] = useState([]);
-  const [weeklyAvailability, setWeeklyAvailability] = useState(0);
+  const [weeklyAvailability, setWeeklyAvailability] = useState('1');
   const [bodyFatPercentage, setBodyFatPercentage] = useState(0);
   const [muscleMassPercentage, setMuscleMassPercentage] = useState(0);
   const [workoutDuration, setWorkoutDuration] = useState(0);
@@ -76,7 +76,7 @@ export default function AdditionalProfileForm() {
   };
 
   return (
-    <Form
+    <PaperForm
       handleSubmit={handleSubmit}
       formTitle="Update Additional Profile"
     >
@@ -102,6 +102,7 @@ export default function AdditionalProfileForm() {
         value={healthConditionsAndInjuries}
         setValue={setHealthConditionsAndInjuries}
         options={healthConditionsAndInjuriesOptions}
+        showTitleLabel
       />
       <FormMultiSelect
         id="dietary-restrictions"
@@ -109,6 +110,7 @@ export default function AdditionalProfileForm() {
         value={dietaryRestrictions}
         setValue={setDietaryRestrictions}
         options={dietaryRestrictionsOptions}
+        showTitleLabel
       />
       <FormMultiSelect
         id="allergies-intolerances"
@@ -116,6 +118,7 @@ export default function AdditionalProfileForm() {
         value={allergiesIntolerances}
         setValue={setAllergiesIntolerances}
         options={allergiesIntolerancesOptions}
+        showTitleLabel
       />
       <FormSelect
         id="weekly-availability"
@@ -125,6 +128,7 @@ export default function AdditionalProfileForm() {
         options={weeklyAvailabilityOptions}
         half
         endAdornment="days"
+        showTitleLabel
       />
       <FormTextFieldInput
         id="workout-duration"
@@ -155,6 +159,6 @@ export default function AdditionalProfileForm() {
         </Button>
       </Grid>
       <Grid item xs={12} sm={5} />
-    </Form>
+    </PaperForm>
   );
 }
