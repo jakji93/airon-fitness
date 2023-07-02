@@ -12,7 +12,7 @@ const router = express.Router();
  *  params: n/a
  *  query params: n/a
  * @response workoutSchedule for user
- *    {userID: string,
+ *    {userInfoID: string,
  *     schedule:
  *       {Monday:
  *         {exercise: string,
@@ -37,7 +37,7 @@ router.get('/', getWorkoutScheduleByUserID);
  *  params: n/a
  *  query params: n/a
  * @response created workoutSchedule for User
- *    {userID: string,
+ *    {userInfoID: string,
  *     schedule:
  *       {Monday:
  *         {exercise: string,
@@ -63,7 +63,7 @@ router.post('/', createWorkoutSchedule);
  *  params: n/a
  *  query params: n/a
  * @response updated workoutSchedule for User
- *    {userID: string,
+ *    {userInfoID: string,
  *     schedule:
  *       {Monday:
  *         {exercise: string,

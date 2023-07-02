@@ -13,7 +13,7 @@ const { protect } = require('../middleware/authMiddleware');
  *  params: n/a
  *  query params: n/a
  * @response mealSchedule for user
- *   {userID: string,
+ *   {userInfoID: string,
  *    schedule:
  *      {Monday:
  *        {breakfast: string,
@@ -37,7 +37,7 @@ router.get('/', protect, getMealScheduleByUser);
  *  params: n/a
  *  query params: n/a
  * @response created mealSchedule
- *   {userID: string,
+ *   {userInfoID: string,
  *    schedule:
  *      {Monday:
  *        {breakfast: string,
@@ -62,7 +62,7 @@ router.post('/', protect, createMealScheduleForUser);
  *  params: n/a
  *  query params: n/a
  * @response created mealSchedule
- *   {userID: string,
+ *   {userInfoID: string,
  *    schedule:
  *      {Monday:
  *        {breakfast: string,
