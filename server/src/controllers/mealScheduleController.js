@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 const openAI = require('../utils/openaiUtil');
+const ageUtil = require('../utils/ageUtil');
 const MealSchedule = require('../models/MealScheduleModel');
 const UserProfile = require('../models/UserProfileModel');
 
@@ -31,36 +32,38 @@ const getMealScheduleByUser = asyncHandler(async (req, res) => {
  * @access  Private
  */
 const createMealScheduleForUser = asyncHandler(async (req, res) => {
-  console.log(req.user);
   const id = req.user._id;
-  console.log(id);
 
   // Check if user already has a meal schedule
   const mealScheduleExists = await MealSchedule.findOne({ _userInfoID: id });
-  console.log(mealScheduleExists);
-
   if (mealScheduleExists) {
     res.status(400).json({ message: 'Meal schedule already exists' });
-    throw new Error('Meal schedule already exists');
   }
 
   // Look up the profile of the user
   const userProfile = await UserProfile.findOne({ userInfoID: id });
-  console.log(userProfile);
-  const tempUser = {
-    age: userProfile.birthday,
-    sex: userProfile.gender,
-    weight: userProfile.weight,
-    fitness: userProfile.experience,
-    healthConditions: [...userProfile.healthConditions].join(','),
-    height: userProfile.height,
-    timePreference: userProfile.weeklyAvailability,
-    durationPreference: userProfile.duration,
-    equipmentAcess: userProfile.equipment,
-    goal: [...userProfile.goals].join(','),
+  
+  // Generate the schedule with OpenAI
+  const userData = {
+    age:                ageUtil.calculateAge(userProfile.birthday),
+    gender:             userProfile.gender,
+    height:             userProfile.height,
+    heightUnit:         userProfile.heightUnit,
+    weight:             userProfile.weight,
+    weightUnit:         userProfile.weightUnit,
+    experience:         userProfile.experience,
+    bodyFat:            userProfile.bodyFat,
+    muscleMass:         userProfile.muscleMass,
+    exerciseDuration:   userProfile.duration,
+    weeklyAvailability: userProfile.weeklyAvailability,
+    allergies:          [...userProfile.allergies].join(','),
+    preference:         [...userProfile.preference].join(','),
+    equipment:          [...userProfile.equipment].join(','),
+    goals:              [...userProfile.goals].join(','),
+    healthConditions:   [...userProfile.healthConditions].join(','),
+    dietRestrictions:   [...userProfile.dietRestriction].join(','),
   }
-  console.log(tempUser);
-  const generatedSchedule = await openAI.generateMealSchedule(tempUser);
+  const generatedSchedule = await openAI.generateMealSchedule(userData);
 
   // Create meal in MongoDB
   const mealSchedule = await MealSchedule.create({
@@ -78,7 +81,6 @@ const createMealScheduleForUser = asyncHandler(async (req, res) => {
   }
 
   res.status(400).json({ message: 'invalid meal schedule data' });
-  throw new Error('invalid meal schedule data');
 });
 
 /**

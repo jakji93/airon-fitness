@@ -39,7 +39,29 @@ const workoutPrompt = (user) => {
 };
 
 const mealPrompt = (user) => {
-  return `Imagine a ${user.age} year old ${user.sex}, weight ${user.weight} pounds, BMI of ${user.BMI}, has ${user.fitness} fitness level, with ${user.healthConditions}, height ${user.height}. Time availability of ${user.timePreference} with each session last ${user.durationPreference}. Has access to ${user.equipmentAccess}. With Dietary Restrictions of ${user.dietaryRestrictions}. Allergies to ${user.Allergies}. Please create a weekly meal plan for the following goals: ${user.goal} including breakfast, snack1 (strictly use snack1 in respond), lunch, snack2 (strictly use snack2 in respond) and dinner in JSON form. Don't include any Note or use null values.`
+  return `I will be giving you the information for creating a meal schedule for a person.
+  
+          Imagine a ${user.age} year old ${user.gender}, 
+          weight ${user.weight}${user.weightUnit} (assume kilograms if no unit provided), 
+          height ${user.height}${user.heightUnit} (assume centimeters if no unit provided),
+          has fitness experience of: ${user.fitness}, 
+          has body fat percentage of: ${user.bodyFat}, and
+          has muscle mass percentage of: ${user.muscleMass}. 
+
+          Their fitness and health goals are: ${user.goals}.
+          They have the following dietary restrictions: ${user.dietRestrictions},
+          They have the following health conditions: ${user.healthConditions},
+          They have the following allergies: ${user.allergies},
+          Please account for these conditions when creating a schedule.
+
+          Now, create a weekly meal plan including 
+            breakfast, 
+            snack1 (strictly use snack1 in respond), 
+            lunch, 
+            snack2 (strictly use snack2 in respond) and 
+            dinner 
+          in JSON form. 
+          Don't include any Note or use null values.`  
 }
 
 async function generateWorkoutSchedule(user) {
