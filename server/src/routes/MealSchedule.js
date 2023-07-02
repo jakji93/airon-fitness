@@ -61,7 +61,7 @@ router.post('/', protect, createMealScheduleForUser);
  *    {input: string}
  *  params: n/a
  *  query params: n/a
- * @response created mealSchedule
+ * @response updated mealSchedule
  *   {userInfoID: string,
  *    schedule:
  *      {Monday:

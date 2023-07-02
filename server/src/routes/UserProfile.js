@@ -8,7 +8,6 @@ const {
 const { protect } = require('../middleware/authMiddleware');
 
 const router = express.Router();
-const { protect } = require('../middleware/authMiddleware');
 
 /**
  * @desc return the user profile with userInfoID (get userInfoID from JWT token)

@@ -88,9 +88,45 @@ const createMealScheduleForUser = asyncHandler(async (req, res) => {
  * @route   PUT /mealSchedule
  * @access  Private
  */
-const updateMealScheduleForUser = (req, res) => {
+const updateMealScheduleForUser = asyncHandler(async (req, res) => {
+  const id = req.user._id;
 
-};
+  // Retrieve the meal schedule (fail if user does not have one already)
+  const mealSchedule= await MealSchedule.findOne({ _userInfoID: id });
+  if (!mealSchedule) {
+    res.status(404).json({ message: 'Cannot update a meal schedule that does not exist' });
+  }
+
+  // If the inputs are empty (nothing to change), throw an error
+  if (mealSchedule.inputs.length === 0) {
+    res.status(400).json({ message: 'There are no custom inputs to use to adjust the schedule' });
+  }
+
+  // Extract the data necessary to adjust the schedule
+  const schedule = JSON.stringify(mealSchedule.schedule);
+  const inputs = mealSchedule.inputs.join(',');
+
+  // Update the schedule with OpenAI
+  console.log(inputs);
+  console.log(schedule);
+  const updatedMealSchedule = await openAI.updateMealSchedule(inputs, schedule);
+  console.log(updatedMealSchedule);
+
+  // Update the MongoDB document
+  mealSchedule.schedule = updatedMealSchedule;
+  const savedMealSchedule = await mealSchedule.save();
+  console.log("saved meal schedule");
+  console.log(savedMealSchedule);
+
+  // Send result if saved to database
+  if (savedMealSchedule) {
+    res.status(200).json({
+      userInfoID: savedMealSchedule.id,
+      schedule: savedMealSchedule.schedule,
+      inputs: savedMealSchedule.inputs,
+    })
+  }
+});
 
 module.exports = {
   getMealScheduleByUser,
