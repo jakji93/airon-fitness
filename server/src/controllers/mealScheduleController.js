@@ -107,8 +107,17 @@ const updateMealScheduleForUser = asyncHandler(async (req, res) => {
   const schedule = JSON.stringify(mealSchedule.schedule);
   const inputs = mealSchedule.inputs.join(',');
 
+  // Look up thye profile of the user and extract relevant data
+  const userProfile = await UserProfile.findOne({ userInfoID: id });
+  const userData = {
+    allergies:          [...userProfile.allergies].join(','),
+    goals:              [...userProfile.goals].join(','),
+    healthConditions:   [...userProfile.healthConditions].join(','),
+    dietRestrictions:   [...userProfile.dietRestriction].join(','),
+  }
+
   // Update the schedule with OpenAI
-  const updatedMealSchedule = await openAI.updateMealSchedule(inputs, schedule);
+  const updatedMealSchedule = await openAI.updateMealSchedule(userData, inputs, schedule);
 
   // Update the MongoDB document
   mealSchedule.schedule = updatedMealSchedule;

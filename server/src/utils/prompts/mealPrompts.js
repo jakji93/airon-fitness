@@ -1,4 +1,4 @@
-const mealPrompt = (user, mode, inputs, schedule) => {
+const mealPrompt = (mode, user, inputs, schedule) => {
   return [
     {
       role: "system",
@@ -6,7 +6,7 @@ const mealPrompt = (user, mode, inputs, schedule) => {
     },
     {
       role: "user",
-      content: mode === 'create' ? mealCreationPrompt(user) : mealUpdatePrompt(inputs, schedule)
+      content: mode === 'create' ? mealCreationPrompt(user) : mealUpdatePrompt(user, inputs, schedule)
     }
   ]
 }
@@ -28,8 +28,14 @@ const mealCreationPrompt = (user) => {
           lunch, snack2 (strictly use snack2 in respond) and dinner in JSON form. Don't include any Note. For null values use 0 instead.`  
   }
 
-const mealUpdatePrompt = (inputs, schedule) => {
-    return `You are a dietician that is given the task to update a schedule.
+const mealUpdatePrompt = (user, inputs, schedule) => {
+    return `You are a dietician that is given the task to update a client's schedule.
+
+            Here is some information about the client:
+            Allergies (make sure the schedule is free of these allergen risks): ${user.allergies}
+            Goals: ${user.goals}
+            Health Conditions: ${user.healthConditions}
+            Diet Restrictions: ${user.dietRestrictions}
       
             Here are the additional requirements or changes that the user has requested:
             ${inputs}

@@ -8,20 +8,20 @@ const headers = {
   'Authorization': `Bearer ${apiKey}`,
 };
 
-async function generateMealSchedule(user) {
+async function generateMealSchedule(userData) {
   const response = await axios.post(apiUrl, {
     model: "gpt-3.5-turbo",
-    messages: mealPrompt(user, 'create'),
+    messages: mealPrompt('create', userData),
     temperature: 0
 }, { headers, timeout: 500000 });
 
   return response.data.choices[0].message.content;
 }
 
-async function updateMealSchedule(inputs, schedule) {
+async function updateMealSchedule(userData, inputs, schedule) {
   const response = await axios.post(apiUrl, {
     model: "gpt-3.5-turbo",
-    messages: mealPrompt({}, 'update', inputs, schedule),
+    messages: mealPrompt('update', userData, inputs, schedule),
     temperature: 0
 }, { headers, timeout: 500000 });
 
