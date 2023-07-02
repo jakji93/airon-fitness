@@ -19,12 +19,9 @@ async function generateMealSchedule(user) {
 }
 
 async function updateMealSchedule(inputs, schedule) {
-  const generatedMessage = mealPrompt({}, 'update', inputs, schedule);
-  console.log(generatedMessage);
-
   const response = await axios.post(apiUrl, {
     model: "gpt-3.5-turbo",
-    messages: generatedMessage,
+    messages: mealPrompt({}, 'update', inputs, schedule),
     temperature: 0
 }, { headers, timeout: 500000 });
 

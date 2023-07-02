@@ -78,9 +78,10 @@ const createMealScheduleForUser = asyncHandler(async (req, res) => {
       schedule: mealSchedule.schedule,
       inputs: mealSchedule.inputs,
     })
+  } else {
+    res.status(400).json({ message: 'invalid meal schedule data' });
   }
 
-  res.status(400).json({ message: 'invalid meal schedule data' });
 });
 
 /**
@@ -107,18 +108,13 @@ const updateMealScheduleForUser = asyncHandler(async (req, res) => {
   const inputs = mealSchedule.inputs.join(',');
 
   // Update the schedule with OpenAI
-  console.log(inputs);
-  console.log(schedule);
   const updatedMealSchedule = await openAI.updateMealSchedule(inputs, schedule);
-  console.log(updatedMealSchedule);
 
   // Update the MongoDB document
   mealSchedule.schedule = updatedMealSchedule;
   const savedMealSchedule = await mealSchedule.save();
-  console.log("saved meal schedule");
-  console.log(savedMealSchedule);
 
-  // Send result if saved to database
+  // Send updated result
   if (savedMealSchedule) {
     res.status(200).json({
       userInfoID: savedMealSchedule.id,
