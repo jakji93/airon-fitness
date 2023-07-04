@@ -17,10 +17,10 @@ export const EXPERIENCE_OPTIONS = {
 export const experienceOptions = Object.values(EXPERIENCE_OPTIONS);
 
 export const GOAL_OPTIONS = {
-  WEIGHT_LOSS: 'weight loss',
-  MUSCLE_GROWTH: 'muscle growth',
-  ENDURANCE: 'endurance',
-  OVERALL_HEALTH: 'overall health',
+  WEIGHT_LOSS: 'Weight Loss',
+  MUSCLE_GROWTH: 'Muscle Growth',
+  ENDURANCE: 'Endurance',
+  OVERALL_HEALTH: 'Overall Health',
 };
 
 export const goalsOptions = Object.values(GOAL_OPTIONS);
