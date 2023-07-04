@@ -10,8 +10,12 @@ const UserProfileSchema = new Schema(
       ref: 'UserInfo',
     },
     birthday: {
-      type: String,
+      type: Date,
       required: [true, 'Please add a birthday'],
+    },
+    gender: {
+      type: String,
+      required: [true, 'Please add a gender'],
     },
     height: {
       type: Number,
