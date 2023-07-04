@@ -76,7 +76,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     throw new Error('User not found');
   }
   // Make sure the logged in user matches the profile user
-  if (profileExists.userInfoID.toString() !== req.user._id) {
+  if (profileExists.userInfoID.toString() !== req.user._id.toString()) {
     res.status(401);
     throw new Error('User not authorized');
   }
