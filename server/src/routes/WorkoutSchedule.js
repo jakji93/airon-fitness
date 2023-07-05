@@ -3,7 +3,7 @@ const { getWorkoutScheduleByUserID, createWorkoutSchedule, updateUserWorkoutSche
 
 const router = express.Router();
 // const { generateWorkoutSchedule } = require('../utils/openaiUtil');
-const openAI = require('../utils/openaiUtil');
+const { protect } = require('../middleware/authMiddleware');
 
 /**
  * @desc get workout schedule for user (Get userID from JWT token)
@@ -27,11 +27,7 @@ const openAI = require('../utils/openaiUtil');
  *        ...}}
  *     inputs: [string]}
  */
-router.get('/:userID', (req, res) => {
-  const foundItem = schedules.find(item => item.userID === req.params.userID);
-  if (!foundItem) return res.status(404).send({ message: 'Item not found' });
-  res.send(foundItem);
-});
+router.get('/', protect, getWorkoutScheduleByUserID);
 
 /**
  * @desc create workout schedule for user (Get userID from JWT token)
@@ -55,28 +51,7 @@ router.get('/:userID', (req, res) => {
  *        ...}}
  *     inputs: [string]}
  */
-router.post('/:userID', async (req, res) => {
-  const tempUser = {
-    age: 25,
-    sex: 'male',
-    weight: '186',
-    BMI: '23',
-    fitness: 'high',
-    healthConditions: 'asthma',
-    height: '180',
-    timePreference: '5 days per week',
-    durationPreference: '60',
-    equipmentAcess: 'dumbbells',
-    goal: 'weight loss'
-  }
-
-  try {
-    const schedule = await openAI.generateWorkoutSchedule(tempUser);
-    res.send(schedule);
-  } catch (e) {
-    res.sendStatus(500);
-  }
-});
+router.post('/', protect, createWorkoutSchedule);
 
 /**
  * @desc update workout schedule for user (Get userID from JWT token)
@@ -101,15 +76,6 @@ router.post('/:userID', async (req, res) => {
  *        ...}}
  *     inputs: [string]}
  */
-router.put('/:userID', (req, res) => {
-  const foundItemIndex = schedules.findIndex(item => item.userID === req.params.userID);
-
-  if (foundItemIndex < 0) return res.status(404).send({ message: 'Item not found' });
-  if (!req.body.schedule) {
-    return res.status(400).send({ message: 'Missing paylod' });
-  }
-  schedules[foundItemIndex].schedule = req.body.schedule;
-  return res.send(schedules[foundItemIndex]);
-});
+router.put('/', protect, updateUserWorkoutScheduleByUserID);
 
 module.exports = router;
