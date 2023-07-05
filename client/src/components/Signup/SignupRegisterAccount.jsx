@@ -8,18 +8,19 @@ import {
   Typography,
   Container,
 } from '@mui/material';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { register, resetAuth } from '../../reducers/Auth';
+import { setSignup } from '../../reducers/Signup';
 import { ToastContext } from '../common/context/ToastContextProvider';
 import Spinner from '../common/Spinner';
 
-export default function SignupRegisterAccount({ nextStage }) {
-  const openToast = useContext(ToastContext);
+export default function SignupRegisterAccount() {
   const dispatch = useDispatch();
+  const step = useSelector((state) => state.signup.step);
+  const openToast = useContext(ToastContext);
   const {
     user, isLoading, isError, isSuccess, message,
   } = useSelector((state) => state.auth);
@@ -44,7 +45,7 @@ export default function SignupRegisterAccount({ nextStage }) {
 
     if (isSuccess || user) {
       openToast('success', 'You\'re account has been created!');
-      nextStage();
+      dispatch(setSignup({ step: step + 1 }));
     }
 
     dispatch(resetAuth);
@@ -132,7 +133,3 @@ export default function SignupRegisterAccount({ nextStage }) {
     </div>
   );
 }
-
-SignupRegisterAccount.propTypes = {
-  nextStage: PropTypes.func.isRequired,
-};

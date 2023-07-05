@@ -20,6 +20,7 @@ export default function FormTextFieldInput(props) {
     endAdornment,
     customTextFieldGridSize,
     autoComplete,
+    required,
   } = props;
 
   return (
@@ -31,14 +32,14 @@ export default function FormTextFieldInput(props) {
         sm={inputGridSizing(half, customTextFieldGridSize)}
       >
         <TextField
-          required
+          required={required}
           id={id}
           name={id}
           label={label}
           fullWidth
           size="small"
           variant="outlined"
-          value={value}
+          value={value ?? ''}
           onChange={(e) => setValue(e.target.value)}
           type={type}
           multiline={multiline}
@@ -61,12 +62,13 @@ FormTextFieldInput.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-  ]).isRequired,
+  ]),
   setValue: PropTypes.func.isRequired,
   type: PropTypes.string,
   endAdornment: PropTypes.string,
   customTextFieldGridSize: PropTypes.number,
   autoComplete: PropTypes.string,
+  required: PropTypes.bool,
 };
 
 FormTextFieldInput.defaultProps = {
@@ -77,4 +79,6 @@ FormTextFieldInput.defaultProps = {
   endAdornment: null,
   customTextFieldGridSize: 0,
   autoComplete: 'off',
+  required: false,
+  value: null,
 };

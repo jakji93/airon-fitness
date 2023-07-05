@@ -15,6 +15,13 @@ import {
   weeklyAvailabilityOptions,
 } from '../../constants/AdditionalProfile';
 
+export const restrictPercentageValue = (input, set) => {
+  const zeroToHundredRegex = /^(?:100|[1-9]\d|\d)$/;
+  if (input === '' || zeroToHundredRegex.test(input)) {
+    set(input);
+  }
+};
+
 export default function AdditionalProfileForm() {
   const [healthConditionsAndInjuries, setHealthConditionsAndInjuries] = useState([]);
   const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
@@ -66,13 +73,6 @@ export default function AdditionalProfileForm() {
     });
 
     clear();
-  };
-
-  const restrictPercentageValue = (input, set) => {
-    const zeroToHundredRegex = /^(?:100|[1-9]\d|\d)$/;
-    if (input === '' || zeroToHundredRegex.test(input)) {
-      set(input);
-    }
   };
 
   return (

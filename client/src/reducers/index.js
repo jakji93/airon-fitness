@@ -5,6 +5,7 @@ import authReducer from './Auth';
 import basicProfileReducer from './BasicProfile';
 import fitnessPlanReducer from './FitnessPlan';
 import mealPlanReducer from './MealPlan';
+import signupReducer from './Signup';
 
 const rootReducer = combineReducers({
   basicProfile: basicProfileReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   fitnessPlan: fitnessPlanReducer,
   auth: authReducer,
   mealPlan: mealPlanReducer,
+  signup: signupReducer,
 });
 
 export default rootReducer;

@@ -19,6 +19,7 @@ export default function FormMultiSelect(props) {
     options,
     showTitleLabel,
     customTextFieldGridSize,
+    required,
   } = props;
 
   return (
@@ -51,6 +52,12 @@ export default function FormMultiSelect(props) {
               variant="outlined"
               label={label}
               placeholder={label}
+              inputProps={{
+                ...params.inputProps,
+                autoComplete: required && 'new-password',
+                required: !required || value.length === 0,
+              }}
+              required={required}
             />
           )}
         />
@@ -68,10 +75,12 @@ FormMultiSelect.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   showTitleLabel: PropTypes.bool,
   customTextFieldGridSize: PropTypes.number,
+  required: PropTypes.bool,
 };
 
 FormMultiSelect.defaultProps = {
   half: false,
   showTitleLabel: true,
   customTextFieldGridSize: 0,
+  required: false,
 };

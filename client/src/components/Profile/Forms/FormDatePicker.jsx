@@ -14,22 +14,26 @@ export default function FormDatePicker(props) {
     half,
     value,
     setValue,
+    customTextFieldGridSize,
+    showTitleLabel,
   } = props;
 
   return (
     <>
-      <GridInputLabel
-        id={id}
-        label={label}
-      />
-      <Grid item xs={12} sm={inputGridSizing(half)}>
+      {showTitleLabel && (
+        <GridInputLabel
+          id={id}
+          label={label}
+        />
+      )}
+      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)}>
         <DatePicker value={value} onChange={(val) => setValue(val)} />
       </Grid>
     </>
   );
 }
 
-const dayjsValidator = (props, propName, componentName, location, propFullName) => {
+export const dayjsValidator = (props, propName, componentName, location, propFullName) => {
   let error;
   const propValue = props[propName];
   // Check if propValue is a valid Day.js object
@@ -48,9 +52,13 @@ FormDatePicker.propTypes = {
   half: PropTypes.bool,
   value: dayjsValidator,
   setValue: PropTypes.func.isRequired,
+  customTextFieldGridSize: PropTypes.number,
+  showTitleLabel: PropTypes.bool,
 };
 
 FormDatePicker.defaultProps = {
   half: false,
   value: null,
+  customTextFieldGridSize: 0,
+  showTitleLabel: false,
 };

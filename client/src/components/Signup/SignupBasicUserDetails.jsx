@@ -1,23 +1,34 @@
 import {
   Grid, Button,
 } from '@mui/material';
-import PropTypes from 'prop-types';
-import React from 'react';
+import dayjs from 'dayjs';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { genderOptions } from '../../constants/BasicProfile';
+import { setSignup } from '../../reducers/Signup';
 import Form from '../Profile/Forms/Form';
+import FormDatePicker from '../Profile/Forms/FormDatePicker';
 import FormSelect from '../Profile/Forms/FormSelect';
 import FormTextFieldInput from '../Profile/Forms/FormTextFieldInput';
 
-export default function SignupDetails(props) {
-  const {
-    nextStage,
-    gender, setGender,
-    firstName, setFirstName,
-    lastName, setLastName,
-  } = props;
-  const handleSubmit = (e) => {
-    nextStage(e);
+export default function SignupBasicUserDetails() {
+  const dispatch = useDispatch();
+  const signup = useSelector((state) => state.signup);
+  const [gender, setGender] = useState(signup.user.gender ?? '');
+  const [firstName, setFirstName] = useState(signup.user.firstName ?? '');
+  const [lastName, setLastName] = useState(signup.user.lastName ?? '');
+  const [birthday, setBirthday] = useState(dayjs(signup.user.birthday) ?? null);
+  const handleSubmit = () => {
+    dispatch(setSignup({
+      user: {
+        gender,
+        firstName,
+        lastName,
+        birthday,
+      },
+      step: signup.step + 1,
+    }));
   };
 
   return (
@@ -36,6 +47,7 @@ export default function SignupDetails(props) {
         showTitleLabel={false}
         autoComplete="given-name"
         customTextFieldGridSize={6}
+        required
       />
       <FormTextFieldInput
         half
@@ -46,6 +58,7 @@ export default function SignupDetails(props) {
         showTitleLabel={false}
         autoComplete="family-name"
         customTextFieldGridSize={6}
+        required
       />
       <FormSelect
         id="gender"
@@ -55,6 +68,15 @@ export default function SignupDetails(props) {
         setValue={setGender}
         value={gender}
         required
+        customTextFieldGridSize={6}
+      />
+      <FormDatePicker
+        half
+        id="birthdate"
+        label="Born"
+        setValue={setBirthday}
+        value={birthday}
+        showTitleLabel={false}
         customTextFieldGridSize={6}
       />
       <Grid
@@ -72,19 +94,9 @@ export default function SignupDetails(props) {
           variant="contained"
           fullWidth
         >
-          Continue
+          Next
         </Button>
       </Grid>
     </Form>
   );
 }
-
-SignupDetails.propTypes = {
-  nextStage: PropTypes.func.isRequired,
-  gender: PropTypes.string.isRequired,
-  setGender: PropTypes.func.isRequired,
-  firstName: PropTypes.string.isRequired,
-  setFirstName: PropTypes.func.isRequired,
-  lastName: PropTypes.string.isRequired,
-  setLastName: PropTypes.func.isRequired,
-};

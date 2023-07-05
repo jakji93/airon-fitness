@@ -18,6 +18,7 @@ export default function FormTextFieldWithRadio(props) {
     radioSelection, setRadioSelection,
     radioLabel,
     half,
+    required,
   } = props;
 
   return (
@@ -32,6 +33,7 @@ export default function FormTextFieldWithRadio(props) {
         type={type}
         endAdornment={radioSelection}
         customTextFieldGridSize={half ? 3 : 0}
+        required={required}
       />
       <Grid item xs={12} sm={half ? 3 : 6}>
         <FormControl>
@@ -67,6 +69,7 @@ FormTextFieldWithRadio.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
+    PropTypes.oneOf([null]),
   ]),
   setValue: PropTypes.func.isRequired,
   type: PropTypes.string,
@@ -74,12 +77,14 @@ FormTextFieldWithRadio.propTypes = {
   half: PropTypes.bool,
   radioSelection: PropTypes.string.isRequired,
   setRadioSelection: PropTypes.func.isRequired,
+  required: PropTypes.bool,
 };
 
 FormTextFieldWithRadio.defaultProps = {
   type: 'number',
   showTitleLabel: true,
   radioLabel: null,
-  value: 0,
+  value: null,
   half: false,
+  required: false,
 };

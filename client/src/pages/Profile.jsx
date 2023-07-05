@@ -3,7 +3,7 @@ import React from 'react';
 
 import AdditionalProfileForm from '../components/Profile/AdditionalProfileForm';
 import AvatarUpload from '../components/Profile/AvatarUpload';
-import BasicProfileForm from '../components/Profile/BasicProfileFormForm';
+import BasicProfileForm from '../components/Profile/BasicProfileForm';
 
 export default function Profile() {
   return (
