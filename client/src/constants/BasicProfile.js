@@ -30,7 +30,11 @@ export const WEIGHT_UNITS = {
   LB: 'lb',
 };
 
+export const weightUnitOptions = Object.values(WEIGHT_UNITS);
+
 export const HEIGHT_UNITS = {
   IN: 'in',
   CM: 'cm',
 };
+
+export const heightUnitOptions = Object.values(HEIGHT_UNITS);

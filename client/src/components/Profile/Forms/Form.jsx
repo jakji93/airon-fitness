@@ -12,7 +12,7 @@ export const handleKeyPress = (e) => {
 
 export const inputLabelSizing = 2.5;
 export const inputGridSizing = (half, custom = 0) => {
-  if (custom) return custom;
+  if (custom !== 0) return custom;
   return half ? 3.5 : 9.5;
 };
 

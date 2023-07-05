@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import SignupDetails from '../components/Signup/SignupDetails';
 import SignupRegisterAccount from '../components/Signup/SignupRegisterAccount';
 import SignupStats from '../components/Signup/SignupStats';
+import { HEIGHT_UNITS, WEIGHT_UNITS } from '../constants/BasicProfile';
 
 export default function SignupFlow() {
   const [gender, setGender] = useState('');
@@ -13,6 +14,8 @@ export default function SignupFlow() {
   const [lastName, setLastName] = useState('');
   const [weight, setWeight] = useState(0);
   const [height, setHeight] = useState(0);
+  const [weightUnits, setWeightUnits] = useState(WEIGHT_UNITS.KG);
+  const [heightUnits, setHeightUnits] = useState(HEIGHT_UNITS.IN);
   const [experience, setExperience] = useState('');
   const [healthConditionsAndInjuries, setHealthConditionsAndInjuries] = useState([]);
   const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
@@ -73,6 +76,8 @@ export default function SignupFlow() {
           dietaryRestrictions={dietaryRestrictions}
           allergiesIntolerances={allergiesIntolerances}
           weeklyAvailability={weeklyAvailability}
+          weightUnits={weightUnits}
+          heightUnits={heightUnits}
           setWeight={setWeight}
           setHeight={setHeight}
           setExperience={setExperience}
@@ -80,6 +85,8 @@ export default function SignupFlow() {
           setDietaryRestrictions={setDietaryRestrictions}
           setAllergiesIntolerances={setAllergiesIntolerances}
           setWeeklyAvailability={setWeeklyAvailability}
+          setWeightUnits={setWeightUnits}
+          setHeightUnits={setHeightUnits}
         />
       )}
     </Box>

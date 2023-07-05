@@ -1,7 +1,6 @@
 import {
   Grid, Button,
 } from '@mui/material';
-import _ from 'lodash';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +10,6 @@ import {
   allergiesIntolerancesOptions, weeklyAvailabilityOptions,
 } from '../../constants/AdditionalProfile';
 import { experienceOptions } from '../../constants/BasicProfile';
-import { convertInchesToCm, convertLbToKg } from '../../util';
 import Form from '../Profile/Forms/Form';
 import FormMultiSelect from '../Profile/Forms/FormMultiSelect';
 import FormSelect from '../Profile/Forms/FormSelect';
@@ -28,6 +26,8 @@ export default function SignupStats(props) {
     dietaryRestrictions, setDietaryRestrictions,
     allergiesIntolerances, setAllergiesIntolerances,
     weeklyAvailability, setWeeklyAvailability,
+    weightUnits, setWeightUnits,
+    heightUnits, setHeightUnits,
   } = props;
 
   const navigate = useNavigate();
@@ -52,8 +52,9 @@ export default function SignupStats(props) {
         setValue={setWeight}
         type="number"
         radioGroups={['lb', 'kg']}
-        conversionFunctions={[_.noop, convertLbToKg]}
         half
+        radioSelection={weightUnits}
+        setRadioSelection={setWeightUnits}
       />
       <FormTextFieldWithRadio
         id="height"
@@ -63,8 +64,9 @@ export default function SignupStats(props) {
         setValue={setHeight}
         type="number"
         radioGroups={['cm', 'in']}
-        conversionFunctions={[_.noop, convertInchesToCm]}
         half
+        radioSelection={heightUnits}
+        setRadioSelection={setHeightUnits}
       />
       <FormSelect
         id="experience"
@@ -153,6 +155,8 @@ SignupStats.propTypes = {
   dietaryRestrictions: PropTypes.arrayOf(PropTypes.string).isRequired,
   allergiesIntolerances: PropTypes.arrayOf(PropTypes.string).isRequired,
   weeklyAvailability: PropTypes.string.isRequired,
+  weightUnits: PropTypes.string.isRequired,
+  heightUnits: PropTypes.string.isRequired,
   setWeight: PropTypes.func.isRequired,
   setHeight: PropTypes.func.isRequired,
   setExperience: PropTypes.func.isRequired,
@@ -160,4 +164,6 @@ SignupStats.propTypes = {
   setDietaryRestrictions: PropTypes.func.isRequired,
   setAllergiesIntolerances: PropTypes.func.isRequired,
   setWeeklyAvailability: PropTypes.func.isRequired,
+  setWeightUnits: PropTypes.func.isRequired,
+  setHeightUnits: PropTypes.func.isRequired,
 };

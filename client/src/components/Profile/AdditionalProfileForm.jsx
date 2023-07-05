@@ -38,7 +38,7 @@ export default function AdditionalProfileForm() {
     setHealthConditionsAndInjuries(additionalProfile.profile.healthConditionsInjuries);
     setDietaryRestrictions(additionalProfile.profile.dietaryRestrictions);
     setAllergiesIntolerances(additionalProfile.profile.allergiesIntolerances);
-    setWeeklyAvailability(additionalProfile.profile.weeklyAvailability);
+    setWeeklyAvailability(additionalProfile.profile.weeklyAvailability.toString());
     setBodyFatPercentage(additionalProfile.profile.bodyFatPercentage);
     setMuscleMassPercentage(additionalProfile.profile.muscleMassPercentage);
     setWorkoutDuration(additionalProfile.profile.workoutDuration);

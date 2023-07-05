@@ -2,7 +2,6 @@ import {
   Grid, Button,
 } from '@mui/material';
 import dayjs from 'dayjs';
-import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,8 +12,15 @@ import FormTextFieldInput from './Forms/FormTextFieldInput';
 import FormTextFieldWithRadio from './Forms/FormTextWithRadio';
 import PaperForm from './Forms/PaperForm';
 import fetchBasicProfile from '../../actionCreators/BasicProfile';
-import { genderOptions, experienceOptions, goalsOptions } from '../../constants/BasicProfile';
-import { convertInchesToCm, convertLbToKg } from '../../util';
+import {
+  genderOptions,
+  experienceOptions,
+  goalsOptions,
+  weightUnitOptions,
+  HEIGHT_UNITS,
+  WEIGHT_UNITS,
+  heightUnitOptions,
+} from '../../constants/BasicProfile';
 
 export default function BasicProfileForm() {
   const [firstName, setFirstName] = useState('');
@@ -23,8 +29,11 @@ export default function BasicProfileForm() {
   const [gender, setGender] = useState('');
   const [weight, setWeight] = useState(0);
   const [height, setHeight] = useState(0);
+  const [weightUnits, setWeightUnits] = useState(WEIGHT_UNITS.KG);
+  const [heightUnits, setHeightUnits] = useState(HEIGHT_UNITS.IN);
   const [experience, setExperience] = useState('');
   const [goals, setGoals] = useState([]);
+
   const basicProfile = useSelector((state) => state.basicProfile);
   const dispatch = useDispatch();
 
@@ -45,17 +54,6 @@ export default function BasicProfileForm() {
     setGoals(basicProfile.profile.goals);
   }, []);
 
-  const clear = () => {
-    setFirstName('');
-    setLastName('');
-    setDateOfBirth(null);
-    setGender('');
-    setWeight(0);
-    setHeight(0);
-    setExperience('');
-    setGoals([]);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log({
@@ -68,8 +66,6 @@ export default function BasicProfileForm() {
       'experience: ': experience,
       'goals: ': goals,
     });
-
-    clear();
   };
 
   return (
@@ -115,9 +111,10 @@ export default function BasicProfileForm() {
         label="Weight"
         value={weight}
         setValue={setWeight}
+        radioSelection={weightUnits}
+        setRadioSelection={setWeightUnits}
         type="number"
-        radioGroups={['kg', 'lb']}
-        conversionFunctions={[_.noop, convertLbToKg]}
+        radioGroups={weightUnitOptions}
         showTitleLabel
       />
       <FormTextFieldWithRadio
@@ -125,9 +122,10 @@ export default function BasicProfileForm() {
         label="Height"
         value={height}
         setValue={setHeight}
+        radioSelection={heightUnits}
+        setRadioSelection={setHeightUnits}
         type="number"
-        radioGroups={['cm', 'inch']}
-        conversionFunctions={[_.noop, convertInchesToCm]}
+        radioGroups={heightUnitOptions}
         showTitleLabel
       />
       <FormSelect
