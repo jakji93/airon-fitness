@@ -53,7 +53,7 @@ router.get('/', protect, getWorkoutScheduleByUserID);
  *        ...}}
  *     inputs: [string]}
  */
-router.post('/', protect, createWorkoutSchedule);
+router.post('/', createWorkoutSchedule);
 
 /**
  * @desc update workout schedule for user (Get userID from JWT token)
