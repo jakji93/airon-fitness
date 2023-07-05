@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -17,20 +17,22 @@ import FormMultiSelect from '../Profile/Forms/FormMultiSelect';
 import FormSelect from '../Profile/Forms/FormSelect';
 import FormTextFieldWithRadio from '../Profile/Forms/FormTextWithRadio';
 
-export default function SignupStats({ setUser, nextStage }) {
-  const [weight, setWeight] = useState(0);
-  const [height, setHeight] = useState(0);
-  const [experience, setExperience] = useState('');
-  const [healthConditionsAndInjuries, setHealthConditionsAndInjuries] = useState([]);
-  const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
-  const [allergiesIntolerances, setAllergiesIntolerances] = useState([]);
-  const [weeklyAvailability, setWeeklyAvailability] = useState('1');
+export default function SignupStats(props) {
+  const {
+    nextStage,
+    prevStage,
+    weight, setWeight,
+    height, setHeight,
+    experience, setExperience,
+    healthConditionsAndInjuries, setHealthConditionsAndInjuries,
+    dietaryRestrictions, setDietaryRestrictions,
+    allergiesIntolerances, setAllergiesIntolerances,
+    weeklyAvailability, setWeeklyAvailability,
+  } = props;
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    setUser((prevState) => ({
-      ...prevState, weight, height, experience,
-    }));
     nextStage(e);
     navigate('/app');
   };
@@ -114,18 +116,25 @@ export default function SignupStats({ setUser, nextStage }) {
       <Grid
         item
         xs={12}
-        sm={12}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+        sm={6}
+      >
+        <Button
+          onClick={prevStage}
+          variant="contained"
+          fullWidth
+        >
+          Back
+        </Button>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sm={6}
       >
         <Button
           type="submit"
           variant="contained"
-          sx={{ mb: 2, width: '300px' }}
+          fullWidth
         >
           Create
         </Button>
@@ -136,5 +145,19 @@ export default function SignupStats({ setUser, nextStage }) {
 
 SignupStats.propTypes = {
   nextStage: PropTypes.func.isRequired,
-  setUser: PropTypes.func.isRequired,
+  prevStage: PropTypes.func.isRequired,
+  weight: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  experience: PropTypes.string.isRequired,
+  healthConditionsAndInjuries: PropTypes.arrayOf(PropTypes.string).isRequired,
+  dietaryRestrictions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  allergiesIntolerances: PropTypes.arrayOf(PropTypes.string).isRequired,
+  weeklyAvailability: PropTypes.string.isRequired,
+  setWeight: PropTypes.func.isRequired,
+  setHeight: PropTypes.func.isRequired,
+  setExperience: PropTypes.func.isRequired,
+  setHealthConditionsAndInjuries: PropTypes.func.isRequired,
+  setDietaryRestrictions: PropTypes.func.isRequired,
+  setAllergiesIntolerances: PropTypes.func.isRequired,
+  setWeeklyAvailability: PropTypes.func.isRequired,
 };

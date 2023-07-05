@@ -18,6 +18,7 @@ export default function FormSelect(props) {
     options,
     endAdornment,
     customTextFieldGridSize,
+    required,
   } = props;
 
   return (
@@ -50,6 +51,7 @@ export default function FormSelect(props) {
                 {endAdornment}
               </InputAdornment>
             )}
+            required={required}
           >
             {options.map((val) => (
               <MenuItem value={val} key={val}>{val}</MenuItem>
@@ -71,6 +73,7 @@ FormSelect.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   endAdornment: PropTypes.string,
   customTextFieldGridSize: PropTypes.number,
+  required: PropTypes.bool,
 };
 
 FormSelect.defaultProps = {
@@ -78,4 +81,5 @@ FormSelect.defaultProps = {
   endAdornment: null,
   showTitleLabel: true,
   customTextFieldGridSize: 0,
+  required: false,
 };

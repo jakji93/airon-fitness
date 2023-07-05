@@ -1,96 +1,90 @@
 import {
-  Box, Typography, Grid, TextField, Button, Container,
+  Grid, Button,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { genderOptions } from '../../constants/BasicProfile';
+import Form from '../Profile/Forms/Form';
 import FormSelect from '../Profile/Forms/FormSelect';
+import FormTextFieldInput from '../Profile/Forms/FormTextFieldInput';
 
-export default function SignupDetails({ nextStage, setUser }) {
-  const [userGender, setUserGender] = useState('');
+export default function SignupDetails(props) {
+  const {
+    nextStage,
+    gender, setGender,
+    firstName, setFirstName,
+    lastName, setLastName,
+  } = props;
   const handleSubmit = (e) => {
-    const { firstName, lastName } = e.target;
-
-    setUser((prevState) => ({
-      ...prevState, firstName: firstName.value, lastName: lastName.value, gender: userGender,
-    }));
     nextStage(e);
   };
 
   return (
-    <Box
-      sx={{
-        marginTop: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
+    <Form
+      handleSubmit={handleSubmit}
+      formTitle="Welcome to Ai-ron Fitness! Let&apos;s get a profile tailored for you."
+      containerSx={{ width: '80vw', maxWidth: '675px' }}
+      centerTitle
     >
-      <Typography component="h1" variant="h5">
-        Welcome to AI-ron Fitness!
-      </Typography>
-      <Typography component="h3" variant="h5">
-        Let&apos;s get a profile tailored for you
-      </Typography>
-      <Box
-        component="form"
-        noValidate
-        onSubmit={handleSubmit}
-        sx={{
-          mt: 3, display: 'flex', flexDirection: 'column', alignItems: 'center',
-        }}
+      <FormTextFieldInput
+        half
+        id="first-name"
+        label="First Name"
+        value={firstName}
+        setValue={setFirstName}
+        showTitleLabel={false}
+        autoComplete="given-name"
+        customTextFieldGridSize={6}
+      />
+      <FormTextFieldInput
+        half
+        id="last-name"
+        label="Last Name"
+        value={lastName}
+        setValue={setLastName}
+        showTitleLabel={false}
+        autoComplete="family-name"
+        customTextFieldGridSize={6}
+      />
+      <FormSelect
+        id="gender"
+        label="Gender *"
+        showTitleLabel={false}
+        options={genderOptions}
+        setValue={setGender}
+        value={gender}
+        required
+        customTextFieldGridSize={6}
+      />
+      <Grid
+        item
+        xs={12}
+        sm={6}
+      />
+      <Grid
+        item
+        xs={12}
+        sm={6}
       >
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              autoComplete="given-name"
-              name="firstName"
-              required
-              fullWidth
-              id="firstName"
-              label="First Name"
-              autoFocus
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              id="lastName"
-              label="Last Name"
-              name="lastName"
-              autoComplete="family-name"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Container sx={{ display: 'contents' }}>
-              <FormSelect
-                half
-                id="gender"
-                label="Gender"
-                showTitleLabel={false}
-                options={genderOptions}
-                setValue={setUserGender}
-                value={userGender}
-              />
-            </Container>
-          </Grid>
-        </Grid>
         <Button
           type="submit"
-          fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2, width: '300px' }}
+          fullWidth
         >
           Continue
         </Button>
-      </Box>
-    </Box>
+      </Grid>
+    </Form>
   );
 }
 
 SignupDetails.propTypes = {
   nextStage: PropTypes.func.isRequired,
-  setUser: PropTypes.func.isRequired,
+  gender: PropTypes.string.isRequired,
+  setGender: PropTypes.func.isRequired,
+  firstName: PropTypes.string.isRequired,
+  setFirstName: PropTypes.func.isRequired,
+  lastName: PropTypes.string.isRequired,
+  setLastName: PropTypes.func.isRequired,
 };

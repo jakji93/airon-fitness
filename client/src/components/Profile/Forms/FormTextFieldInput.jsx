@@ -19,6 +19,7 @@ export default function FormTextFieldInput(props) {
     multiline,
     endAdornment,
     customTextFieldGridSize,
+    autoComplete,
   } = props;
 
   return (
@@ -36,7 +37,6 @@ export default function FormTextFieldInput(props) {
           label={label}
           fullWidth
           size="small"
-          autoComplete="off"
           variant="outlined"
           value={value}
           onChange={(e) => setValue(e.target.value)}
@@ -45,6 +45,7 @@ export default function FormTextFieldInput(props) {
           InputProps={{
             endAdornment: <InputAdornment position="end">{endAdornment}</InputAdornment>,
           }}
+          autoComplete={autoComplete}
         />
       </Grid>
     </>
@@ -65,6 +66,7 @@ FormTextFieldInput.propTypes = {
   type: PropTypes.string,
   endAdornment: PropTypes.string,
   customTextFieldGridSize: PropTypes.number,
+  autoComplete: PropTypes.string,
 };
 
 FormTextFieldInput.defaultProps = {
@@ -74,4 +76,5 @@ FormTextFieldInput.defaultProps = {
   type: null,
   endAdornment: null,
   customTextFieldGridSize: 0,
+  autoComplete: 'off',
 };

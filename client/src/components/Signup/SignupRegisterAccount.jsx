@@ -17,7 +17,7 @@ import { register, resetAuth } from '../../reducers/Auth';
 import { ToastContext } from '../common/context/ToastContextProvider';
 import Spinner from '../common/Spinner';
 
-export default function SignupRegisterAccount({ nextStage, setUser }) {
+export default function SignupRegisterAccount({ nextStage }) {
   const openToast = useContext(ToastContext);
   const dispatch = useDispatch();
   const {
@@ -35,7 +35,6 @@ export default function SignupRegisterAccount({ nextStage, setUser }) {
       return;
     }
     dispatch(register({ email: email.value, password: password.value }));
-    setUser({ email: email.value, password: password.value });
   };
 
   useEffect(() => {
@@ -136,5 +135,4 @@ export default function SignupRegisterAccount({ nextStage, setUser }) {
 
 SignupRegisterAccount.propTypes = {
   nextStage: PropTypes.func.isRequired,
-  setUser: PropTypes.func.isRequired,
 };
