@@ -40,6 +40,7 @@ const createUserProfile = asyncHandler(async (req, res) => {
   }
   const userProfile = req.body;
   if (!userProfile.birthday
+      || !userProfile.gender
       || !userProfile.experience
       || !userProfile.goals
       || !userProfile.apiKey
@@ -81,6 +82,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
   const userProfile = req.body;
   if (!userProfile.birthday
+      || !userProfile.gender
       || !userProfile.experience
       || !userProfile.goals
       || !userProfile.apiKey
