@@ -19,8 +19,8 @@ export default function SignupRequireUserDetails() {
   const signup = useSelector((state) => state.signup);
   const [weight, setWeight] = useState(signup.user.weight ?? null);
   const [height, setHeight] = useState(signup.user.height ?? null);
-  const [weightUnits, setWeightUnits] = useState(signup.user.weightUnits ?? WEIGHT_UNITS.KG);
-  const [heightUnits, setHeightUnits] = useState(signup.user.heightUnits ?? HEIGHT_UNITS.IN);
+  const [weightUnit, setWeightUnit] = useState(signup.user.weightUnit ?? WEIGHT_UNITS.KG);
+  const [heightUnit, setHeightUnit] = useState(signup.user.heightUnit ?? HEIGHT_UNITS.IN);
   const [experience, setExperience] = useState(signup.user.experience ?? '');
   const [goals, setGoals] = useState(signup.user.goals ?? []);
 
@@ -29,8 +29,8 @@ export default function SignupRequireUserDetails() {
       user: {
         weight,
         height,
-        weightUnits,
-        heightUnits,
+        weightUnit,
+        heightUnit,
         experience,
         goals,
       },
@@ -38,7 +38,20 @@ export default function SignupRequireUserDetails() {
     }));
   };
 
-  const handleBack = () => dispatch(setSignup({ step: signup.step - 1 }));
+  const handleBack = () => {
+    dispatch(setSignup({
+      user: {
+        weight,
+        height,
+        weightUnit,
+        heightUnit,
+        experience,
+        goals,
+      },
+      step: signup.step - 1,
+    }));
+  };
+
   return (
     <Form
       handleSubmit={handleSubmit}
@@ -55,8 +68,8 @@ export default function SignupRequireUserDetails() {
         type="number"
         radioGroups={['lb', 'kg']}
         half
-        radioSelection={weightUnits}
-        setRadioSelection={setWeightUnits}
+        radioSelection={weightUnit}
+        setRadioSelection={setWeightUnit}
         required
       />
       <FormTextFieldWithRadio
@@ -68,8 +81,8 @@ export default function SignupRequireUserDetails() {
         type="number"
         radioGroups={['cm', 'in']}
         half
-        radioSelection={heightUnits}
-        setRadioSelection={setHeightUnits}
+        radioSelection={heightUnit}
+        setRadioSelection={setHeightUnit}
         required
       />
       <FormMultiSelect

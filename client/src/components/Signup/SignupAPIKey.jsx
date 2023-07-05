@@ -22,7 +22,14 @@ export default function SignupAPIKey() {
     }));
   };
 
-  const handleBack = () => dispatch(setSignup({ step: signup.step - 1 }));
+  const handleBack = () => {
+    dispatch(setSignup({
+      user: {
+        apiKey,
+      },
+      step: signup.step - 1,
+    }));
+  };
 
   return (
     <Form

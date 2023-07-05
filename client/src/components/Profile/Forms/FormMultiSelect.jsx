@@ -55,7 +55,7 @@ export default function FormMultiSelect(props) {
               inputProps={{
                 ...params.inputProps,
                 autoComplete: required && 'new-password',
-                required: !required || value.length === 0,
+                required: required || value.length === 0,
               }}
               required={required}
             />

@@ -2,30 +2,38 @@ import {
   Grid, Button,
 } from '@mui/material';
 import dayjs from 'dayjs';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { genderOptions } from '../../constants/BasicProfile';
 import { setSignup } from '../../reducers/Signup';
+import { ToastContext } from '../common/context/ToastContextProvider';
 import Form from '../Profile/Forms/Form';
 import FormDatePicker from '../Profile/Forms/FormDatePicker';
 import FormSelect from '../Profile/Forms/FormSelect';
 import FormTextFieldInput from '../Profile/Forms/FormTextFieldInput';
 
 export default function SignupBasicUserDetails() {
+  const openToast = useContext(ToastContext);
   const dispatch = useDispatch();
   const signup = useSelector((state) => state.signup);
   const [gender, setGender] = useState(signup.user.gender ?? '');
   const [firstName, setFirstName] = useState(signup.user.firstName ?? '');
   const [lastName, setLastName] = useState(signup.user.lastName ?? '');
   const [birthday, setBirthday] = useState(dayjs(signup.user.birthday) ?? null);
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (birthday.format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD')) {
+      openToast('error', 'Please add your birthday', 3000);
+      return;
+    }
+
     dispatch(setSignup({
       user: {
         gender,
         firstName,
         lastName,
-        birthday,
+        birthday: birthday.format('YYYY-MM-DD'),
       },
       step: signup.step + 1,
     }));

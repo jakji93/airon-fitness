@@ -27,7 +27,7 @@ export default function FormDatePicker(props) {
         />
       )}
       <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)}>
-        <DatePicker value={value} onChange={(val) => setValue(val)} />
+        <DatePicker label={label} value={value} onChange={(val) => setValue(val)} disableFuture />
       </Grid>
     </>
   );
