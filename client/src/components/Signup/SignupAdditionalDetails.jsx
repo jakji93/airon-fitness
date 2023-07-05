@@ -22,42 +22,42 @@ export default function SignupAdditionalDetails() {
   const dispatch = useDispatch();
   const signup = useSelector((state) => state.signup);
   const [
-    healthConditionsAndInjuries,
-    setHealthConditionsAndInjuries,
-  ] = useState(signup.user.healthConditionsAndInjuries);
+    healthConditions,
+    setHealthConditions,
+  ] = useState(signup.user.healthConditions);
   const [
-    dietaryRestrictions,
-    setDietaryRestrictions,
-  ] = useState(signup.user.dietaryRestrictions ?? []);
+    dietRestriction,
+    setDietRestriction,
+  ] = useState(signup.user.dietRestriction ?? []);
   const [
-    allergiesIntolerances,
-    setAllergiesIntolerances,
-  ] = useState(signup.user.allergiesIntolerances ?? []);
+    allergies,
+    setAllergies,
+  ] = useState(signup.user.allergies ?? []);
   const [
     weeklyAvailability,
     setWeeklyAvailability,
   ] = useState(signup.user.weeklyAvailability ?? null);
-  const [bodyFatPercentage, setBodyFatPercentage] = useState(signup.user.bodyFatPercentage ?? null);
+  const [bodyFat, setBodyFat] = useState(signup.user.bodyFat ?? null);
   const [
-    muscleMassPercentage,
-    setMuscleMassPercentage,
-  ] = useState(signup.user.muscleMassPercentage ?? null);
-  const [workoutDuration, setWorkoutDuration] = useState(signup.user.workoutDuration ?? null);
-  const [exercisePreferences, setExercisePreferences] = useState(signup.user.exercisePreferences ?? ['e.g. Squat']);
-  const [equipmentAvailability, setEquipmentAvailability] = useState(signup.user.equipmentAvailability ?? ['e.g. Dumbbells']);
+    muscleMass,
+    setMuscleMass,
+  ] = useState(signup.user.muscleMass ?? null);
+  const [duration, setDuration] = useState(signup.user.duration ?? null);
+  const [preference, setPreference] = useState(signup.user.preference ?? ['e.g. Squat']);
+  const [equipment, setEquipment] = useState(signup.user.equipment ?? ['e.g. Dumbbells']);
 
   const handleSubmit = () => {
     dispatch(setSignup({
       user: {
-        healthConditionsAndInjuries,
-        dietaryRestrictions,
-        allergiesIntolerances,
+        healthConditions,
+        dietRestriction,
+        allergies,
         weeklyAvailability,
-        bodyFatPercentage,
-        muscleMassPercentage,
-        workoutDuration,
-        exercisePreferences,
-        equipmentAvailability,
+        bodyFat,
+        muscleMass,
+        duration,
+        preference,
+        equipment,
       },
       step: signup.step,
     }));
@@ -69,15 +69,15 @@ export default function SignupAdditionalDetails() {
   const handleBack = () => {
     dispatch(setSignup({
       user: {
-        healthConditionsAndInjuries,
-        dietaryRestrictions,
-        allergiesIntolerances,
+        healthConditions,
+        dietRestriction,
+        allergies,
         weeklyAvailability,
-        bodyFatPercentage,
-        muscleMassPercentage,
-        workoutDuration,
-        exercisePreferences,
-        equipmentAvailability,
+        bodyFat,
+        muscleMass,
+        duration,
+        preference,
+        equipment,
       },
       step: signup.step - 1,
     }));
@@ -93,8 +93,8 @@ export default function SignupAdditionalDetails() {
       <FormTextFieldInput
         id="body-fat-percentage"
         label="Body Fat Percentage"
-        value={bodyFatPercentage}
-        setValue={(val) => restrictPercentageValue(val, setBodyFatPercentage)}
+        value={bodyFat}
+        setValue={(val) => restrictPercentageValue(val, setBodyFat)}
         endAdornment="%"
         customTextFieldGridSize={6}
         showTitleLabel={false}
@@ -103,8 +103,8 @@ export default function SignupAdditionalDetails() {
       <FormTextFieldInput
         id="muscle-mass-percentage"
         label="Muscle Mass Percentage"
-        value={muscleMassPercentage}
-        setValue={(val) => restrictPercentageValue(val, setMuscleMassPercentage)}
+        value={muscleMass}
+        setValue={(val) => restrictPercentageValue(val, setMuscleMass)}
         endAdornment="%"
         customTextFieldGridSize={6}
         showTitleLabel={false}
@@ -113,8 +113,8 @@ export default function SignupAdditionalDetails() {
       <FormTextFieldInput
         id="workout-duration"
         label="Workout Duration"
-        value={workoutDuration}
-        setValue={setWorkoutDuration}
+        value={duration}
+        setValue={setDuration}
         endAdornment="minutes"
         customTextFieldGridSize={6}
         showTitleLabel={false}
@@ -133,24 +133,24 @@ export default function SignupAdditionalDetails() {
       <FormMultiInput
         id="exercise-preferences"
         label="Exercise Preferences"
-        value={exercisePreferences}
-        setValue={setExercisePreferences}
+        value={preference}
+        setValue={setPreference}
         showTitleLabel={false}
         customTextFieldGridSize={12}
       />
       <FormMultiInput
         id="equipment-availability"
         label="Equipment Availability"
-        value={equipmentAvailability}
-        setValue={setEquipmentAvailability}
+        value={equipment}
+        setValue={setEquipment}
         showTitleLabel={false}
         customTextFieldGridSize={12}
       />
       <FormMultiSelect
         id="health-conditions-and-injuries"
         label="Health Conditions & Injuries"
-        value={healthConditionsAndInjuries}
-        setValue={setHealthConditionsAndInjuries}
+        value={healthConditions}
+        setValue={setHealthConditions}
         options={healthConditionsAndInjuriesOptions}
         showTitleLabel={false}
         customTextFieldGridSize={6}
@@ -158,8 +158,8 @@ export default function SignupAdditionalDetails() {
       <FormMultiSelect
         id="allergies-intolerances"
         label="Allergies & Intolerances"
-        value={allergiesIntolerances}
-        setValue={setAllergiesIntolerances}
+        value={allergies}
+        setValue={setAllergies}
         options={allergiesIntolerancesOptions}
         showTitleLabel={false}
         customTextFieldGridSize={6}
@@ -167,8 +167,8 @@ export default function SignupAdditionalDetails() {
       <FormMultiSelect
         id="dietary-restrictions"
         label="Dietary Restrictions"
-        value={dietaryRestrictions}
-        setValue={setDietaryRestrictions}
+        value={dietRestriction}
+        setValue={setDietRestriction}
         options={dietaryRestrictionsOptions}
         showTitleLabel={false}
         customTextFieldGridSize={6}

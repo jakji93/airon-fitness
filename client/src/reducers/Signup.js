@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
+import dayjs from 'dayjs';
 
 import { HEIGHT_UNITS, WEIGHT_UNITS } from '../constants/BasicProfile';
 
@@ -10,23 +11,23 @@ const initialSignupUser = {
   gender: '',
   firstName: '',
   lastName: '',
-  birthday: null,
+  birthday: dayjs().format('YYYY-MM-DD'),
   weight: null,
   height: null,
-  weightUnits: WEIGHT_UNITS.KG,
-  heightUnits: HEIGHT_UNITS.IN,
+  weightUnit: WEIGHT_UNITS.KG,
+  heightUnit: HEIGHT_UNITS.IN,
   experience: '',
   goals: [],
   apiKey: '',
-  healthConditionsAndInjuries: [],
-  dietaryRestrictions: [],
-  allergiesIntolerances: [],
+  healthConditions: [],
+  dietRestrictions: [],
+  allergies: [],
   weeklyAvailability: null,
-  bodyFatPercentage: null,
-  muscleMassPercentage: null,
-  workoutDuration: null,
-  exercisePreferences: ['e.g. Squat'],
-  equipmentAvailability: ['e.g. Dumbbells'],
+  bodyFat: null,
+  muscleMass: null,
+  duration: null,
+  preference: ['e.g. Squat'],
+  equipment: ['e.g. Dumbbells'],
 };
 
 const initialState = signup || {
