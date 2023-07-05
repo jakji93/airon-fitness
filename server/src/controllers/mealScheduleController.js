@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 const openAI = require('../utils/openaiUtil');
-const ageUtil = require('../utils/ageUtil');
+const userUtil = require('../utils/userUtil');
 const MealSchedule = require('../models/MealScheduleModel');
 const UserProfile = require('../models/UserProfileModel');
 
@@ -12,14 +12,14 @@ const UserProfile = require('../models/UserProfileModel');
  */
 const getMealScheduleByUser = asyncHandler(async (req, res) => {
   const {
-    _userInfoID, schedule, inputs
-  } = await MealSchedule.findOne({ _userInfoID: req.user._id });
+    userInfoID, schedule, inputs
+  } = await MealSchedule.findOne({ userInfoID: req.user._id });
 
-  if (!foundItem) {
+  if (!schedule) {
     res.status(404).json({ message: 'Meal schedule not found' })
   } else {
     res.status(200).json({
-      userInfoID: _userInfoID,
+      userInfoID: userInfoID,
       schedule,
       inputs
     })
@@ -35,7 +35,7 @@ const createMealScheduleForUser = asyncHandler(async (req, res) => {
   const id = req.user._id;
 
   // Check if user already has a meal schedule
-  const mealScheduleExists = await MealSchedule.findOne({ _userInfoID: id });
+  const mealScheduleExists = await MealSchedule.findOne({ userInfoID: id });
   if (mealScheduleExists) {
     res.status(400).json({ message: 'Meal schedule already exists' });
   }
@@ -44,30 +44,12 @@ const createMealScheduleForUser = asyncHandler(async (req, res) => {
   const userProfile = await UserProfile.findOne({ userInfoID: id });
   
   // Generate the schedule with OpenAI
-  const userData = {
-    age:                ageUtil.calculateAge(userProfile.birthday),
-    gender:             userProfile.gender,
-    height:             userProfile.height,
-    heightUnit:         userProfile.heightUnit,
-    weight:             userProfile.weight,
-    weightUnit:         userProfile.weightUnit,
-    experience:         userProfile.experience,
-    bodyFat:            userProfile.bodyFat,
-    muscleMass:         userProfile.muscleMass,
-    exerciseDuration:   userProfile.duration,
-    weeklyAvailability: userProfile.weeklyAvailability,
-    allergies:          [...userProfile.allergies].join(','),
-    preference:         [...userProfile.preference].join(','),
-    equipment:          [...userProfile.equipment].join(','),
-    goals:              [...userProfile.goals].join(','),
-    healthConditions:   [...userProfile.healthConditions].join(','),
-    dietRestrictions:   [...userProfile.dietRestriction].join(','),
-  }
+  const userData = userUtil.generateUserObject(userProfile);
   const generatedSchedule = await openAI.generateMealSchedule(userData);
 
   // Create meal in MongoDB
   const mealSchedule = await MealSchedule.create({
-    _userInfoID: id,
+    userInfoID: id,
     schedule: generatedSchedule,
     inputs: [],
   });
@@ -93,34 +75,26 @@ const updateMealScheduleForUser = asyncHandler(async (req, res) => {
   const id = req.user._id;
 
   // Retrieve the meal schedule (fail if user does not have one already)
-  const mealSchedule= await MealSchedule.findOne({ _userInfoID: id });
+  const mealSchedule= await MealSchedule.findOne({ userInfoID: id });
   if (!mealSchedule) {
     res.status(404).json({ message: 'Cannot update a meal schedule that does not exist' });
   }
 
-  // If the inputs are empty (nothing to change), throw an error
-  if (mealSchedule.inputs.length === 0) {
-    res.status(400).json({ message: 'There are no custom inputs to use to adjust the schedule' });
-  }
-
-  // Extract the data necessary to adjust the schedule
+  // Organize the data necessary to adjust the schedule
   const schedule = JSON.stringify(mealSchedule.schedule);
-  const inputs = mealSchedule.inputs.join(',');
+  var updatedInputs = mealSchedule.inputs;
+  updatedInputs.push(req.body.customInput);
 
-  // Look up thye profile of the user and extract relevant data
+  // Look up the profile of the user
   const userProfile = await UserProfile.findOne({ userInfoID: id });
-  const userData = {
-    allergies:          [...userProfile.allergies].join(','),
-    goals:              [...userProfile.goals].join(','),
-    healthConditions:   [...userProfile.healthConditions].join(','),
-    dietRestrictions:   [...userProfile.dietRestriction].join(','),
-  }
 
   // Update the schedule with OpenAI
-  const updatedMealSchedule = await openAI.updateMealSchedule(userData, inputs, schedule);
+  const userData = userUtil.generateUserObject(userProfile);
+  const updatedMealSchedule = await openAI.updateMealSchedule(userData, updatedInputs, schedule);
 
   // Update the MongoDB document
   mealSchedule.schedule = updatedMealSchedule;
+  mealSchedule.inputs = updatedInputs;
   const savedMealSchedule = await mealSchedule.save();
 
   // Send updated result
