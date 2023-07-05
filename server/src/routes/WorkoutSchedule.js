@@ -7,6 +7,7 @@ const { protect } = require('../middleware/authMiddleware');
 
 /**
  * @desc get workout schedule for user (Get userID from JWT token)
+ * @access Private
  * @route GET /workoutSchedule
  * @request
  *  body: n/a
@@ -31,6 +32,7 @@ router.get('/', protect, getWorkoutScheduleByUserID);
 
 /**
  * @desc create workout schedule for user (Get userID from JWT token)
+ * @access Private
  * @route POST /workoutSchedule
  * @request
  *  body: n/a
@@ -55,6 +57,7 @@ router.post('/', protect, createWorkoutSchedule);
 
 /**
  * @desc update workout schedule for user (Get userID from JWT token)
+ * @access Private
  * @route PUT /workoutSchedule
  * @request
  *  body:
