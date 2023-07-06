@@ -9,21 +9,17 @@ import {
   Container,
 } from '@mui/material';
 import * as React from 'react';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { register, resetAuth } from '../../reducers/Auth';
+import { register } from '../../reducers/Auth';
 import { setSignup } from '../../reducers/Signup';
 import { ToastContext } from '../common/context/ToastContextProvider';
-import Spinner from '../common/Spinner';
 
 export default function SignupRegisterAccount() {
   const dispatch = useDispatch();
   const step = useSelector((state) => state.signup.step);
   const openToast = useContext(ToastContext);
-  const {
-    user, isLoading, isError, isSuccess, message,
-  } = useSelector((state) => state.auth);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,24 +32,8 @@ export default function SignupRegisterAccount() {
       return;
     }
     dispatch(register({ email: email.value, password: password.value }));
+    dispatch(setSignup({ step: step + 1 }));
   };
-
-  useEffect(() => {
-    if (isError) {
-      openToast('error', message);
-    }
-
-    if (isSuccess || user) {
-      openToast('success', 'You\'re account has been created!');
-      dispatch(setSignup({ step: step + 1 }));
-    }
-
-    dispatch(resetAuth);
-  }, [user, isError, isSuccess, message, dispatch]);
-
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   return (
     <div>

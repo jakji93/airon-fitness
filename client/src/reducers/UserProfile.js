@@ -2,34 +2,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { getErrorMessage } from './utils';
-import { HEIGHT_UNITS, WEIGHT_UNITS } from '../constants/BasicProfile';
 import userProfileService from '../services/UserProfileService';
 
-const initialUserProfile = {
-  gender: '',
-  firstName: '',
-  lastName: '',
-  birthday: null,
-  weight: null,
-  height: null,
-  weightUnit: WEIGHT_UNITS.KG,
-  heightUnit: HEIGHT_UNITS.IN,
-  experience: '',
-  goals: [],
-  apiKey: '',
-  healthConditions: [],
-  dietRestrictions: [],
-  allergies: [],
-  weeklyAvailability: null,
-  bodyFat: null,
-  muscleMass: null,
-  duration: null,
-  preference: ['e.g. Squat'],
-  equipment: ['e.g. Dumbbells'],
-};
-
 const initialState = {
-  profile: initialUserProfile,
+  profile: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -37,7 +13,7 @@ const initialState = {
 };
 
 // create user profile
-export const createUserProfile = createAsyncThunk(
+export const registerUserProfile = createAsyncThunk(
   'userProfile/createUserProfile',
   async (userData, thunkAPI) => {
     try {
@@ -79,24 +55,31 @@ export const userProfileSlice = createSlice({
   name: 'userProfile',
   initialState,
   reducers: {
-    resetUserProfile: (state) => {
+    resetUserProfileStates: (state) => {
       state.isLoading = false;
       state.isSuccess = false;
       state.isError = false;
       state.message = '';
     },
+    logoutUserProfile: (state) => {
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.message = '';
+      state.profile = null;
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createUserProfile.pending, (state) => {
+      .addCase(registerUserProfile.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(createUserProfile.fulfilled, (state, action) => {
+      .addCase(registerUserProfile.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.profile = action.payload;
       })
-      .addCase(createUserProfile.rejected, (state, action) => {
+      .addCase(registerUserProfile.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
@@ -133,5 +116,5 @@ export const userProfileSlice = createSlice({
   },
 });
 
-export const { resetUserProfile } = userProfileSlice.actions;
+export const { resetUserProfileStates, logoutUserProfile } = userProfileSlice.actions;
 export default userProfileSlice.reducer;

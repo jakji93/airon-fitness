@@ -2,18 +2,23 @@ import {
   Grid, Button,
 } from '@mui/material';
 import dayjs from 'dayjs';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { genderOptions } from '../../constants/BasicProfile';
+import { resetAuth } from '../../reducers/Auth';
 import { setSignup } from '../../reducers/Signup';
 import { ToastContext } from '../common/context/ToastContextProvider';
+import Spinner from '../common/Spinner';
 import Form from '../Profile/Forms/Form';
 import FormDatePicker from '../Profile/Forms/FormDatePicker';
 import FormSelect from '../Profile/Forms/FormSelect';
 import FormTextFieldInput from '../Profile/Forms/FormTextFieldInput';
 
 export default function SignupBasicUserDetails() {
+  const {
+    user, isLoading, isError, isSuccess, message,
+  } = useSelector((state) => state.auth);
   const openToast = useContext(ToastContext);
   const dispatch = useDispatch();
   const signup = useSelector((state) => state.signup);
@@ -38,6 +43,21 @@ export default function SignupBasicUserDetails() {
       step: signup.step + 1,
     }));
   };
+  useEffect(() => {
+    if (isError) {
+      openToast('error', message);
+    }
+
+    if (isSuccess || user) {
+      openToast('success', 'Your account has been created!');
+    }
+
+    dispatch(resetAuth);
+  }, [user, isError, isSuccess, message, dispatch]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Form

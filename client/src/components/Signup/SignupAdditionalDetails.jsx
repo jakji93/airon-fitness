@@ -3,13 +3,13 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 import {
   healthConditionsAndInjuriesOptions, dietaryRestrictionsOptions,
   allergiesIntolerancesOptions, weeklyAvailabilityOptions,
 } from '../../constants/AdditionalProfile';
-import { removeSignup, setSignup } from '../../reducers/Signup';
+import { setSignup } from '../../reducers/Signup';
+import { registerUserProfile } from '../../reducers/UserProfile';
 import { restrictPercentageValue } from '../Profile/AdditionalProfileForm';
 import Form from '../Profile/Forms/Form';
 import FormMultiInput from '../Profile/Forms/FormMultiInput';
@@ -18,7 +18,6 @@ import FormSelect from '../Profile/Forms/FormSelect';
 import FormTextFieldInput from '../Profile/Forms/FormTextFieldInput';
 
 export default function SignupAdditionalDetails() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const signup = useSelector((state) => state.signup);
   const [
@@ -61,9 +60,18 @@ export default function SignupAdditionalDetails() {
       },
       step: signup.step,
     }));
-    // TODO: call backend to make profile
-    dispatch(removeSignup());
-    navigate('/app');
+    dispatch(registerUserProfile({
+      ...signup.user,
+      healthConditions,
+      dietRestriction,
+      allergies,
+      weeklyAvailability,
+      bodyFat,
+      muscleMass,
+      duration,
+      preference,
+      equipment,
+    }));
   };
 
   const handleBack = () => {

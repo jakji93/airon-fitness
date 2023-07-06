@@ -46,20 +46,32 @@ export default function FormMultiSelect(props) {
               {selected ? <CheckIcon color="info" /> : null}
             </MenuItem>
           )}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant="outlined"
-              label={label}
-              placeholder={label}
-              inputProps={{
-                ...params.inputProps,
-                autoComplete: required && 'new-password',
-                required: required || value.length === 0,
-              }}
-              required={required}
-            />
-          )}
+          renderInput={(params) => {
+            if (required) {
+              return (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label={label}
+                  placeholder={label}
+                  inputProps={{
+                    ...params.inputProps,
+                    required: value.length === 0,
+                  }}
+                  required={required}
+                />
+              );
+            }
+
+            return (
+              <TextField
+                {...params}
+                variant="outlined"
+                label={label}
+                placeholder={label}
+              />
+            );
+          }}
         />
       </Grid>
     </>
