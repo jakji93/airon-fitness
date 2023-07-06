@@ -86,12 +86,16 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
   const userProfile = req.body;
   if (!userProfile.birthday
-      || !userProfile.gender
-      || !userProfile.experience
-      || !userProfile.goals
-      || !userProfile.apiKey
-      || !userProfile.firstName
-      || !userProfile.lastName) {
+    || !userProfile.gender
+    || !userProfile.experience
+    || !userProfile.goals
+    || !userProfile.apiKey
+    || !userProfile.firstName
+    || !userProfile.lastName
+    || !userProfile.weight
+    || !userProfile.weightUnit
+    || !userProfile.height
+    || !userProfile.heightUnit) {
     res.status(400).json({ message: 'Please include all required fields' });
     throw new Error('Please include all required fields');
   }
