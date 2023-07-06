@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const UserProfile = require('../models/UserProfileModel');
+const { USER_PROFILE_FIELDS } = require('../constants');
 
 /**
  * @desc    creturns a list of all the user profiles
@@ -84,7 +85,15 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error('User not authorized');
   }
-  const userProfile = req.body;
+
+  const profile = Object.entries(profileExists._doc)
+    .filter(([key]) => USER_PROFILE_FIELDS.includes(key))
+    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+  const userProfile = {
+    ...profile,
+    ...req.body,
+  };
+  console.log(userProfile);
   if (!userProfile.birthday
     || !userProfile.gender
     || !userProfile.experience
@@ -99,7 +108,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     res.status(400).json({ message: 'Please include all required fields' });
     throw new Error('Please include all required fields');
   }
-  userProfile.userInfoID = req.user._id;
+
   const updatedProfile = await UserProfile.findOneAndUpdate(
     { userInfoID: req.user._id },
     userProfile,
@@ -107,9 +116,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       new: true,
     },
   );
-  if (updatedProfile) {
-    res.status(201).json(updatedProfile);
-  }
+  if (updatedProfile) return res.status(201).json(updatedProfile);
+
   res.status(400).json({ message: 'Failed to update profile' });
   throw new Error('Failed to update profile');
 });
