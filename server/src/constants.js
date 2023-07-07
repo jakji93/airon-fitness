@@ -2,7 +2,6 @@ const USER_PROFILE_FIELDS = [
   'apiKey',
   'firstName',
   'lastName',
-  'image',
   'birthday',
   'gender',
   'height',

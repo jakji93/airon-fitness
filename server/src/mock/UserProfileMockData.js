@@ -2,7 +2,7 @@ const userProfile1 = {
   apiKey: 'mnop5678',
   firstName: 'Sarah',
   lastName: 'Johnson',
-  image: 'https://example.com/profile4.jpg',
+  profileImage: 'https://example.com/profile4.jpg',
   birthday: '1992-08-20',
   gender: 'Male',
   height: 170,
