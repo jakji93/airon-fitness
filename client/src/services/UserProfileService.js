@@ -2,29 +2,34 @@ import axios from 'axios';
 
 const API_URL = `${process.env.REACT_APP_SERVER_API_BASE}/userProfile/`;
 
-const buildUserProfileRequestBody = (userData) => ({
-  apiKey: userData.apiKey,
-  firstName: userData.firstName,
-  lastName: userData.lastName,
-  image: userData.image,
-  birthday: userData.birthday,
-  gender: userData.gender,
-  height: parseInt(userData.height, 10),
-  heightUnit: userData.heightUnit,
-  weight: parseInt(userData.weight, 10),
-  weightUnit: userData.weightUnit,
-  experience: userData.experience,
-  bodyFat: parseInt(userData.bodyFat, 10),
-  muscleMass: parseInt(userData.muscleMass, 10),
-  duration: parseInt(userData.duration, 10),
-  weeklyAvailability: parseInt(userData.weeklyAvailability, 10),
-  preference: userData.preference,
-  equipment: userData.equipment,
-  allergies: userData.allergies,
-  goals: userData.goals,
-  healthConditions: userData.healthConditions,
-  dietRestriction: userData.dietRestriction,
-});
+const buildUserProfileRequestBody = (userData) => {
+  const requestBody = {};
+  if (userData.apiKey) requestBody.apiKey = userData.apiKey;
+  if (userData.firstName) requestBody.firstName = userData.firstName;
+  if (userData.lastName) requestBody.lastName = userData.lastName;
+  if (userData.image) requestBody.image = userData.image;
+  if (userData.birthday) requestBody.birthday = userData.birthday;
+  if (userData.gender) requestBody.gender = userData.gender;
+  if (userData.height) requestBody.height = parseInt(userData.height, 10);
+  if (userData.heightUnit) requestBody.heightUnit = userData.heightUnit;
+  if (userData.weight) requestBody.weight = parseInt(userData.weight, 10);
+  if (userData.weightUnit) requestBody.weightUnit = userData.weightUnit;
+  if (userData.experience) requestBody.experience = userData.experience;
+  if (userData.bodyFat) requestBody.bodyFat = parseInt(userData.bodyFat, 10);
+  if (userData.muscleMass) requestBody.muscleMass = parseInt(userData.muscleMass, 10);
+  if (userData.duration) requestBody.duration = parseInt(userData.duration, 10);
+  if (userData.weeklyAvailability) {
+    requestBody.weeklyAvailability = parseInt(userData.weeklyAvailability, 10);
+  }
+  if (userData.preference) requestBody.preference = userData.preference;
+  if (userData.equipment) requestBody.equipment = userData.equipment;
+  if (userData.allergies) requestBody.allergies = userData.allergies;
+  if (userData.goals) requestBody.goals = userData.goals;
+  if (userData.healthConditions) requestBody.healthConditions = userData.healthConditions;
+  if (userData.dietRestriction) requestBody.dietRestriction = userData.dietRestriction;
+
+  return requestBody;
+};
 
 const createUserProfile = async (userData) => {
   const requestBody = buildUserProfileRequestBody(userData);
@@ -63,6 +68,7 @@ const getUserProfile = async () => {
   const headers = {
     Authorization: `Bearer ${user.token}`,
   };
+  console.log('SENDING GET');
   const response = await axios.get(API_URL, { headers });
   return response.data;
 };
