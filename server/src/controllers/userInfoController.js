@@ -2,6 +2,9 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 const UserInfo = require('../models/UserInfoModel');
+const UserProfile = require('../models/UserProfileModel');
+const MealSchedule = require('../models/MealScheduleModel');
+const WorkoutSchedule = require('../models/WorkoutScheduleModel');
 
 const generateToken = (_id) => jwt.sign({ _id }, process.env.JWT_SECRET, {
   expiresIn: '30d',
@@ -85,8 +88,34 @@ const getMe = asyncHandler(async (req, res) => {
   });
 });
 
+/**
+ * @desc    Delete user data
+ * @route   DELETE /userInfo/me
+ * @access  Private
+ */
+const deleteMe = asyncHandler(async (req, res) => {
+  const {
+    _id, email,
+  } = await UserInfo.findOneAndDelete({ _id: req.user._id });
+
+  if (!_id) {
+    res.status(400).json({ message: 'User not found' });
+    throw new Error('User not found');
+  }
+
+  await MealSchedule.deleteOne({ userInfoID: req.user._id });
+  await WorkoutSchedule.deleteOne({ userInfoID: req.user._id });
+  await UserProfile.deleteOne({ userInfoID: req.user._id });
+
+  res.status(200).json({
+    id: _id,
+    email,
+  });
+});
+
 module.exports = {
   loginUser,
   registerUser,
   getMe,
+  deleteMe,
 };
