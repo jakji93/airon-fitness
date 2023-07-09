@@ -1,4 +1,18 @@
-const mealCreationPrompt = (user) => `Imagine a ${user.age} year old ${user.gender}, 
+const mealPrompt = (mode, user, inputs, schedule) => {
+  return [
+    {
+      role: "system",
+      content: "You are a fitness expert and dietary specialist."
+    },
+    {
+      role: "user",
+      content: mode === 'create' ? mealCreationPrompt(user) : mealUpdatePrompt(user, inputs, schedule)
+    }
+  ]
+}
+
+const mealCreationPrompt = (user) => {
+  return `Imagine a ${user.age} year old ${user.gender}, 
           weight ${user.weight}${user.weightUnit} (assume kilograms if no unit provided), 
           height ${user.height}${user.heightUnit} (assume centimeters if no unit provided),
           has fitness experience of: ${user.fitness}, 
@@ -11,9 +25,11 @@ const mealCreationPrompt = (user) => `Imagine a ${user.age} year old ${user.gend
           They have the following allergies: ${user.allergies},
 
           Now, create a weekly meal plan including breakfast, snack1 (strictly use snack1 in respond), 
-          lunch, snack2 (strictly use snack2 in respond) and dinner in JSON form. Don't include any Note. For null values use 0 instead.`;
+          lunch, snack2 (strictly use snack2 in respond) and dinner in JSON form. Don't include any Note. For null values use 0 instead.`  
+  }
 
-const mealUpdatePrompt = (user, inputs, schedule) => `You are a dietician that is given the task to update a client's schedule.
+const mealUpdatePrompt = (user, inputs, schedule) => {
+    return `You are a dietician that is given the task to update a client's schedule.
 
             Here is some information about the client:
             Allergies (make sure the schedule is free of these allergen risks): ${user.allergies}
@@ -28,20 +44,9 @@ const mealUpdatePrompt = (user, inputs, schedule) => `You are a dietician that i
             ${schedule}
 
             Please make the necessary modifications and return the updated workout schedule in the same JSON format. Thank you!
-            Don't include Note. For null values use 0 instead.`;
+            Don't include Note. For null values use 0 instead.`  
+  }
 
-const mealPrompt = (mode, user, inputs, schedule) => [
-  {
-    role: 'system',
-    content: 'You are a fitness expert and dietary specialist.',
-  },
-  {
-    role: 'user',
-    content: mode === 'create' ? mealCreationPrompt(user) : mealUpdatePrompt(user, inputs, schedule),
-  },
-];
-
-module.exports = {
-  mealPrompt,
-  mealCreationPrompt,
-};
+  module.exports = {
+    mealPrompt,
+  }
