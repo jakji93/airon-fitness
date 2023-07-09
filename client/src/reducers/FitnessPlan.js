@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialPlan = {
-  Monday: [{
+  firstDay: [{
     exercise: 'Barbell Squats',
     sets: 3,
     reps: 10,
@@ -34,12 +34,30 @@ const initialPlan = {
     duration: null,
     intensity: 60,
   }],
-  Tuesday: [],
-  Wednesday: [],
-  Thursday: [],
-  Friday: [],
-  Saturday: [],
-  Sunday: [],
+  secondDay: [{
+    exercise: 'Bench Press',
+    sets: 3,
+    reps: 10,
+    rest: 60,
+    duration: null,
+    intensity: 75,
+  },
+  {
+    exercise: 'Lat Pulldowns',
+    sets: 3,
+    reps: 12,
+    rest: 60,
+    duration: null,
+    intensity: 70,
+  }],
+  thirdDay: [{
+    exercise: 'Plank',
+    sets: 3,
+    reps: 60,
+    rest: 30,
+    duration: null,
+    intensity: 60,
+  }],
 };
 
 // TODO: when api setup, change the initial state to empty
