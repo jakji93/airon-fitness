@@ -57,7 +57,7 @@ const createWorkoutSchedule = asyncHandler(async (req, res) => {
 
   const workoutSchedule = await WorkoutSchema.create({
     userInfoID: id,
-    schedules: generatedSchedule,
+    schedule: generatedSchedule,
     inputs: [],
   });
 
