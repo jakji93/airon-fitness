@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import {
-  Autocomplete, Chip, Container, Grid, TextField,
+  Autocomplete, Chip, Grid, TextField,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -15,19 +15,20 @@ export default function FormMultiInput(props) {
     half,
     value,
     setValue,
+    showTitleLabel,
+    customTextFieldGridSize,
+    required,
   } = props;
 
   return (
-    <Container sx={{
-      display: 'flex',
-      alignItems: 'center',
-    }}
-    >
-      <GridInputLabel
-        id={id}
-        label={label}
-      />
-      <Grid item xs={12} sm={inputGridSizing(half)}>
+    <>
+      {showTitleLabel && (
+        <GridInputLabel
+          id={id}
+          label={label}
+        />
+      )}
+      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)}>
         <Autocomplete
           multiple
           id="tags-filled"
@@ -35,7 +36,7 @@ export default function FormMultiInput(props) {
           options={[]}
           freeSolo
           onChange={(e, newValue) => setValue(newValue)}
-          sx={{ m: 1, width: '100%' }}
+          sx={{ width: '100%' }}
           getOptionLabel={(option) => option}
           renderTags={(val, getTagProps) => val.map((option, index) => (
             <Chip
@@ -44,17 +45,35 @@ export default function FormMultiInput(props) {
               {...getTagProps({ index })}
             />
           ))}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant="outlined"
-              label={label}
-              placeholder={label}
-            />
-          )}
+          renderInput={(params) => {
+            if (required) {
+              return (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label={label}
+                  placeholder={label}
+                  inputProps={{
+                    ...params.inputProps,
+                    required: value.length === 0,
+                  }}
+                  required={required}
+                />
+              );
+            }
+
+            return (
+              <TextField
+                {...params}
+                variant="outlined"
+                label={label}
+                placeholder={label}
+              />
+            );
+          }}
         />
       </Grid>
-    </Container>
+    </>
   );
 }
 
@@ -64,8 +83,14 @@ FormMultiInput.propTypes = {
   half: PropTypes.bool,
   value: PropTypes.arrayOf(PropTypes.string).isRequired,
   setValue: PropTypes.func.isRequired,
+  showTitleLabel: PropTypes.bool,
+  customTextFieldGridSize: PropTypes.number,
+  required: PropTypes.bool,
 };
 
 FormMultiInput.defaultProps = {
   half: false,
+  showTitleLabel: true,
+  customTextFieldGridSize: 0,
+  required: false,
 };

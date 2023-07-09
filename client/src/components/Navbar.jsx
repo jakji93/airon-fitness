@@ -10,6 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { ToastContext } from './common/context/ToastContextProvider';
 import { logout, resetAuth } from '../reducers/Auth';
+import { logoutUserProfile } from '../reducers/UserProfile';
 
 const pages = [['home', '/app'], ['about', '/app/about'], ['profile', '/app/profile']];
 
@@ -25,6 +26,7 @@ function ResponsiveAppBar() {
     ['Logout', () => {
       dispatch(logout());
       dispatch(resetAuth());
+      dispatch(logoutUserProfile());
       navigate('/login');
       openToast('success', 'You have been logged out');
     }],
