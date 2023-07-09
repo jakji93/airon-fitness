@@ -2,6 +2,8 @@ const express = require('express');
 const { getWorkoutScheduleByUserID, createWorkoutSchedule, updateUserWorkoutScheduleByUserID } = require('../controllers/workoutScheduleController');
 
 const router = express.Router();
+// const { generateWorkoutSchedule } = require('../utils/openaiUtil');
+const { protect } = require('../middleware/authMiddleware');
 
 /**
  * @desc get workout schedule for user (Get userID from JWT token)
@@ -26,7 +28,7 @@ const router = express.Router();
  *        ...}}
  *     inputs: [string]}
  */
-router.get('/', getWorkoutScheduleByUserID);
+router.get('/', protect, getWorkoutScheduleByUserID);
 
 /**
  * @desc create workout schedule for user (Get userID from JWT token)
@@ -51,7 +53,7 @@ router.get('/', getWorkoutScheduleByUserID);
  *        ...}}
  *     inputs: [string]}
  */
-router.post('/', createWorkoutSchedule);
+router.post('/', protect, createWorkoutSchedule);
 
 /**
  * @desc update workout schedule for user (Get userID from JWT token)
@@ -77,6 +79,6 @@ router.post('/', createWorkoutSchedule);
  *        ...}}
  *     inputs: [string]}
  */
-router.put('/:userID', updateUserWorkoutScheduleByUserID);
+router.put('/', protect, updateUserWorkoutScheduleByUserID);
 
 module.exports = router;
