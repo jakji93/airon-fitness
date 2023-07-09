@@ -24,9 +24,9 @@ const getWorkoutScheduleByUserID = (req, res) => {
  * @access  Private
  */
 const createWorkoutSchedule = (req, res) => {
-  if (!req.body.schedule) {
-    return res.status(400).send({ message: 'Missing Payload' });
-  }
+  // if (!req.body.schedule) {
+  //   return res.status(400).send({ message: 'Missing Payload' });
+  // }
   const item = { userID: req.body.userID, schedule: req.body.schedule };
   schedules.push(item);
   return res.send(item);

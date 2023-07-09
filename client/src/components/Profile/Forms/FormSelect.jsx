@@ -20,6 +20,8 @@ export default function FormSelect(props) {
     customTextFieldGridSize,
   } = props;
 
+  console.log(value);
+
   return (
     <>
       { showTitleLabel && <GridInputLabel id={id} label={label} /> }

@@ -2,9 +2,20 @@ import SendIcon from '@mui/icons-material/Send';
 import {
   Card, Grid, Divider, TextField, Typography, Fab,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import ChatMessages from './ChatMessages';
+import { createFitnessPlan } from '../../../actionCreators/FitnessPlan';
+import {
+  allergiesIntolerancesOptions,
+  dietaryRestrictionsOptions,
+  healthConditionsAndInjuriesOptions,
+  weeklyAvailabilityOptions,
+} from '../../../constants/AdditionalProfile';
+import { goalsOptions } from '../../../constants/BasicProfile';
+import FormMultiSelect from '../../Profile/Forms/FormMultiSelect';
+import FormSelect from '../../Profile/Forms/FormSelect';
 
 // const MessageArea = styled(List)(({ theme }) => ({
 //   width: '30vw',
@@ -40,85 +51,182 @@ import ChatMessages from './ChatMessages';
 export default function ChatArea() {
   // eslint-disable-next-line no-unused-vars
   const [messages, setMessages] = useState([{ content: 'Welcome to AI-ron Fitness! How can I help you?', isSelf: false }]);
+  // eslint-disable-next-line no-unused-vars
   const [textField, setTextField] = useState('');
-  const [mode, setMode] = useState(0);
-  const editProfileFields = ['weight', 'height', 'avaiability'];
+  // eslint-disable-next-line no-unused-vars
+  const [inputMode, setInputMode] = useState(0);
+  // const [inputField, setInputField] = useState('');
+  const [mode, setMode] = useState('starter');
+  // const editProfileFields = ['weight', 'height', 'avaiability'];
+  const [formSelect, setFormSelect] = useState('');
+  const [inputMultiSelect, setInputMultiSelect] = useState([]);
+  const [formOptions, setFormOptions] = useState([]);
+  const [inputLabel, setInputLabel] = useState('');
+  const dispatch = useDispatch();
 
-  const stringContainsAny = (string, array) => {
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < array.length; i++) {
-      if (string.includes(array[i])) {
-        return true;
-      }
-    }
-    return false;
-  };
+  useEffect(() => {
+    dispatch(createFitnessPlan());
+  }, [dispatch]);
 
-  const handleModeZeroResponse = (newMessages) => {
-    const userText = textField.toLowerCase();
+  // const stringContainsAny = (string, array) => {
+  //   // eslint-disable-next-line no-plusplus
+  //   for (let i = 0; i < array.length; i++) {
+  //     if (string.includes(array[i])) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // };
 
-    if (userText.includes('workout')) {
+  const handleStarterResponse = (newMessages, input) => {
+    if (input.includes('workout')) {
       newMessages.push({ content: 'Let\'s get the perfect workout schedule for you. One moment please.', isSelf: false });
       return;
     }
 
-    if (userText.includes('meal')) {
+    if (input.includes('meal')) {
       newMessages.push({ content: 'Let\'s get the perfect meal schedule for you. One moment please.', isSelf: false });
       return;
     }
 
-    if (userText.includes('plan') || textField.includes('schedule')) {
-      newMessages.push({ content: 'Would you like me to get your workout or meal schedule?', isSelf: false });
-      setMode(2);
+    if (input.includes('plan') || input.includes('schedule')) {
+      newMessages.push({ content: 'Would you like to provide custom input for your workout plan?', isSelf: false });
+      setMode('confirmCustomInput');
+      setFormOptions(['Yes', 'No']);
+      setInputMode(1);
+      setInputLabel('Provide custom input?');
       return;
     }
 
-    if (userText.includes('update') && textField.includes('profile')) {
-      newMessages.push({ content: 'For sure. Which of the following values would you like to update: Weight, Height, Availability', isSelf: false });
-      setMode(1);
-      return;
-    }
-
-    newMessages.push({ content: 'Sorry I don\'t understand, try asking me about your workout schedule.', isSelf: false });
-  };
-
-  const handleModeOneResponse = (newMessages) => {
-    const userText = textField.toLowerCase();
-
-    if (mode === 1 && !stringContainsAny(userText, editProfileFields)) {
-      newMessages.push({ content: 'Invalid profile field. Please provide a valid profile field to update.', isSelf: false });
+    if (input.includes('update') && input.includes('profile')) {
+      newMessages.push({ content: 'For sure. Which of the following values would you like to update?', isSelf: false });
+      setFormOptions(['Height', 'Weight', 'Avaibility', 'Allergies', 'Health Conditions', 'Dietary Restrictions', 'Goals']);
+      setInputMode(1);
+      setInputLabel('Profile');
+      setMode('edit');
       return;
     }
 
     newMessages.push({ content: 'Sorry I don\'t understand, try asking me about your workout schedule.', isSelf: false });
   };
 
-  const handleModeTwoResponse = (newMessages) => {
-    const userText = textField.toLowerCase();
+  const handleEditResponse = (newMessages, input) => {
+    // update profile
+    console.log(newMessages);
+    console.log(input);
+    const updateField = newMessages[newMessages.length - 1].content;
+    let responseMsg;
 
-    if (userText.includes('workout')) {
-      newMessages.push({ content: 'Let\'s get the perfect workout schedule for you. One moment please.', isSelf: false });
-      return;
+    switch (updateField) {
+      case 'Height':
+        setInputMode(0);
+        responseMsg = { content: 'Please provide a height in cm', isSelf: false };
+        break;
+      case 'Weight':
+        setInputMode(0);
+        responseMsg = { content: 'Please provide a weight in cm', isSelf: false };
+        break;
+      case 'Avaibility':
+        setInputMode(1);
+        setFormOptions(weeklyAvailabilityOptions);
+        setInputLabel('Avaibility');
+        responseMsg = { content: 'Please choose the number of days you are available', isSelf: false };
+        break;
+      case 'Allergies':
+        setInputMode(2);
+        setInputLabel('Allergies');
+        setFormOptions(allergiesIntolerancesOptions);
+        responseMsg = { content: 'Please select the relevant allergies', isSelf: false };
+        break;
+      case 'Health Conditions':
+        setInputMode(2);
+        setInputLabel('Health Conditions');
+        setFormOptions(healthConditionsAndInjuriesOptions);
+        responseMsg = { content: 'Please select the relevant health conditions', isSelf: false };
+        break;
+      case 'Dietary Restrictions':
+        setInputMode(2);
+        setInputLabel('Dietary Restrictions');
+        setFormOptions(dietaryRestrictionsOptions);
+        responseMsg = { content: 'Please select the relevant dietary restrictions', isSelf: false };
+        break;
+      case 'Goals':
+        setInputMode(2);
+        setInputLabel('Goals');
+        setFormOptions(goalsOptions);
+        responseMsg = { content: 'Please select your new goals', isSelf: false };
+        break;
+      default:
+        responseMsg = { content: 'Sorry I don\'t understand, please try again', isSelf: false };
     }
+    setMode('confirmEdit');
 
-    if (userText.includes('meal')) {
-      newMessages.push({ content: 'Let\'s get the perfect meal schedule for you. One moment please.', isSelf: false });
-      return;
-    }
-
-    newMessages.push({ content: 'Sorry I don\'t understand, try asking me about your workout schedule.', isSelf: false });
+    newMessages.push(responseMsg);
   };
 
-  const handleCommand = (newMessages) => {
+  const handleTextEdit = (newMessages, input) => {
+    newMessages.push({ content: input, isSelf: false });
+    if (Number.isNaN(input)) {
+      newMessages.push({ content: 'Please provide a valid number', isSelf: false });
+    } else {
+      newMessages.push({ content: 'Your profile has been updated', isSelf: false });
+    }
+  };
+
+  const handleSelectEdit = (newMessages) => {
+    newMessages.push({ content: 'Your profile has been updated', isSelf: false });
+  };
+
+  const handleMultiSelectEdit = (newMessages) => {
+    let responseString = '';
+    inputMultiSelect.forEach((i) => {
+      responseString = `${responseString}, ${i}`;
+    });
+    newMessages.push({ content: responseString, isSelf: true });
+    newMessages.push({ content: 'Your profile has been updated', isSelf: false });
+  };
+
+  const handleConfirmEditResponse = (newMessages, input) => {
+    if (inputMode === 0) {
+      handleTextEdit(newMessages, input);
+    } else if (inputMode === 1) {
+      handleSelectEdit(newMessages);
+    } else {
+      handleMultiSelectEdit(newMessages);
+    }
+  };
+
+  const handleGeneratePlanWithCustom = (newMessages, input) => {
+    console.log(input);
+    newMessages.push({ content: 'Allow me to get your plan', isSelf: false });
+  };
+
+  const handleConfirmCustomInput = (newMessages) => {
+    if (formSelect === 'No') {
+      newMessages.push({ content: 'Allow me to get your plan', isSelf: false });
+    } else {
+      newMessages.push({ content: 'What custom input would you like to provide?', isSelf: false });
+      setMode('generatePlanWithCustom');
+      setInputMode(0);
+    }
+  };
+
+  const handleCommand = (newMessages, input) => {
     switch (mode) {
-      case 0:
-        handleModeZeroResponse(newMessages);
+      case 'starter':
+        handleStarterResponse(newMessages, input);
         break;
-      case 1:
-        handleModeOneResponse(newMessages);
+      case 'edit':
+        handleEditResponse(newMessages, input);
         break;
-      case 2:
-        handleModeTwoResponse(newMessages);
+      case 'generatePlanWithCustom':
+        handleGeneratePlanWithCustom(newMessages, input);
+        break;
+      case 'confirmCustomInput':
+        handleConfirmCustomInput(newMessages);
+        break;
+      case 'confirmEdit':
+        handleConfirmEditResponse(newMessages, input);
         break;
       default:
         newMessages.push({ content: 'Sorry I don\'t understand, try asking me about your workout schedule.', isSelf: false });
@@ -126,18 +234,37 @@ export default function ChatArea() {
   };
 
   const handleSubmit = (e) => {
-    if (e.key === 'Enter' && textField !== '') {
-      const newMessages = [...messages, { content: textField, isSelf: true }];
-      handleCommand(newMessages);
+    const { value } = e.target;
+
+    if (e.key === 'Enter' && value !== '') {
+      const newMessages = [...messages, { content: value, isSelf: true }];
+      handleCommand(newMessages, value);
       setMessages(newMessages);
 
-      setTextField('');
+      document.getElementById('chatbox-inputfield').value = '';
     }
+  };
+
+  const handleSendButton = () => {
+    let message;
+    if (inputMode === 0) {
+      message = document.getElementById('chatbox-inputfield').value;
+    } else {
+      message = formSelect;
+    }
+
+    const newMessages = [...messages, { content: message, isSelf: true }];
+    handleCommand(newMessages, message);
+    setMessages(newMessages);
   };
 
   const handleFieldChange = (e) => {
     setTextField(e.target.value);
   };
+
+  useEffect(() => {
+    setInputMode(0);
+  }, []);
 
   return (
     <div>
@@ -152,10 +279,38 @@ export default function ChatArea() {
           <Divider />
           <Grid container style={{ padding: '20px' }}>
             <Grid item xs={11}>
-              <TextField value={textField} id="outlined-basic-email" label="Type to request/update a plan" onChange={handleFieldChange} onKeyDown={handleSubmit} fullWidth />
+              { inputMode === 0
+                ? <TextField id="chatbox-inputfield" label="Type to request/update a plan" onChange={handleFieldChange} onKeyDown={handleSubmit} fullWidth />
+                : ''}
+              {
+                inputMode === 1
+                  ? (
+                    <FormSelect
+                      label={inputLabel}
+                      id="chatbox-inputfield"
+                      showTitleLabel={false}
+                      options={formOptions}
+                      setValue={setFormSelect}
+                      value={formSelect}
+                    />
+                  ) : ''
+              }
+              {
+                inputMode === 2
+                  ? (
+                    <FormMultiSelect
+                      label={inputLabel}
+                      id="chatbox-inputfield"
+                      showTitleLabel={false}
+                      options={formOptions}
+                      setValue={setInputMultiSelect}
+                      value={inputMultiSelect}
+                    />
+                  ) : ''
+              }
             </Grid>
             <Grid item xs={1}>
-              <Fab color="primary" aria-label="add"><SendIcon /></Fab>
+              <Fab color="primary" aria-label="add"><SendIcon onClick={handleSendButton} /></Fab>
             </Grid>
           </Grid>
         </Grid>

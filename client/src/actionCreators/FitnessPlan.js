@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-const fetchFitnessPlan = () => (dispatch) => {
+export const fetchFitnessPlan = () => (dispatch) => {
   dispatch({
     type: 'fitnessPlan/FETCH_FITNESS_PLAN_REQUESTED',
   });
-  axios.get('api here')
+  axios.get('http://localhost:3001/workoutSchedule')
     .then((response) => {
+      console.log(response);
       dispatch({
         type: 'fitnessPlan/FETCH_FITNESS_PLAN_SUCCESS',
         payload: response.data,
@@ -19,4 +20,22 @@ const fetchFitnessPlan = () => (dispatch) => {
     });
 };
 
-export default fetchFitnessPlan;
+export const createFitnessPlan = () => (dispatch) => {
+  dispatch({
+    type: 'fitnessPlan/FETCH_FITNESS_PLAN_REQUESTED',
+  });
+  axios.post('http://localhost:3001/workoutSchedule')
+    .then((response) => {
+      console.log(response);
+      dispatch({
+        type: 'fitnessPlan/FETCH_FITNESS_PLAN_SUCCESS',
+        payload: response.data,
+      });
+    })
+    .catch((e) => {
+      dispatch({
+        type: 'fitnessPlan/FETCH_FITNESS_PLAN_ERROR',
+        payload: e.message,
+      });
+    });
+};
