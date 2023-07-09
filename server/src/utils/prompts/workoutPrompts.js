@@ -1,9 +1,10 @@
 const workoutCreationPrompt = (user) => `Imagine a ${user.age} year old ${user.gender}, 
             weight ${user.weight} ${user.weightUnit}, 
-            BMI of ${user.BMI}, 
+            has body fat percentage of: ${user.bodyFat},
+            has muscle mass percentage of: ${user.muscleMass}, 
             has ${user.experience} fitness level, 
             with ${user.healthConditions}, 
-            height ${user.height} cm. 
+            height ${user.height} ${user.heightUnit}. 
             Time availability of ${user.weeklyAvailability} days per week 
             with each session lasting ${user.exerciseDuration} minutes. 
             Has access to ${user.equipment}. 
@@ -16,10 +17,8 @@ const workoutCreationPrompt = (user) => `Imagine a ${user.age} year old ${user.g
 const workoutUpdatePrompt = (user, inputs, schedule) => `You are a dietician that is given the task to update a client's schedule.
 
   Here is some information about the client:
-  Allergies (make sure the schedule is free of these allergen risks): ${user.allergies}
   Goals: ${user.goals}
   Health Conditions: ${user.healthConditions}
-  Diet Restrictions: ${user.dietRestrictions}
 
   Here are the additional requirements or changes that the user has requested:
   ${inputs}

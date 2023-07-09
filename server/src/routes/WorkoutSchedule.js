@@ -1,12 +1,17 @@
 const express = require('express');
-const { getWorkoutScheduleByUserID, createWorkoutSchedule, updateUserWorkoutScheduleByUserID } = require('../controllers/workoutScheduleController');
+const {
+  getLatestWorkoutScheduleByUserID,
+  getAllWorkoutScheduleByUserID,
+  createWorkoutSchedule,
+  updateUserWorkoutScheduleByUserID,
+} = require('../controllers/workoutScheduleController');
 
 const router = express.Router();
 // const { generateWorkoutSchedule } = require('../utils/openaiUtil');
 const { protect } = require('../middleware/authMiddleware');
 
 /**
- * @desc get workout schedule for user (Get userID from JWT token)
+ * @desc get lastest workout schedule for user (Get userID from JWT token)
  * @access Private
  * @route GET /workoutSchedule
  * @request
@@ -28,7 +33,34 @@ const { protect } = require('../middleware/authMiddleware');
  *        ...}}
  *     inputs: [string]}
  */
-router.get('/', protect, getWorkoutScheduleByUserID);
+router.get('/', protect, getLatestWorkoutScheduleByUserID);
+
+/**
+ * @desc get all workout schedule for user (Get userID from JWT token)
+ * @access Private
+ * @route GET /workoutSchedule/all
+ * @request
+ *  body: n/a
+ *  params: n/a
+ *  query params: n/a
+ * @response workoutSchedule for user sort from oldest to newest
+ *  {schedules: [
+ *    {userInfoID: string,
+ *     schedule:
+ *       {Monday:
+ *         {exercise: string,
+ *          sets: num,
+ *          reps: num,
+ *          rest: num
+ *          duration: num
+ *          intensity: num}
+ *        Tuesday:...
+ *        Wednesday:...
+ *        ...}}
+ *     inputs: [string]},
+ *    ...]}
+ */
+router.get('/all', protect, getAllWorkoutScheduleByUserID);
 
 /**
  * @desc create workout schedule for user (Get userID from JWT token)
