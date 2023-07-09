@@ -29,10 +29,10 @@ async function updateMealSchedule(userData, inputs, schedule) {
   return response.data.choices[0].message.content;
 }
 
-async function generateWorkoutSchedule(user) {
+async function generateWorkoutSchedule(userData) {
   const response = await axios.post(apiUrl, {
     model: 'gpt-3.5-turbo',
-    messages: workoutPrompt(user, 'workout'),
+    messages: workoutPrompt('create', userData),
     temperature: 0,
   }, { headers, timeout: 500000 });
 

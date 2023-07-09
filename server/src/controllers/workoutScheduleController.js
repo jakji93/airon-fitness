@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler');
 const openAI = require('../utils/openaiUtil');
 const WorkoutSchema = require('../models/WorkoutScheduleModel');
 const UserProfile = require('../models/UserProfileModel');
-const { getUserData } = require('../utils/ageUtil');
+const userUtil = require('../utils/userUtil');
 
 /**
  * @desc    get workout schedule for user (userID)
@@ -11,14 +11,14 @@ const { getUserData } = require('../utils/ageUtil');
  */
 const getWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
   const {
-    _userInfoID, schedule, inputs,
-  } = await WorkoutSchema.findOne({ _userInfoID: req.user._id });
+    userInfoID, schedule, inputs,
+  } = await WorkoutSchema.findOne({ userInfoID: req.user._id });
 
   if (!schedule) {
-    res.status(404).json({ message: 'Meal schedule not found' });
+    res.status(404).json({ message: 'Workout schedule not found' });
   } else {
     res.status(200).json({
-      userInfoID: _userInfoID,
+      userInfoID,
       schedule,
       inputs,
     });
@@ -31,28 +31,20 @@ const getWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
  * @access  Private
  */
 const createWorkoutSchedule = asyncHandler(async (req, res) => {
-  // const id = req.user._id;
+  const id = req.user._id;
 
-  // const userProfile = await UserProfile.findOne({ userInfoID: id });
-  // const userData = getUserData(userProfile);
-  const userData = {
-    age: 21,
-    sex: 'Male',
-    weight: '180',
-    fitness: 'beginner',
-    healthConditions: 'asthma',
-    height: '180',
-    timePereference: '5 days',
-    durationPreference: '20',
-    equipmentAccess: 'dumbbells',
-    goal: 'muscle gain',
-  };
-  const id = 1;
+  const workoutScheduleExists = await WorkoutSchema.findOne({ userInfoID: id });
+  if (workoutScheduleExists) {
+    res.status(400).json({ message: 'Workout schedule already exists' });
+  }
 
+  const userProfile = await UserProfile.findOne({ userInfoID: id });
+
+  const userData = userUtil.generateUserObject(userProfile);
   const generatedSchedule = await openAI.generateWorkoutSchedule(userData);
 
   const workoutSchedule = await WorkoutSchema.create({
-    _userInfoID: id,
+    userInfoID: id,
     schedule: generatedSchedule,
     inputs: [],
   });
@@ -73,18 +65,36 @@ const createWorkoutSchedule = asyncHandler(async (req, res) => {
  * @route   PUT /workoutSchedule
  * @access  Private
  */
-const updateUserWorkoutScheduleByUserID = (req, res) => {
-  // const foundItemIndex = schedules.findIndex((item) => item.userID === req.params.userID);
-  const foundItemIndex = null;
+const updateUserWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
+  const id = req.user._id;
 
-  if (foundItemIndex < 0) return res.status(404).send({ message: 'Item not found' });
-  if (!req.body.schedule) {
-    return res.status(400).send({ message: 'Missing payload' });
+  const workoutSchedule = await WorkoutSchema.findOne({ userInfoID: id });
+  if (!workoutSchedule) {
+    res.status(404).json({ message: 'Cannot update a workout schedule that does not exist' });
   }
-  return res.status(400).send({ message: 'Missing payload' });
-  // schedules[foundItemIndex].schedule = req.body.schedule;
-  // return res.send(schedules[foundItemIndex]);
-};
+
+  const schedule = JSON.stringify(workoutSchedule.schedule);
+  const updatedInputs = workoutSchedule.inputs;
+  updatedInputs.push(req.body.customInput);
+
+  const userProfile = await UserProfile.findOne({ userInfoID: id });
+
+  const userData = userUtil.generateUserObject(userProfile);
+
+  const updatedWorkoutSchedule = await openAI.updateWorkoutSchedule(userData, updatedInputs, schedule);
+
+  workoutSchedule.schedule = updatedWorkoutSchedule;
+  workoutSchedule.inputs = updatedInputs;
+  const savedWorkoutSchedule = await workoutSchedule.save();
+
+  if (savedWorkoutSchedule) {
+    res.status(200).json({
+      userInfoID: savedWorkoutSchedule.id,
+      schedule: savedWorkoutSchedule.schedule,
+      inputs: savedWorkoutSchedule.inputs,
+    });
+  }
+});
 
 module.exports = {
   getWorkoutScheduleByUserID,
