@@ -1,35 +1,13 @@
 const asyncHandler = require('express-async-handler');
-const openAI = require('../utils/openaiUtil');
-const userUtil = require('../utils/userUtil');
 const MealSchedule = require('../models/MealScheduleModel');
-const UserProfile = require('../models/UserProfileModel');
+const { mealScheduleMockMTWTFSS } = require('../mock/MealScheduleMockData');
 
 /**
- * @desc    get meal schedule for user (userID)
- * @route   GET /mealSchedule
+ * @desc    use mock data to create a user schedule (NO OPENAI CALL)
+ * @route   POST /mock/mealSchedule
  * @access  Private
  */
-const getMealScheduleByUser = asyncHandler(async (req, res) => {
-  const userMealSchedule = await MealSchedule.findOne({ userInfoID: req.user._id });
-
-  if (!userMealSchedule || !userMealSchedule.schedule) {
-    res.status(404).json({ message: 'Meal schedule not found' });
-  } else {
-    const { userInfoID, schedule, inputs } = userMealSchedule;
-    res.status(200).json({
-      userInfoID,
-      schedule,
-      inputs,
-    });
-  }
-});
-
-/**
- * @desc    create meal schedule for user (userID)
- * @route   POST /mealSchedule
- * @access  Private
- */
-const createMealScheduleForUser = asyncHandler(async (req, res) => {
+const MOCKcreateMealScheduleForUser = asyncHandler(async (req, res) => {
   const id = req.user._id;
 
   // Check if user already has a meal schedule
@@ -39,16 +17,19 @@ const createMealScheduleForUser = asyncHandler(async (req, res) => {
   }
 
   // Look up the profile of the user
-  const userProfile = await UserProfile.findOne({ userInfoID: id });
+  // const userProfile = await UserProfile.findOne({ userInfoID: id });
 
   // Generate the schedule with OpenAI
-  const userData = userUtil.generateUserObject(userProfile);
-  const generatedSchedule = await openAI.generateMealSchedule(userData);
+  // const userData = userUtil.generateUserObject(userProfile);
+  // const generatedSchedule = await openAI.generateMealSchedule(userData);
+
+  /** Use a MOCK SCHEDULE */
+  const mockSchedule = mealScheduleMockMTWTFSS;
 
   // Create meal in MongoDB
   const mealSchedule = await MealSchedule.create({
     userInfoID: id,
-    schedule: generatedSchedule,
+    schedule: mockSchedule,
     inputs: [],
   });
 
@@ -64,11 +45,11 @@ const createMealScheduleForUser = asyncHandler(async (req, res) => {
 });
 
 /**
- * @desc    update meal schedule for user (userID)
- * @route   PUT /mealSchedule
+ * @desc    use mock data to update meal schedule (NO OPEN AI CALL)
+ * @route   PUT /mock/mealSchedule
  * @access  Private
  */
-const updateMealScheduleForUser = asyncHandler(async (req, res) => {
+const MOCKupdateMealScheduleForUser = asyncHandler(async (req, res) => {
   const id = req.user._id;
 
   // Retrieve the meal schedule (fail if user does not have one already)
@@ -78,19 +59,22 @@ const updateMealScheduleForUser = asyncHandler(async (req, res) => {
   }
 
   // Organize the data necessary to adjust the schedule
-  const schedule = JSON.stringify(mealSchedule.schedule);
+  // const schedule = JSON.stringify(mealSchedule.schedule);
   const updatedInputs = mealSchedule.inputs;
   updatedInputs.push(req.body.customInput);
 
-  // Look up the profile of the user
-  const userProfile = await UserProfile.findOne({ userInfoID: id });
+  // // Look up the profile of the user
+  // const userProfile = await UserProfile.findOne({ userInfoID: id });
 
   // Update the schedule with OpenAI
-  const userData = userUtil.generateUserObject(userProfile);
-  const updatedMealSchedule = await openAI.updateMealSchedule(userData, updatedInputs, schedule);
+  // const userData = userUtil.generateUserObject(userProfile);
+  // const updatedMealSchedule = await openAI.updateMealSchedule(userData, updatedInputs, schedule);
+
+  /** Use a MOCK SCHEDULE */
+  const mockSchedule = mealScheduleMockMTWTFSS;
 
   // Update the MongoDB document
-  mealSchedule.schedule = updatedMealSchedule;
+  mealSchedule.schedule = mockSchedule;
   mealSchedule.inputs = updatedInputs;
   const savedMealSchedule = await mealSchedule.save();
 
@@ -105,7 +89,6 @@ const updateMealScheduleForUser = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  getMealScheduleByUser,
-  createMealScheduleForUser,
-  updateMealScheduleForUser,
+  MOCKcreateMealScheduleForUser,
+  MOCKupdateMealScheduleForUser,
 };
