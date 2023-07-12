@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+import { getErrorMessage } from './utils';
 import authService from '../services/AuthService';
 
 // Get user from localStorage
@@ -13,14 +14,6 @@ const initialState = {
   isLoading: false,
   message: '',
 };
-
-const getErrorMessage = (error) => (
-  error.response
-  && error.response.data
-  && error.response.data.message
-)
-  || error.message
-  || error.toString();
 
 // Register user
 export const register = createAsyncThunk(

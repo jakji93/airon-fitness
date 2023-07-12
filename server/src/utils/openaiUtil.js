@@ -1,6 +1,7 @@
 const axios = require('axios');
 const { mealPrompt } = require('./prompts/mealPrompts');
 const { workoutPrompt } = require('./prompts/workoutPrompts');
+
 const apiKey = process.env.GPT_KEY;
 const apiUrl = 'https://api.openai.com/v1/chat/completions';
 const headers = {
@@ -10,53 +11,47 @@ const headers = {
 
 async function generateMealSchedule(userData) {
   const response = await axios.post(apiUrl, {
-    model: "gpt-3.5-turbo",
+    model: 'gpt-3.5-turbo',
     messages: mealPrompt('create', userData),
-    temperature: 0
-}, { headers, timeout: 500000 });
+    temperature: 0,
+  }, { headers, timeout: 500000 });
 
   return response.data.choices[0].message.content;
 }
 
 async function updateMealSchedule(userData, inputs, schedule) {
   const response = await axios.post(apiUrl, {
-    model: "gpt-3.5-turbo",
+    model: 'gpt-3.5-turbo',
     messages: mealPrompt('update', userData, inputs, schedule),
-    temperature: 0
-}, { headers, timeout: 500000 });
+    temperature: 0,
+  }, { headers, timeout: 500000 });
 
   return response.data.choices[0].message.content;
 }
 
+async function generateWorkoutSchedule(userData) {
+  const response = await axios.post(apiUrl, {
+    model: 'gpt-3.5-turbo',
+    messages: workoutPrompt('create', userData),
+    temperature: 0,
+  }, { headers, timeout: 500000 });
 
-
-// TODO: update workout schedule logic to match above 
-
-const message = (user, mode) => {
-  return [
-    {
-      role: "system",
-      content: "You are a fitness expert."
-    },
-    {
-      role: "user",
-      content: mode === 'workout' ? workoutPrompt(user) : mealCreationPrompt(user)
-    }
-  ]
+  return response.data.choices[0].message.content;
 }
 
-async function generateWorkoutSchedule(user) {
+async function updateWorkoutSchedule(userData, inputs, schedule) {
   const response = await axios.post(apiUrl, {
-    model: "gpt-3.5-turbo",
-    messages: message(user, 'workout'),
-    temperature: 0
-}, { headers, timeout: 500000 });
+    model: 'gpt-3.5-turbo',
+    messages: workoutPrompt('update', userData, inputs, schedule),
+    temperature: 0,
+  }, { headers, timeout: 500000 });
 
   return response.data.choices[0].message.content;
 }
 
 module.exports = {
   generateWorkoutSchedule,
+  updateWorkoutSchedule,
   generateMealSchedule,
-  updateMealSchedule
-}
+  updateMealSchedule,
+};
