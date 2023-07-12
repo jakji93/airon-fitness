@@ -2,18 +2,21 @@ import { Grid, Typography } from '@mui/material';
 import React from 'react';
 
 import ChatArea from '../components/Home/ChatArea';
-import FitnessPlanView from '../components/Home/PlanView/FitnessPlanView';
+import TabbedPlanView from '../components/Home/PlanView/TabbedPlanView';
 import StatsView from '../components/Home/StatsView/StatsView';
 
 export default function Home() {
   return (
     <>
-      <Typography variant="h1">
-        Home Page
+      <Typography variant="h2">
+        Welcome to Ai-ron Fitness!
+      </Typography>
+      <Typography variant="subtitle1">
+        Where AI Whips You into Shape and Leaves You Bot-ter than Ever!
       </Typography>
       <Grid container sx={{ p: 2 }} spacing={4}>
         <Grid item xs>
-          <FitnessPlanView />
+          <TabbedPlanView />
         </Grid>
         <Grid item xs>
           <StatsView />
