@@ -3,8 +3,9 @@ const express = require('express');
 
 const router = express.Router();
 const { protect } = require('../middleware/authMiddleware');
-const { MOCKcreateMealScheduleForUser, MOCKupdateMealScheduleForUser } = require('../controllers/mealScheduleMockController');
-const { MOCKupdateUserWorkoutScheduleByUserID, MOCKcreateWorkoutSchedule } = require('../controllers/workoutScheduleMockController');
+const { MOCKcreateMealScheduleForUser, MOCKupdateMealScheduleForUser } = require('../controllers/mockMealScheduleController');
+const { MOCKupdateUserWorkoutScheduleByUserID, MOCKcreateWorkoutSchedule } = require('../controllers/mockWorkoutScheduleController');
+const { MOCKcreateWorkoutAndMealSchedule } = require('../controllers/mockWorkoutAndMealSchedule');
 
 /**
  * @desc use mock data to create a user schedule (NO OPENAI CALL)
@@ -105,5 +106,63 @@ router.post('/workoutSchedule', protect, MOCKcreateWorkoutSchedule);
  *     inputs: [string]}
  */
 router.put('/workoutSchedule', protect, MOCKupdateUserWorkoutScheduleByUserID);
+
+/**
+  * @desc    use mock data to
+ *            create workout schedule and
+ *            create meal schedule
+ *            (NO OPENAI CALL)
+ * @access Private
+ * @route POST /mock/workoutMealSchedule
+ * @request
+ *  body: n/a
+ *  params: n/a
+ *  query params: n/a
+ * @response created mealSchedule & workoutSchedule
+ *   {
+ *       "mealSchedule": {
+ *           "userInfoID": "64a75a8fd5db4f1acaaa41ef",
+ *           "schedule": {
+ *               "Monday": {
+ *                   "breakfast": "...",
+ *                   "snack1": "...",
+ *                   "lunch": "...",
+ *                   "snack2": "...",
+ *                   "dinner": "...",
+ *               },
+ *               "Tuesday": ...
+ *           },
+ *           "inputs": [],
+ *           "_id": "64af93876766233058d8c04d",
+ *           "createdAt": "2023-07-13T06:02:47.511Z",
+ *           "updatedAt": "2023-07-13T06:02:47.511Z",
+ *           "__v": 0
+ *       },
+ *       "workoutSchedule": {
+ *           "userInfoID": "64a75a8fd5db4f1acaaa41ef",
+ *           "schedule": {
+ *               "Monday": [
+ *                   {
+ *                       "exercise": "Barbell Squats",
+ *                       "sets": 3,
+ *                       "reps": 10,
+ *                       "rest": 60,
+ *                       "duration": null,
+ *                       "intensity": 75
+ *                   },
+ *                   ...
+ *               ],
+ *               "Wednesday": ...
+ *           },
+ *           "inputs": [],
+ *           "_id": "64af93876766233058d8c04f",
+ *           "createdAt": "2023-07-13T06:02:47.633Z",
+ *           "updatedAt": "2023-07-13T06:02:47.633Z",
+ *           "__v": 0
+ *       }
+ *   }
+ *
+ */
+router.post('/workoutMealSchedule', protect, MOCKcreateWorkoutAndMealSchedule);
 
 module.exports = router;
