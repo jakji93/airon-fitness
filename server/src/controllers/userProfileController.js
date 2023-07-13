@@ -93,7 +93,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     ...profile,
     ...req.body,
   };
-  console.log(userProfile);
   if (!userProfile.birthday
     || !userProfile.gender
     || !userProfile.experience

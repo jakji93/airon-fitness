@@ -5,7 +5,8 @@ import { getErrorMessage } from './utils';
 import workoutAndMealScheduleService from '../services/WorkoutAndMealScheduleService';
 
 const initialState = {
-  profile: null,
+  workoutSchedule: null,
+  mealSchedule: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -55,7 +56,8 @@ const WorkoutAndMealScheduleSlice = createSlice({
       .addCase(getWorkoutAndMealSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.profile = action.payload;
+        state.workoutSchedule = action.payload.workoutSchedule;
+        state.mealSchedule = action.payload.mealSchedule;
       })
       .addCase(getWorkoutAndMealSchedule.rejected, (state, action) => {
         state.isLoading = false;
@@ -69,7 +71,8 @@ const WorkoutAndMealScheduleSlice = createSlice({
       .addCase(createWorkoutAndMealSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.profile = action.payload;
+        state.workoutSchedule = action.payload.workoutSchedule;
+        state.mealSchedule = action.payload.mealSchedule;
       })
       .addCase(createWorkoutAndMealSchedule.rejected, (state, action) => {
         state.isLoading = false;

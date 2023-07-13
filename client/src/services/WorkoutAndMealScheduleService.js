@@ -5,19 +5,13 @@ import { createBearerTokenHeader } from './util';
 /** Backend + local storage calls */
 
 const getWorkoutAndMealSchedule = async () => {
-  const workoutResponse = await axios.post(
-    `${process.env.REACT_APP_SERVER_API_BASE}/workoutSchedule/`,
-    {
-      headers: createBearerTokenHeader,
-    },
-  );
+  const workoutResponse = await axios.get(`${process.env.REACT_APP_SERVER_API_BASE}/workoutSchedule/`, {
+    headers: createBearerTokenHeader(),
+  });
 
-  const mealResponse = await axios.post(
-    `${process.env.REACT_APP_SERVER_API_BASE}/mealSchedule/`,
-    {
-      headers: createBearerTokenHeader,
-    },
-  );
+  const mealResponse = await axios.get(`${process.env.REACT_APP_SERVER_API_BASE}/mealSchedule/`, {
+    headers: createBearerTokenHeader(),
+  });
 
   return {
     workoutSchedule: workoutResponse.data,
@@ -26,12 +20,11 @@ const getWorkoutAndMealSchedule = async () => {
 };
 
 const createWorkoutAndMealSchedule = async () => {
-  const response = await axios.post(
-    `${process.env.REACT_APP_SERVER_API_BASE}/mock/workoutMealSchedule/`,
-    {
-      headers: createBearerTokenHeader,
-    },
-  );
+  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/mock/workoutMealSchedule/`;
+
+  const response = await axios.post(apiUrl, {}, {
+    headers: createBearerTokenHeader(),
+  });
 
   return response.data;
 };

@@ -2,7 +2,7 @@ import { Grid, Typography } from '@mui/material';
 import React from 'react';
 
 import ChatArea from '../components/Home/ChatArea';
-import TabbedPlanView from '../components/Home/PlanView/TabbedPlanView';
+import TabbedScheduleView from '../components/Home/PlanView/TabbedScheduleView';
 import StatsView from '../components/Home/StatsView/StatsView';
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
       </Typography>
       <Grid container sx={{ p: 2 }} spacing={4}>
         <Grid item xs>
-          <TabbedPlanView />
+          <TabbedScheduleView />
         </Grid>
         <Grid item xs>
           <StatsView />
