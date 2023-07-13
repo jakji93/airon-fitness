@@ -56,13 +56,14 @@ const WorkoutAndMealScheduleSlice = createSlice({
       .addCase(getWorkoutAndMealSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.message = 'Your schedules have been loaded!';
         state.workoutSchedule = action.payload.workoutSchedule;
         state.mealSchedule = action.payload.mealSchedule;
       })
-      .addCase(getWorkoutAndMealSchedule.rejected, (state, action) => {
+      .addCase(getWorkoutAndMealSchedule.rejected, (state) => {
         state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
+        state.isSuccess = true;
+        state.message = 'Please create a schedule!';
         state.profile = null;
       })
       .addCase(createWorkoutAndMealSchedule.pending, (state) => {
@@ -71,6 +72,7 @@ const WorkoutAndMealScheduleSlice = createSlice({
       .addCase(createWorkoutAndMealSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.message = 'Your schedule has been created!';
         state.workoutSchedule = action.payload.workoutSchedule;
         state.mealSchedule = action.payload.mealSchedule;
       })

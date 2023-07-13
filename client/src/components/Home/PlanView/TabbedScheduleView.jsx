@@ -44,7 +44,6 @@ TabPanel.propTypes = {
 export default function TabbedScheduleView() {
   const dispatch = useDispatch();
   const openToast = useContext(ToastContext);
-  const [gettingMealSchedule, setGettingMealSchedule] = useState(false);
   const [value, setValue] = useState(0);
   const {
     isLoading, workoutSchedule, mealSchedule, isError, isSuccess, message,
@@ -52,31 +51,19 @@ export default function TabbedScheduleView() {
 
   useEffect(() => {
     if (!workoutSchedule || !mealSchedule) {
-      setGettingMealSchedule(true);
       dispatch(getWorkoutAndMealSchedule());
     }
   }, []);
 
   useEffect(() => {
-    if (isError && gettingMealSchedule) {
-      openToast('success', 'Let\'s create a meal & workout schedule!');
-      dispatch(resetWorkoutAndMealScheduleStates());
-    }
-
-    if (isError && !gettingMealSchedule) {
+    if (isError) {
       openToast('error', message);
       dispatch(resetWorkoutAndMealScheduleStates());
     }
 
-    if (isSuccess && !gettingMealSchedule) {
-      openToast('success', 'Your schedule has been created!');
+    if (isSuccess) {
+      openToast('success', message);
       dispatch(resetWorkoutAndMealScheduleStates());
-    }
-
-    if (isSuccess && gettingMealSchedule) {
-      openToast('success', 'Your schedule has been loaded!');
-      dispatch(resetWorkoutAndMealScheduleStates());
-      setGettingMealSchedule(false);
     }
   }, [workoutSchedule, mealSchedule, isError, isSuccess, message, dispatch]);
 
