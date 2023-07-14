@@ -11,7 +11,7 @@ const router = express.Router();
 const { protect } = require('../middleware/authMiddleware');
 
 /**
- * @desc get lastest workout schedule for user (Get userID from JWT token)
+ * @desc get latest workout schedule for user (Get userID from JWT token)
  * @access Private
  * @route GET /workoutSchedule
  * @request
