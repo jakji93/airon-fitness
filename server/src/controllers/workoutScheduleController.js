@@ -14,9 +14,12 @@ const getLatestWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
     userInfoID, schedule, inputs,
   } = await WorkoutSchema.findOne({ userInfoID: req.user._id }).sort({ _id: -1 });
 
-  if (!schedule) {
+  if (!userWorkoutSchedule || !userWorkoutSchedule.schedule) {
     res.status(404).json({ message: 'Workout schedule not found' });
   } else {
+    const {
+      userInfoID, schedule, inputs,
+    } = userWorkoutSchedule;
     res.status(200).json({
       userInfoID,
       schedule,

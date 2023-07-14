@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { createBearerTokenHeader } from './util';
+
 const API_URL = `${process.env.REACT_APP_SERVER_API_BASE}/userProfile/`;
 
 const buildUserProfileRequestBody = (userData) => {
@@ -34,14 +36,9 @@ const buildUserProfileRequestBody = (userData) => {
 const createUserProfile = async (userData) => {
   const requestBody = buildUserProfileRequestBody(userData);
 
-  const user = JSON.parse(localStorage.getItem('user'));
-  if (!user || !user.token) throw new Error('Cannot get user profile, user not logged in');
-
-  const headers = {
-    Authorization: `Bearer ${user.token}`,
-  };
-
-  const response = await axios.post(API_URL, requestBody, { headers });
+  const response = await axios.post(API_URL, requestBody, {
+    headers: createBearerTokenHeader(),
+  });
 
   return response.data;
 };
@@ -49,27 +46,17 @@ const createUserProfile = async (userData) => {
 const updateUserProfile = async (userData) => {
   const requestBody = buildUserProfileRequestBody(userData);
 
-  const user = JSON.parse(localStorage.getItem('user'));
-  if (!user || !user.token) throw new Error('Cannot get user profile, user not logged in');
-
-  const headers = {
-    Authorization: `Bearer ${user.token}`,
-  };
-
-  const response = await axios.put(API_URL, requestBody, { headers });
+  const response = await axios.put(API_URL, requestBody, {
+    headers: createBearerTokenHeader(),
+  });
 
   return response.data;
 };
 
 const getUserProfile = async () => {
-  const user = JSON.parse(localStorage.getItem('user'));
-  if (!user || !user.token) throw new Error('Cannot get user profile, user not logged in');
-
-  const headers = {
-    Authorization: `Bearer ${user.token}`,
-  };
-  console.log('SENDING GET');
-  const response = await axios.get(API_URL, { headers });
+  const response = await axios.get(API_URL, {
+    headers: createBearerTokenHeader(),
+  });
   return response.data;
 };
 

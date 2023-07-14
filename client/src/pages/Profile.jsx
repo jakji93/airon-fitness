@@ -23,14 +23,14 @@ export default function Profile() {
   useEffect(() => {
     if (isError) {
       openToast('error', message);
+      dispatch(resetUserProfileStates());
     }
 
     if ((isSuccess || profile) && updatingProfile) {
       openToast('success', 'Your profile has been updated!');
+      setUpdatingProfile(false);
+      dispatch(resetUserProfileStates());
     }
-
-    setUpdatingProfile(false);
-    dispatch(resetUserProfileStates());
   }, [profile, isError, isSuccess, message, dispatch]);
 
   if (isLoading) {

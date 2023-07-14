@@ -7,6 +7,7 @@ const userInfoRoute = require('./src/routes/UserInfo');
 const userProfileRoute = require('./src/routes/UserProfile');
 const workoutScheduleRoute = require('./src/routes/WorkoutSchedule');
 const mealScheduleRoute = require('./src/routes/MealSchedule');
+const mockRoute = require('./src/routes/mock');
 
 connectDB.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
@@ -19,6 +20,7 @@ app.use('/userInfo', userInfoRoute);
 app.use('/userProfile', userProfileRoute);
 app.use('/workoutSchedule', workoutScheduleRoute);
 app.use('/mealSchedule', mealScheduleRoute);
+app.use('/mock', mockRoute);
 
 app.get('/', (req, res) => {
   res.send('Server connection established!');
