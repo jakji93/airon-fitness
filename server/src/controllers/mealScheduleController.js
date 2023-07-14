@@ -11,7 +11,7 @@ const UserProfile = require('../models/UserProfileModel');
  */
 const getMealScheduleByUser = asyncHandler(async (req, res) => {
   const userMealSchedule = await MealSchedule.findOne({ userInfoID: req.user._id });
-
+  
   if (!userMealSchedule || !userMealSchedule.schedule) {
     res.status(404).json({ message: 'Meal schedule not found' });
   } else {
