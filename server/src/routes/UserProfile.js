@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer');
 const {
   getUserProfileById,
   createUserProfile,
@@ -7,6 +8,8 @@ const {
 } = require('../controllers/userProfileController');
 const { protect } = require('../middleware/authMiddleware');
 
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 const router = express.Router();
 
 /**
@@ -101,7 +104,7 @@ router.get('/', protect, getUserProfileById);
  *  query params: n/a
  * @response status code + copy of above request body on success
  */
-router.post('/', protect, createUserProfile);
+router.post('/', protect, upload.single('file'), createUserProfile);
 
 /**
  * @desc update a user profile with userInfoID (get userInfoID from JWT token)
@@ -148,7 +151,7 @@ router.post('/', protect, createUserProfile);
  *  query params: n/a
  * @response status code + copy of above request body on success
  */
-router.put('/', protect, updateUserProfile);
+router.put('/', protect, upload.single('file'), updateUserProfile);
 
 /**
  * @desc delete a user profile with userInfoID (get userInfoID from JWT token)

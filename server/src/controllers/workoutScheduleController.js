@@ -92,8 +92,11 @@ const updateUserWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
   const userProfile = await UserProfile.findOne({ userInfoID: id });
 
   const userData = userUtil.generateUserObject(userProfile);
-
-  const updatedWorkoutSchedule = await openAI.updateWorkoutSchedule(userData, inputs, schedule);
+  const updatedWorkoutSchedule = await openAI.updateWorkoutSchedule(
+    userData,
+    updatedInputs,
+    schedule,
+  );
 
   workoutSchedule.schedule = updatedWorkoutSchedule;
   workoutSchedule.inputs = inputs;
