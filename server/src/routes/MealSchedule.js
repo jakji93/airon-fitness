@@ -20,7 +20,14 @@ const { protect } = require('../middleware/authMiddleware');
  *         snack1: string,
  *         lunch: string,
  *         snack2: string
- *         dinner: string}
+ *         dinner: string
+ *         nutrition_totals: {
+ *          calories: number,
+ *          carbohydrates: number,
+ *          protein: number,
+ *           fat: number
+ *          }
+ *        }
  *       Tuesday:...
  *       Wednesday:...
  *       ...}
