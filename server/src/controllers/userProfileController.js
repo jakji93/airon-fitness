@@ -55,6 +55,12 @@ const createUserProfile = asyncHandler(async (req, res) => {
     throw new Error('Please include all required fields');
   }
   userProfile.userInfoID = req.user._id;
+  if (req.file) {
+    userProfile.profileImage = {
+      data: req.file.buffer,
+      contentType: req.file.mimetype,
+    };
+  }
   const newProfile = await UserProfile.create(userProfile);
   if (newProfile) {
     res.status(201).json(newProfile);
@@ -108,7 +114,12 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     res.status(400).json({ message: 'Please include all required fields' });
     throw new Error('Please include all required fields');
   }
-
+  if (req.file) {
+    userProfile.profileImage = {
+      data: req.file.buffer,
+      contentType: req.file.mimetype,
+    };
+  }
   const updatedProfile = await UserProfile.findOneAndUpdate(
     { userInfoID: req.user._id },
     userProfile,
