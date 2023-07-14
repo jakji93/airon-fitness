@@ -109,7 +109,7 @@ export default function Landing() {
           <Button variant="outlined" sx={styles.actionButton} href="/login">
             Let&apos;s get started.
           </Button>
-          <Button variant="outlined" sx={styles.actionButton} href="/app/about">
+          <Button variant="outlined" sx={styles.actionButton} href="/about">
             Who are we?
           </Button>
         </div>
