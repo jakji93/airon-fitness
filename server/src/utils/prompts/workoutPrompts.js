@@ -21,10 +21,8 @@ const workoutUpdatePrompt = (user, inputs, schedule) => `
   Imagine that you are updating a client's workout schedule.
 
   Here is some information about the client:
-  Allergies (make sure the schedule is free of these allergen risks): ${user.allergies}
   Goals: ${user.goals}
   Health Conditions: ${user.healthConditions}
-  Diet Restrictions: ${user.dietRestrictions}
 
   Here are the additional requirements or changes that the user has requested:
   ${inputs}
