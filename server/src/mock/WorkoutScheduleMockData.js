@@ -1,4 +1,4 @@
-const schedule = {
+const workoutScheduleMock = {
   Monday: [
     {
       exercise: 'Barbell Squats',
@@ -104,5 +104,5 @@ const schedule = {
 };
 
 module.exports = {
-  schedule,
+  workoutScheduleMock,
 };

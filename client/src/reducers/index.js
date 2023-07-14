@@ -1,15 +1,13 @@
 import { combineReducers } from 'redux';
 
 import authReducer from './Auth';
-import fitnessPlanReducer from './FitnessPlan';
-import mealPlanReducer from './MealPlan';
 import signupReducer from './Signup';
 import userProfileReducer from './UserProfile';
+import workoutAndMealScheduleReducer from './WorkoutAndMealSchedule';
 
 const rootReducer = combineReducers({
-  fitnessPlan: fitnessPlanReducer,
+  workoutAndMealSchedule: workoutAndMealScheduleReducer,
   auth: authReducer,
-  mealPlan: mealPlanReducer,
   signup: signupReducer,
   userProfile: userProfileReducer,
 });
