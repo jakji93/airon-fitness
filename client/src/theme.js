@@ -15,7 +15,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ['san-serif', 'ariel'].join(','),
+    fontFamily: ['Montserrat', 'san-serif'].join(','),
     fontSize: 12,
     h1: {
       fontFamily: ['sans-serif', 'ariel'].join(','),
@@ -37,6 +37,12 @@ const theme = createTheme({
     h5: {
       fontFamily: ['sans-serif', 'ariel'].join(','),
       fontSize: 16,
+    },
+  },
+  buttons: {
+    hover: {
+      backgroundColor: '#f0f0f0',
+      transition: 'background-color 0.3s ease',
     },
   },
 });
