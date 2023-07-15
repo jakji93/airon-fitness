@@ -10,9 +10,9 @@ const userUtil = require('../utils/userUtil');
  * @access  Private
  */
 const getLatestWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
-  const {
-    userInfoID, schedule, inputs,
-  } = await WorkoutSchema.findOne({ userInfoID: req.user._id }).sort({ _id: -1 });
+  const userWorkoutSchedule = await WorkoutSchema.findOne(
+    { userInfoID: req.user._id },
+  ).sort({ _id: -1 });
 
   if (!userWorkoutSchedule || !userWorkoutSchedule.schedule) {
     res.status(404).json({ message: 'Workout schedule not found' });
@@ -97,7 +97,7 @@ const updateUserWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
   const userData = userUtil.generateUserObject(userProfile);
   const updatedWorkoutSchedule = await openAI.updateWorkoutSchedule(
     userData,
-    updatedInputs,
+    inputs,
     schedule,
   );
 
