@@ -10,7 +10,9 @@ const userUtil = require('../../utils/userUtil');
  * @access  Private
  */
 const getLatestWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
-  const userWorkoutSchedule = await WorkoutSchema.findOne({ userInfoID: req.user._id });
+  const userWorkoutSchedule = await WorkoutSchema.findOne(
+    { userInfoID: req.user._id },
+  ).sort({ _id: -1 });
 
   if (!userWorkoutSchedule || !userWorkoutSchedule.schedule) {
     res.status(404).json({ message: 'Workout schedule not found' });

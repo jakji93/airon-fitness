@@ -20,28 +20,26 @@ const workoutCreationPrompt = (user) => `
   In the JSON, include the total amount of calories burned (with "calories" as the key) 
   for each exercise provided by the workout plan.
   Then, add up the total number of calories and include it as "total_calories" for the day.
-  For null values use 0 instead. 
   Don't include any notes. For null values use 0 instead.
   
   To be explicit, the JSON should be formatted like so: 
   {
-    schedule: 
-      {Monday: 
-        {exercises: 
-          [{exercise: string, 
-            sets: number, 
-            reps: number, 
-            rest: number, 
-            duration: number, 
-            intensity: number,
-            calories: number
-           },
-          ...
-          ], 
-        }
-        total_calories: number
+    {Monday: 
+      {exercises: 
+        [{exercise: string, 
+          sets: number, 
+          reps: number, 
+          rest: number, 
+          duration: number, 
+          intensity: number,
+          calories: number
+          },
+        ...
+        ], 
       }
-      ...
+      total_calories: number
+    }
+    ...
    }`;
 
 const workoutUpdatePrompt = (user, inputs, schedule) => `
