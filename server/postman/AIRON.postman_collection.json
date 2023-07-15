@@ -10,7 +10,7 @@
 			"name": "mealSchedule",
 			"item": [
 				{
-					"name": "localhost:3001/mealSchedule",
+					"name": "localhost:3001/mealSchedule Copy",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -51,6 +51,43 @@
 							]
 						},
 						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"customInput\": \"make it low calorie\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/mealSchedule",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"mealSchedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3001/mealSchedule",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmYjkzYjdkM2UyMDRkYTJhNTY1YTciLCJpYXQiOjE2ODgyNTgyNDksImV4cCI6MTY5MDg1MDI0OX0.nw-rB8UkeBzy0iExykj1I6cfJ-sFpGgOOm1I-XLqHPA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
 						"header": [],
 						"url": {
 							"raw": "localhost:3001/mealSchedule",
@@ -231,6 +268,76 @@
 							"port": "3001",
 							"path": [
 								"userProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3001/userProfile/generate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmYjkzYjdkM2UyMDRkYTJhNTY1YTciLCJpYXQiOjE2ODgyNTgyNDksImV4cCI6MTY5MDg1MDI0OX0.nw-rB8UkeBzy0iExykj1I6cfJ-sFpGgOOm1I-XLqHPA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"birthday\": \"1990-01-01\",\r\n  \"experience\": \"intermediate\",\r\n  \"goals\": [\"lose weight\", \"gain muscle\"],\r\n  \"apiKey\": \"davis-api-key\",\r\n  \"firstName\": \"Davis\",\r\n  \"lastName\": \"Song\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/userProfile",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"userProfile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "workoutSchedule",
+			"item": [
+				{
+					"name": "localhost:3001/mealSchedule",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmYjkzYjdkM2UyMDRkYTJhNTY1YTciLCJpYXQiOjE2ODgyNTgyNDksImV4cCI6MTY5MDg1MDI0OX0.nw-rB8UkeBzy0iExykj1I6cfJ-sFpGgOOm1I-XLqHPA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/workoutSchedule",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"workoutSchedule"
 							]
 						}
 					},
