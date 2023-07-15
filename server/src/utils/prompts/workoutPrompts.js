@@ -25,23 +25,22 @@ const workoutCreationPrompt = (user) => `
   
   To be explicit, the JSON should be formatted like so: 
   {
-    schedule: 
-      {Monday: 
-        {exercises: 
-          [{exercise: string, 
-            sets: number, 
-            reps: number, 
-            rest: number, 
-            duration: number, 
-            intensity: number,
-            calories: number
-           },
-          ...
-          ], 
-        }
-        total_calories: number
+    {Monday: 
+      {exercises: 
+        [{exercise: string, 
+          sets: number, 
+          reps: number, 
+          rest: number, 
+          duration: number, 
+          intensity: number,
+          calories: number
+          },
+        ...
+        ], 
       }
-      ...
+      total_calories: number
+    }
+    ...
    }`;
 
 const workoutUpdatePrompt = (user, inputs, schedule) => `
