@@ -1,4 +1,5 @@
 import { Grid, Button } from '@mui/material';
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -7,72 +8,67 @@ import FormMultiSelect from './Forms/FormMultiSelect';
 import FormSelect from './Forms/FormSelect';
 import FormTextFieldInput from './Forms/FormTextFieldInput';
 import PaperForm from './Forms/PaperForm';
-import fetchAdditionalProfile from '../../actionCreators/AdditionalProfile';
 import {
   healthConditionsAndInjuriesOptions,
   dietaryRestrictionsOptions,
   allergiesIntolerancesOptions,
   weeklyAvailabilityOptions,
 } from '../../constants/AdditionalProfile';
+import { updateUserProfile } from '../../reducers/UserProfile';
 
-export default function AdditionalProfileForm() {
-  const [healthConditionsAndInjuries, setHealthConditionsAndInjuries] = useState([]);
-  const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
-  const [allergiesIntolerances, setAllergiesIntolerances] = useState([]);
-  const [weeklyAvailability, setWeeklyAvailability] = useState('1');
-  const [bodyFatPercentage, setBodyFatPercentage] = useState(0);
-  const [muscleMassPercentage, setMuscleMassPercentage] = useState(0);
-  const [workoutDuration, setWorkoutDuration] = useState(0);
-  const [exercisePreferences, setExercisePreferences] = useState([]);
-  const [equipmentAvailability, setEquipmentAvailability] = useState([]);
-  const additionalProfile = useSelector((state) => state.additionalProfile);
+export const restrictPercentageValue = (input, set) => {
+  const zeroToHundredRegex = /^(?:100|[1-9]\d|\d)$/;
+  if (input === '' || zeroToHundredRegex.test(input)) {
+    set(input);
+  }
+};
+
+export default function AdditionalProfileForm(props) {
+  const {
+    setUpdatingProfile,
+  } = props;
+  const profile = useSelector((state) => state.userProfile.profile);
+
+  const [healthConditions, setHealthConditions] = useState(profile?.healthConditions ?? []);
+  const [dietRestriction, setDietRestriction] = useState(profile?.dietRestriction ?? []);
+  const [allergies, setAllergies] = useState(profile?.allergies ?? []);
+  const [weeklyAvailability, setWeeklyAvailability] = useState(profile?.weeklyAvailability ?? '1');
+  const [bodyFat, setBodyFat] = useState(profile?.bodyFat ?? 0);
+  const [muscleMass, setMuscleMass] = useState(profile?.muscleMass ?? 0);
+  const [duration, setDuration] = useState(profile?.duration ?? 0);
+  const [preference, setPreference] = useState(profile?.preference ?? []);
+  const [equipment, setEquipment] = useState(profile?.equipment ?? []);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAdditionalProfile());
-  }, [dispatch]);
-
-  useEffect(() => {
-    // TODO: uncomment this when backend api is set up
-    // if (additionalProfile.loading || additionalProfile.error) return;
-    setHealthConditionsAndInjuries(additionalProfile.profile.healthConditionsInjuries);
-    setDietaryRestrictions(additionalProfile.profile.dietaryRestrictions);
-    setAllergiesIntolerances(additionalProfile.profile.allergiesIntolerances);
-    setWeeklyAvailability(additionalProfile.profile.weeklyAvailability);
-    setBodyFatPercentage(additionalProfile.profile.bodyFatPercentage);
-    setMuscleMassPercentage(additionalProfile.profile.muscleMassPercentage);
-    setWorkoutDuration(additionalProfile.profile.workoutDuration);
-    setExercisePreferences(additionalProfile.profile.exercisePreferences);
-    setEquipmentAvailability(additionalProfile.profile.equipmentAvailability);
-  }, []);
-
-  const clear = () => {
-    setHealthConditionsAndInjuries([]);
-    setDietaryRestrictions([]);
-    setAllergiesIntolerances([]);
-    setWeeklyAvailability([]);
-  };
+    if (profile) {
+      setHealthConditions(profile.healthConditions);
+      setDietRestriction(profile.dietRestriction);
+      setAllergies(profile.allergies);
+      setWeeklyAvailability(profile.weeklyAvailability);
+      setBodyFat(profile.bodyFat);
+      setMuscleMass(profile.muscleMass);
+      setDuration(profile.duration);
+      setPreference(profile.preference);
+      setEquipment(profile.equipment);
+    }
+  }, [profile, dispatch]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({
-      healthConditionsAndInjuries,
-      dietaryRestrictions,
-      allergiesIntolerances,
+    setUpdatingProfile(true);
+    dispatch(updateUserProfile({
+      healthConditions,
+      dietRestriction,
+      allergies,
       weeklyAvailability,
-      bodyFatPercentage,
-      muscleMassPercentage,
-      workoutDuration,
-    });
-
-    clear();
-  };
-
-  const restrictPercentageValue = (input, set) => {
-    const zeroToHundredRegex = /^(?:100|[1-9]\d|\d)$/;
-    if (input === '' || zeroToHundredRegex.test(input)) {
-      set(input);
-    }
+      bodyFat,
+      muscleMass,
+      duration,
+      preference,
+      equipment,
+    }));
   };
 
   return (
@@ -84,39 +80,39 @@ export default function AdditionalProfileForm() {
         id="body-fat-percentage"
         label="Body Fat Percentage"
         half
-        value={bodyFatPercentage}
-        setValue={(val) => restrictPercentageValue(val, setBodyFatPercentage)}
+        value={bodyFat}
+        setValue={(val) => restrictPercentageValue(val, setBodyFat)}
         endAdornment="%"
       />
       <FormTextFieldInput
         id="muscle-mass-percentage"
         label="Muscle Mass Percentage"
         half
-        value={muscleMassPercentage}
-        setValue={(val) => restrictPercentageValue(val, setMuscleMassPercentage)}
+        value={muscleMass}
+        setValue={(val) => restrictPercentageValue(val, setMuscleMass)}
         endAdornment="%"
       />
       <FormMultiSelect
         id="health-conditions-and-injuries"
         label="Health Conditions & Injuries"
-        value={healthConditionsAndInjuries}
-        setValue={setHealthConditionsAndInjuries}
+        value={healthConditions}
+        setValue={setHealthConditions}
         options={healthConditionsAndInjuriesOptions}
         showTitleLabel
       />
       <FormMultiSelect
         id="dietary-restrictions"
         label="Dietary Restrictions"
-        value={dietaryRestrictions}
-        setValue={setDietaryRestrictions}
+        value={dietRestriction}
+        setValue={setDietRestriction}
         options={dietaryRestrictionsOptions}
         showTitleLabel
       />
       <FormMultiSelect
         id="allergies-intolerances"
         label="Allergies & Intolerances"
-        value={allergiesIntolerances}
-        setValue={setAllergiesIntolerances}
+        value={allergies}
+        setValue={setAllergies}
         options={allergiesIntolerancesOptions}
         showTitleLabel
       />
@@ -134,22 +130,21 @@ export default function AdditionalProfileForm() {
         id="workout-duration"
         label="Workout Duration"
         half
-        value={workoutDuration}
-        setValue={setWorkoutDuration}
+        value={duration}
+        setValue={setDuration}
         endAdornment="minutes"
       />
-      <Grid item xs={12} sm={6} />
       <FormMultiInput
         id="exercise-preferences"
         label="Exercise Preferences"
-        value={exercisePreferences}
-        setValue={setExercisePreferences}
+        value={preference}
+        setValue={setPreference}
       />
       <FormMultiInput
         id="equipment-availability"
         label="Equipment Availability"
-        value={equipmentAvailability}
-        setValue={setEquipmentAvailability}
+        value={equipment}
+        setValue={setEquipment}
       />
       <Grid item xs={12} sm={6} />
       <Grid item xs={12} sm={5} />
@@ -162,3 +157,11 @@ export default function AdditionalProfileForm() {
     </PaperForm>
   );
 }
+
+AdditionalProfileForm.propTypes = {
+  setUpdatingProfile: PropTypes.func,
+};
+
+AdditionalProfileForm.defaultProps = {
+  setUpdatingProfile: () => {},
+};

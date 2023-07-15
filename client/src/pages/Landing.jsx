@@ -2,7 +2,9 @@ import { Button, Typography } from '@mui/material';
 import React from 'react';
 import TypewriterComponent from 'typewriter-effect';
 
+import banner from '../assets/design/GradientLogo1.png';
 import videoBackground from '../assets/LandingVideoBackgroundCrop.mp4';
+import theme from '../theme';
 
 const styles = {
   container: {
@@ -15,13 +17,19 @@ const styles = {
     height: '100%',
     backgroundColor: '#000000aa', // last two hex digits represent % opacity
   },
+  banner: {
+    paddingBottom: '2%',
+    maxWidth: '50%',
+    maxHeight: '50%',
+  },
   video: {
     width: '100%',
     height: '100%',
     objectFit: 'cover',
   },
   actionContainer: {
-    fontFamily: 'Montserrat, sans-serif',
+    width: '90%',
+    fontFamily: theme.typography.fontFamily,
     position: 'absolute',
     top: '25%',
     display: 'flex',
@@ -30,21 +38,36 @@ const styles = {
     zIndex: 9999,
   },
   typewriter: {
+    width: '90%',
+    fontFamily: theme.typography.fontFamily,
     color: '#F3F3F0',
     fontWeight: 800,
-    fontSize: '60px',
+    fontSize: '4vw',
   },
   info: {
     color: '#F3F3F0',
     fontSize: '20px',
     padding: '15px 15px 0px 0px',
   },
+  buttonContainer: {
+    display: 'flex',
+    gap: '10px',
+  },
   actionButton: {
-    color: '#B5936B',
+    fontWeight: 'normal',
+    color: '#ffffff',
     borderColor: '#B5936B',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     marginTop: '25px',
     padding: '15px',
     width: '200px',
+    '&:hover': {
+      fontWeight: 'bolder',
+      color: '#3F3F47',
+      borderColor: 'F3F3F0',
+      backgroundColor: '#ffffff',
+      transition: 'background-color 0.3s ease',
+    },
   },
 };
 
@@ -53,6 +76,7 @@ export default function Landing() {
     <div className="video-container" style={styles.container}>
       <div className="overlay" style={styles.overlay} />
       <div className="action-container" style={styles.actionContainer}>
+        <img alt="banner" style={styles.banner} src={banner} />
         <div className="typewriter-container">
           <div className="typewriter" style={styles.typewriter}>
             <TypewriterComponent
@@ -81,9 +105,14 @@ export default function Landing() {
             designed to support individuals on their workout journey.
           </Typography>
         </div>
-        <Button variant="outlined" fontWeight="light" style={styles.actionButton} href="/login">
-          Let&apos;s get started.
-        </Button>
+        <div className="button-container" style={styles.buttonContainer}>
+          <Button variant="outlined" sx={styles.actionButton} href="/login">
+            Let&apos;s get started.
+          </Button>
+          <Button variant="outlined" sx={styles.actionButton} href="/about">
+            Who are we?
+          </Button>
+        </div>
       </div>
       <video
         src={videoBackground}

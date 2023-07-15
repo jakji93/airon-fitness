@@ -115,33 +115,36 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 
 <!-- Roadmap -->
 ### Minimal Requirements
-- [ ] A user can create a profile that can be saved
-    - [ ] Develop Frontend UI
+- [x] A user can create a profile that can be saved
+    - [x] Develop Frontend UI
     - [ ] Fetch/Upload Profile Image
-    - [ ] Store input JSON (Name, Age, Email, Birthdate, Image) in database
-    - [ ] API Integration - Birthdate Entry
-    - [ ] Investigate Email Authentication
-- [ ] A user can update their profile with details such as diet, current training plan, etc.
-- [ ] A user can ask their personal trainer for a new fitness plan based on their profile and any additional information (e.g. workout frequency,  experience, specific goals)
-    - [ ] Investigate OpenAI
-    - [ ] Setup input prompt format
-    - [ ] Setup Frontend UI
-    - [ ] Setup backend API calls to ChatGPT
-    - [ ] Parse output JSON to Fitness Plan
-    - [ ] Store output JSON in datebase
+    - [x] Store input JSON (Name, Age, Email, Birthdate, Image) in database
+    - [x] API Integration - Birthdate Entry
+    - [x] Investigate Email Authentication
+- [ ] Form authentication
+- [x] A user can update their profile with their own details such as diet, experience, etc.
+- [x] A user can ask their personal trainer for a new fitness plan based on their profile and any additional information (e.g. workout frequency,  experience, specific goals)
+    - [x] Investigate OpenAI
+    - [x] Setup input prompt format
+    - [x] Setup initial frontend UI
+    - [x] Setup backend API calls to ChatGPT
+    - [x] Parse output JSON to Fitness Plan
+    - [x] Store output JSON in datebase
 
 ### Standard Requirements
-- [ ] Leverage ChatGPT AI to return a custom fitness plan
+- [x] Leverage ChatGPT AI to return a custom fitness plan
 - [ ] Allow users to log their workout history
-- [ ] Progress tracking of fitness plan
-- [ ] Account for user illness / physical constraints
-- [ ] Secure authentication system
+- [ ] View meal plan user metrics and statistics
+- [x] Account for user illness / physical constraints
+- [x] Secure authentication system
 - [ ] Login using Google Accounts
+- [ ] Use user stats to automatically refine workout plans
 
 ### Stretch Goals
 - [ ] Computer Vision that analyzes a users posture
-- [ ] Dynamically update fitness plans as users log their history
-- [ ] Live audio feedback during a workout 
+- [ ] Dynamically update fitness plans as users log their history (user review and feedback in fitness plans) 
+- [ ] Live audio feedback during a workout
+- [ ] User can start a guided workout with timers tracking rest period and workout length (hands-free implementation) 
 
 ### Prototyping (Figma)
 [![Prototyping with Figma][Figma]][Figma-url]

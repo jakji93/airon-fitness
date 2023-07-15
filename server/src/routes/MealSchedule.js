@@ -2,49 +2,49 @@ const express = require('express');
 const { getMealScheduleByUser, createMealScheduleForUser, updateMealScheduleForUser } = require('../controllers/mealScheduleController');
 
 const router = express.Router();
+const { protect } = require('../middleware/authMiddleware');
 
 /**
- * @desc get meal schedule for user (userID)
+ * @desc get meal schedule for user (Get userID from JWT token)
+ * @access Private
  * @route GET /mealSchedule
  * @request
  *  body: n/a
- *  params: userID
+ *  params: n/a
  *  query params: n/a
  * @response mealSchedule for user
- *   {userID: string,
+ *   {userInfoID: string,
  *    schedule:
  *      {Monday:
  *        {breakfast: string,
  *         snack1: string,
  *         lunch: string,
  *         snack2: string
- *         dinner: string}
+ *         dinner: string
+ *         nutrition_totals: {
+ *          calories: number,
+ *          carbohydrates: number,
+ *          protein: number,
+ *           fat: number
+ *          }
+ *        }
  *       Tuesday:...
  *       Wednesday:...
- *       ...}}
+ *       ...}
+ *    inputs: [string]}
  */
-router.get('/:userID', getMealScheduleByUser);
+router.get('/', protect, getMealScheduleByUser);
 
 /**
- * @desc create meal schedule for user (userID)
+ * @desc create meal schedule for user (Get userID from JWT token)
+ * @access Private
  * @route POST /mealSchedule
  * @request
- *  body:
- *    {userID: string,
- *    schedule:
- *      {Monday:
- *        {breakfast: string,
- *         snack1: string,
- *         lunch: string,
- *         snack2: string
- *         dinner: string}
- *        Tuesday:...
- *        Wednesday:...
- *        ...}}
+ *  body: n/a
  *  params: n/a
  *  query params: n/a
  * @response created mealSchedule
- *   {userID: string,
+ *   {userInfoID: string,
  *    schedule:
  *      {Monday:
  *        {breakfast: string,
@@ -55,29 +55,21 @@ router.get('/:userID', getMealScheduleByUser);
  *       Tuesday:...
  *       Wednesday:...
  *       ...}}
+ *    inputs: [string]}
  */
-router.post('/', createMealScheduleForUser);
+router.post('/', protect, createMealScheduleForUser);
 
 /**
- * @desc update meal schedule for user (userID)
+ * @desc update meal schedule for user (Get userID from JWT token)
+ * @access Private
  * @route PUT /mealSchedule
  * @request
  *  body:
- *    {userID: string,
- *    schedule:
- *      {Monday:
- *        {breakfast: string,
- *         snack1: string,
- *         lunch: string,
- *         snack2: string
- *         dinner: string}
- *        Tuesday:...
- *        Wednesday:...
- *        ...}}
+ *    {input: string}
  *  params: n/a
  *  query params: n/a
- * @response created mealSchedule
- *   {userID: string,
+ * @response updated mealSchedule
+ *   {userInfoID: string,
  *    schedule:
  *      {Monday:
  *        {breakfast: string,
@@ -88,7 +80,8 @@ router.post('/', createMealScheduleForUser);
  *       Tuesday:...
  *       Wednesday:...
  *       ...}}
+ *    inputs: [string]}
  */
-router.put('/:userID', updateMealScheduleForUser);
+router.put('/', protect, updateMealScheduleForUser);
 
 module.exports = router;

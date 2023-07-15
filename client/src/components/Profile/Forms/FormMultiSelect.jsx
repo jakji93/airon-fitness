@@ -19,6 +19,7 @@ export default function FormMultiSelect(props) {
     options,
     showTitleLabel,
     customTextFieldGridSize,
+    required,
   } = props;
 
   return (
@@ -45,14 +46,32 @@ export default function FormMultiSelect(props) {
               {selected ? <CheckIcon color="info" /> : null}
             </MenuItem>
           )}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant="outlined"
-              label={label}
-              placeholder={label}
-            />
-          )}
+          renderInput={(params) => {
+            if (required) {
+              return (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label={label}
+                  placeholder={label}
+                  inputProps={{
+                    ...params.inputProps,
+                    required: value.length === 0,
+                  }}
+                  required={required}
+                />
+              );
+            }
+
+            return (
+              <TextField
+                {...params}
+                variant="outlined"
+                label={label}
+                placeholder={label}
+              />
+            );
+          }}
         />
       </Grid>
     </>
@@ -68,10 +87,12 @@ FormMultiSelect.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   showTitleLabel: PropTypes.bool,
   customTextFieldGridSize: PropTypes.number,
+  required: PropTypes.bool,
 };
 
 FormMultiSelect.defaultProps = {
   half: false,
   showTitleLabel: true,
   customTextFieldGridSize: 0,
+  required: false,
 };

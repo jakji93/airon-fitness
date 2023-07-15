@@ -1,17 +1,25 @@
 const express = require('express');
-const { getWorkoutScheduleByUserID, createWorkoutSchedule, updateUserWorkoutScheduleByUserID } = require('../controllers/workoutScheduleController');
+const {
+  getLatestWorkoutScheduleByUserID,
+  getAllWorkoutScheduleByUserID,
+  createWorkoutSchedule,
+  updateUserWorkoutScheduleByUserID,
+} = require('../controllers/workoutScheduleController');
 
 const router = express.Router();
+// const { generateWorkoutSchedule } = require('../utils/openaiUtil');
+const { protect } = require('../middleware/authMiddleware');
 
 /**
- * @desc get workout schedule for user (userID)
+ * @desc get latest workout schedule for user (Get userID from JWT token)
+ * @access Private
  * @route GET /workoutSchedule
  * @request
  *  body: n/a
- *  params: userID
+ *  params: n/a
  *  query params: n/a
  * @response workoutSchedule for user
- *    {userID: string,
+ *    {userInfoID: string,
  *     schedule:
  *       {Monday:
  *         {exercise: string,
@@ -23,15 +31,21 @@ const router = express.Router();
  *        Tuesday:...
  *        Wednesday:...
  *        ...}}
+ *     inputs: [string]}
  */
-router.get('/:userID', getWorkoutScheduleByUserID);
+router.get('/', protect, getLatestWorkoutScheduleByUserID);
 
 /**
- * @desc create workout schedule for user (userID)
- * @route POST /workoutSchedule
+ * @desc get all workout schedule for user (Get userID from JWT token)
+ * @access Private
+ * @route GET /workoutSchedule/all
  * @request
- *  body:
- *    {userID: string,
+ *  body: n/a
+ *  params: n/a
+ *  query params: n/a
+ * @response workoutSchedule for user sort from oldest to newest
+ *  {schedules: [
+ *    {userInfoID: string,
  *     schedule:
  *       {Monday:
  *         {exercise: string,
@@ -43,10 +57,21 @@ router.get('/:userID', getWorkoutScheduleByUserID);
  *        Tuesday:...
  *        Wednesday:...
  *        ...}}
+ *     inputs: [string]},
+ *    ...]}
+ */
+router.get('/all', protect, getAllWorkoutScheduleByUserID);
+
+/**
+ * @desc create workout schedule for user (Get userID from JWT token)
+ * @access Private
+ * @route POST /workoutSchedule
+ * @request
+ *  body: n/a
  *  params: n/a
  *  query params: n/a
  * @response created workoutSchedule for User
- *    {userID: string,
+ *    {userInfoID: string,
  *     schedule:
  *       {Monday:
  *         {exercise: string,
@@ -58,30 +83,21 @@ router.get('/:userID', getWorkoutScheduleByUserID);
  *        Tuesday:...
  *        Wednesday:...
  *        ...}}
+ *     inputs: [string]}
  */
-router.post('/', createWorkoutSchedule);
+router.post('/', protect, createWorkoutSchedule);
 
 /**
- * @desc update workout schedule for user (userID)
+ * @desc update workout schedule for user (Get userID from JWT token)
+ * @access Private
  * @route PUT /workoutSchedule
  * @request
  *  body:
- *    {userID: string,
- *     schedule:
- *       {Monday:
- *         {exercise: string,
- *          sets: num,
- *          reps: num,
- *          rest: num
- *          duration: num
- *          intensity: num}
- *        Tuesday:...
- *        Wednesday:...
- *        ...}}
+ *    {input: string}
  *  params: n/a
  *  query params: n/a
- * @response created workoutSchedule for User
- *    {userID: string,
+ * @response updated workoutSchedule for User
+ *    {userInfoID: string,
  *     schedule:
  *       {Monday:
  *         {exercise: string,
@@ -93,7 +109,8 @@ router.post('/', createWorkoutSchedule);
  *        Tuesday:...
  *        Wednesday:...
  *        ...}}
+ *     inputs: [string]}
  */
-router.put('/:userID', updateUserWorkoutScheduleByUserID);
+router.put('/', protect, updateUserWorkoutScheduleByUserID);
 
 module.exports = router;

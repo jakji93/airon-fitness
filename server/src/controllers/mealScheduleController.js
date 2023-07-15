@@ -1,52 +1,108 @@
-const { schedule } = require('../mock/MealScheduleMockData');
-
-const schedules = [
-  {
-    userID: '1',
-    schedule,
-  },
-];
+const asyncHandler = require('express-async-handler');
+const openAI = require('../utils/openaiUtil');
+const userUtil = require('../utils/userUtil');
+const MealSchedule = require('../models/MealScheduleModel');
+const UserProfile = require('../models/UserProfileModel');
 
 /**
  * @desc    get meal schedule for user (userID)
  * @route   GET /mealSchedule
  * @access  Private
  */
-const getMealScheduleByUser = (req, res) => {
-  const foundItem = schedules.find((item) => item.userID === req.params.userID);
-  if (!foundItem) return res.status(404).send({ message: 'Item not found' });
-  return res.send(foundItem);
-};
+const getMealScheduleByUser = asyncHandler(async (req, res) => {
+  const userMealSchedule = await MealSchedule.findOne({ userInfoID: req.user._id });
+  
+  if (!userMealSchedule || !userMealSchedule.schedule) {
+    res.status(404).json({ message: 'Meal schedule not found' });
+  } else {
+    const { userInfoID, schedule, inputs } = userMealSchedule;
+    res.status(200).json({
+      userInfoID,
+      schedule,
+      inputs,
+    });
+  }
+});
 
 /**
  * @desc    create meal schedule for user (userID)
  * @route   POST /mealSchedule
  * @access  Private
  */
-const createMealScheduleForUser = (req, res) => {
-  if (!req.body.schedule) {
-    return res.status(400).send({ message: 'Missing Payload' });
+const createMealScheduleForUser = asyncHandler(async (req, res) => {
+  const id = req.user._id;
+
+  // Check if user already has a meal schedule
+  const mealScheduleExists = await MealSchedule.findOne({ userInfoID: id });
+  if (mealScheduleExists) {
+    res.status(400).json({ message: 'Meal schedule already exists' });
   }
-  const item = { userID: req.body.userID, schedule: req.body.schedule };
-  schedules.push(item);
-  return res.send(item);
-};
+
+  // Look up the profile of the user
+  const userProfile = await UserProfile.findOne({ userInfoID: id });
+
+  // Generate the schedule with OpenAI
+  const userData = userUtil.generateUserObject(userProfile);
+  const generatedSchedule = await openAI.generateMealSchedule(userData);
+
+  // Create meal in MongoDB
+  const mealSchedule = await MealSchedule.create({
+    userInfoID: id,
+    schedule: generatedSchedule,
+    inputs: [],
+  });
+
+  if (mealSchedule) {
+    res.status(201).json({
+      userInfoID: mealSchedule.id,
+      schedule: mealSchedule.schedule,
+      inputs: mealSchedule.inputs,
+    });
+  } else {
+    res.status(400).json({ message: 'invalid meal schedule data' });
+  }
+});
 
 /**
  * @desc    update meal schedule for user (userID)
  * @route   PUT /mealSchedule
  * @access  Private
  */
-const updateMealScheduleForUser = (req, res) => {
-  const foundItemIndex = schedules.findIndex((item) => item.userID === req.params.userID);
+const updateMealScheduleForUser = asyncHandler(async (req, res) => {
+  const id = req.user._id;
 
-  if (foundItemIndex < 0) return res.status(404).send({ message: 'Item not found' });
-  if (!req.body.schedule) {
-    return res.status(400).send({ message: 'Missing paylod' });
+  // Retrieve the meal schedule (fail if user does not have one already)
+  const mealSchedule = await MealSchedule.findOne({ userInfoID: id });
+  if (!mealSchedule) {
+    res.status(404).json({ message: 'Cannot update a meal schedule that does not exist' });
   }
-  schedules[foundItemIndex].schedule = req.body.schedule;
-  return res.send(schedules[foundItemIndex]);
-};
+
+  // Organize the data necessary to adjust the schedule
+  const schedule = JSON.stringify(mealSchedule.schedule);
+  const updatedInputs = mealSchedule.inputs;
+  updatedInputs.push(req.body.customInput);
+
+  // Look up the profile of the user
+  const userProfile = await UserProfile.findOne({ userInfoID: id });
+
+  // Update the schedule with OpenAI
+  const userData = userUtil.generateUserObject(userProfile);
+  const updatedMealSchedule = await openAI.updateMealSchedule(userData, updatedInputs, schedule);
+
+  // Update the MongoDB document
+  mealSchedule.schedule = updatedMealSchedule;
+  mealSchedule.inputs = updatedInputs;
+  const savedMealSchedule = await mealSchedule.save();
+
+  // Send updated result
+  if (savedMealSchedule) {
+    res.status(200).json({
+      userInfoID: savedMealSchedule.id,
+      schedule: savedMealSchedule.schedule,
+      inputs: savedMealSchedule.inputs,
+    });
+  }
+});
 
 module.exports = {
   getMealScheduleByUser,

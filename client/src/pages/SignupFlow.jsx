@@ -1,56 +1,63 @@
 import {
   Stepper, Step, StepLabel, Box,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import SignupDetails from '../components/Signup/SignupDetails';
+import { ToastContext } from '../components/common/context/ToastContextProvider';
+import Spinner from '../components/common/Spinner';
+import SignupAdditionalDetails from '../components/Signup/SignupAdditionalDetails';
+import SignupAPIKey from '../components/Signup/SignupAPIKey';
+import SignupBasicUserDetails from '../components/Signup/SignupBasicUserDetails';
 import SignupRegisterAccount from '../components/Signup/SignupRegisterAccount';
-import SignupStats from '../components/Signup/SignupStats';
+import SignupRequireUserDetails from '../components/Signup/SignupRequireUserDetails';
+import { removeSignup } from '../reducers/Signup';
+import { resetUserProfileStates } from '../reducers/UserProfile';
 
 export default function SignupFlow() {
-  const [user, setUser] = useState({});
-  const [step, setStep] = useState(0);
-  const steps = ['Account Creation', 'Personal', 'Health'];
+  const openToast = useContext(ToastContext);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {
+    profile, isLoading, isError, isSuccess, message,
+  } = useSelector((state) => state.userProfile);
+  const step = useSelector((state) => state.signup.step);
 
-  const handleNext = (e) => {
-    if (e) e.preventDefault();
-    setStep((prevStep) => prevStep + 1);
+  const stepTitles = ['Account Creation', 'Personal Info', 'Required Info', 'API Key', 'Customize Profile'];
 
-    if (step === 3) {
-      console.log(user);
-      // TODO: Implement API call to create user
-    }
-  };
-
-  const getCurrentStage = () => {
-    let stage;
-    switch (step) {
-      case 0:
-        stage = <SignupRegisterAccount nextStage={handleNext} setUser={setUser} />;
-        break;
-      case 1:
-        stage = <SignupDetails nextStage={handleNext} setUser={setUser} />;
-        break;
-      case 2:
-        stage = <SignupStats nextStage={handleNext} setUser={setUser} />;
-        break;
-      default:
-        break;
+  useEffect(() => {
+    if (isError) {
+      openToast('error', message);
     }
 
-    return stage;
-  };
+    if (isSuccess || profile) {
+      openToast('success', 'Your profile has been created!');
+      navigate('/app');
+      dispatch(removeSignup());
+    }
+
+    dispatch(resetUserProfileStates);
+  }, [profile, isError, isSuccess, message, dispatch]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Box>
       <Stepper activeStep={step} sx={{ margin: '3%' }}>
-        {steps.map((label) => (
+        {stepTitles.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
-      { getCurrentStage() }
+      {step === 0 && <SignupRegisterAccount />}
+      {step === 1 && <SignupBasicUserDetails />}
+      {step === 2 && <SignupRequireUserDetails />}
+      {step === 3 && <SignupAPIKey />}
+      {step === 4 && <SignupAdditionalDetails />}
     </Box>
   );
 }

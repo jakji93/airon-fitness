@@ -2,7 +2,7 @@ import {
   FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Grid,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import FormTextFieldInput from './FormTextFieldInput';
 
@@ -15,34 +15,11 @@ export default function FormTextFieldWithRadio(props) {
     setValue,
     type,
     radioGroups,
-    // Array of functions that convert from each option in radioGroups,
-    // to the measurement unit of the first
-    // First value in array should be noop
-    conversionFunctions,
+    radioSelection, setRadioSelection,
     radioLabel,
     half,
+    required,
   } = props;
-  const [radioSelection, setRadioSelection] = useState(radioGroups[0]);
-  const [inputValue, setInputValue] = useState(value);
-
-  /**
-   * Convert measurements to the first one specified in radioGroups
-   * If selection is already the first, simply set the value
-   */
-  const setConvertedValue = (val) => {
-    if (radioSelection === radioGroups[0]) {
-      setValue(val);
-      return;
-    }
-    const index = radioGroups.findIndex((item) => item === radioSelection);
-    const conversionFunction = conversionFunctions[index];
-    const convertedValue = conversionFunction(val);
-    setValue(convertedValue);
-  };
-
-  useEffect(() => {
-    setConvertedValue(inputValue);
-  }, [inputValue, radioSelection]);
 
   return (
     <>
@@ -51,11 +28,12 @@ export default function FormTextFieldWithRadio(props) {
         label={label}
         showTitleLabel={showTitleLabel}
         half
-        value={inputValue}
-        setValue={setInputValue}
+        value={value}
+        setValue={setValue}
         type={type}
         endAdornment={radioSelection}
-        customTextFieldGridSize={half && 3}
+        customTextFieldGridSize={half ? 3 : 0}
+        required={required}
       />
       <Grid item xs={12} sm={half ? 3 : 6}>
         <FormControl>
@@ -91,18 +69,22 @@ FormTextFieldWithRadio.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
+    PropTypes.oneOf([null]),
   ]),
   setValue: PropTypes.func.isRequired,
   type: PropTypes.string,
   radioGroups: PropTypes.arrayOf(PropTypes.string).isRequired,
-  conversionFunctions: PropTypes.arrayOf(PropTypes.func).isRequired,
   half: PropTypes.bool,
+  radioSelection: PropTypes.string.isRequired,
+  setRadioSelection: PropTypes.func.isRequired,
+  required: PropTypes.bool,
 };
 
 FormTextFieldWithRadio.defaultProps = {
   type: 'number',
   showTitleLabel: true,
   radioLabel: null,
-  value: 0,
+  value: null,
   half: false,
+  required: false,
 };
