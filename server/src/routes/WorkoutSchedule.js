@@ -21,17 +21,24 @@ const { protect } = require('../middleware/authMiddleware');
  * @response workoutSchedule for user
  *    {userInfoID: string,
  *     schedule:
- *       {Monday:
- *         {exercise: string,
- *          sets: num,
- *          reps: num,
- *          rest: num
- *          duration: num
- *          intensity: num}
- *        Tuesday:...
- *        Wednesday:...
- *        ...}}
- *     inputs: [string]}
+ *      {Monday:
+ *        {exercises:
+ *          [{exercise: string,
+ *            sets: number,
+ *            reps: number,
+ *            rest: number,
+ *            duration: number,
+ *            intensity: number.
+ *            calories: number,
+ *           },
+ *          ...
+ *          ],
+ *          total_calories: number
+ *       }
+ *      {Tuesday:... }
+ *      ...
+ *      inputs: [string]
+ *     }
  */
 router.get('/', protect, getLatestWorkoutScheduleByUserID);
 
@@ -73,17 +80,24 @@ router.get('/all', protect, getAllWorkoutScheduleByUserID);
  * @response created workoutSchedule for User
  *    {userInfoID: string,
  *     schedule:
- *       {Monday:
- *         {exercise: string,
- *          sets: num,
- *          reps: num,
- *          rest: num
- *          duration: num
- *          intensity: num}
- *        Tuesday:...
- *        Wednesday:...
- *        ...}}
- *     inputs: [string]}
+ *      {Monday:
+ *        {exercises:
+ *          [{exercise: string,
+ *            sets: number,
+ *            reps: number,
+ *            rest: number,
+ *            duration: number,
+ *            intensity: number.
+ *            calories: number,
+ *           },
+ *          ...
+ *          ],
+ *          total_calories: number
+ *       }
+ *      {Tuesday:... }
+ *      ...
+ *      inputs: [string]
+ *     }
  */
 router.post('/', protect, createWorkoutSchedule);
 
@@ -99,17 +113,24 @@ router.post('/', protect, createWorkoutSchedule);
  * @response updated workoutSchedule for User
  *    {userInfoID: string,
  *     schedule:
- *       {Monday:
- *         {exercise: string,
- *          sets: num,
- *          reps: num,
- *          rest: num
- *          duration: num
- *          intensity: num}
- *        Tuesday:...
- *        Wednesday:...
- *        ...}}
- *     inputs: [string]}
+ *      {Monday:
+ *        {exercises:
+ *          [{exercise: string,
+ *            sets: number,
+ *            reps: number,
+ *            rest: number,
+ *            duration: number,
+ *            intensity: number.
+ *            calories: number,
+ *           },
+ *          ...
+ *          ],
+ *          total_calories: number
+ *       }
+ *      {Tuesday:... }
+ *      ...
+ *      inputs: [string]
+ *     }
  */
 router.put('/', protect, updateUserWorkoutScheduleByUserID);
 
