@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler');
-const WorkoutSchema = require('../models/WorkoutScheduleModel');
-const { workoutScheduleMock } = require('../mock/WorkoutScheduleMockData');
+const WorkoutSchema = require('../../models/WorkoutScheduleModel');
+const { workoutScheduleMock } = require('../../mock/WorkoutScheduleMockData');
 
 /**
  * @desc    use mock data to create workout schedule (NO OPENAI CALL)

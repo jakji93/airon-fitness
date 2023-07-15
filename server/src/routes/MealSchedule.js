@@ -1,5 +1,5 @@
 const express = require('express');
-const { getMealScheduleByUser, createMealScheduleForUser, updateMealScheduleForUser } = require('../controllers/mealScheduleController');
+const { getMealScheduleByUser, createMealScheduleForUser, updateMealScheduleForUser } = require('../controllers/mealSchedule/mealScheduleController');
 
 const router = express.Router();
 const { protect } = require('../middleware/authMiddleware');

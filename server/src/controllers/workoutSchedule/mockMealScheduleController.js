@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler');
-const MealSchedule = require('../models/MealScheduleModel');
-const { mealScheduleMockMTWTFSS } = require('../mock/MealScheduleMockData');
+const MealSchedule = require('../../models/MealScheduleModel');
+const { mealScheduleMockMTWTFSS } = require('../../mock/MealScheduleMockData');
 
 /**
  * @desc    use mock data to create a user schedule (NO OPENAI CALL)

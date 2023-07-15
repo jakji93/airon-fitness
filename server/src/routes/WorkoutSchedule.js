@@ -4,7 +4,7 @@ const {
   getAllWorkoutScheduleByUserID,
   createWorkoutSchedule,
   updateUserWorkoutScheduleByUserID,
-} = require('../controllers/workoutScheduleController');
+} = require('../controllers/workoutSchedule/workoutScheduleController');
 
 const router = express.Router();
 // const { generateWorkoutSchedule } = require('../utils/openaiUtil');
