@@ -51,7 +51,14 @@ router.get('/', protect, getMealScheduleByUser);
  *         snack1: string,
  *         lunch: string,
  *         snack2: string
- *         dinner: string}
+ *         dinner: string
+ *         nutrition_totals: {
+ *          calories: number,
+ *          carbohydrates: number,
+ *          protein: number,
+ *           fat: number
+ *          }
+ *        }
  *       Tuesday:...
  *       Wednesday:...
  *       ...}}
@@ -76,7 +83,14 @@ router.post('/', protect, createMealScheduleForUser);
  *         snack1: string,
  *         lunch: string,
  *         snack2: string
- *         dinner: string}
+ *         dinner: string
+ *         nutrition_totals: {
+ *          calories: number,
+ *          carbohydrates: number,
+ *          protein: number,
+ *           fat: number
+ *          }
+ *        }
  *       Tuesday:...
  *       Wednesday:...
  *       ...}}
