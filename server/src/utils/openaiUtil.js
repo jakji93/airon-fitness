@@ -6,7 +6,7 @@ const apiKey = process.env.GPT_KEY;
 const apiUrl = 'https://api.openai.com/v1/chat/completions';
 const headers = {
   'Content-Type': 'application/json',
-  'Authorization': `Bearer ${apiKey}`,
+  Authorization: `Bearer ${apiKey}`,
 };
 
 async function generateMealSchedule(userData) {
