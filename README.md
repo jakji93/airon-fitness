@@ -19,7 +19,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/d-x-s/airon-fitness">
-    <img src="assets/logo.png" alt="Logo" width="80" height="80">
+    <img src="assets/logo.png" alt="Logo" width="150" height="150">
   </a>
 
   <h3 align="center">AIron Fitness</h3>
@@ -27,14 +27,8 @@
   <p align="center">
     AI-powered fitness app to help you kickstart your training journey.
     <br />
-    <a href="https://github.com/d-x-s/airon-fitness"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/d-x-s/airon-fitness"><strong>View Demo »</strong></a>
     <br />
-    <br />
-    <a href="https://github.com/d-x-s/airon-fitness">View Demo</a>
-    ·
-    <a href="https://github.com/d-x-s/airon-fitness">Report Bug</a>
-    ·
-    <a href="https://github.com/d-x-s/airon-fitness">Request Feature</a>
   </p>
 </div>
 
@@ -47,21 +41,14 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#the-team">The Team</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#minimal-requirements">Minimal Requirements</a></li>
+    <li><a href="#standard-requirements">Standard Requirements</a></li>
+    <li><a href="#stretch-goals">Stretch Goals</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -117,11 +104,11 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 ### Minimal Requirements
 - [x] A user can create a profile that can be saved
     - [x] Develop Frontend UI
-    - [ ] Fetch/Upload Profile Image
+    - [x] Fetch/Upload Profile Image
     - [x] Store input JSON (Name, Age, Email, Birthdate, Image) in database
     - [x] API Integration - Birthdate Entry
     - [x] Investigate Email Authentication
-- [ ] Form authentication
+- [x] Form authentication
 - [x] A user can update their profile with their own details such as diet, experience, etc.
 - [x] A user can ask their personal trainer for a new fitness plan based on their profile and any additional information (e.g. workout frequency,  experience, specific goals)
     - [x] Investigate OpenAI
