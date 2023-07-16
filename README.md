@@ -19,7 +19,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/d-x-s/airon-fitness">
-    <img src="assets/logo.png" alt="Logo" width="80" height="80">
+    <img src="assets/logo.png" alt="Logo" width="150" height="150">
   </a>
 
   <h3 align="center">AIron Fitness</h3>
@@ -104,11 +104,11 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 ### Minimal Requirements
 - [x] A user can create a profile that can be saved
     - [x] Develop Frontend UI
-    - [ ] Fetch/Upload Profile Image
+    - [x] Fetch/Upload Profile Image
     - [x] Store input JSON (Name, Age, Email, Birthdate, Image) in database
     - [x] API Integration - Birthdate Entry
     - [x] Investigate Email Authentication
-- [ ] Form authentication
+- [x] Form authentication
 - [x] A user can update their profile with their own details such as diet, experience, etc.
 - [x] A user can ask their personal trainer for a new fitness plan based on their profile and any additional information (e.g. workout frequency,  experience, specific goals)
     - [x] Investigate OpenAI
