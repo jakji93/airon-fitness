@@ -49,9 +49,28 @@ async function updateWorkoutSchedule(userData, inputs, schedule) {
   return response.data.choices[0].message.content;
 }
 
+async function verifyAPIKey(verifyKey) {
+  const verificationUrl = 'https://api.openai.com/v1/usage';
+  try {
+    const response = await axios.get(verificationUrl, {
+      params: {
+        date: '2023-01-01', // Replace with the desired date
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${verifyKey}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    return null;
+  }
+}
+
 module.exports = {
   generateWorkoutSchedule,
   updateWorkoutSchedule,
   generateMealSchedule,
   updateMealSchedule,
+  verifyAPIKey,
 };

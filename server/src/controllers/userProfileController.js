@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const UserProfile = require('../models/UserProfileModel');
 const { USER_PROFILE_FIELDS } = require('../constants');
+const openAI = require('../utils/openaiUtil');
 
 /**
  * @desc    creturns a list of all the user profiles
@@ -53,6 +54,11 @@ const createUserProfile = asyncHandler(async (req, res) => {
       || !userProfile.heightUnit) {
     res.status(400).json({ message: 'Please include all required fields' });
     throw new Error('Please include all required fields');
+  }
+  const verifyKey = openAI.verifyAPIKey(userProfile.apiKey);
+  if (!verifyKey) {
+    res.status(400).json({ message: 'Please include a valid GPT API key' });
+    throw new Error('Please include a valid GPT API key');
   }
   userProfile.userInfoID = req.user._id;
   if (req.file) {
@@ -112,6 +118,11 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     || !userProfile.heightUnit) {
     res.status(400).json({ message: 'Please include all required fields' });
     throw new Error('Please include all required fields');
+  }
+  const verifyKey = openAI.verifyAPIKey(userProfile.apiKey);
+  if (!verifyKey) {
+    res.status(400).json({ message: 'Please include a valid GPT API key' });
+    throw new Error('Please include a valid GPT API key');
   }
   if (req.file) {
     userProfile.profileImage = {
