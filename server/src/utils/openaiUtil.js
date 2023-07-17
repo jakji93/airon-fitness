@@ -54,7 +54,7 @@ async function verifyAPIKey(verifyKey) {
   try {
     const response = await axios.get(verificationUrl, {
       params: {
-        date: '2023-01-01', // Replace with the desired date
+        date: '2023-01-01',
       },
       headers: {
         'Content-Type': 'application/json',
