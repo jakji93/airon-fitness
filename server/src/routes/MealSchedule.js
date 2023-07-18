@@ -25,7 +25,7 @@ const { protect } = require('../middleware/authMiddleware');
  *          calories: number,
  *          carbohydrates: number,
  *          protein: number,
- *           fat: number
+ *          fat: number
  *          }
  *        }
  *       Tuesday:...
@@ -56,7 +56,7 @@ router.get('/', protect, getMealScheduleByUser);
  *          calories: number,
  *          carbohydrates: number,
  *          protein: number,
- *           fat: number
+ *          fat: number
  *          }
  *        }
  *       Tuesday:...
@@ -88,7 +88,7 @@ router.post('/', protect, createMealScheduleForUser);
  *          calories: number,
  *          carbohydrates: number,
  *          protein: number,
- *           fat: number
+ *          fat: number
  *          }
  *        }
  *       Tuesday:...
