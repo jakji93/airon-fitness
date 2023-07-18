@@ -1,8 +1,8 @@
 const asyncHandler = require('express-async-handler');
-const openAI = require('../utils/openaiUtil');
-const WorkoutSchema = require('../models/WorkoutScheduleModel');
-const UserProfile = require('../models/UserProfileModel');
-const userUtil = require('../utils/userUtil');
+const openAI = require('../../utils/openaiUtil');
+const WorkoutSchema = require('../../models/WorkoutScheduleModel');
+const UserProfile = require('../../models/UserProfileModel');
+const userUtil = require('../../utils/userUtil');
 
 /**
  * @desc    get latest workout schedule for user (userID)
@@ -46,13 +46,9 @@ const getAllWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
 });
 
 /**
- * @desc    create workout schedule for user (userID)
- * @route   POST /workoutSchedule
- * @access  Private
+ * @desc extracted helper for generating workout schedule data and updating database
  */
-const createWorkoutSchedule = asyncHandler(async (req, res) => {
-  const id = req.user._id;
-
+const generateWorkoutScheduleHelper = async (id) => {
   const userProfile = await UserProfile.findOne({ userInfoID: id });
 
   const userData = userUtil.generateUserObject(userProfile);
@@ -63,6 +59,24 @@ const createWorkoutSchedule = asyncHandler(async (req, res) => {
     schedule: generatedSchedule,
     inputs: [],
   });
+
+  return workoutSchedule;
+};
+
+/**
+ * @desc    create workout schedule for user (userID)
+ * @route   POST /workoutSchedule
+ * @access  Private
+ */
+const createWorkoutSchedule = asyncHandler(async (req, res) => {
+  const id = req.user._id;
+
+  const mealScheduleExists = await WorkoutSchema.findOne({ userInfoID: id });
+  if (mealScheduleExists) {
+    res.status(400).json({ message: 'Workout schedule already exists' });
+  }
+
+  const workoutSchedule = await generateWorkoutScheduleHelper(id);
 
   if (workoutSchedule) {
     res.status(201).json({
@@ -89,20 +103,20 @@ const updateUserWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
   }
 
   const schedule = JSON.stringify(workoutSchedule.schedule);
-  const inputs = workoutSchedule.inputs;
-  inputs.push(req.body.customInput);
+  const updatedInputs = workoutSchedule.inputs;
+  updatedInputs.push(req.body.customInput);
 
   const userProfile = await UserProfile.findOne({ userInfoID: id });
 
   const userData = userUtil.generateUserObject(userProfile);
   const updatedWorkoutSchedule = await openAI.updateWorkoutSchedule(
     userData,
-    inputs,
+    updatedInputs,
     schedule,
   );
 
   workoutSchedule.schedule = updatedWorkoutSchedule;
-  workoutSchedule.inputs = inputs;
+  workoutSchedule.inputs = updatedInputs;
   const savedWorkoutSchedule = await workoutSchedule.save();
 
   if (savedWorkoutSchedule) {
@@ -119,4 +133,5 @@ module.exports = {
   getAllWorkoutScheduleByUserID,
   createWorkoutSchedule,
   updateUserWorkoutScheduleByUserID,
+  generateWorkoutScheduleHelper,
 };

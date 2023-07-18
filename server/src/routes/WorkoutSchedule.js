@@ -4,10 +4,9 @@ const {
   getAllWorkoutScheduleByUserID,
   createWorkoutSchedule,
   updateUserWorkoutScheduleByUserID,
-} = require('../controllers/workoutScheduleController');
+} = require('../controllers/workoutSchedule/workoutScheduleController');
 
 const router = express.Router();
-// const { generateWorkoutSchedule } = require('../utils/openaiUtil');
 const { protect } = require('../middleware/authMiddleware');
 
 /**
@@ -52,20 +51,27 @@ router.get('/', protect, getLatestWorkoutScheduleByUserID);
  *  query params: n/a
  * @response workoutSchedule for user sort from oldest to newest
  *  {schedules: [
- *    {userInfoID: string,
+*    {userInfoID: string,
  *     schedule:
- *       {Monday:
- *         {exercise: string,
- *          sets: num,
- *          reps: num,
- *          rest: num
- *          duration: num
- *          intensity: num}
- *        Tuesday:...
- *        Wednesday:...
- *        ...}}
- *     inputs: [string]},
- *    ...]}
+ *      {Monday:
+ *        {exercises:
+ *          [{exercise: string,
+ *            sets: number,
+ *            reps: number,
+ *            rest: number,
+ *            duration: number,
+ *            intensity: number.
+ *            calories: number,
+ *           },
+ *          ...
+ *          ],
+ *          total_calories: number
+ *       }
+ *      {Tuesday:... }
+ *      ...
+ *      inputs: [string]}...
+ *    ]
+ *  }
  */
 router.get('/all', protect, getAllWorkoutScheduleByUserID);
 

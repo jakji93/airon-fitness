@@ -1,8 +1,8 @@
 const asyncHandler = require('express-async-handler');
-const openAI = require('../utils/openaiUtil');
-const userUtil = require('../utils/userUtil');
-const MealSchedule = require('../models/MealScheduleModel');
-const UserProfile = require('../models/UserProfileModel');
+const openAI = require('../../utils/openaiUtil');
+const userUtil = require('../../utils/userUtil');
+const MealSchema = require('../../models/MealScheduleModel');
+const UserProfile = require('../../models/UserProfileModel');
 
 /**
  * @desc    get meal schedule for user (userID)
@@ -10,8 +10,8 @@ const UserProfile = require('../models/UserProfileModel');
  * @access  Private
  */
 const getMealScheduleByUser = asyncHandler(async (req, res) => {
-  const userMealSchedule = await MealSchedule.findOne({ userInfoID: req.user._id });
-  
+  const userMealSchedule = await MealSchema.findOne({ userInfoID: req.user._id });
+
   if (!userMealSchedule || !userMealSchedule.schedule) {
     res.status(404).json({ message: 'Meal schedule not found' });
   } else {
@@ -25,6 +25,24 @@ const getMealScheduleByUser = asyncHandler(async (req, res) => {
 });
 
 /**
+ * @desc extracted helper for generating meal schedule data and updating database
+ */
+const generateMealScheduleHelper = async (id) => {
+  const userProfile = await UserProfile.findOne({ userInfoID: id });
+
+  const userData = userUtil.generateUserObject(userProfile);
+  const generatedSchedule = await openAI.generateMealSchedule(userData);
+
+  const mealSchedule = await MealSchema.create({
+    userInfoID: id,
+    schedule: generatedSchedule,
+    inputs: [],
+  });
+
+  return mealSchedule;
+};
+
+/**
  * @desc    create meal schedule for user (userID)
  * @route   POST /mealSchedule
  * @access  Private
@@ -32,25 +50,12 @@ const getMealScheduleByUser = asyncHandler(async (req, res) => {
 const createMealScheduleForUser = asyncHandler(async (req, res) => {
   const id = req.user._id;
 
-  // Check if user already has a meal schedule
-  const mealScheduleExists = await MealSchedule.findOne({ userInfoID: id });
+  const mealScheduleExists = await MealSchema.findOne({ userInfoID: id });
   if (mealScheduleExists) {
     res.status(400).json({ message: 'Meal schedule already exists' });
   }
 
-  // Look up the profile of the user
-  const userProfile = await UserProfile.findOne({ userInfoID: id });
-
-  // Generate the schedule with OpenAI
-  const userData = userUtil.generateUserObject(userProfile);
-  const generatedSchedule = await openAI.generateMealSchedule(userData);
-
-  // Create meal in MongoDB
-  const mealSchedule = await MealSchedule.create({
-    userInfoID: id,
-    schedule: generatedSchedule,
-    inputs: [],
-  });
+  const mealSchedule = await generateMealScheduleHelper(id);
 
   if (mealSchedule) {
     res.status(201).json({
@@ -72,7 +77,7 @@ const updateMealScheduleForUser = asyncHandler(async (req, res) => {
   const id = req.user._id;
 
   // Retrieve the meal schedule (fail if user does not have one already)
-  const mealSchedule = await MealSchedule.findOne({ userInfoID: id });
+  const mealSchedule = await MealSchema.findOne({ userInfoID: id });
   if (!mealSchedule) {
     res.status(404).json({ message: 'Cannot update a meal schedule that does not exist' });
   }
@@ -108,4 +113,5 @@ module.exports = {
   getMealScheduleByUser,
   createMealScheduleForUser,
   updateMealScheduleForUser,
+  generateMealScheduleHelper,
 };

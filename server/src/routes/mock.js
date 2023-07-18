@@ -3,9 +3,9 @@ const express = require('express');
 
 const router = express.Router();
 const { protect } = require('../middleware/authMiddleware');
-const { MOCKcreateMealScheduleForUser, MOCKupdateMealScheduleForUser } = require('../controllers/mockMealScheduleController');
-const { MOCKupdateUserWorkoutScheduleByUserID, MOCKcreateWorkoutSchedule } = require('../controllers/mockWorkoutScheduleController');
-const { MOCKcreateWorkoutAndMealSchedule } = require('../controllers/mockWorkoutAndMealSchedule');
+const { MOCKcreateMealScheduleForUser, MOCKupdateMealScheduleForUser } = require('../controllers/workoutSchedule/mockMealScheduleController');
+const { MOCKupdateUserWorkoutScheduleByUserID, MOCKcreateWorkoutSchedule } = require('../controllers/workoutSchedule/mockWorkoutScheduleController');
+const { MOCKcreateWorkoutAndMealSchedule } = require('../controllers/workoutSchedule/mockWorkoutAndMealSchedule');
 
 /**
  * @desc use mock data to create a user schedule (NO OPENAI CALL)
