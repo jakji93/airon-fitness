@@ -15,12 +15,18 @@ export default function FormTextFieldInput(props) {
     half,
     value,
     setValue,
+    onChange,
     type,
     multiline,
     endAdornment,
     customTextFieldGridSize,
     autoComplete,
     required,
+    placeholder,
+    onBlur,
+    error,
+    helperText,
+    size,
   } = props;
 
   return (
@@ -37,16 +43,23 @@ export default function FormTextFieldInput(props) {
           name={id}
           label={label}
           fullWidth
-          size="small"
+          size={size}
           variant="outlined"
-          value={value ?? ''}
-          onChange={(e) => setValue(e.target.value)}
+          value={value}
+          onChange={(e) => {
+            if (setValue) setValue(e.target.value);
+            if (onChange) onChange(e);
+          }}
           type={type}
           multiline={multiline}
           InputProps={{
             endAdornment: <InputAdornment position="end">{endAdornment}</InputAdornment>,
           }}
           autoComplete={autoComplete}
+          placeholder={placeholder}
+          onBlur={onBlur}
+          error={error}
+          helperText={helperText}
         />
       </Grid>
     </>
@@ -63,12 +76,18 @@ FormTextFieldInput.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
-  setValue: PropTypes.func.isRequired,
+  setValue: PropTypes.func,
   type: PropTypes.string,
   endAdornment: PropTypes.string,
   customTextFieldGridSize: PropTypes.number,
   autoComplete: PropTypes.string,
   required: PropTypes.bool,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  onBlur: PropTypes.func,
+  error: PropTypes.bool,
+  helperText: PropTypes.string,
+  size: PropTypes.string,
 };
 
 FormTextFieldInput.defaultProps = {
@@ -81,4 +100,11 @@ FormTextFieldInput.defaultProps = {
   autoComplete: 'off',
   required: false,
   value: null,
+  placeholder: '',
+  error: false,
+  onBlur: null,
+  onChange: null,
+  setValue: null,
+  helperText: '',
+  size: 'small',
 };
