@@ -14,7 +14,11 @@ connectDB.on('error', console.error.bind(console, 'MongoDB connection error:'));
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use(cors());
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://airon-fitness.onrender.com/'],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/userInfo', userInfoRoute);
 app.use('/userProfile', userProfileRoute);
