@@ -128,6 +128,7 @@ export default function SignupRegisterAccount() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2, width: '300px' }}
+              disabled={formik.isSubmitting}
             >
               Create Account
             </Button>
