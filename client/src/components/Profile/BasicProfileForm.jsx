@@ -103,22 +103,6 @@ export default function BasicProfileForm(props) {
     },
   });
 
-  // useEffect(() => {
-  //   if (profile) {
-  //     setFirstName(profile.firstName ?? '');
-  //     setLastName(profile.lastName ?? '');
-  //     setBirthday(dayjs(profile.birthday) ?? null);
-  //     setGender(profile.gender ?? '');
-  //     setWeight(profile.weight ?? 0);
-  //     setHeight(profile.height ?? 0);
-  //     setWeightUnit(profile.weightUnit ?? WEIGHT_UNITS.KG);
-  //     setHeightUnit(profile.heightUnit ?? HEIGHT_UNITS.IN);
-  //     setExperience(profile.experience ?? '');
-  //     setGoals(profile.goals ?? []);
-  //     setApiKey(profile.apiKey ?? '');
-  //   }
-  // }, [profile, dispatch]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     formik.handleSubmit(e);

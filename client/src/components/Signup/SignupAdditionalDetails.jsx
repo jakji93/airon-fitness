@@ -160,41 +160,41 @@ export default function SignupAdditionalDetails() {
       <FormMultiInput
         id="preference"
         label="Exercise Preferences"
-        value={formik.values.preference}
-        setFieldValue={formik.setFieldValue}
         showTitleLabel={false}
         customTextFieldGridSize={12}
         placeholder="e.g. Squats"
+        value={formik.values.preference}
+        setFieldValue={formik.setFieldValue}
         size="medium"
       />
       <FormMultiInput
         id="equipment"
         label="Equipment Availability"
-        value={formik.values.equipment}
-        setFieldValue={formik.setFieldValue}
         showTitleLabel={false}
         customTextFieldGridSize={12}
         placeholder="e.g. Dumbbells"
+        value={formik.values.equipment}
+        setFieldValue={formik.setFieldValue}
         size="medium"
       />
       <FormMultiSelect
         id="healthConditions"
         label="Health Conditions & Injuries"
-        value={formik.values.healthConditions}
-        setFieldValue={formik.setFieldValue}
         options={healthConditionsAndInjuriesOptions}
         showTitleLabel={false}
         customTextFieldGridSize={6}
+        value={formik.values.healthConditions}
+        setFieldValue={formik.setFieldValue}
         size="medium"
       />
       <FormMultiSelect
         id="allergies"
         label="Allergies & Intolerances"
-        value={formik.values.allergies}
-        setFieldValue={formik.setFieldValue}
         options={allergiesIntolerancesOptions}
         showTitleLabel={false}
         customTextFieldGridSize={6}
+        value={formik.values.allergies}
+        setFieldValue={formik.setFieldValue}
         size="medium"
       />
       <FormMultiSelect
