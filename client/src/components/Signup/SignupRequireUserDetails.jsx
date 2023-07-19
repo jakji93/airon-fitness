@@ -91,14 +91,14 @@ export default function SignupRequireUserDetails() {
     >
       <FormTextFieldWithRadio
         id="weight"
-        radioId="weightUnit"
         label="Weight"
         showTitleLabel={false}
-        value={formik.values.weight}
-        onChange={formik.handleChange}
         type="number"
         radioGroups={['lb', 'kg']}
         half
+        value={formik.values.weight}
+        onChange={formik.handleChange}
+        radioId="weightUnit"
         radioSelection={formik.values.weightUnit}
         onChangeRadio={formik.handleChange}
         error={formik.touched.weight && Boolean(formik.errors.weight)}
@@ -130,11 +130,11 @@ export default function SignupRequireUserDetails() {
       <FormMultiSelect
         id="goals"
         label="Goals"
-        value={formik.values.goals}
         options={goalsOptions}
         showTitleLabel={false}
-        required
         customTextFieldGridSize={12}
+        value={formik.values.goals}
+        required
         error={formik.touched.goals && Boolean(formik.errors.goals)}
         helperText={formik.touched.goals && formik.errors.goals}
         onBlur={formik.handleBlur}
@@ -144,15 +144,16 @@ export default function SignupRequireUserDetails() {
       <FormSelect
         id="experience"
         label="Experience"
-        value={formik.values.experience}
-        onChange={formik.handleChange}
         options={experienceOptions}
         showTitleLabel={false}
         customTextFieldGridSize={6}
+        value={formik.values.experience}
+        onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         error={formik.touched.experience && Boolean(formik.errors.experience)}
         helperText={formik.touched.experience && formik.errors.experience}
         size="medium"
+        required
       />
       <Grid
         item
