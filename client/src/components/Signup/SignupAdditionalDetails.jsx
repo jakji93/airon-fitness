@@ -1,8 +1,10 @@
 import {
   Grid, Button,
 } from '@mui/material';
-import React, { useState } from 'react';
+import { useFormik } from 'formik';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
 
 import {
   healthConditionsAndInjuriesOptions, dietaryRestrictionsOptions,
@@ -10,82 +12,83 @@ import {
 } from '../../constants/AdditionalProfile';
 import { setSignup } from '../../reducers/Signup';
 import { registerUserProfile } from '../../reducers/UserProfile';
-import { restrictPercentageValue } from '../Profile/AdditionalProfileForm';
 import Form from '../Profile/Forms/Form';
 import FormMultiInput from '../Profile/Forms/FormMultiInput';
 import FormMultiSelect from '../Profile/Forms/FormMultiSelect';
 import FormSelect from '../Profile/Forms/FormSelect';
 import FormTextFieldInput from '../Profile/Forms/FormTextFieldInput';
 
+const validationSchema = yup.object({
+  bodyFat: yup
+    .number().min(0).max(100),
+  muscleMass: yup
+    .number().min(0).max(100),
+  duration: yup
+    .number().min(0),
+  weeklyAvailability: yup
+    .string('Enter your weeklyAvailability')
+    .oneOf(weeklyAvailabilityOptions, 'Must use preset option'),
+
+});
+
 export default function SignupAdditionalDetails() {
   const dispatch = useDispatch();
   const signup = useSelector((state) => state.signup);
-  const [
-    healthConditions,
-    setHealthConditions,
-  ] = useState(signup.user.healthConditions);
-  const [
-    dietRestriction,
-    setDietRestriction,
-  ] = useState(signup.user.dietRestriction ?? []);
-  const [
-    allergies,
-    setAllergies,
-  ] = useState(signup.user.allergies ?? []);
-  const [
-    weeklyAvailability,
-    setWeeklyAvailability,
-  ] = useState(signup.user.weeklyAvailability ?? null);
-  const [bodyFat, setBodyFat] = useState(signup.user.bodyFat ?? null);
-  const [
-    muscleMass,
-    setMuscleMass,
-  ] = useState(signup.user.muscleMass ?? null);
-  const [duration, setDuration] = useState(signup.user.duration ?? null);
-  const [preference, setPreference] = useState(signup.user.preference ?? ['e.g. Squat']);
-  const [equipment, setEquipment] = useState(signup.user.equipment ?? ['e.g. Dumbbells']);
-
-  const handleSubmit = () => {
-    dispatch(setSignup({
-      user: {
-        healthConditions,
-        dietRestriction,
-        allergies,
-        weeklyAvailability,
-        bodyFat,
-        muscleMass,
-        duration,
-        preference,
-        equipment,
-      },
-      step: signup.step,
-    }));
-    dispatch(registerUserProfile({
-      ...signup.user,
-      healthConditions,
-      dietRestriction,
-      allergies,
-      weeklyAvailability,
-      bodyFat,
-      muscleMass,
-      duration,
-      preference,
-      equipment,
-    }));
-  };
+  const formik = useFormik({
+    initialValues: {
+      healthConditions: signup.user.healthConditions ?? [],
+      dietRestriction: signup.user.dietRestriction ?? [],
+      allergies: signup.user.allergies ?? [],
+      weeklyAvailability: signup.user.weeklyAvailability ?? '',
+      bodyFat: signup.user.bodyFat ?? '',
+      muscleMass: signup.user.muscleMass ?? '',
+      duration: signup.user.duration ?? '',
+      preference: signup.user.preference ?? ['e.g. Squat'],
+      equipment: signup.user.equipment ?? ['e.g. Dumbbells'],
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      dispatch(setSignup({
+        user: {
+          healthConditions: values.healthConditions,
+          dietRestriction: values.dietRestriction,
+          allergies: values.allergies,
+          weeklyAvailability: values.weeklyAvailability,
+          bodyFat: values.bodyFat,
+          muscleMass: values.muscleMass,
+          duration: values.duration,
+          preference: values.preference,
+          equipment: values.equipment,
+        },
+        step: signup.step,
+      }));
+      dispatch(registerUserProfile({
+        ...signup.user,
+        healthConditions: values.healthConditions,
+        dietRestriction: values.dietRestriction,
+        allergies: values.allergies,
+        weeklyAvailability: values.weeklyAvailability,
+        bodyFat: values.bodyFat,
+        muscleMass: values.muscleMass,
+        duration: values.duration,
+        preference: values.preference,
+        equipment: values.equipment,
+      }));
+    },
+  });
 
   const handleBack = () => {
     dispatch(setSignup({
       user: {
-        healthConditions,
-        dietRestriction,
-        allergies,
-        weeklyAvailability,
-        bodyFat,
-        muscleMass,
-        duration,
-        preference,
-        equipment,
+        healthConditions: formik.values.healthConditions,
+        dietRestriction: formik.values.dietRestriction,
+        allergies: formik.values.allergies,
+        weeklyAvailability: formik.values.weeklyAvailability,
+        bodyFat: formik.values.bodyFat,
+        muscleMass: formik.values.muscleMass,
+        duration: formik.values.duration,
+        preference: formik.values.preference,
+        equipment: formik.values.equipment,
       },
       step: signup.step - 1,
     }));
@@ -93,93 +96,116 @@ export default function SignupAdditionalDetails() {
 
   return (
     <Form
-      handleSubmit={handleSubmit}
+      handleSubmit={formik.handleSubmit}
       formTitle="Optionally, provide some additional information to further customize your plan"
       containerSx={{ width: '80vw', maxWidth: '675px' }}
       centerTitle
     >
       <FormTextFieldInput
-        id="body-fat-percentage"
+        id="bodyFat"
         label="Body Fat Percentage"
-        value={bodyFat}
-        setValue={(val) => restrictPercentageValue(val, setBodyFat)}
         endAdornment="%"
         customTextFieldGridSize={6}
         showTitleLabel={false}
         type="number"
+        value={formik.values.bodyFat}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        error={formik.touched.bodyFat && Boolean(formik.errors.bodyFat)}
+        helperText={formik.touched.bodyFat && formik.errors.bodyFat}
+        size="medium"
       />
       <FormTextFieldInput
-        id="muscle-mass-percentage"
+        id="muscleMass"
         label="Muscle Mass Percentage"
-        value={muscleMass}
-        setValue={(val) => restrictPercentageValue(val, setMuscleMass)}
         endAdornment="%"
         customTextFieldGridSize={6}
         showTitleLabel={false}
         type="number"
+        value={formik.values.muscleMass}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        error={formik.touched.muscleMass && Boolean(formik.errors.muscleMass)}
+        helperText={formik.touched.muscleMass && formik.errors.muscleMass}
+        size="medium"
       />
       <FormTextFieldInput
-        id="workout-duration"
+        id="duration"
         label="Workout Duration"
-        value={duration}
-        setValue={setDuration}
         endAdornment="minutes"
         customTextFieldGridSize={6}
         showTitleLabel={false}
         type="number"
+        value={formik.values.duration}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        error={formik.touched.duration && Boolean(formik.errors.duration)}
+        helperText={formik.touched.duration && formik.errors.duration}
+        size="medium"
       />
       <FormSelect
-        id="weekly-availability"
+        id="weeklyAvailability"
         label="Weekly Availability"
-        value={weeklyAvailability}
-        setValue={setWeeklyAvailability}
         options={weeklyAvailabilityOptions}
         showTitleLabel={false}
         endAdornment="days"
         customTextFieldGridSize={6}
+        value={formik.values.weeklyAvailability}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        error={formik.touched.weeklyAvailability && Boolean(formik.errors.weeklyAvailability)}
+        helperText={formik.touched.weeklyAvailability && formik.errors.weeklyAvailability}
+        size="medium"
       />
       <FormMultiInput
-        id="exercise-preferences"
+        id="preference"
         label="Exercise Preferences"
-        value={preference}
-        setValue={setPreference}
+        value={formik.values.preference}
+        setFieldValue={formik.setFieldValue}
         showTitleLabel={false}
         customTextFieldGridSize={12}
+        placeholder="e.g. Squats"
+        size="medium"
       />
       <FormMultiInput
-        id="equipment-availability"
+        id="equipment"
         label="Equipment Availability"
-        value={equipment}
-        setValue={setEquipment}
+        value={formik.values.equipment}
+        setFieldValue={formik.setFieldValue}
         showTitleLabel={false}
         customTextFieldGridSize={12}
+        placeholder="e.g. Dumbbells"
+        size="medium"
       />
       <FormMultiSelect
-        id="health-conditions-and-injuries"
+        id="healthConditions"
         label="Health Conditions & Injuries"
-        value={healthConditions}
-        setValue={setHealthConditions}
+        value={formik.values.healthConditions}
+        setFieldValue={formik.setFieldValue}
         options={healthConditionsAndInjuriesOptions}
         showTitleLabel={false}
         customTextFieldGridSize={6}
+        size="medium"
       />
       <FormMultiSelect
-        id="allergies-intolerances"
+        id="allergies"
         label="Allergies & Intolerances"
-        value={allergies}
-        setValue={setAllergies}
+        value={formik.values.allergies}
+        setFieldValue={formik.setFieldValue}
         options={allergiesIntolerancesOptions}
         showTitleLabel={false}
         customTextFieldGridSize={6}
+        size="medium"
       />
       <FormMultiSelect
-        id="dietary-restrictions"
+        id="dietRestriction"
         label="Dietary Restrictions"
-        value={dietRestriction}
-        setValue={setDietRestriction}
+        value={formik.values.dietRestriction}
+        setFieldValue={formik.setFieldValue}
         options={dietaryRestrictionsOptions}
         showTitleLabel={false}
         customTextFieldGridSize={6}
+        size="medium"
       />
       <Grid item xs={12} sm={6} />
       <Grid
