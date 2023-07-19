@@ -4,7 +4,6 @@ import {
   Tab, Tabs,
 } from '@mui/material';
 import { Box } from '@mui/system';
-import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,32 +13,7 @@ import NoSchedule from './NoSchedule';
 import { getWorkoutAndMealSchedule, resetWorkoutAndMealScheduleStates } from '../../../reducers/WorkoutAndMealSchedule';
 import { ToastContext } from '../../common/context/ToastContextProvider';
 import RelativeSpinner from '../../common/RelativeSpinner';
-
-function TabPanel(props) {
-  const {
-    children, value, index, ...other
-  } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          {children}
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node.isRequired,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
+import TabPanel from '../../common/TabPanel';
 
 export default function TabbedScheduleView() {
   const dispatch = useDispatch();
