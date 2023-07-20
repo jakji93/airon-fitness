@@ -14,13 +14,13 @@ export default function FormMultiSelect(props) {
     id,
     label,
     half,
-    value,
-    setValue,
+    value, setValue, setFieldValue,
     options,
     showTitleLabel,
     customTextFieldGridSize,
     required,
     limitTags,
+    onBlur, error, helperText, size,
   } = props;
 
   return (
@@ -30,13 +30,17 @@ export default function FormMultiSelect(props) {
         <Autocomplete
           limitTags={limitTags}
           value={value}
-          onChange={(e, newValue) => setValue(newValue)}
+          onChange={(e, newValue) => {
+            if (setValue) setValue(newValue);
+            if (setFieldValue) setFieldValue(id, newValue);
+          }}
           sx={{ m: 1, width: '100%', margin: 0 }}
           multiple
           id="tags-standard"
           options={options}
           getOptionLabel={(option) => option}
           disableCloseOnSelect
+          size={size}
           renderOption={(menuItemProps, option, { selected }) => (
             <MenuItem
               {...menuItemProps}
@@ -61,6 +65,9 @@ export default function FormMultiSelect(props) {
                     required: value.length === 0,
                   }}
                   required={required}
+                  error={error}
+                  helperText={helperText}
+                  onBlur={onBlur}
                 />
               );
             }
@@ -85,12 +92,17 @@ FormMultiSelect.propTypes = {
   label: PropTypes.string.isRequired,
   half: PropTypes.bool,
   value: PropTypes.arrayOf(PropTypes.string).isRequired,
-  setValue: PropTypes.func.isRequired,
+  setValue: PropTypes.func,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   showTitleLabel: PropTypes.bool,
   customTextFieldGridSize: PropTypes.number,
   required: PropTypes.bool,
   limitTags: PropTypes.number,
+  setFieldValue: PropTypes.func,
+  onBlur: PropTypes.func,
+  error: PropTypes.bool,
+  helperText: PropTypes.string,
+  size: PropTypes.string,
 };
 
 FormMultiSelect.defaultProps = {
@@ -99,4 +111,10 @@ FormMultiSelect.defaultProps = {
   customTextFieldGridSize: 0,
   required: false,
   limitTags: 20,
+  setValue: null,
+  setFieldValue: null,
+  onBlur: null,
+  error: false,
+  helperText: '',
+  size: 'small',
 };

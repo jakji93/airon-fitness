@@ -30,7 +30,14 @@ export default function ToastContextProvider(props) {
 
   return (
     <>
-      <Snackbar open={open} autoHideDuration={autoHideDuration} onClose={handleClose}>
+      <Snackbar
+        open={open}
+        autoHideDuration={autoHideDuration}
+        onClose={handleClose}
+        sx={{
+          maxWidth: '20rem',
+        }}
+      >
         <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
           {message}
         </Alert>

@@ -1,31 +1,43 @@
 import {
   Grid, Button, Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import { useFormik } from 'formik';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
 
 import { setSignup } from '../../reducers/Signup';
 import Form from '../Profile/Forms/Form';
 import FormTextFieldInput from '../Profile/Forms/FormTextFieldInput';
 
+const validationSchema = yup.object({
+  apiKey: yup
+    .string('Select a gender')
+    .required('api key is required'),
+});
+
 export default function SignupAPIKey() {
   const dispatch = useDispatch();
   const signup = useSelector((state) => state.signup);
-  const [apiKey, setApiKey] = useState(signup.user.apiKey ?? '');
-
-  const handleSubmit = () => {
-    dispatch(setSignup({
-      user: {
-        apiKey,
-      },
-      step: signup.step + 1,
-    }));
-  };
+  const formik = useFormik({
+    initialValues: {
+      apiKey: signup.user.apiKey ?? '',
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      dispatch(setSignup({
+        user: {
+          apiKey: values.apiKey,
+        },
+        step: signup.step + 1,
+      }));
+    },
+  });
 
   const handleBack = () => {
     dispatch(setSignup({
       user: {
-        apiKey,
+        apiKey: formik.values.apiKey,
       },
       step: signup.step - 1,
     }));
@@ -33,7 +45,7 @@ export default function SignupAPIKey() {
 
   return (
     <Form
-      handleSubmit={handleSubmit}
+      handleSubmit={formik.handleSubmit}
       formTitle="In order to create your fitness plan, we need an OpenAI API Key."
       containerSx={{ width: '80vw', maxWidth: '675px' }}
       centerTitle
@@ -48,14 +60,18 @@ export default function SignupAPIKey() {
         </Typography>
       </Grid>
       <FormTextFieldInput
-        id="api-key"
+        id="apiKey"
         label="API Key"
-        value={apiKey}
-        setValue={setApiKey}
         showTitleLabel={false}
-        autoComplete="api-key"
+        autoComplete="apiKey"
         customTextFieldGridSize={12}
         required
+        value={formik.values.apiKey}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        error={formik.touched.apiKey && Boolean(formik.errors.apiKey)}
+        helperText={formik.touched.apiKey && formik.errors.apiKey}
+        size="medium"
       />
       <Grid
         item
