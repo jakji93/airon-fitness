@@ -20,6 +20,7 @@ export default function FormMultiSelect(props) {
     showTitleLabel,
     customTextFieldGridSize,
     required,
+    limitTags,
   } = props;
 
   return (
@@ -27,6 +28,7 @@ export default function FormMultiSelect(props) {
       { showTitleLabel && <GridInputLabel id={id} label={label} /> }
       <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)}>
         <Autocomplete
+          limitTags={limitTags}
           value={value}
           onChange={(e, newValue) => setValue(newValue)}
           sx={{ m: 1, width: '100%', margin: 0 }}
@@ -88,6 +90,7 @@ FormMultiSelect.propTypes = {
   showTitleLabel: PropTypes.bool,
   customTextFieldGridSize: PropTypes.number,
   required: PropTypes.bool,
+  limitTags: PropTypes.number,
 };
 
 FormMultiSelect.defaultProps = {
@@ -95,4 +98,5 @@ FormMultiSelect.defaultProps = {
   showTitleLabel: true,
   customTextFieldGridSize: 0,
   required: false,
+  limitTags: 20,
 };

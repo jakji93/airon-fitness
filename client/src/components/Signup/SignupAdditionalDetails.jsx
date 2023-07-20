@@ -161,7 +161,8 @@ export default function SignupAdditionalDetails() {
         setValue={setHealthConditions}
         options={healthConditionsAndInjuriesOptions}
         showTitleLabel={false}
-        customTextFieldGridSize={6}
+        customTextFieldGridSize={12}
+        limitTags={3}
       />
       <FormMultiSelect
         id="allergies-intolerances"
@@ -170,7 +171,8 @@ export default function SignupAdditionalDetails() {
         setValue={setAllergies}
         options={allergiesIntolerancesOptions}
         showTitleLabel={false}
-        customTextFieldGridSize={6}
+        customTextFieldGridSize={12}
+        limitTags={3}
       />
       <FormMultiSelect
         id="dietary-restrictions"
@@ -179,9 +181,9 @@ export default function SignupAdditionalDetails() {
         setValue={setDietRestriction}
         options={dietaryRestrictionsOptions}
         showTitleLabel={false}
-        customTextFieldGridSize={6}
+        customTextFieldGridSize={12}
+        limitTags={3}
       />
-      <Grid item xs={12} sm={6} />
       <Grid
         item
         xs={12}
