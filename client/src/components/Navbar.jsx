@@ -4,14 +4,14 @@ import {
   AppBar, Container, Toolbar, Typography, Box, IconButton, Menu, MenuItem, Button, Tooltip, Avatar,
 } from '@mui/material';
 import * as React from 'react';
-import { useMemo, useEffect } from 'react';
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { ToastContext } from './common/context/ToastContextProvider';
 import { arrayBufferToBase64, base64Flag } from './Profile/AvatarUpload';
 import { logout, resetAuth } from '../reducers/Auth';
-import { getUserProfile, logoutUserProfile, resetUserProfileStates } from '../reducers/UserProfile';
+import { logoutUserProfile } from '../reducers/UserProfile';
 
 const pages = [['home', '/app'], ['about', '/app/about'], ['profile', '/app/profile']];
 
@@ -24,31 +24,15 @@ function ResponsiveAppBar() {
   const settings = useMemo(() => [
     ['Profile', () => navigate('/app/profile')],
     ['Logout', () => {
+      navigate('/login');
       dispatch(logout());
       dispatch(resetAuth());
       dispatch(logoutUserProfile());
-      navigate('/login');
       openToast('success', 'You have been logged out');
     }],
   ], [navigate, dispatch]);
-  const {
-    profile, isError, isSuccess, message,
-  } = useSelector((state) => state.userProfile);
+  const { profile } = useSelector((state) => state.userProfile);
   const profileImage = base64Flag + arrayBufferToBase64(profile?.profileImage?.data?.data);
-  useEffect(() => {
-    if (!profile) dispatch(getUserProfile());
-  }, []);
-
-  useEffect(() => {
-    if (isError) {
-      openToast('error', message);
-      dispatch(resetUserProfileStates());
-    }
-
-    if (isSuccess || profile) {
-      dispatch(resetUserProfileStates());
-    }
-  }, [profile, isError, isSuccess, message, dispatch]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
