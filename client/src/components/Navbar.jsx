@@ -4,13 +4,14 @@ import {
   AppBar, Container, Toolbar, Typography, Box, IconButton, Menu, MenuItem, Button, Tooltip, Avatar,
 } from '@mui/material';
 import * as React from 'react';
-import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useMemo, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { ToastContext } from './common/context/ToastContextProvider';
+import { arrayBufferToBase64, base64Flag } from './Profile/AvatarUpload';
 import { logout, resetAuth } from '../reducers/Auth';
-import { logoutUserProfile } from '../reducers/UserProfile';
+import { getUserProfile, logoutUserProfile, resetUserProfileStates } from '../reducers/UserProfile';
 
 const pages = [['home', '/app'], ['about', '/app/about'], ['profile', '/app/profile']];
 
@@ -18,7 +19,6 @@ function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const openToast = React.useContext(ToastContext);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const settings = useMemo(() => [
@@ -31,6 +31,24 @@ function ResponsiveAppBar() {
       openToast('success', 'You have been logged out');
     }],
   ], [navigate, dispatch]);
+  const {
+    profile, isError, isSuccess, message,
+  } = useSelector((state) => state.userProfile);
+  const profileImage = base64Flag + arrayBufferToBase64(profile?.profileImage?.data?.data);
+  useEffect(() => {
+    if (!profile) dispatch(getUserProfile());
+  }, []);
+
+  useEffect(() => {
+    if (isError) {
+      openToast('error', message);
+      dispatch(resetUserProfileStates());
+    }
+
+    if (isSuccess || profile) {
+      dispatch(resetUserProfileStates());
+    }
+  }, [profile, isError, isSuccess, message, dispatch]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -142,7 +160,10 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  alt={profile?.firstName ?? '?'}
+                  src={profileImage ?? '/static/images/avatar/2.jpg'}
+                />
               </IconButton>
             </Tooltip>
             <Menu

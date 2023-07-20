@@ -20,12 +20,11 @@ const BigAvatar = styled(Avatar)(({ theme }) => ({
   margin: `0 auto ${theme.spacing(2)}px`,
   border: `1px solid ${grey[500]}`,
   boxShadow: `0 0 1px 0 ${grey[500]} inset, 0 0 1px 0 ${grey[500]}`,
-
+  fontSize: '3rem',
 }));
 
-const base64Flag = 'data:image/jpeg;base64,';
-
-const arrayBufferToBase64 = (buffer) => {
+export const base64Flag = 'data:image/jpeg;base64,';
+export const arrayBufferToBase64 = (buffer) => {
   let binary = '';
   const bytes = [].slice.call(new Uint8Array(buffer));
   bytes.forEach((b) => {
@@ -42,7 +41,7 @@ export default function AvatarUpload() {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.userProfile.profile);
   const profileImage = base64Flag + arrayBufferToBase64(profile?.profileImage?.data?.data);
-  const [image, _setImage] = useState(profileImage ?? null);
+  const [image, _setImage] = useState(profileImage ?? '/static/img/avatars/default-profile.svg');
   const inputFileRef = createRef();
   const imageExists = image && image !== base64Flag;
 
@@ -86,8 +85,8 @@ export default function AvatarUpload() {
       justifyContent="center"
     >
       <BigAvatar
-        alt="Avatar"
-        src={image || '/static/img/avatars/default-profile.svg'}
+        alt={profile?.firstName ?? '?'}
+        src={image}
         imgProps={{
           style: {
             maxHeight: '100%',
