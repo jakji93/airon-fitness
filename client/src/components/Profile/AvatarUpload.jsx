@@ -6,7 +6,13 @@ import {
   Avatar, Box, Button, styled,
 } from '@mui/material';
 import { grey } from '@mui/material/colors';
-import React, { createRef, useState } from 'react';
+import React, {
+  createRef, useContext, useState,
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { updateUserProfile, updateUserProfileImage } from '../../reducers/UserProfile';
+import { ToastContext } from '../common/context/ToastContextProvider';
 
 const BigAvatar = styled(Avatar)(({ theme }) => ({
   width: '120px',
@@ -17,12 +23,28 @@ const BigAvatar = styled(Avatar)(({ theme }) => ({
 
 }));
 
+const base64Flag = 'data:image/jpeg;base64,';
+
+const arrayBufferToBase64 = (buffer) => {
+  let binary = '';
+  const bytes = [].slice.call(new Uint8Array(buffer));
+  bytes.forEach((b) => {
+    binary += String.fromCharCode(b);
+  });
+  return window.btoa(binary);
+};
+
 /**
  * Inspired from: https://gist.github.com/Pacheco95/aa5c28b7a61dacba5b8f55f84d1fa591
  */
 export default function AvatarUpload() {
-  const [image, _setImage] = useState(null);
+  const openToast = useContext(ToastContext);
+  const dispatch = useDispatch();
+  const profile = useSelector((state) => state.userProfile.profile);
+  const profileImage = base64Flag + arrayBufferToBase64(profile?.profileImage?.data?.data);
+  const [image, _setImage] = useState(profileImage ?? null);
   const inputFileRef = createRef();
+  const imageExists = image && image !== base64Flag;
 
   const cleanup = () => {
     URL.revokeObjectURL(image);
@@ -30,22 +52,27 @@ export default function AvatarUpload() {
   };
 
   const setImage = (newImage) => {
-    if (image) {
+    if (imageExists) {
       cleanup();
+      dispatch(updateUserProfile({ profileImage: 'blank' }));
     }
     _setImage(newImage);
   };
 
   const handleOnChange = (event) => {
     const newImage = event.target?.files?.[0];
+    if (!newImage) return;
 
-    if (newImage) {
-      setImage(URL.createObjectURL(newImage));
+    if (newImage.size > 500000) {
+      openToast('error', 'File size is too large, please use a smaller picture');
+      return;
     }
+    setImage(URL.createObjectURL(newImage));
+    dispatch(updateUserProfileImage(newImage));
   };
 
   const handleClick = (event) => {
-    if (image) {
+    if (imageExists) {
       event.preventDefault();
       setImage(null);
     }
@@ -84,8 +111,8 @@ export default function AvatarUpload() {
           onClick={handleClick}
           component="span"
         >
-          {image ? <DeleteIcon /> : <UploadIcon />}
-          {image ? 'Delete' : 'Upload'}
+          {imageExists ? <DeleteIcon /> : <UploadIcon />}
+          {imageExists ? 'Delete' : 'Upload'}
         </Button>
       </label>
     </Box>
