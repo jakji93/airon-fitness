@@ -35,7 +35,7 @@ export default function ExistingWorkoutSchedule() {
         }}
       >
         {schedule && Object.keys(schedule).map((day, index) => {
-          const daySchedule = schedule[day];
+          const daySchedule = schedule[day].exercises;
           counter += 1;
           return (
             <div key={counter}>
