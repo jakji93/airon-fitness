@@ -2,24 +2,48 @@ import {
   Box, Button, CssBaseline, Grid, TextField, Typography,
 } from '@mui/material';
 import { Container } from '@mui/system';
-import React, { useContext, useEffect, useState } from 'react';
+import { useFormik } from 'formik';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import * as yup from 'yup';
 
 import { ToastContext } from '../components/common/context/ToastContextProvider';
 import Spinner from '../components/common/Spinner';
 import { login, resetAuth } from '../reducers/Auth';
 
+const validationSchema = yup.object({
+  email: yup
+    .string('Enter your email')
+    .email('Enter a valid email')
+    .required('Email is required'),
+  password: yup
+    .string('Enter your password')
+    .min(8, 'Password should be of minimum 8 characters length')
+    .required('Password is required'),
+});
+
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const openToast = useContext(ToastContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const {
     user, isLoading, isError, isSuccess, message,
   } = useSelector((state) => state.auth);
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      dispatch(login({
+        email: values.email,
+        password: values.password,
+      }));
+    },
+  });
 
   useEffect(() => {
     if (isError) {
@@ -34,7 +58,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    formik.handleSubmit(e);
   };
 
   if (isLoading) {
@@ -73,8 +97,12 @@ export default function Login() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="johndoe@email.com"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -86,8 +114,11 @@ export default function Login() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.password && Boolean(formik.errors.password)}
+                  helperText={formik.touched.password && formik.errors.password}
                 />
               </Grid>
             </Grid>

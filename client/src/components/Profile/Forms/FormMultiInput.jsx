@@ -13,11 +13,12 @@ export default function FormMultiInput(props) {
     id,
     label,
     half,
-    value,
-    setValue,
+    value, setValue, setFieldValue,
     showTitleLabel,
     customTextFieldGridSize,
     required,
+    size,
+    placeholder,
   } = props;
 
   return (
@@ -35,9 +36,14 @@ export default function FormMultiInput(props) {
           value={value}
           options={[]}
           freeSolo
-          onChange={(e, newValue) => setValue(newValue)}
+          onChange={(e, newValue) => {
+            if (setValue) setValue(newValue);
+            if (setFieldValue) setFieldValue(id, newValue);
+          }}
+          placeholder={placeholder}
           sx={{ width: '100%' }}
           getOptionLabel={(option) => option}
+          size={size}
           renderTags={(val, getTagProps) => val.map((option, index) => (
             <Chip
               variant="filled"
@@ -52,16 +58,15 @@ export default function FormMultiInput(props) {
                   {...params}
                   variant="outlined"
                   label={label}
-                  placeholder={label}
                   inputProps={{
                     ...params.inputProps,
                     required: value.length === 0,
                   }}
                   required={required}
+                  placeholder={placeholder}
                 />
               );
             }
-
             return (
               <TextField
                 {...params}
@@ -82,10 +87,13 @@ FormMultiInput.propTypes = {
   label: PropTypes.string.isRequired,
   half: PropTypes.bool,
   value: PropTypes.arrayOf(PropTypes.string).isRequired,
-  setValue: PropTypes.func.isRequired,
+  setValue: PropTypes.func,
   showTitleLabel: PropTypes.bool,
   customTextFieldGridSize: PropTypes.number,
   required: PropTypes.bool,
+  setFieldValue: PropTypes.func,
+  size: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 FormMultiInput.defaultProps = {
@@ -93,4 +101,8 @@ FormMultiInput.defaultProps = {
   showTitleLabel: true,
   customTextFieldGridSize: 0,
   required: false,
+  setFieldValue: null,
+  setValue: null,
+  size: 'small',
+  placeholder: '',
 };

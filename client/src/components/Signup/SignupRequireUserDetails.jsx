@@ -1,8 +1,10 @@
 import {
   Grid, Button,
 } from '@mui/material';
-import React, { useState } from 'react';
+import { useFormik } from 'formik';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
 
 import {
   HEIGHT_UNITS,
@@ -14,39 +16,67 @@ import FormMultiSelect from '../Profile/Forms/FormMultiSelect';
 import FormSelect from '../Profile/Forms/FormSelect';
 import FormTextFieldWithRadio from '../Profile/Forms/FormTextWithRadio';
 
+const validationSchema = yup.object({
+  weight: yup
+    .number('Enter your weight')
+    .required('weight is required'),
+  height: yup
+    .number('Enter your height')
+    .required('height is required'),
+  weightUnit: yup
+    .string()
+    .required(),
+  heightUnit: yup
+    .string()
+    .required(),
+  experience: yup
+    .string('Enter your experience')
+    .oneOf(experienceOptions, 'Must use preset option')
+    .required('experience is required'),
+  goals: yup
+    .array('Enter your goals')
+    .of(yup.string().oneOf(goalsOptions, 'Must use preset option'))
+    .min(1, 'At least one goal is required')
+    .required('goals are required'),
+});
+
 export default function SignupRequireUserDetails() {
   const dispatch = useDispatch();
   const signup = useSelector((state) => state.signup);
-  const [weight, setWeight] = useState(signup.user.weight ?? null);
-  const [height, setHeight] = useState(signup.user.height ?? null);
-  const [weightUnit, setWeightUnit] = useState(signup.user.weightUnit ?? WEIGHT_UNITS.KG);
-  const [heightUnit, setHeightUnit] = useState(signup.user.heightUnit ?? HEIGHT_UNITS.IN);
-  const [experience, setExperience] = useState(signup.user.experience ?? '');
-  const [goals, setGoals] = useState(signup.user.goals ?? []);
-
-  const handleSubmit = () => {
-    dispatch(setSignup({
-      user: {
-        weight,
-        height,
-        weightUnit,
-        heightUnit,
-        experience,
-        goals,
-      },
-      step: signup.step + 1,
-    }));
-  };
+  const formik = useFormik({
+    initialValues: {
+      weight: signup.user.weight ?? '',
+      height: signup.user.height ?? '',
+      weightUnit: signup.user.weightUnit ?? WEIGHT_UNITS.KG,
+      heightUnit: signup.user.heightUnit ?? HEIGHT_UNITS.IN,
+      experience: signup.user.experience ?? '',
+      goals: signup.user.goals ?? [],
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      dispatch(setSignup({
+        user: {
+          weight: values.weight,
+          height: values.height,
+          weightUnit: values.weightUnit,
+          heightUnit: values.heightUnit,
+          experience: values.experience,
+          goals: values.goals,
+        },
+        step: signup.step + 1,
+      }));
+    },
+  });
 
   const handleBack = () => {
     dispatch(setSignup({
       user: {
-        weight,
-        height,
-        weightUnit,
-        heightUnit,
-        experience,
-        goals,
+        weight: formik.values.weight,
+        height: formik.values.height,
+        weightUnit: formik.values.weightUnit,
+        heightUnit: formik.values.heightUnit,
+        experience: formik.values.experience,
+        goals: formik.values.goals,
       },
       step: signup.step - 1,
     }));
@@ -54,55 +84,76 @@ export default function SignupRequireUserDetails() {
 
   return (
     <Form
-      handleSubmit={handleSubmit}
+      handleSubmit={formik.handleSubmit}
       formTitle="We will need some important information to tailor a plan for you"
-      containerSx={{ width: '80vw', maxWidth: '675px' }}
+      containerSx={{ width: '80vw', maxWidth: '800px' }}
       centerTitle
     >
       <FormTextFieldWithRadio
         id="weight"
         label="Weight"
         showTitleLabel={false}
-        value={weight}
-        setValue={setWeight}
         type="number"
         radioGroups={['lb', 'kg']}
         half
-        radioSelection={weightUnit}
-        setRadioSelection={setWeightUnit}
+        value={formik.values.weight}
+        onChange={formik.handleChange}
+        radioId="weightUnit"
+        radioSelection={formik.values.weightUnit}
+        onChangeRadio={formik.handleChange}
+        error={formik.touched.weight && Boolean(formik.errors.weight)}
+        helperText={formik.touched.weight && formik.errors.weight}
+        onBlur={formik.handleBlur}
+        placeholder="69"
+        size="medium"
         required
       />
       <FormTextFieldWithRadio
         id="height"
         label="Height"
         showTitleLabel={false}
-        value={height}
-        setValue={setHeight}
         type="number"
         radioGroups={['cm', 'in']}
         half
-        radioSelection={heightUnit}
-        setRadioSelection={setHeightUnit}
         required
+        radioId="heightUnit"
+        value={formik.values.height}
+        onChange={formik.handleChange}
+        radioSelection={formik.values.heightUnit}
+        onChangeRadio={formik.handleChange}
+        error={formik.touched.height && Boolean(formik.errors.height)}
+        helperText={formik.touched.height && formik.errors.height}
+        onBlur={formik.handleBlur}
+        placeholder="69"
+        size="medium"
       />
       <FormMultiSelect
         id="goals"
         label="Goals"
-        value={goals}
-        setValue={setGoals}
         options={goalsOptions}
         showTitleLabel={false}
-        required
         customTextFieldGridSize={12}
+        value={formik.values.goals}
+        required
+        error={formik.touched.goals && Boolean(formik.errors.goals)}
+        helperText={formik.touched.goals && formik.errors.goals}
+        onBlur={formik.handleBlur}
+        setFieldValue={formik.setFieldValue}
+        size="medium"
       />
       <FormSelect
         id="experience"
         label="Experience"
-        value={experience}
-        setValue={setExperience}
         options={experienceOptions}
         showTitleLabel={false}
         customTextFieldGridSize={6}
+        value={formik.values.experience}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        error={formik.touched.experience && Boolean(formik.errors.experience)}
+        helperText={formik.touched.experience && formik.errors.experience}
+        size="medium"
+        required
       />
       <Grid
         item
