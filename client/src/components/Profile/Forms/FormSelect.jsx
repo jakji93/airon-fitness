@@ -18,16 +18,15 @@ export default function FormSelect(props) {
     options,
     endAdornment,
     customTextFieldGridSize,
+    fillHeight,
     required,
   } = props;
-
-  console.log(value);
 
   return (
     <>
       { showTitleLabel && <GridInputLabel id={id} label={label} /> }
-      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)}>
-        <FormControl fullWidth size="small">
+      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)} sx={fillHeight ? { height: '100%' } : ''}>
+        <FormControl fullWidth size="small" sx={fillHeight ? { height: '100%' } : ''}>
           <InputLabel
             id={`${id}-label`}
             sx={{
@@ -43,6 +42,7 @@ export default function FormSelect(props) {
             value={value}
             label={label}
             onChange={(e) => setValue(e.target.value)}
+            sx={fillHeight ? { height: '100%' } : ''}
             endAdornment={(
               <InputAdornment
                 sx={{
@@ -75,6 +75,7 @@ FormSelect.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   endAdornment: PropTypes.string,
   customTextFieldGridSize: PropTypes.number,
+  fillHeight: PropTypes.bool,
   required: PropTypes.bool,
 };
 
@@ -84,4 +85,5 @@ FormSelect.defaultProps = {
   showTitleLabel: true,
   customTextFieldGridSize: 0,
   required: false,
+  fillHeight: false,
 };

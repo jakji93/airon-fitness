@@ -304,7 +304,7 @@ export default function ChatArea() {
           <Grid container style={{ padding: '20px' }}>
             <Grid item xs={11}>
               { inputMode === 0
-                ? <TextField id="chatbox-inputfield" label="Type to request/update a plan" onKeyDown={handleSubmit} fullWidth />
+                ? <TextField id="chatbox-inputfield" label="Provide a valid value" onKeyDown={handleSubmit} fullWidth />
                 : ''}
               {
                 inputMode === 1
@@ -316,6 +316,8 @@ export default function ChatArea() {
                       options={formOptions}
                       setValue={setFormSelect}
                       value={formSelect}
+                      customTextFieldGridSize={12}
+                      fillHeight
                     />
                   ) : ''
               }
@@ -329,6 +331,7 @@ export default function ChatArea() {
                       options={formOptions}
                       setValue={setInputMultiSelect}
                       value={inputMultiSelect}
+                      customTextFieldGridSize={12}
                     />
                   ) : ''
               }
