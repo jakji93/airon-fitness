@@ -5,10 +5,11 @@ import {
 } from '@mui/material';
 import * as React from 'react';
 import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { ToastContext } from './common/context/ToastContextProvider';
+import { arrayBufferToBase64, base64Flag } from './Profile/AvatarUpload';
 import { logout, resetAuth } from '../reducers/Auth';
 import { logoutUserProfile } from '../reducers/UserProfile';
 import { resetScheduleState } from '../reducers/WorkoutAndMealSchedule';
@@ -19,20 +20,21 @@ function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const openToast = React.useContext(ToastContext);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const settings = useMemo(() => [
     ['Profile', () => navigate('/app/profile')],
     ['Logout', () => {
+      navigate('/login');
       dispatch(logout());
       dispatch(resetAuth());
       dispatch(logoutUserProfile());
       dispatch(resetScheduleState());
-      navigate('/login');
       openToast('success', 'You have been logged out');
     }],
   ], [navigate, dispatch]);
+  const { profile } = useSelector((state) => state.userProfile);
+  const profileImage = base64Flag + arrayBufferToBase64(profile?.profileImage?.data?.data);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -144,7 +146,10 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  alt={profile?.firstName ?? '?'}
+                  src={profileImage ?? '/static/images/avatar/2.jpg'}
+                />
               </IconButton>
             </Tooltip>
             <Menu
