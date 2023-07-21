@@ -13,7 +13,7 @@ function MealScheduleCollapse(props) {
     index,
     handleClick,
     selectedIndex,
-    dayPlan,
+    daySchedule,
   } = props;
 
   return (
@@ -22,16 +22,16 @@ function MealScheduleCollapse(props) {
         <ListItemText primary={`Day ${index + 1}`} />
         {index === selectedIndex ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
-      {dayPlan && Object.keys(dayPlan).map((meal) => (
+      {daySchedule && Object.keys(daySchedule).map((meal) => (
         <Collapse
           in={index === selectedIndex}
           timeout="auto"
           unmountOnExit
-          key={`${index} ${meal.toString()}`}
+          key={`${index}-${meal.toString()}`}
         >
           <ListItem>
             <ListItemText
-              secondary={`${meal.toString()}: ${dayPlan[meal]}`}
+              secondary={`${meal.toString()}: ${daySchedule[meal]}`}
             />
           </ListItem>
         </Collapse>
@@ -43,8 +43,8 @@ function MealScheduleCollapse(props) {
 MealScheduleCollapse.propTypes = {
   index: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
-  selectedIndex: PropTypes.string.isRequired,
-  dayPlan: PropTypes.shape({
+  selectedIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  daySchedule: PropTypes.shape({
     breakfast: PropTypes.string,
     snack1: PropTypes.string,
     lunch: PropTypes.string,
@@ -69,10 +69,8 @@ export default function ExistingMealSchedule() {
   };
 
   useEffect(() => {
-    // TODO: uncomment this when backend api is set up
-    // if (fitnessPlan.loading || fitnessPlan.error) return;
     setSchedule(mealSchedule.schedule);
-  }, []);
+  }, [mealSchedule]);
 
   return (
     <Grid container>
@@ -83,7 +81,7 @@ export default function ExistingMealSchedule() {
       >
         {schedule && Object.keys(schedule).map((day, index) => (
           <MealScheduleCollapse
-            dayPlan={schedule[day]}
+            daySchedule={schedule[day]}
             handleClick={handleClick}
             index={index}
             key={`${day} meal`}
