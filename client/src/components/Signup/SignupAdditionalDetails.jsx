@@ -182,7 +182,8 @@ export default function SignupAdditionalDetails() {
         label="Health Conditions & Injuries"
         options={healthConditionsAndInjuriesOptions}
         showTitleLabel={false}
-        customTextFieldGridSize={6}
+        customTextFieldGridSize={12}
+        limitTags={3}
         value={formik.values.healthConditions}
         setFieldValue={formik.setFieldValue}
         size="medium"
@@ -192,7 +193,8 @@ export default function SignupAdditionalDetails() {
         label="Allergies & Intolerances"
         options={allergiesIntolerancesOptions}
         showTitleLabel={false}
-        customTextFieldGridSize={6}
+        customTextFieldGridSize={12}
+        limitTags={3}
         value={formik.values.allergies}
         setFieldValue={formik.setFieldValue}
         size="medium"
@@ -204,10 +206,10 @@ export default function SignupAdditionalDetails() {
         setFieldValue={formik.setFieldValue}
         options={dietaryRestrictionsOptions}
         showTitleLabel={false}
-        customTextFieldGridSize={6}
+        customTextFieldGridSize={12}
+        limitTags={3}
         size="medium"
       />
-      <Grid item xs={12} sm={6} />
       <Grid
         item
         xs={12}

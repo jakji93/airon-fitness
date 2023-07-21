@@ -29,6 +29,7 @@ const buildUserProfileRequestBody = (userData) => {
   if (userData.goals) requestBody.goals = userData.goals;
   if (userData.healthConditions) requestBody.healthConditions = userData.healthConditions;
   if (userData.dietRestriction) requestBody.dietRestriction = userData.dietRestriction;
+  if (userData.profileImage) requestBody.profileImage = userData.profileImage;
 
   return requestBody;
 };
@@ -60,10 +61,24 @@ const getUserProfile = async () => {
   return response.data;
 };
 
+const updateProfileImage = async (file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      ...createBearerTokenHeader(),
+    },
+  };
+  const response = await axios.put(API_URL, formData, config);
+  return response.data;
+};
+
 const userProfileService = {
   createUserProfile,
   getUserProfile,
   updateUserProfile,
+  updateProfileImage,
 };
 
 export default userProfileService;
