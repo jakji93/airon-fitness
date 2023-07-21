@@ -38,6 +38,8 @@ export default function ExistingMealSchedule() {
       >
         {schedule && Object.keys(schedule).map((day, index) => {
           const dayPlan = schedule[day];
+          const mealPlan = { ...dayPlan };
+          delete mealPlan.nutrition_totals;
           counter += 1;
           return (
             <div>
@@ -45,11 +47,11 @@ export default function ExistingMealSchedule() {
                 <ListItemText primary={`Day ${counter}`} />
                 {index === selectedIndex ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
-              {dayPlan && Object.keys(dayPlan).map((meal) => (
+              {mealPlan && Object.keys(mealPlan).map((meal) => (
                 <Collapse in={index === selectedIndex} timeout="auto" unmountOnExit>
                   <ListItem>
                     <ListItemText
-                      secondary={`${meal.toString()}: ${dayPlan[meal]}`}
+                      secondary={`${meal.toString()}: ${mealPlan[meal]}`}
                     />
                   </ListItem>
                 </Collapse>
