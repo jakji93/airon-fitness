@@ -7,6 +7,9 @@ import { useDispatch, useStore } from 'react-redux';
 
 import ChatMessages from './ChatMessages';
 import {
+  createWorkoutString, createMealString, starterOptions, starterLabel,
+} from './util';
+import {
   allergiesIntolerancesOptions,
   dietaryRestrictionsOptions,
   healthConditionsAndInjuriesOptions,
@@ -20,9 +23,6 @@ import {
 } from '../../../reducers/WorkoutAndMealSchedule';
 import FormMultiSelect from '../../Profile/Forms/FormMultiSelect';
 import FormSelect from '../../Profile/Forms/FormSelect';
-
-const starterOptions = ['Edit Profile', 'View Meal Plan', 'View Workout Plan'];
-const starterLabel = 'Choose an option';
 
 export default function ChatArea() {
   const [messages, setMessages] = useState([{ content: 'Welcome to AI-ron Fitness! How can I help you?', isSelf: false }]);
@@ -51,6 +51,37 @@ export default function ChatArea() {
     setInputMode(1);
     setMode('starter');
     setFormOptions(starterOptions);
+  };
+
+  const generatePlan = async (newMessages, call, customInput) => {
+    switch (call) {
+      case 'new':
+        await dispatch(scheduleMode === 'Workout' ? createWorkoutSchedule() : createMealSchedule());
+        break;
+      case 'curr':
+        await dispatch(scheduleMode === 'Workout' ? getWorkoutSchedule() : getMealSchedule());
+        break;
+      case 'custom':
+        await dispatch(scheduleMode === 'Workout' ? updateWorkoutSchedule(customInput) : updateMealSchedule(customInput));
+        break;
+      default:
+    }
+
+    const state = store.getState();
+    let schedule;
+
+    if (state.workoutAndMealSchedule.isError) throw new Error('Create schedule failed');
+
+    if (scheduleMode === 'Workout') {
+      schedule = state.workoutAndMealSchedule.workoutSchedule.schedule;
+      createWorkoutString(schedule, newMessages);
+    } else {
+      schedule = state.workoutAndMealSchedule.mealSchedule;
+      createMealString(schedule, newMessages);
+    }
+
+    newMessages.push({ content: 'Is there anything else I can help with?', isSelf: false });
+    resetValues();
   };
 
   const handleStarterResponse = (newMessages, input) => {
@@ -158,63 +189,6 @@ export default function ChatArea() {
     } else {
       handleSelectEdit(newMessages);
     }
-  };
-
-  const createWorkoutString = (schedule, newMessages) => {
-    Object.entries(schedule).forEach(([day, exercises]) => {
-      let workoutString = '';
-      const exercisesArray = Object.entries(exercises);
-      let workout = `${day}\n`;
-
-      exercisesArray.forEach((ex) => {
-        workout += `Exercise ${Number(ex[0]) + 1}:  ${ex[1].exercise} ${ex[1].reps} Reps, ${ex[1].sets} Sets\n`;
-      });
-
-      workoutString += workout;
-      newMessages.push({ content: workoutString, isSelf: false });
-    });
-  };
-
-  const createMealString = (schedule, newMessages) => {
-    Object.entries(schedule.schedule).forEach(([day, meals]) => {
-      const meal = Object.entries(meals);
-      newMessages.push({ content: `${day}\n`, isSelf: false });
-
-      meal.forEach((ex, idx) => {
-        newMessages.push({ content: idx !== 5 ? `${ex[0]}: ${ex[1]}\n` : '', isSelf: false });
-      });
-    });
-  };
-
-  const generatePlan = async (newMessages, call, customInput) => {
-    switch (call) {
-      case 'new':
-        await dispatch(scheduleMode === 'Workout' ? createWorkoutSchedule() : createMealSchedule());
-        break;
-      case 'curr':
-        await dispatch(scheduleMode === 'Workout' ? getWorkoutSchedule() : getMealSchedule());
-        break;
-      case 'custom':
-        await dispatch(scheduleMode === 'Workout' ? updateWorkoutSchedule(customInput) : updateMealSchedule(customInput));
-        break;
-      default:
-    }
-
-    const state = store.getState();
-    let schedule;
-
-    if (state.workoutAndMealSchedule.isError) throw new Error('Create schedule failed');
-
-    if (scheduleMode === 'Workout') {
-      schedule = state.workoutAndMealSchedule.workoutSchedule.schedule;
-      createWorkoutString(schedule, newMessages);
-    } else {
-      schedule = state.workoutAndMealSchedule.mealSchedule;
-      createMealString(schedule, newMessages);
-    }
-
-    newMessages.push({ content: 'Is there anything else I can help with?', isSelf: false });
-    resetValues();
   };
 
   const handleConfirmCustomInput = async (newMessages) => {
