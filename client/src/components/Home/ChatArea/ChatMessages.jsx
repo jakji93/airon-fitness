@@ -31,7 +31,7 @@ const styles = {
 
 export default function ChatMessages({ messages }) {
   return (
-    <Box style={styles.textbox}>
+    <Box id="chatbox-messages" style={styles.textbox}>
       {messages.map((m, idx) => (
         <Box style={styles.message} key={idx}>
           <ChatBubble message={m} />

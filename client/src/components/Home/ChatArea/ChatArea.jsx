@@ -2,11 +2,10 @@ import SendIcon from '@mui/icons-material/Send';
 import {
   Card, Grid, Divider, TextField, Typography, Fab,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useStore } from 'react-redux';
 
 import ChatMessages from './ChatMessages';
-import { createFitnessPlan, fetchFitnessPlan } from '../../../actionCreators/FitnessPlan';
 import {
   allergiesIntolerancesOptions,
   dietaryRestrictionsOptions,
@@ -14,69 +13,45 @@ import {
   weeklyAvailabilityOptions,
 } from '../../../constants/AdditionalProfile';
 import { goalsOptions } from '../../../constants/BasicProfile';
+import { getUserProfile, updateUserProfile } from '../../../reducers/UserProfile';
+import {
+  getWorkoutSchedule, getMealSchedule, createWorkoutSchedule,
+  createMealSchedule, updateWorkoutSchedule, updateMealSchedule,
+} from '../../../reducers/WorkoutAndMealSchedule';
 import FormMultiSelect from '../../Profile/Forms/FormMultiSelect';
 import FormSelect from '../../Profile/Forms/FormSelect';
 
-// const MessageArea = styled(List)(({ theme }) => ({
-//   width: '30vw',
-//   height: '30vh',
-//   overflowY: 'auto',
-//   margin: `0 auto ${theme.spacing(2)}px`,
-// }));
-
-// const styles = {
-//   textbox: {
-//     flex: '1 1 auto',
-//     overflow: 'auto',
-//     width: '100%',
-//     height: '30vh',
-//   },
-//   message: {
-//     overflow: 'auto',
-//     margin: '4px 0',
-//   },
-//   content: {
-//     display: 'inline-block',
-//     maxWidth: '46%',
-//     fontSize: '12px',
-//     borderRadius: '15px',
-//     padding: '8px 10px',
-//     float: 'right',
-//     textAlign: 'right',
-//     color: 'white',
-//     backgroundColor: '#00b2ff',
-//   },
-// };
+const starterOptions = ['Edit Profile', 'View Meal Plan', 'View Workout Plan'];
+const starterLabel = 'Choose an option';
 
 export default function ChatArea() {
-  // eslint-disable-next-line no-unused-vars
   const [messages, setMessages] = useState([{ content: 'Welcome to AI-ron Fitness! How can I help you?', isSelf: false }]);
-  // eslint-disable-next-line no-unused-vars
-  const [textField, setTextField] = useState('');
-  // eslint-disable-next-line no-unused-vars
   const [inputMode, setInputMode] = useState(1);
-  // const [inputField, setInputField] = useState('');
   const [mode, setMode] = useState('starter');
-  // const editProfileFields = ['weight', 'height', 'avaiability'];
   const [formSelect, setFormSelect] = useState('');
   const [inputMultiSelect, setInputMultiSelect] = useState([]);
-  const [formOptions, setFormOptions] = useState(['Edit Profile', 'View Meal Plan', 'View Workout Plan']);
-  const [inputLabel, setInputLabel] = useState('Choose an option');
+  const [formOptions, setFormOptions] = useState(starterOptions);
+  const [inputLabel, setInputLabel] = useState(starterLabel);
+  const [profileEditField, setProfileEditField] = useState('');
+  const [scheduleMode, setScheduleMode] = useState('');
   const dispatch = useDispatch();
+  const store = useStore();
 
   useEffect(() => {
-    dispatch(createFitnessPlan());
-  }, [dispatch]);
+    const chatBox = document.getElementById('chatbox-messages');
 
-  // const stringContainsAny = (string, array) => {
-  //   // eslint-disable-next-line no-plusplus
-  //   for (let i = 0; i < array.length; i++) {
-  //     if (string.includes(array[i])) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // };
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }, [messages]);
+
+  const resetValues = () => {
+    setProfileEditField('');
+    setInputLabel(starterLabel);
+    setInputMultiSelect([]);
+    setFormSelect('');
+    setInputMode(1);
+    setMode('starter');
+    setFormOptions(starterOptions);
+  };
 
   const handleStarterResponse = (newMessages, input) => {
     if (input === 'Edit Profile') {
@@ -91,53 +66,64 @@ export default function ChatArea() {
       setFormOptions(['Yes', 'No']);
       setInputMode(1);
       setInputLabel('Provide custom input?');
+      setScheduleMode(input.split(' ')[1]);
     }
   };
 
-  const handleEditResponse = (newMessages, input) => {
-    // update profile
-    console.log(newMessages);
-    console.log(input);
+  const handleEditResponse = async (newMessages) => {
     const updateField = newMessages[newMessages.length - 1].content;
+    let state = store.getState();
     let responseMsg;
+
+    if (!state.userProfile.profile) {
+      await dispatch(getUserProfile());
+      state = store.getState();
+    }
 
     switch (updateField) {
       case 'Height':
         setInputMode(0);
-        responseMsg = { content: 'Please provide a height in cm', isSelf: false };
+        setProfileEditField('height');
+        responseMsg = { content: ` Please provide a height in ${state.userProfile.profile.heightUnit}`, isSelf: false };
         break;
       case 'Weight':
         setInputMode(0);
-        responseMsg = { content: 'Please provide a weight in cm', isSelf: false };
+        setProfileEditField('weight');
+        responseMsg = { content: `Please provide a weight in ${state.userProfile.profile.weightUnit}`, isSelf: false };
         break;
       case 'Avaibility':
         setInputMode(1);
         setFormOptions(weeklyAvailabilityOptions);
         setInputLabel('Avaibility');
+        setProfileEditField('weeklyAvailability');
         responseMsg = { content: 'Please choose the number of days you are available', isSelf: false };
         break;
       case 'Allergies':
         setInputMode(2);
         setInputLabel('Allergies');
         setFormOptions(allergiesIntolerancesOptions);
+        setProfileEditField('allergies');
         responseMsg = { content: 'Please select the relevant allergies', isSelf: false };
         break;
       case 'Health Conditions':
         setInputMode(2);
         setInputLabel('Health Conditions');
         setFormOptions(healthConditionsAndInjuriesOptions);
+        setProfileEditField('healthConditions');
         responseMsg = { content: 'Please select the relevant health conditions', isSelf: false };
         break;
       case 'Dietary Restrictions':
         setInputMode(2);
         setInputLabel('Dietary Restrictions');
         setFormOptions(dietaryRestrictionsOptions);
+        setProfileEditField('dietRestriction');
         responseMsg = { content: 'Please select the relevant dietary restrictions', isSelf: false };
         break;
       case 'Goals':
         setInputMode(2);
         setInputLabel('Goals');
         setFormOptions(goalsOptions);
+        setProfileEditField('goals');
         responseMsg = { content: 'Please select your new goals', isSelf: false };
         break;
       default:
@@ -148,50 +134,97 @@ export default function ChatArea() {
     newMessages.push(responseMsg);
   };
 
-  const handleTextEdit = (newMessages, input) => {
+  const handleTextEdit = async (newMessages, input) => {
     if (Number.isNaN(input)) {
       newMessages.push({ content: 'Please provide a valid number', isSelf: false });
     } else {
+      await dispatch(updateUserProfile({ [profileEditField]: input }));
       newMessages.push({ content: 'Your profile has been updated', isSelf: false });
+      resetValues();
     }
   };
 
-  const handleSelectEdit = (newMessages) => {
+  const handleSelectEdit = async (newMessages) => {
+    await dispatch(updateUserProfile({
+      [profileEditField]: inputMultiSelect.length === 0 ? formSelect : inputMultiSelect,
+    }));
     newMessages.push({ content: 'Your profile has been updated. Is there anything else I can help with?', isSelf: false });
-    setFormOptions(['Edit Profile', 'View Meal Plan', 'View Workout Plan']);
-    setMode('starter');
-    setInputMode(1);
-    setInputLabel('Choose an option');
-  };
-
-  const handleMultiSelectEdit = (newMessages) => {
-    newMessages.push({ content: 'Your profile has been updated. Is there anything else I can help with?', isSelf: false });
+    resetValues();
   };
 
   const handleConfirmEditResponse = (newMessages, input) => {
     if (inputMode === 0) {
       handleTextEdit(newMessages, input);
-    } else if (inputMode === 1) {
+    } else {
       handleSelectEdit(newMessages);
-    } else {
-      handleMultiSelectEdit(newMessages);
     }
   };
 
-  const handleGeneratePlan = (newMessages, input = null) => {
-    newMessages.push({ content: 'Give me a moment to get your plan', isSelf: false });
-    console.log(input);
-    if (newMessages[1].content.includes('Workout')) {
-      dispatch(fetchFitnessPlan());
-      console.log('workout');
-    } else {
-      console.log('meal');
-    }
+  const createWorkoutString = (schedule, newMessages) => {
+    Object.entries(schedule).forEach(([day, exercises]) => {
+      let workoutString = '';
+      const exercisesArray = Object.entries(exercises);
+      let workout = `${day}\n`;
+
+      exercisesArray.forEach((ex) => {
+        workout += `Exercise ${Number(ex[0]) + 1}:  ${ex[1].exercise} ${ex[1].reps} Reps, ${ex[1].sets} Sets\n`;
+      });
+
+      workoutString += workout;
+      newMessages.push({ content: workoutString, isSelf: false });
+    });
   };
 
-  const handleConfirmCustomInput = (newMessages) => {
+  const createMealString = (schedule, newMessages) => {
+    Object.entries(schedule.schedule).forEach(([day, meals]) => {
+      const meal = Object.entries(meals);
+      newMessages.push({ content: `${day}\n`, isSelf: false });
+
+      meal.forEach((ex, idx) => {
+        newMessages.push({ content: idx !== 5 ? `${ex[0]}: ${ex[1]}\n` : '', isSelf: false });
+      });
+    });
+  };
+
+  const generatePlan = async (newMessages, call, customInput) => {
+    switch (call) {
+      case 'new':
+        await dispatch(scheduleMode === 'Workout' ? createWorkoutSchedule() : createMealSchedule());
+        break;
+      case 'curr':
+        await dispatch(scheduleMode === 'Workout' ? getWorkoutSchedule() : getMealSchedule());
+        break;
+      case 'custom':
+        await dispatch(scheduleMode === 'Workout' ? updateWorkoutSchedule(customInput) : updateMealSchedule(customInput));
+        break;
+      default:
+    }
+
+    const state = store.getState();
+    let schedule;
+
+    if (state.workoutAndMealSchedule.isError) throw new Error('Create schedule failed');
+
+    if (scheduleMode === 'Workout') {
+      schedule = state.workoutAndMealSchedule.workoutSchedule.schedule;
+      createWorkoutString(schedule, newMessages);
+    } else {
+      schedule = state.workoutAndMealSchedule.mealSchedule;
+      createMealString(schedule, newMessages);
+    }
+
+    newMessages.push({ content: 'Is there anything else I can help with?', isSelf: false });
+    resetValues();
+  };
+
+  const handleConfirmCustomInput = async (newMessages) => {
     if (formSelect === 'No') {
-      handleGeneratePlan(newMessages);
+      try {
+        await generatePlan(newMessages, 'curr');
+      } catch (e) {
+        newMessages.push({ content: 'It appears you do not have a schedule, give me a moment to generate one for you', isSelf: false });
+        generatePlan(newMessages, 'new');
+      }
     } else {
       newMessages.push({ content: 'What custom input would you like to provide?', isSelf: false });
       setMode('generatePlanWithCustom');
@@ -208,7 +241,7 @@ export default function ChatArea() {
         handleEditResponse(newMessages, input);
         break;
       case 'generatePlanWithCustom':
-        handleGeneratePlan(newMessages, input);
+        generatePlan(newMessages, 'custom', input);
         break;
       case 'confirmCustomInput':
         handleConfirmCustomInput(newMessages);
@@ -225,7 +258,6 @@ export default function ChatArea() {
     const { value } = e.target;
 
     if (e.key === 'Enter' && value !== '') {
-      console.log(e);
       const newMessages = [...messages, { content: value, isSelf: true }];
       handleCommand(newMessages, value);
       setMessages(newMessages);
@@ -236,11 +268,7 @@ export default function ChatArea() {
 
   const handleSendButton = () => {
     let message;
-    // if (inputMode === 0) {
-    //   message = document.getElementById('chatbox-inputfield').value;
-    // } else {
-    //   message = formSelect;
-    // }
+
     switch (inputMode) {
       case 0:
         message = document.getElementById('chatbox-inputfield').value;
@@ -260,16 +288,7 @@ export default function ChatArea() {
     const newMessages = [...messages, { content: message, isSelf: true }];
     handleCommand(newMessages, message);
     setMessages(newMessages);
-    console.log(document.getElementById('chatbox-inputfield'));
   };
-
-  const handleFieldChange = (e) => {
-    setTextField(e.target.value);
-  };
-
-  // useEffect(() => {
-  //   setInputMode(1);
-  // }, []);
 
   return (
     <div>
@@ -285,7 +304,7 @@ export default function ChatArea() {
           <Grid container style={{ padding: '20px' }}>
             <Grid item xs={11}>
               { inputMode === 0
-                ? <TextField id="chatbox-inputfield" label="Type to request/update a plan" onChange={handleFieldChange} onKeyDown={handleSubmit} fullWidth />
+                ? <TextField id="chatbox-inputfield" label="Type to request/update a plan" onKeyDown={handleSubmit} fullWidth />
                 : ''}
               {
                 inputMode === 1
