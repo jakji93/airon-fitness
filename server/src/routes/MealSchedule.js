@@ -1,5 +1,5 @@
 const express = require('express');
-const { getMealScheduleByUser, createMealScheduleForUser, updateMealScheduleForUser } = require('../controllers/mealScheduleController');
+const { getMealScheduleByUser, createMealScheduleForUser, updateMealScheduleForUser } = require('../controllers/mealSchedule/mealScheduleController');
 
 const router = express.Router();
 const { protect } = require('../middleware/authMiddleware');
@@ -25,7 +25,7 @@ const { protect } = require('../middleware/authMiddleware');
  *          calories: number,
  *          carbohydrates: number,
  *          protein: number,
- *           fat: number
+ *          fat: number
  *          }
  *        }
  *       Tuesday:...
@@ -51,7 +51,14 @@ router.get('/', protect, getMealScheduleByUser);
  *         snack1: string,
  *         lunch: string,
  *         snack2: string
- *         dinner: string}
+ *         dinner: string
+ *         nutrition_totals: {
+ *          calories: number,
+ *          carbohydrates: number,
+ *          protein: number,
+ *          fat: number
+ *          }
+ *        }
  *       Tuesday:...
  *       Wednesday:...
  *       ...}}
@@ -76,7 +83,14 @@ router.post('/', protect, createMealScheduleForUser);
  *         snack1: string,
  *         lunch: string,
  *         snack2: string
- *         dinner: string}
+ *         dinner: string
+ *         nutrition_totals: {
+ *          calories: number,
+ *          carbohydrates: number,
+ *          protein: number,
+ *          fat: number
+ *          }
+ *        }
  *       Tuesday:...
  *       Wednesday:...
  *       ...}}

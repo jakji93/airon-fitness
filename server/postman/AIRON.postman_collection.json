@@ -1,0 +1,349 @@
+{
+	"info": {
+		"_postman_id": "1cab29cb-8e0c-4090-8de2-15649e25b053",
+		"name": "AIRON",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24642677"
+	},
+	"item": [
+		{
+			"name": "mealSchedule",
+			"item": [
+				{
+					"name": "localhost:3001/mealSchedule Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmYjkzYjdkM2UyMDRkYTJhNTY1YTciLCJpYXQiOjE2ODgyNTgyNDksImV4cCI6MTY5MDg1MDI0OX0.nw-rB8UkeBzy0iExykj1I6cfJ-sFpGgOOm1I-XLqHPA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/mealSchedule",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"mealSchedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3001/mealSchedule",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmYjkzYjdkM2UyMDRkYTJhNTY1YTciLCJpYXQiOjE2ODgyNTgyNDksImV4cCI6MTY5MDg1MDI0OX0.nw-rB8UkeBzy0iExykj1I6cfJ-sFpGgOOm1I-XLqHPA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"customInput\": \"make it low calorie\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/mealSchedule",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"mealSchedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3001/mealSchedule",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmYjkzYjdkM2UyMDRkYTJhNTY1YTciLCJpYXQiOjE2ODgyNTgyNDksImV4cCI6MTY5MDg1MDI0OX0.nw-rB8UkeBzy0iExykj1I6cfJ-sFpGgOOm1I-XLqHPA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/mealSchedule",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"mealSchedule"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "userInfo",
+			"item": [
+				{
+					"name": "localhost:3001/userInfo",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"123\",\r\n    \"email\": \"test@test.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/userInfo",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"userInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3001/userInfo/me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmYjkzYjdkM2UyMDRkYTJhNTY1YTciLCJpYXQiOjE2ODgyNTgyNDksImV4cCI6MTY5MDg1MDI0OX0.nw-rB8UkeBzy0iExykj1I6cfJ-sFpGgOOm1I-XLqHPA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/userInfo/me",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"userInfo",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3001/userInfo/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"123\",\r\n    \"email\": \"test@test.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/userInfo/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"userInfo",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "userProfile",
+			"item": [
+				{
+					"name": "localhost:3001/userProfile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmYjkzYjdkM2UyMDRkYTJhNTY1YTciLCJpYXQiOjE2ODgyNTgyNDksImV4cCI6MTY5MDg1MDI0OX0.nw-rB8UkeBzy0iExykj1I6cfJ-sFpGgOOm1I-XLqHPA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"birthday\": \"1990-01-01\",\r\n  \"experience\": \"intermediate\",\r\n  \"goals\": [\"lose weight\", \"gain muscle\"],\r\n  \"apiKey\": \"davis-api-key\",\r\n  \"firstName\": \"Davis\",\r\n  \"lastName\": \"Song\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/userProfile",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"userProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3001/userProfile/generate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmYjkzYjdkM2UyMDRkYTJhNTY1YTciLCJpYXQiOjE2ODgyNTgyNDksImV4cCI6MTY5MDg1MDI0OX0.nw-rB8UkeBzy0iExykj1I6cfJ-sFpGgOOm1I-XLqHPA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"birthday\": \"1990-01-01\",\r\n  \"experience\": \"intermediate\",\r\n  \"goals\": [\"lose weight\", \"gain muscle\"],\r\n  \"apiKey\": \"davis-api-key\",\r\n  \"firstName\": \"Davis\",\r\n  \"lastName\": \"Song\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/userProfile",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"userProfile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "workoutSchedule",
+			"item": [
+				{
+					"name": "localhost:3001/mealSchedule",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmYjkzYjdkM2UyMDRkYTJhNTY1YTciLCJpYXQiOjE2ODgyNTgyNDksImV4cCI6MTY5MDg1MDI0OX0.nw-rB8UkeBzy0iExykj1I6cfJ-sFpGgOOm1I-XLqHPA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/workoutSchedule",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"workoutSchedule"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

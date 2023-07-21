@@ -8,17 +8,21 @@ import FormTextFieldInput from './FormTextFieldInput';
 
 export default function FormTextFieldWithRadio(props) {
   const {
-    id,
+    id, radioId,
     label,
     showTitleLabel,
-    value,
-    setValue,
+    value, setValue, onChange,
     type,
     radioGroups,
-    radioSelection, setRadioSelection,
+    radioSelection, setRadioSelection, onChangeRadio,
     radioLabel,
     half,
     required,
+    placeholder,
+    onBlur,
+    error,
+    helperText,
+    size,
   } = props;
 
   return (
@@ -34,17 +38,27 @@ export default function FormTextFieldWithRadio(props) {
         endAdornment={radioSelection}
         customTextFieldGridSize={half ? 3 : 0}
         required={required}
+        onChange={onChange}
+        placeholder={placeholder}
+        onBlur={onBlur}
+        error={error}
+        size={size}
+        helperText={helperText}
       />
       <Grid item xs={12} sm={half ? 3 : 6}>
         <FormControl>
           {radioLabel
             && <FormLabel id={`${id}-row-radio-buttons-group-label`}>{radioLabel}</FormLabel>}
           <RadioGroup
+            id={radioId}
             row
-            name={`${id}row-radio-buttons-group`}
-            aria-labelledby={`${id}-row-radio-buttons-group-label`}
+            name={radioId}
+            aria-labelledby={`${radioId}-row-radio-buttons-group-label`}
             value={radioSelection}
-            onChange={(e) => setRadioSelection(e.target.value)}
+            onChange={(e) => {
+              if (setRadioSelection) setRadioSelection(e.target.value);
+              if (onChangeRadio) onChangeRadio(e);
+            }}
           >
             {radioGroups.map((val) => (
               <FormControlLabel
@@ -71,13 +85,21 @@ FormTextFieldWithRadio.propTypes = {
     PropTypes.number,
     PropTypes.oneOf([null]),
   ]),
-  setValue: PropTypes.func.isRequired,
+  setValue: PropTypes.func,
   type: PropTypes.string,
   radioGroups: PropTypes.arrayOf(PropTypes.string).isRequired,
   half: PropTypes.bool,
   radioSelection: PropTypes.string.isRequired,
-  setRadioSelection: PropTypes.func.isRequired,
+  setRadioSelection: PropTypes.func,
   required: PropTypes.bool,
+  radioId: PropTypes.string,
+  onChange: PropTypes.func,
+  onChangeRadio: PropTypes.func,
+  placeholder: PropTypes.string,
+  onBlur: PropTypes.func,
+  error: PropTypes.bool,
+  helperText: PropTypes.string,
+  size: PropTypes.string,
 };
 
 FormTextFieldWithRadio.defaultProps = {
@@ -87,4 +109,14 @@ FormTextFieldWithRadio.defaultProps = {
   value: null,
   half: false,
   required: false,
+  setValue: null,
+  setRadioSelection: null,
+  radioId: '',
+  onChange: null,
+  onChangeRadio: null,
+  placeholder: '',
+  onBlur: null,
+  error: false,
+  helperText: '',
+  size: 'small',
 };

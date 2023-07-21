@@ -8,31 +8,48 @@ import {
   Typography,
   Container,
 } from '@mui/material';
+import { useFormik } from 'formik';
 import * as React from 'react';
-import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
 
 import { register } from '../../reducers/Auth';
 import { setSignup } from '../../reducers/Signup';
-import { ToastContext } from '../common/context/ToastContextProvider';
+
+const validationSchema = yup.object({
+  email: yup
+    .string('Enter your email')
+    .email('Enter a valid email')
+    .required('Email is required'),
+  password: yup
+    .string('Enter your password')
+    .min(8, 'Password should be of minimum 8 characters length')
+    .required('Password is required'),
+  confirmPassword: yup
+    .string('Enter your password')
+    .min(8, 'Password should be of minimum 8 characters length')
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+});
 
 export default function SignupRegisterAccount() {
   const dispatch = useDispatch();
   const step = useSelector((state) => state.signup.step);
-  const openToast = useContext(ToastContext);
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      dispatch(register({ email: values.email, password: values.password }));
+      dispatch(setSignup({ step: step + 1 }));
+    },
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const {
-      email, password, confirmPassword,
-    } = e.target;
-
-    if (password.value !== confirmPassword.value) {
-      openToast('error', "Password's do not match");
-      return;
-    }
-    dispatch(register({ email: email.value, password: password.value }));
-    dispatch(setSignup({ step: step + 1 }));
+    formik.handleSubmit(e);
   };
 
   return (
@@ -67,6 +84,12 @@ export default function SignupRegisterAccount() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  placeholder="johndoe@email.com"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -77,7 +100,11 @@ export default function SignupRegisterAccount() {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.password && Boolean(formik.errors.password)}
+                  helperText={formik.touched.password && formik.errors.password}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -88,7 +115,11 @@ export default function SignupRegisterAccount() {
                   label="Confirm Password"
                   type="password"
                   id="confirm-password"
-                  autoComplete="new-password"
+                  value={formik.values.confirmPassword}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+                  helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
                 />
               </Grid>
             </Grid>
@@ -97,6 +128,7 @@ export default function SignupRegisterAccount() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2, width: '300px' }}
+              disabled={formik.isSubmitting}
             >
               Create Account
             </Button>

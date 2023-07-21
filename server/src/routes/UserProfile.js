@@ -6,6 +6,9 @@ const {
   updateUserProfile,
   deleteUserProfileById,
 } = require('../controllers/userProfileController');
+const {
+  generateSchedules,
+} = require('../controllers/scheduleGenerationController');
 const { protect } = require('../middleware/authMiddleware');
 
 const storage = multer.memoryStorage();
@@ -166,5 +169,33 @@ router.put('/', protect, upload.single('file'), updateUserProfile);
  *    { "error": "User profile not found." }
  */
 router.delete('/', protect, deleteUserProfileById);
+
+/**
+ * @desc generate workout and meal schedules based on user profile information
+ * @access Private
+ * @route POST /userProfile/generate
+ * @request
+ *  body: n/a
+ *  params: n/a
+ *  query params: n/a
+ * @response object containing both schedules
+ * {
+ *  "userInfoID": string,
+ *  "workoutSchedule": {
+ *    "Monday": {
+ *       "exercises": [
+ *          ...
+ *        ],
+ *       "total_calories"
+ *    }, ...
+ *   },
+ *  "mealSchedule" {
+ *    "Monday": {
+ *      "breakfast": string
+ *       ...
+ *    }, ...
+ * }
+ */
+router.post('/generate', protect, generateSchedules);
 
 module.exports = router;

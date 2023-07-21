@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const UserProfile = require('../models/UserProfileModel');
 const { USER_PROFILE_FIELDS } = require('../constants');
+const openAI = require('../utils/openaiUtil');
 
 /**
  * @desc    creturns a list of all the user profiles
@@ -54,6 +55,11 @@ const createUserProfile = asyncHandler(async (req, res) => {
     res.status(400).json({ message: 'Please include all required fields' });
     throw new Error('Please include all required fields');
   }
+  const verifyKey = openAI.verifyAPIKey(userProfile.apiKey);
+  if (!verifyKey) {
+    res.status(400).json({ message: 'Please include a valid GPT API key' });
+    throw new Error('Please include a valid GPT API key');
+  }
   userProfile.userInfoID = req.user._id;
   if (req.file) {
     userProfile.profileImage = {
@@ -62,11 +68,12 @@ const createUserProfile = asyncHandler(async (req, res) => {
     };
   }
   const newProfile = await UserProfile.create(userProfile);
-  if (newProfile) {
-    res.status(201).json(newProfile);
+
+  if (!newProfile) {
+    res.status(400).json({ message: 'Failed to create profile' });
+    throw new Error('Failed to create profile');
   }
-  res.status(400).json({ message: 'Failed to create profile' });
-  throw new Error('Failed to create profile');
+  res.status(201).json(newProfile);
 });
 
 /**
@@ -113,6 +120,11 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     res.status(400).json({ message: 'Please include all required fields' });
     throw new Error('Please include all required fields');
   }
+  const verifyKey = openAI.verifyAPIKey(userProfile.apiKey);
+  if (!verifyKey) {
+    res.status(400).json({ message: 'Please include a valid GPT API key' });
+    throw new Error('Please include a valid GPT API key');
+  }
   if (req.file) {
     userProfile.profileImage = {
       data: req.file.buffer,
@@ -126,10 +138,11 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       new: true,
     },
   );
-  if (updatedProfile) return res.status(201).json(updatedProfile);
-
-  res.status(400).json({ message: 'Failed to update profile' });
-  throw new Error('Failed to update profile');
+  if (!updatedProfile) {
+    res.status(400).json({ message: 'Failed to update profile' });
+    throw new Error('Failed to update profile');
+  }
+  return res.status(201).json(updatedProfile);
 });
 
 /**

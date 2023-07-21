@@ -2,8 +2,10 @@ import {
   Grid, Button,
 } from '@mui/material';
 import dayjs from 'dayjs';
-import React, { useContext, useEffect, useState } from 'react';
+import { useFormik } from 'formik';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
 
 import { genderOptions } from '../../constants/BasicProfile';
 import { resetAuth } from '../../reducers/Auth';
@@ -15,6 +17,21 @@ import FormDatePicker from '../Profile/Forms/FormDatePicker';
 import FormSelect from '../Profile/Forms/FormSelect';
 import FormTextFieldInput from '../Profile/Forms/FormTextFieldInput';
 
+const validationSchema = yup.object({
+  gender: yup
+    .string('Select a gender')
+    .oneOf(genderOptions, 'Must use available gender'),
+  firstName: yup
+    .string('Enter your first name')
+    .required('first name is required'),
+  lastName: yup
+    .string('Enter your last name')
+    .required('last name is required'),
+  birthday: yup
+    .date('Enter your birthday')
+    .required('birthday is required'),
+});
+
 export default function SignupBasicUserDetails() {
   const {
     user, isLoading, isError, isSuccess, message,
@@ -22,34 +39,44 @@ export default function SignupBasicUserDetails() {
   const openToast = useContext(ToastContext);
   const dispatch = useDispatch();
   const signup = useSelector((state) => state.signup);
-  const [gender, setGender] = useState(signup.user.gender ?? '');
-  const [firstName, setFirstName] = useState(signup.user.firstName ?? '');
-  const [lastName, setLastName] = useState(signup.user.lastName ?? '');
-  const [birthday, setBirthday] = useState(dayjs(signup.user.birthday) ?? null);
+  const formik = useFormik({
+    initialValues: {
+      gender: signup.user.gender ?? '',
+      firstName: signup.user.firstName,
+      lastName: signup.user.lastName,
+      birthday: dayjs(signup.user.birthday) ?? dayjs(),
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      if (values.birthday.format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD')) {
+        openToast('error', 'Please add your birthday', 3000);
+        return;
+      }
+
+      dispatch(setSignup({
+        user: {
+          gender: values.gender,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          birthday: values.birthday.format('YYYY-MM-DD'),
+        },
+        step: signup.step + 1,
+      }));
+    },
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (birthday.format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD')) {
-      openToast('error', 'Please add your birthday', 3000);
-      return;
-    }
-
-    dispatch(setSignup({
-      user: {
-        gender,
-        firstName,
-        lastName,
-        birthday: birthday.format('YYYY-MM-DD'),
-      },
-      step: signup.step + 1,
-    }));
+    formik.handleSubmit();
   };
+
   useEffect(() => {
     if (isError) {
       openToast('error', message);
     }
 
     if (isSuccess || user) {
-      openToast('success', 'Your account has been created!');
+      openToast('success', 'Your account has been created! Please setup your user profile 🫡');
     }
 
     dispatch(resetAuth);
@@ -68,44 +95,60 @@ export default function SignupBasicUserDetails() {
     >
       <FormTextFieldInput
         half
-        id="first-name"
+        id="firstName"
         label="First Name"
-        value={firstName}
-        setValue={setFirstName}
         showTitleLabel={false}
         autoComplete="given-name"
         customTextFieldGridSize={6}
         required
+        placeholder="John"
+        value={formik.values.firstName}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+        helperText={formik.touched.firstName && formik.errors.firstName}
+        size="medium"
       />
       <FormTextFieldInput
         half
-        id="last-name"
+        id="lastName"
         label="Last Name"
-        value={lastName}
-        setValue={setLastName}
         showTitleLabel={false}
         autoComplete="family-name"
         customTextFieldGridSize={6}
         required
+        placeholder="Doe"
+        value={formik.values.lastName}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+        helperText={formik.touched.lastName && formik.errors.lastName}
+        size="medium"
       />
       <FormSelect
         id="gender"
         label="Gender *"
         showTitleLabel={false}
         options={genderOptions}
-        setValue={setGender}
-        value={gender}
         required
         customTextFieldGridSize={6}
+        value={formik.values.gender}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        error={formik.touched.gender && Boolean(formik.errors.gender)}
+        helperText={formik.touched.gender && formik.errors.gender}
+        size="medium"
       />
       <FormDatePicker
         half
-        id="birthdate"
+        id="birthday"
         label="Born"
-        setValue={setBirthday}
-        value={birthday}
         showTitleLabel={false}
         customTextFieldGridSize={6}
+        name="birthday"
+        disableFuture
+        setFieldValue={formik.setFieldValue}
+        value={formik.values.birthday}
       />
       <Grid
         item
