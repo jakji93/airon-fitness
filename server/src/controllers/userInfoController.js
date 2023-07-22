@@ -55,15 +55,12 @@ const registerUser = asyncHandler(async (req, res) => {
  * @access  Public
  */
 const loginUser = asyncHandler(async (req, res) => {
-  // eslint-disable-next-line no-unused-vars
   const { email, password } = req.body;
-  console.log(email);
 
   // Check for user email
   const user = await UserInfo.findOne({ email });
-  console.log(user);
 
-  if (user && (true)) {
+  if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
       id: user._id,
       email: user.email,

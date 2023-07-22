@@ -176,7 +176,6 @@ const WorkoutAndMealScheduleSlice = createSlice({
         state.isError = true;
       })
       .addCase(getMealSchedule.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
@@ -197,6 +196,18 @@ const WorkoutAndMealScheduleSlice = createSlice({
         state.message = 'Your schedule has been created!';
         state.mealSchedule = action.payload;
       })
+      .addCase(createWorkoutSchedule.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(createMealSchedule.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
       .addCase(updateWorkoutSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
@@ -210,6 +221,18 @@ const WorkoutAndMealScheduleSlice = createSlice({
         state.isError = false;
         state.message = 'Your schedule has been created!';
         state.mealSchedule = action.payload;
+      })
+      .addCase(updateWorkoutSchedule.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(updateMealSchedule.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });
