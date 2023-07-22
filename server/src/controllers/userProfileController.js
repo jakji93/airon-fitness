@@ -55,7 +55,7 @@ const createUserProfile = asyncHandler(async (req, res) => {
     res.status(400).json({ message: 'Please include all required fields' });
     throw new Error('Please include all required fields');
   }
-  const verifyKey = openAI.verifyAPIKey(userProfile.apiKey);
+  const verifyKey = await openAI.verifyAPIKey(userProfile.apiKey);
   if (!verifyKey) {
     res.status(400).json({ message: 'Please include a valid GPT API key' });
     throw new Error('Please include a valid GPT API key');
@@ -120,7 +120,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     res.status(400).json({ message: 'Please include all required fields' });
     throw new Error('Please include all required fields');
   }
-  const verifyKey = openAI.verifyAPIKey(userProfile.apiKey);
+  const verifyKey = await openAI.verifyAPIKey(userProfile.apiKey);
   if (!verifyKey) {
     res.status(400).json({ message: 'Please include a valid GPT API key' });
     throw new Error('Please include a valid GPT API key');

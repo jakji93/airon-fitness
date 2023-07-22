@@ -15,13 +15,14 @@ function WorkoutScheduleCollapse(props) {
     selectedIndex,
     daySchedule,
   } = props;
+  const workoutSchedule = daySchedule.exercises;
   return (
     <div>
       <ListItemButton key={index} onClick={() => { handleClick(index); }} divider>
         <ListItemText primary={`Day ${index + 1}`} />
         {index === selectedIndex ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
-      {daySchedule && daySchedule.map((workout) => (
+      {workoutSchedule && workoutSchedule.map((workout) => (
         <Collapse
           key={`${index}-${workout.exercise}`}
           in={index === selectedIndex}
@@ -46,14 +47,17 @@ WorkoutScheduleCollapse.propTypes = {
   index: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
   selectedIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-  daySchedule: PropTypes.arrayOf(PropTypes.shape({
-    exercise: PropTypes.string,
-    sets: PropTypes.number,
-    reps: PropTypes.number,
-    rest: PropTypes.number,
-    duration: PropTypes.number,
-    intensity: PropTypes.number,
-  })).isRequired,
+  daySchedule: PropTypes.shape({
+    exercises: PropTypes.arrayOf(PropTypes.shape({
+      exercise: PropTypes.string,
+      sets: PropTypes.number,
+      reps: PropTypes.number,
+      rest: PropTypes.number,
+      duration: PropTypes.number,
+      intensity: PropTypes.number,
+    })),
+    total_calories: PropTypes.number,
+  }).isRequired,
 };
 
 export default function ExistingWorkoutSchedule() {

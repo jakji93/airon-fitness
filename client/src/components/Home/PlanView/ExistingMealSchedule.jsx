@@ -15,14 +15,15 @@ function MealScheduleCollapse(props) {
     selectedIndex,
     daySchedule,
   } = props;
-
+  const mealSchedule = { ...daySchedule };
+  delete mealSchedule.nutrition_totals;
   return (
     <div>
       <ListItemButton key={index} onClick={() => { handleClick(index); }} divider>
         <ListItemText primary={`Day ${index + 1}`} />
         {index === selectedIndex ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
-      {daySchedule && Object.keys(daySchedule).map((meal) => (
+      {mealSchedule && Object.keys(mealSchedule).map((meal) => (
         <Collapse
           in={index === selectedIndex}
           timeout="auto"
@@ -31,7 +32,7 @@ function MealScheduleCollapse(props) {
         >
           <ListItem>
             <ListItemText
-              secondary={`${meal.toString()}: ${daySchedule[meal]}`}
+              secondary={`${meal.toString()}: ${mealSchedule[meal]}`}
             />
           </ListItem>
         </Collapse>
@@ -50,6 +51,12 @@ MealScheduleCollapse.propTypes = {
     lunch: PropTypes.string,
     snack2: PropTypes.string,
     dinner: PropTypes.string,
+    nutrition_totas: PropTypes.shape({
+      calories: PropTypes.number,
+      protein: PropTypes.number,
+      carbohydrates: PropTypes.number,
+      fat: PropTypes.number,
+    }),
   }).isRequired,
 };
 
