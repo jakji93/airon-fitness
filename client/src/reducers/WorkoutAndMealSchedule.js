@@ -47,6 +47,7 @@ const WorkoutAndMealScheduleSlice = createSlice({
       state.isError = false;
       state.message = '';
     },
+    resetScheduleState: () => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -87,6 +88,7 @@ const WorkoutAndMealScheduleSlice = createSlice({
 
 export const {
   resetWorkoutAndMealScheduleStates,
+  resetScheduleState,
 } = WorkoutAndMealScheduleSlice.actions;
 
 export default WorkoutAndMealScheduleSlice.reducer;

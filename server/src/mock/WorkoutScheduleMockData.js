@@ -34,7 +34,7 @@ const workoutScheduleMock = {
         intensity: 60,
       },
     ],
-    total_calories: 523
+    total_calories: 523,
   },
   Wednesday: {
     exercises: [
@@ -71,7 +71,7 @@ const workoutScheduleMock = {
         intensity: 60,
       },
     ],
-    total_calories: 490
+    total_calories: 490,
   },
   Friday: {
     exercises: [
@@ -108,8 +108,8 @@ const workoutScheduleMock = {
         intensity: 70,
       },
     ],
-    total_calories: 320
-  }
+    total_calories: 320,
+  },
 };
 
 module.exports = {

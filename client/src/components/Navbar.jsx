@@ -12,6 +12,7 @@ import { ToastContext } from './common/context/ToastContextProvider';
 import { arrayBufferToBase64, base64Flag } from './Profile/AvatarUpload';
 import { logout, resetAuth } from '../reducers/Auth';
 import { logoutUserProfile } from '../reducers/UserProfile';
+import { resetScheduleState } from '../reducers/WorkoutAndMealSchedule';
 
 const pages = [['home', '/app'], ['about', '/app/about'], ['profile', '/app/profile']];
 
@@ -28,6 +29,7 @@ function ResponsiveAppBar() {
       dispatch(logout());
       dispatch(resetAuth());
       dispatch(logoutUserProfile());
+      dispatch(resetScheduleState());
       openToast('success', 'You have been logged out');
     }],
   ], [navigate, dispatch]);

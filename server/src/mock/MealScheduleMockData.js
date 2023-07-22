@@ -17,7 +17,6 @@
 //    Wednesday:...
 //    ...}
 //    inputs: [string]}
-
 const mealScheduleMockMTWTF = {
   Monday: {
     breakfast: 'Oatmeal with berries and a sprinkle of nuts',
@@ -29,7 +28,7 @@ const mealScheduleMockMTWTF = {
       calories: 1500,
       protein: 79,
       carbohydrates: 140,
-      fat: 48
+      fat: 48,
     },
   },
   Tuesday: {
@@ -42,7 +41,7 @@ const mealScheduleMockMTWTF = {
       calories: 1200,
       protein: 104,
       carbohydrates: 99,
-      fat: 39
+      fat: 39,
     },
   },
   Wednesday: {
@@ -55,7 +54,7 @@ const mealScheduleMockMTWTF = {
       calories: 1450,
       protein: 133,
       carbohydrates: 88,
-      fat: 64
+      fat: 64,
     },
   },
   Thursday: {
@@ -68,7 +67,7 @@ const mealScheduleMockMTWTF = {
       calories: 1650,
       protein: 98,
       carbohydrates: 185,
-      fat: 46
+      fat: 46,
     },
   },
   Friday: {
@@ -81,7 +80,7 @@ const mealScheduleMockMTWTF = {
       calories: 1580,
       protein: 92,
       carbohydrates: 128,
-      fat: 62
+      fat: 62,
     },
   },
 };
@@ -97,7 +96,7 @@ const mealScheduleMockMTWTFSS = {
       calories: 1630,
       protein: 110,
       carbohydrates: 120,
-      fat: 65
+      fat: 65,
     },
   },
   Tuesday: {
@@ -110,7 +109,7 @@ const mealScheduleMockMTWTFSS = {
       calories: 1448,
       protein: 74.3,
       carbohydrates: 103.6,
-      fat: 82.6
+      fat: 82.6,
     },
   },
   Wednesday: {
@@ -123,7 +122,7 @@ const mealScheduleMockMTWTFSS = {
       calories: 1226,
       protein: 155,
       carbohydrates: 131,
-      fat: 51
+      fat: 51,
     },
   },
   Thursday: {
@@ -136,7 +135,7 @@ const mealScheduleMockMTWTFSS = {
       calories: 1700,
       protein: 100,
       carbohydrates: 140,
-      fat: 77
+      fat: 77,
     },
   },
   Friday: {
@@ -149,7 +148,7 @@ const mealScheduleMockMTWTFSS = {
       calories: 1550,
       protein: 80,
       carbohydrates: 175,
-      fat: 61
+      fat: 61,
     },
   },
   Saturday: {
@@ -162,7 +161,7 @@ const mealScheduleMockMTWTFSS = {
       calories: 1750,
       protein: 98,
       carbohydrates: 180,
-      fat: 65
+      fat: 65,
     },
   },
   Sunday: {
@@ -175,7 +174,7 @@ const mealScheduleMockMTWTFSS = {
       calories: 1380,
       protein: 105,
       carbohydrates: 114,
-      fat: 57
+      fat: 57,
     },
   },
 };
