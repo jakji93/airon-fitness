@@ -8,7 +8,9 @@ const theme = createTheme({
       light: '#3F72AF',
     },
     secondary: {
-      main: '#DBE2EF',
+      main: '#B5936B',
+      dark: '#3F3F47',
+      light: '#ffffff',
     },
     background: {
       default: '#F9F7F7',
@@ -18,24 +20,24 @@ const theme = createTheme({
     fontFamily: ['Montserrat', 'san-serif'].join(','),
     fontSize: 12,
     h1: {
-      fontFamily: ['sans-serif', 'ariel'].join(','),
+      fontFamily: ['Montserrat', 'san-serif'].join(','),
       fontWeight: 800,
       fontSize: 40,
     },
     h2: {
-      fontFamily: ['sans-serif', 'ariel'].join(','),
+      fontFamily: ['Montserrat', 'san-serif'].join(','),
       fontSize: 32,
     },
     h3: {
-      fontFamily: ['sans-serif', 'ariel'].join(','),
+      fontFamily: ['Montserrat', 'san-serif'].join(','),
       fontSize: 24,
     },
     h4: {
-      fontFamily: ['sans-serif', 'ariel'].join(','),
+      fontFamily: ['Montserrat', 'san-serif'].join(','),
       fontSize: 20,
     },
     h5: {
-      fontFamily: ['sans-serif', 'ariel'].join(','),
+      fontFamily: ['Montserrat', 'san-serif'].join(','),
       fontSize: 16,
     },
   },

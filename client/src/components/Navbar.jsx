@@ -1,7 +1,7 @@
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
   AppBar, Container, Toolbar, Typography, Box, IconButton, Menu, MenuItem, Button, Tooltip, Avatar,
+  Icon,
 } from '@mui/material';
 import * as React from 'react';
 import { useMemo } from 'react';
@@ -10,11 +10,13 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { ToastContext } from './common/context/ToastContextProvider';
 import { arrayBufferToBase64, base64Flag } from './Profile/AvatarUpload';
+import AironLogo from '../assets/design/LogoTanIcon.png';
 import { logout, resetAuth } from '../reducers/Auth';
 import { logoutUserProfile } from '../reducers/UserProfile';
 import { resetScheduleState } from '../reducers/WorkoutAndMealSchedule';
+import theme from '../theme';
 
-const pages = [['home', '/app'], ['about', '/app/about'], ['profile', '/app/profile']];
+const pages = [['HOME', '/app'], ['ABOUT', '../about'], ['PROFILE', 'profile']];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -51,11 +53,23 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  const styles = {
+    logo: {
+      display: 'block',
+      maxWidth: '50px',
+      maxHeight: '50px',
+      width: 'auto',
+      height: 'auto',
+    },
+  };
+
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#3F3F47' }}>
+    <AppBar position="static" sx={{ backgroundColor: theme.palette.secondary.dark }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <FitnessCenterIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Icon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+            <img src={AironLogo} alt="Airon Icon" style={styles.logo} />
+          </Icon>
           <Typography
             variant="h6"
             noWrap
@@ -64,10 +78,10 @@ function ResponsiveAppBar() {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
+              fontFamily: theme.typography.fontFamily,
+              fontWeight: 300,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: theme.palette.secondary.main,
               textDecoration: 'none',
             }}
           >
@@ -82,6 +96,9 @@ function ResponsiveAppBar() {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
+              sx={{
+                color: theme.palette.secondary.main,
+              }}
             >
               <MenuIcon />
             </IconButton>
@@ -104,15 +121,17 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page[0]} onClick={handleCloseNavMenu}>
+                <MenuItem key={page[0]} onClick={handleCloseNavMenu} component={Link} to={page[1]}>
                   <Typography textAlign="center">
-                    <Link to={page[1]}>{page[0]}</Link>
+                    {page[0]}
                   </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <FitnessCenterIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Icon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
+            <img src={AironLogo} alt="Airon Icon" style={styles.logo} />
+          </Icon>
           <Typography
             variant="h5"
             noWrap
@@ -122,23 +141,37 @@ function ResponsiveAppBar() {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
+              fontFamily: theme.typography.fontFamily,
+              fontWeight: 300,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: '#B5936B',
               textDecoration: 'none',
             }}
           >
             AIRON
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{
+            flexGrow: 1,
+            display: {
+              xs: 'none', md: 'flex', mr: 'auto', ml: 'auto',
+            },
+          }}
+          >
             {pages.map((page) => (
               <Button
                 key={page[0]}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{
+                  my: 2,
+                  color: theme.palette.secondary.main,
+                  display: 'block',
+                  '&:hover': {
+                    color: 'white',
+                    transition: 'background-color 1.0s ease-in-out',
+                  },
+                }}
               >
-                <Link style={{ textDecoration: 'none', color: 'white' }} to={page[1]}>{page[0]}</Link>
+                <Link style={{ textDecoration: 'none', color: 'inherit' }} to={page[1]}>{page[0]}</Link>
               </Button>
             ))}
           </Box>
