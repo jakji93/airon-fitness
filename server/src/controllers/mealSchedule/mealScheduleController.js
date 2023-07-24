@@ -10,7 +10,9 @@ const UserProfile = require('../../models/UserProfileModel');
  * @access  Private
  */
 const getMealScheduleByUser = asyncHandler(async (req, res) => {
-  const userMealSchedule = await MealSchema.findOne({ userInfoID: req.user._id });
+  const userMealSchedule = await MealSchema
+    .findOne({ userInfoID: req.user._id })
+    .sort({ _id: -1 });
 
   if (!userMealSchedule || !userMealSchedule.schedule) {
     res.status(404).json({ message: 'Meal schedule not found' });
@@ -50,11 +52,6 @@ const generateMealScheduleHelper = async (id) => {
 const createMealScheduleForUser = asyncHandler(async (req, res) => {
   const id = req.user._id;
 
-  const mealScheduleExists = await MealSchema.findOne({ userInfoID: id });
-  if (mealScheduleExists) {
-    res.status(400).json({ message: 'Meal schedule already exists' });
-  }
-
   const mealSchedule = await generateMealScheduleHelper(id);
 
   if (mealSchedule) {
@@ -77,7 +74,10 @@ const updateMealScheduleForUser = asyncHandler(async (req, res) => {
   const id = req.user._id;
 
   // Retrieve the meal schedule (fail if user does not have one already)
-  const mealSchedule = await MealSchema.findOne({ userInfoID: id });
+  const mealSchedule = await MealSchema
+    .findOne({ userInfoID: id })
+    .sort({ _id: -1 });
+
   if (!mealSchedule) {
     res.status(404).json({ message: 'Cannot update a meal schedule that does not exist' });
   }

@@ -36,6 +36,7 @@ function generateUserObject(userProfile) {
     goals: [...userProfile.goals].join(','),
     healthConditions: [...userProfile.healthConditions].join(','),
     dietRestrictions: [...userProfile.dietRestriction].join(','),
+    apiKey: userProfile.apiKey,
   };
   return userData;
 }

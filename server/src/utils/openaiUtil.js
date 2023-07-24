@@ -9,12 +9,21 @@ const headers = {
   Authorization: `Bearer ${apiKey}`,
 };
 
+function getHeader(userData) {
+  if (apiKey) return headers;
+  const header = {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${userData.apiKey}`,
+  };
+  return header;
+}
+
 async function generateMealSchedule(userData) {
   const response = await axios.post(apiUrl, {
     model: 'gpt-3.5-turbo',
     messages: mealPrompt('create', userData),
     temperature: 0,
-  }, { headers, timeout: 500000 });
+  }, { headers: getHeader(userData), timeout: 500000 });
 
   return response.data.choices[0].message.content;
 }
@@ -24,7 +33,7 @@ async function updateMealSchedule(userData, inputs, schedule) {
     model: 'gpt-3.5-turbo',
     messages: mealPrompt('update', userData, inputs, schedule),
     temperature: 0,
-  }, { headers, timeout: 500000 });
+  }, { headers: getHeader(userData), timeout: 500000 });
 
   return response.data.choices[0].message.content;
 }
@@ -34,7 +43,7 @@ async function generateWorkoutSchedule(userData) {
     model: 'gpt-3.5-turbo',
     messages: workoutPrompt('create', userData),
     temperature: 0,
-  }, { headers, timeout: 500000 });
+  }, { headers: getHeader(userData), timeout: 500000 });
 
   return response.data.choices[0].message.content;
 }
@@ -44,7 +53,7 @@ async function updateWorkoutSchedule(userData, inputs, schedule) {
     model: 'gpt-3.5-turbo',
     messages: workoutPrompt('update', userData, inputs, schedule),
     temperature: 0,
-  }, { headers, timeout: 500000 });
+  }, { headers: getHeader(userData), timeout: 500000 });
 
   return response.data.choices[0].message.content;
 }
