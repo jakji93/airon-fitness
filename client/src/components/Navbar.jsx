@@ -25,8 +25,8 @@ function ResponsiveAppBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const settings = useMemo(() => [
-    ['Profile', () => navigate('/app/profile')],
-    ['Logout', () => {
+    ['PROFILE', () => navigate('/app/profile')],
+    ['LOGOUT', () => {
       navigate('/login');
       dispatch(logout());
       dispatch(resetAuth());
