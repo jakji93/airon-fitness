@@ -82,7 +82,7 @@ export default function SignupBasicUserDetails() {
       openToast('error', message);
     }
 
-    if (isSuccess || user) {
+    if (isSuccess && user) {
       openToast('success', 'Your account has been created! Please setup your user profile 🫡');
     }
 
