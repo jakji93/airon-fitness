@@ -103,8 +103,8 @@ const deleteMe = asyncHandler(async (req, res) => {
     throw new Error('User not found');
   }
 
-  await MealSchedule.deleteOne({ userInfoID: req.user._id });
-  await WorkoutSchedule.deleteOne({ userInfoID: req.user._id });
+  await MealSchedule.deleteMany({ userInfoID: req.user._id });
+  await WorkoutSchedule.deleteMany({ userInfoID: req.user._id });
   await UserProfile.deleteOne({ userInfoID: req.user._id });
 
   res.status(200).json({
