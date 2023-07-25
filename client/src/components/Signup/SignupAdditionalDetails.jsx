@@ -2,7 +2,7 @@ import {
   Grid, Button,
 } from '@mui/material';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 
@@ -34,18 +34,19 @@ const validationSchema = yup.object({
 export default function SignupAdditionalDetails() {
   const dispatch = useDispatch();
   const signup = useSelector((state) => state.signup);
+  const initialValues = {
+    healthConditions: signup.user.healthConditions ?? [],
+    dietRestriction: signup.user.dietRestriction ?? [],
+    allergies: signup.user.allergies ?? [],
+    weeklyAvailability: signup.user.weeklyAvailability ?? '',
+    bodyFat: signup.user.bodyFat ?? '',
+    muscleMass: signup.user.muscleMass ?? '',
+    duration: signup.user.duration ?? '',
+    preference: signup.user.preference ?? ['e.g. Squat'],
+    equipment: signup.user.equipment ?? ['e.g. Dumbbells'],
+  };
   const formik = useFormik({
-    initialValues: {
-      healthConditions: signup.user.healthConditions ?? [],
-      dietRestriction: signup.user.dietRestriction ?? [],
-      allergies: signup.user.allergies ?? [],
-      weeklyAvailability: signup.user.weeklyAvailability ?? '',
-      bodyFat: signup.user.bodyFat ?? '',
-      muscleMass: signup.user.muscleMass ?? '',
-      duration: signup.user.duration ?? '',
-      preference: signup.user.preference ?? ['e.g. Squat'],
-      equipment: signup.user.equipment ?? ['e.g. Dumbbells'],
-    },
+    initialValues,
     validationSchema,
     onSubmit: (values) => {
       dispatch(setSignup({
@@ -76,6 +77,12 @@ export default function SignupAdditionalDetails() {
       }));
     },
   });
+
+  useEffect(() => {
+    Object.entries(initialValues).forEach(([fieldName, value]) => {
+      formik.setFieldValue(fieldName, value);
+    });
+  }, [signup]);
 
   const handleBack = () => {
     dispatch(setSignup({

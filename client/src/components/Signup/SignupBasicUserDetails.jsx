@@ -39,13 +39,14 @@ export default function SignupBasicUserDetails() {
   const openToast = useContext(ToastContext);
   const dispatch = useDispatch();
   const signup = useSelector((state) => state.signup);
+  const initialValues = {
+    gender: signup.user.gender ?? '',
+    firstName: signup.user.firstName,
+    lastName: signup.user.lastName,
+    birthday: dayjs(signup.user.birthday) ?? dayjs(),
+  };
   const formik = useFormik({
-    initialValues: {
-      gender: signup.user.gender ?? '',
-      firstName: signup.user.firstName,
-      lastName: signup.user.lastName,
-      birthday: dayjs(signup.user.birthday) ?? dayjs(),
-    },
+    initialValues,
     validationSchema,
     onSubmit: (values) => {
       if (values.birthday.format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD')) {
@@ -64,6 +65,12 @@ export default function SignupBasicUserDetails() {
       }));
     },
   });
+
+  useEffect(() => {
+    Object.entries(initialValues).forEach(([fieldName, value]) => {
+      formik.setFieldValue(fieldName, value);
+    });
+  }, [signup]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
