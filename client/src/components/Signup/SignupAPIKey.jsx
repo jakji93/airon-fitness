@@ -2,7 +2,7 @@ import {
   Grid, Button, Typography,
 } from '@mui/material';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 
@@ -19,10 +19,11 @@ const validationSchema = yup.object({
 export default function SignupAPIKey() {
   const dispatch = useDispatch();
   const signup = useSelector((state) => state.signup);
+  const initialValues = {
+    apiKey: signup.user.apiKey ?? '',
+  };
   const formik = useFormik({
-    initialValues: {
-      apiKey: signup.user.apiKey ?? '',
-    },
+    initialValues,
     validationSchema,
     onSubmit: (values) => {
       dispatch(setSignup({
@@ -33,6 +34,12 @@ export default function SignupAPIKey() {
       }));
     },
   });
+
+  useEffect(() => {
+    Object.entries(initialValues).forEach(([fieldName, value]) => {
+      formik.setFieldValue(fieldName, value);
+    });
+  }, [signup]);
 
   const handleBack = () => {
     dispatch(setSignup({

@@ -4,7 +4,7 @@ import {
 import dayjs from 'dayjs';
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 
@@ -70,20 +70,21 @@ export default function BasicProfileForm(props) {
   } = props;
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.userProfile.profile);
+  const initialValues = {
+    firstName: profile?.firstName ?? '',
+    lastName: profile?.lastName ?? '',
+    birthday: dayjs(profile?.birthday) ?? null,
+    gender: profile?.gender ?? '',
+    weight: profile?.weight ?? 0,
+    height: profile?.height ?? 0,
+    weightUnit: profile?.weightUnit ?? WEIGHT_UNITS.KG,
+    heightUnit: profile?.heightUnit ?? HEIGHT_UNITS.IN,
+    experience: profile?.experience ?? '',
+    goals: profile?.goals ?? [],
+    apiKey: profile?.apiKey ?? '',
+  };
   const formik = useFormik({
-    initialValues: {
-      firstName: profile?.firstName ?? '',
-      lastName: profile?.lastName ?? '',
-      birthday: dayjs(profile?.birthday) ?? null,
-      gender: profile?.gender ?? '',
-      weight: profile?.weight ?? 0,
-      height: profile?.height ?? 0,
-      weightUnit: profile?.weightUnit ?? WEIGHT_UNITS.KG,
-      heightUnit: profile?.heightUnit ?? HEIGHT_UNITS.IN,
-      experience: profile?.experience ?? '',
-      goals: profile?.goals ?? [],
-      apiKey: profile?.apiKey ?? '',
-    },
+    initialValues,
     validationSchema,
     onSubmit: (values) => {
       setUpdatingProfile(true);
@@ -102,6 +103,12 @@ export default function BasicProfileForm(props) {
       }));
     },
   });
+
+  useEffect(() => {
+    Object.entries(initialValues).forEach(([fieldName, value]) => {
+      formik.setFieldValue(fieldName, value);
+    });
+  }, [profile]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
