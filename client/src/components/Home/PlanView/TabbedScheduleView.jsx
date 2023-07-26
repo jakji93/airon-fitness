@@ -32,12 +32,10 @@ export default function TabbedScheduleView() {
   useEffect(() => {
     if (isError) {
       openToast('error', message);
-      dispatch(resetWorkoutAndMealScheduleStates());
     }
 
     if (isSuccess) {
       openToast('success', message);
-      dispatch(resetWorkoutAndMealScheduleStates());
     }
   }, [workoutSchedule, mealSchedule, isError, isSuccess, message, dispatch]);
 
