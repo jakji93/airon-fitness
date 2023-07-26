@@ -13,6 +13,8 @@ import Spinner from '../components/common/Spinner';
 import GoogleLogin from '../components/GoogleLogin';
 import { login, resetAuth } from '../reducers/Auth';
 import { removeSignup } from '../reducers/Signup';
+import { logoutUserProfile } from '../reducers/UserProfile';
+import { resetScheduleState } from '../reducers/WorkoutAndMealSchedule';
 
 const validationSchema = yup.object({
   email: yup
@@ -49,6 +51,9 @@ export default function Login() {
 
   useEffect(() => {
     dispatch(removeSignup());
+    dispatch(resetAuth());
+    dispatch(logoutUserProfile());
+    dispatch(resetScheduleState());
   });
 
   useEffect(() => {
@@ -59,7 +64,7 @@ export default function Login() {
     if (isSuccess && user) openToast('success', 'You\'ve been logged in');
     if (isSuccess || user) navigate('/app');
 
-    dispatch(resetAuth);
+    dispatch(resetAuth());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const handleSubmit = async (e) => {
