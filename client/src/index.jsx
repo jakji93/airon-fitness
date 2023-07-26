@@ -18,6 +18,7 @@ import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import SignupFlow from './pages/SignupFlow';
+import Workout from './pages/Workout';
 import rootReducer from './reducers';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <Profile />,
+      },
+      {
+        path: 'workout',
+        element: <Workout />,
       },
     ],
   },

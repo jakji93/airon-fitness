@@ -16,7 +16,7 @@ import { logoutUserProfile } from '../reducers/UserProfile';
 import { resetScheduleState } from '../reducers/WorkoutAndMealSchedule';
 import theme from '../theme';
 
-const pages = [['HOME', '/app'], ['ABOUT', '../about'], ['PROFILE', 'profile']];
+const pages = [['HOME', '/app'], ['ABOUT', '../about'], ['PROFILE', 'profile'], ['WORKOUT', 'workout']];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -64,8 +64,8 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: theme.palette.secondary.dark }}>
-      <Container maxWidth="xl">
+    <AppBar position="static" sx={{ backgroundColor: theme.palette.secondary.dark, minHeight: '10vh' }}>
+      <Container maxWidth="auto" sx={{ ml: 0 }}>
         <Toolbar disableGutters>
           <Icon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
             <img src={AironLogo} alt="Airon Icon" style={styles.logo} />
