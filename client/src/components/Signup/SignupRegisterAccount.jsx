@@ -80,7 +80,7 @@ export default function SignupRegisterAccount() {
     }));
     dispatch(setSignup({
       user: {
-        firstName: credentials.given_ame,
+        firstName: credentials.given_name,
         lastName: credentials.family_name,
       },
       step,
@@ -160,7 +160,7 @@ export default function SignupRegisterAccount() {
           onError={() => {
             openToast('error', 'Google Authentication Failed');
           }}
-          useOneTap
+          size="medium"
         />
       </Grid>
       <Grid container justifyContent="flex-end">
