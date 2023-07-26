@@ -2,7 +2,10 @@ import {
   Box, Button, CssBaseline, Grid, TextField, Typography,
 } from '@mui/material';
 import { Container } from '@mui/system';
+import { GoogleLogin } from '@react-oauth/google';
 import { useFormik } from 'formik';
+// eslint-disable-next-line camelcase
+import jwt_decode from 'jwt-decode';
 import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,11 +13,9 @@ import * as yup from 'yup';
 
 import { ToastContext } from '../components/common/context/ToastContextProvider';
 import Spinner from '../components/common/Spinner';
-import GoogleLogin from '../components/GoogleLogin';
-import { login, resetAuth } from '../reducers/Auth';
-import { removeSignup } from '../reducers/Signup';
-import { logoutUserProfile } from '../reducers/UserProfile';
-import { resetScheduleState } from '../reducers/WorkoutAndMealSchedule';
+import { login, register, resetAuth } from '../reducers/Auth';
+import { setSignup } from '../reducers/Signup';
+import authService from '../services/AuthService';
 
 const validationSchema = yup.object({
   email: yup
@@ -50,13 +51,6 @@ export default function Login() {
   });
 
   useEffect(() => {
-    dispatch(removeSignup());
-    dispatch(resetAuth());
-    dispatch(logoutUserProfile());
-    dispatch(resetScheduleState());
-  });
-
-  useEffect(() => {
     if (isError) {
       openToast('error', message);
     }
@@ -72,11 +66,31 @@ export default function Login() {
     formik.handleSubmit(e);
   };
 
-  const handleGoogleLoginSuccess = (res) => {
-    dispatch(login({
-      email: res.profileObj.email,
-      password: res.profileObj.googleId,
-    }));
+  const handleGoogleLoginSuccess = async (res) => {
+    const credentials = jwt_decode(res.credential);
+    try {
+      await authService.loginUser({
+        email: credentials.email,
+        password: credentials.sub,
+      });
+      openToast('success', 'You\'ve been logged in');
+    } catch (e) {
+      // if Google login attempted, but account doesn't exist, create the account
+      if (e.response.data.message === 'Invalid credentials') {
+        dispatch(register({
+          email: credentials.email,
+          password: credentials.sub,
+        }));
+        dispatch(setSignup({
+          user: {
+            firstName: credentials.given_name,
+            lastName: credentials.family_name,
+          },
+          step: 1,
+        }));
+        navigate('/signup');
+      }
+    }
   };
 
   if (isLoading) {
@@ -151,9 +165,11 @@ export default function Login() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <GoogleLogin
-                  buttonText="Login with Google"
-                  failureText="Could not authenticate with google"
                   onSuccess={handleGoogleLoginSuccess}
+                  onError={() => {
+                    openToast('error', 'Google Authentication Failed');
+                  }}
+                  useOneTap
                 />
               </Grid>
             </Grid>

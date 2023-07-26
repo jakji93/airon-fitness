@@ -3,7 +3,10 @@ import {
   Link,
   Grid,
 } from '@mui/material';
+import { GoogleLogin } from '@react-oauth/google';
 import { useFormik } from 'formik';
+// eslint-disable-next-line camelcase
+import jwt_decode from 'jwt-decode';
 import * as React from 'react';
 import { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +16,6 @@ import { register, resetAuth } from '../../reducers/Auth';
 import { setSignup } from '../../reducers/Signup';
 import { ToastContext } from '../common/context/ToastContextProvider';
 import Spinner from '../common/Spinner';
-import GoogleLogin from '../GoogleLogin';
 import Form from '../Profile/Forms/Form';
 import FormTextFieldInput from '../Profile/Forms/FormTextFieldInput';
 
@@ -58,10 +60,11 @@ export default function SignupRegisterAccount() {
 
     if (isSuccess && user) {
       openToast('success', 'Your account has been created! Please setup your user profile 🫡');
-      dispatch(setSignup({ step: step + 1 }));
     }
 
-    dispatch(resetAuth);
+    if (user) dispatch(setSignup({ step: step + 1 }));
+
+    dispatch(resetAuth());
   }, [user, isError, isSuccess, message, dispatch]);
 
   const handleSubmit = (e) => {
@@ -70,14 +73,15 @@ export default function SignupRegisterAccount() {
   };
 
   const handleGoogleSignupSuccess = (res) => {
+    const credentials = jwt_decode(res.credential);
     dispatch(register({
-      email: res.profileObj.email,
-      password: res.profileObj.googleId,
+      email: credentials.email,
+      password: credentials.sub,
     }));
     dispatch(setSignup({
       user: {
-        firstName: res.profileObj.givenName,
-        lastName: res.profileObj.familyName,
+        firstName: credentials.given_ame,
+        lastName: credentials.family_name,
       },
       step,
     }));
@@ -152,9 +156,11 @@ export default function SignupRegisterAccount() {
       </Grid>
       <Grid item xs={12} sm={6}>
         <GoogleLogin
-          buttonText="Signup with Google"
-          failureText="Could not authenticate with google"
           onSuccess={handleGoogleSignupSuccess}
+          onError={() => {
+            openToast('error', 'Google Authentication Failed');
+          }}
+          useOneTap
         />
       </Grid>
       <Grid container justifyContent="flex-end">
