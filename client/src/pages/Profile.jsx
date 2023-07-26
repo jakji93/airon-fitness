@@ -9,7 +9,7 @@ import TabPanel from '../components/common/TabPanel';
 import AdditionalProfileForm from '../components/Profile/AdditionalProfileForm';
 import AvatarUpload from '../components/Profile/AvatarUpload';
 import BasicProfileForm from '../components/Profile/BasicProfileForm';
-import { getUserProfile, resetUserProfileStates } from '../reducers/UserProfile';
+import { resetUserProfileStates } from '../reducers/UserProfile';
 
 export default function Profile() {
   const openToast = useContext(ToastContext);
@@ -21,19 +21,16 @@ export default function Profile() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!profile) dispatch(getUserProfile());
-  }, []);
-
-  useEffect(() => {
-    if (isError) {
-      openToast('error', message);
-      dispatch(resetUserProfileStates());
-    }
-
-    if ((isSuccess || profile) && updatingProfile) {
+    if (isSuccess && updatingProfile) {
       openToast('success', 'Your profile has been updated!');
       setUpdatingProfile(false);
       dispatch(resetUserProfileStates());
+    }
+
+    if (isError) {
+      openToast('error', message);
+      dispatch(resetUserProfileStates());
+      setUpdatingProfile(false);
     }
   }, [profile, isError, isSuccess, message, dispatch]);
 

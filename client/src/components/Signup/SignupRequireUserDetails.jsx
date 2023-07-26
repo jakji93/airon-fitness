@@ -2,7 +2,7 @@ import {
   Grid, Button,
 } from '@mui/material';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 
@@ -43,15 +43,16 @@ const validationSchema = yup.object({
 export default function SignupRequireUserDetails() {
   const dispatch = useDispatch();
   const signup = useSelector((state) => state.signup);
+  const initialValues = {
+    weight: signup.user.weight ?? '',
+    height: signup.user.height ?? '',
+    weightUnit: signup.user.weightUnit ?? WEIGHT_UNITS.KG,
+    heightUnit: signup.user.heightUnit ?? HEIGHT_UNITS.IN,
+    experience: signup.user.experience ?? '',
+    goals: signup.user.goals ?? [],
+  };
   const formik = useFormik({
-    initialValues: {
-      weight: signup.user.weight ?? '',
-      height: signup.user.height ?? '',
-      weightUnit: signup.user.weightUnit ?? WEIGHT_UNITS.KG,
-      heightUnit: signup.user.heightUnit ?? HEIGHT_UNITS.IN,
-      experience: signup.user.experience ?? '',
-      goals: signup.user.goals ?? [],
-    },
+    initialValues,
     validationSchema,
     onSubmit: (values) => {
       dispatch(setSignup({
@@ -67,6 +68,12 @@ export default function SignupRequireUserDetails() {
       }));
     },
   });
+
+  useEffect(() => {
+    Object.entries(initialValues).forEach(([fieldName, value]) => {
+      formik.setFieldValue(fieldName, value);
+    });
+  }, [signup]);
 
   const handleBack = () => {
     dispatch(setSignup({
