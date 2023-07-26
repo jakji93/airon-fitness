@@ -10,7 +10,9 @@ import * as yup from 'yup';
 
 import { ToastContext } from '../components/common/context/ToastContextProvider';
 import Spinner from '../components/common/Spinner';
+import GoogleLogin from '../components/GoogleLogin';
 import { login, resetAuth } from '../reducers/Auth';
+import { removeSignup } from '../reducers/Signup';
 
 const validationSchema = yup.object({
   email: yup
@@ -46,6 +48,10 @@ export default function Login() {
   });
 
   useEffect(() => {
+    dispatch(removeSignup());
+  });
+
+  useEffect(() => {
     if (isError) {
       openToast('error', message);
     }
@@ -59,6 +65,13 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     formik.handleSubmit(e);
+  };
+
+  const handleGoogleLoginSuccess = (res) => {
+    dispatch(login({
+      email: res.profileObj.email,
+      password: res.profileObj.googleId,
+    }));
   };
 
   if (isLoading) {
@@ -121,15 +134,24 @@ export default function Login() {
                   helperText={formik.touched.password && formik.errors.password}
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ width: '100%', height: '100%' }}
+                >
+                  Login
+                </Button>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <GoogleLogin
+                  buttonText="Login with Google"
+                  failureText="Could not authenticate with google"
+                  onSuccess={handleGoogleLoginSuccess}
+                />
+              </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, width: '300px' }}
-            >
-              Login
-            </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to="/signup" variant="body2">
