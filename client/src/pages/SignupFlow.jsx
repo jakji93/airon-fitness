@@ -19,10 +19,11 @@ export default function SignupFlow() {
   const openToast = useContext(ToastContext);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
   const {
     profile, isLoading, isError, isSuccess, message,
   } = useSelector((state) => state.userProfile);
-  const step = useSelector((state) => state.signup.step);
+  const { user: signupUser, step } = useSelector((state) => state.signup);
 
   const stepTitles = ['Account Creation', 'Personal Info', 'Required Info', 'API Key', 'Customize Profile'];
 
@@ -36,6 +37,8 @@ export default function SignupFlow() {
       navigate('/app');
       dispatch(removeSignup());
     }
+
+    if (!user && signupUser) dispatch(removeSignup());
 
     dispatch(resetUserProfileStates);
   }, [profile, isError, isSuccess, message, dispatch]);
