@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
 } from '@mui/material';
 import React, { useState } from 'react';
 
@@ -45,19 +44,6 @@ export default function Workout() {
       {step === StepEnum.IN_SESSION
       && (
       <GuidedWorkout onNext={handleNext} />
-      )}
-
-      {step === StepEnum.DUMMY_TEXT && (
-      <div>
-        <h2>Dummy Text for Step 2</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac metus nec arcu
-          tincidunt varius. Mauris egestas, nisl a scelerisque fermentum, turpis neque mollis
-          mauris, vel bibendum tellus nisi at ligula. Sed auctor urna purus, vel lacinia quam
-          hendrerit et.
-        </p>
-        <Button onClick={() => handleNext(StepEnum.START_WORKOUT)}>Next</Button>
-      </div>
       )}
     </Box>
   );

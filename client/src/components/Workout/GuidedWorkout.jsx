@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
-import PropTypes from 'prop-types'; // Import the prop-types module
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import WorkoutStatesEnum from './WorkoutFlowStates';

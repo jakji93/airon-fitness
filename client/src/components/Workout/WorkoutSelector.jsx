@@ -2,7 +2,7 @@ import {
   Box,
   Button,
 } from '@mui/material';
-import PropTypes from 'prop-types'; // Import the prop-types module
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Typewriter from 'typewriter-effect';
