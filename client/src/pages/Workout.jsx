@@ -4,33 +4,48 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
+import StepEnum from '../components/Workout/WorkoutFlowStates';
 import WorkoutSelector from '../components/Workout/WorkoutSelector';
+import theme from '../theme';
+
+const styles = {
+  container: {
+    backgroundColor: theme.palette.secondary.dark,
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column', // Arrange children vertically
+    justifyContent: 'center', // Vertically center the content
+    alignItems: 'center', // Horizontally center the content
+    minHeight: '95vh',
+  },
+};
 
 export default function Workout() {
-  const [step, setStep] = useState(1);
-  const handleNext = () => {
-    setStep(step + 1);
-  };
+  const [step, setStep] = useState(StepEnum.START_WORKOUT);
 
-  const handlePrevious = () => {
-    setStep(step - 1);
+  // States: START_WORKOUT, SELECT_WORKOUT, IN_SESSION
+  const handleNext = (nextStep) => {
+    setStep(nextStep);
   };
 
   return (
-    <Box>
-      {step === 1 && <WorkoutSelector onNext={handleNext} />}
-      {step === 2 && (
-        <div>
-          <h2>Dummy Text for Step 2</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac metus nec arcu
-            tincidunt varius. Mauris egestas, nisl a scelerisque fermentum, turpis neque mollis
-            mauris, vel bibendum tellus nisi at ligula. Sed auctor urna purus, vel lacinia quam
-            hendrerit et.
-          </p>
-          <Button onClick={handlePrevious}>Previous</Button>
-          <Button onClick={handleNext}>Next</Button>
-        </div>
+    <Box sx={styles.container}>
+      {step === StepEnum.START_WORKOUT
+      && (
+      <WorkoutSelector onNext={() => handleNext(StepEnum.DUMMY_TEXT)} />
+      )}
+
+      {step === StepEnum.DUMMY_TEXT && (
+      <div>
+        <h2>Dummy Text for Step 2</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac metus nec arcu
+          tincidunt varius. Mauris egestas, nisl a scelerisque fermentum, turpis neque mollis
+          mauris, vel bibendum tellus nisi at ligula. Sed auctor urna purus, vel lacinia quam
+          hendrerit et.
+        </p>
+        <Button onClick={() => handleNext(StepEnum.START_WORKOUT)}>Next</Button>
+      </div>
       )}
     </Box>
   );

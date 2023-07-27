@@ -10,20 +10,12 @@ import Typewriter from 'typewriter-effect';
 import AironLogo from '../../assets/design/LogoTan.png';
 import theme from '../../theme';
 
-const getDayOfWeekName = () => {
-  const currentDate = new Date();
-  const dayOfWeek = currentDate.getDay();
-  const daysOfWeekNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  return daysOfWeekNames[dayOfWeek];
-};
-
 const styles = {
   container: {
     color: 'white',
     backgroundColor: theme.palette.secondary.dark,
-    minHeight: '90vh', // Set the minimum height to 100 viewport height units
     flexGrow: 1,
-    display: 'flex', // Use flexbox for layout
+    display: 'flex',
     flexDirection: 'column', // Arrange children vertically
     justifyContent: 'center', // Vertically center the content
     alignItems: 'center', // Horizontally center the content
@@ -36,6 +28,8 @@ const styles = {
     paddingBottom: '30px',
   },
   logo: {
+    minWidth: '10vh',
+    minHeight: '10vh',
     maxWidth: '25vh',
     maxHeight: '25vh',
     width: 'auto',
@@ -75,6 +69,13 @@ const styles = {
       },
     },
   },
+};
+
+const getDayOfWeekName = () => {
+  const currentDate = new Date();
+  const dayOfWeek = currentDate.getDay();
+  const daysOfWeekNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  return daysOfWeekNames[dayOfWeek];
 };
 
 export default function WorkoutSelector({ onNext }) {
@@ -131,7 +132,6 @@ export default function WorkoutSelector({ onNext }) {
   );
 }
 
-// Add prop-types validation for the onNext prop
 WorkoutSelector.propTypes = {
   onNext: PropTypes.func.isRequired,
 };

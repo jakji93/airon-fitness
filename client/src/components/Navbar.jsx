@@ -64,7 +64,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: theme.palette.secondary.dark, minHeight: '10vh' }}>
+    <AppBar position="static" sx={{ backgroundColor: theme.palette.secondary.dark, minHeight: '5vh' }}>
       <Container maxWidth="auto" sx={{ ml: 0 }}>
         <Toolbar disableGutters>
           <Icon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
