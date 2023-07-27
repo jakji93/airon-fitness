@@ -4,6 +4,8 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
+import GuidedWorkout from '../components/Workout/GuidedWorkout';
+import WorkoutCarousel from '../components/Workout/WorkoutCarousel';
 import StepEnum from '../components/Workout/WorkoutFlowStates';
 import WorkoutSelector from '../components/Workout/WorkoutSelector';
 import theme from '../theme';
@@ -32,7 +34,17 @@ export default function Workout() {
     <Box sx={styles.container}>
       {step === StepEnum.START_WORKOUT
       && (
-      <WorkoutSelector onNext={() => handleNext(StepEnum.DUMMY_TEXT)} />
+      <WorkoutSelector onNext={handleNext} />
+      )}
+
+      {step === StepEnum.SELECT_WORKOUT
+      && (
+      <WorkoutCarousel onNext={handleNext} />
+      )}
+
+      {step === StepEnum.IN_SESSION
+      && (
+      <GuidedWorkout onNext={handleNext} />
       )}
 
       {step === StepEnum.DUMMY_TEXT && (

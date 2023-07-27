@@ -7,6 +7,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Typewriter from 'typewriter-effect';
 
+import WorkoutStatesEnum from './WorkoutFlowStates';
 import AironLogo from '../../assets/design/LogoTan.png';
 import theme from '../../theme';
 
@@ -118,11 +119,11 @@ export default function WorkoutSelector({ onNext }) {
       />
 
       {workoutSchedule ? (
-        <Button onClick={onNext} variant="outlined" sx={styles.startButton}>
+        <Button onClick={() => onNext(WorkoutStatesEnum.IN_SESSION)} variant="outlined" sx={styles.startButton}>
           START WORKOUT
         </Button>
       ) : (
-        <Button onClick={onNext} variant="outlined" sx={styles.startButton}>
+        <Button onClick={() => onNext(WorkoutStatesEnum.SELECT_WORKOUT)} variant="outlined" sx={styles.startButton}>
           CHOOSE WORKOUT
         </Button>
       )}
