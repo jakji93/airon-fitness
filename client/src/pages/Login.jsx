@@ -4,6 +4,7 @@ import {
 import { Container } from '@mui/system';
 import { GoogleLogin } from '@react-oauth/google';
 import { useFormik } from 'formik';
+import { gapi } from 'gapi-script';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
 import React, { useContext, useEffect, useState } from 'react';
@@ -78,6 +79,18 @@ export default function Login() {
       navigate('/signup');
     }
   }, [redirectSignup, credentials]);
+
+  const initializeGapi = () => {
+    gapi.client.init({
+      clientId: process.env.REACT_APP_GCP_CLIENT_ID,
+      scope: '',
+    });
+  };
+
+  useEffect(() => {
+    // load and init google api scripts
+    gapi.load('client:auth2', initializeGapi);
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
