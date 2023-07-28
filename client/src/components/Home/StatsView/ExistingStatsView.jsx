@@ -71,7 +71,7 @@ function getMealData(mMacro) {
   return res;
 }
 
-export default function StatsView() {
+export default function ExistingStatsView() {
   const { workoutSchedule, mealSchedule } = useSelector(
     (state) => state.workoutAndMealSchedule,
   );
