@@ -17,8 +17,8 @@ const generateSchedules = asyncHandler(async (req, res) => {
   if (meals && workouts) {
     res.status(200).json({
       userInfoID: id,
-      workoutSchedule: workouts.schedule,
-      mealSchedule: meals.schedule,
+      workoutSchedule: workouts,
+      mealSchedule: meals,
     });
   } else {
     res.status(400).json({ message: 'invalid schedule data' });
