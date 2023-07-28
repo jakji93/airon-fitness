@@ -29,9 +29,31 @@ const createWorkoutAndMealSchedule = async () => {
   return response.data;
 };
 
+const updateWorkoutSchedule = async () => {
+  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/mock/workoutSchedule/`;
+
+  const response = await axios.put(apiUrl, {}, {
+    headers: createBearerTokenHeader(),
+  });
+
+  return response.data;
+};
+
+const updateMealSchedule = async () => {
+  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/mock/mealSchedule/`;
+
+  const response = await axios.put(apiUrl, {}, {
+    headers: createBearerTokenHeader(),
+  });
+
+  return response.data;
+};
+
 const workoutAndMealScheduleService = {
   createWorkoutAndMealSchedule,
   getWorkoutAndMealSchedule,
+  updateWorkoutSchedule,
+  updateMealSchedule,
 };
 
 export default workoutAndMealScheduleService;
