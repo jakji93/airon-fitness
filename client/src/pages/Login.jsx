@@ -81,7 +81,7 @@ export default function Login() {
   }, [redirectSignup, credentials]);
 
   const initializeGapi = () => {
-    gapi.client.init({
+    gapi.auth2.init({
       clientId: process.env.REACT_APP_GCP_CLIENT_ID,
       scope: '',
     });
