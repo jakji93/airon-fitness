@@ -10,7 +10,8 @@ export default function StatsView() {
   const {
     workoutSchedule, mealSchedule, isError, isSuccess, message,
   } = useSelector((state) => state.workoutAndMealSchedule);
-
+  const schedulesExist = workoutSchedule && mealSchedule
+    && workoutSchedule.schedule && mealSchedule.schedule;
   useEffect(() => {
     if (!workoutSchedule || !mealSchedule) {
       dispatch(getWorkoutAndMealSchedule());
@@ -29,7 +30,7 @@ export default function StatsView() {
 
   return (
     <div>
-      {(workoutSchedule && mealSchedule) ? <ExistingStatsView /> : <NoStatsView />}
+      {schedulesExist ? <ExistingStatsView /> : <NoStatsView />}
     </div>
   );
 }

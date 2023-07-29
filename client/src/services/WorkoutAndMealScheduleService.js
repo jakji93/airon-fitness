@@ -20,7 +20,7 @@ const getWorkoutAndMealSchedule = async () => {
 };
 
 const createWorkoutAndMealSchedule = async () => {
-  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/mock/workoutMealSchedule/`;
+  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/userProfile/generate/`;
 
   const response = await axios.post(apiUrl, {}, {
     headers: createBearerTokenHeader(),
