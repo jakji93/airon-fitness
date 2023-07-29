@@ -22,7 +22,7 @@ export default function SignupFlow() {
   const {
     profile, isLoading, isError, isSuccess, message,
   } = useSelector((state) => state.userProfile);
-  const step = useSelector((state) => state.signup.step);
+  const { step } = useSelector((state) => state.signup);
 
   const stepTitles = ['Account Creation', 'Personal Info', 'Required Info', 'API Key', 'Customize Profile'];
 
@@ -32,7 +32,7 @@ export default function SignupFlow() {
     }
 
     if (isSuccess || profile) {
-      openToast('success', 'Your profile has been created!');
+      openToast('success', 'You\'re all set up!');
       navigate('/app');
       dispatch(removeSignup());
     }

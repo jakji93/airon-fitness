@@ -136,7 +136,6 @@ const WorkoutAndMealScheduleSlice = createSlice({
       .addCase(getWorkoutAndMealSchedule.rejected, (state) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.message = 'Please create a schedule!';
         state.profile = null;
       })
       .addCase(createWorkoutAndMealSchedule.pending, (state) => {
