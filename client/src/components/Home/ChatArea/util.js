@@ -4,8 +4,8 @@ export const createWorkoutString = (schedule, newMessages) => {
     const exercisesArray = Object.entries(exercises);
     let workout = `${day}\n`;
 
-    exercisesArray.forEach((ex) => {
-      workout += `Exercise ${Number(ex[0]) + 1}:  ${ex[1].exercise} ${ex[1].reps} Reps, ${ex[1].sets} Sets\n`;
+    exercisesArray[0][1].forEach((ex, idx) => {
+      workout += `Exercise ${idx + 1}:  ${ex.exercise} ${ex.reps} Reps, ${ex.sets} Sets\n`;
     });
 
     workoutString += workout;

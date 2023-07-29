@@ -2,7 +2,7 @@ import SendIcon from '@mui/icons-material/Send';
 import {
   Card, Grid, Divider, TextField, Typography, Fab,
 } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { useDispatch, useStore } from 'react-redux';
 
 import ChatMessages from './ChatMessages';
@@ -36,12 +36,19 @@ export default function ChatArea() {
   const [scheduleMode, setScheduleMode] = useState('');
   const dispatch = useDispatch();
   const store = useStore();
+  const [token, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
     const chatBox = document.getElementById('chatbox-messages');
 
     chatBox.scrollTop = chatBox.scrollHeight;
   }, [messages]);
+
+  useEffect(() => {
+    const chatBox = document.getElementById('chatbox-messages');
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }, [token]);
 
   const resetValues = () => {
     setProfileEditField('');
@@ -53,24 +60,43 @@ export default function ChatArea() {
     setFormOptions(starterOptions);
   };
 
-  const generatePlan = async (newMessages, call, customInput) => {
-    switch (call) {
-      case 'new':
-        await dispatch(scheduleMode === 'Workout' ? createWorkoutSchedule() : createMealSchedule());
-        break;
-      case 'curr':
-        await dispatch(scheduleMode === 'Workout' ? getWorkoutSchedule() : getMealSchedule());
-        break;
-      case 'custom':
-        await dispatch(scheduleMode === 'Workout' ? updateWorkoutSchedule(customInput) : updateMealSchedule(customInput));
-        break;
-      default:
+  const validateExistingSchedule = (validateMode) => {
+    const state = store.getState();
+    let error;
+
+    if (validateMode) {
+      error = state.workoutAndMealSchedule.workoutSchedule;
+    } else {
+      error = state.workoutAndMealSchedule.mealSchedule;
     }
 
-    const state = store.getState();
-    let schedule;
+    if (error === undefined || Object.keys(error).length === 0) throw new Error('No existing schedule');
+  };
 
-    if (state.workoutAndMealSchedule.isError) throw new Error('Create schedule failed');
+  const generatePlan = async (newMessages, call, customInput) => {
+    let state = store.getState();
+
+    try {
+      switch (call) {
+        case 'new':
+          await dispatch(scheduleMode === 'Workout' ? createWorkoutSchedule() : createMealSchedule());
+          break;
+        case 'curr':
+          validateExistingSchedule(scheduleMode === 'Workout');
+          await dispatch(scheduleMode === 'Workout' ? getWorkoutSchedule() : getMealSchedule());
+          break;
+        case 'custom':
+          validateExistingSchedule(scheduleMode === 'Workout');
+          await dispatch(scheduleMode === 'Workout' ? updateWorkoutSchedule(customInput) : updateMealSchedule(customInput));
+          break;
+        default:
+      }
+    } catch (e) {
+      throw new Error('No existing schedule');
+    }
+
+    state = store.getState();
+    let schedule;
 
     if (scheduleMode === 'Workout') {
       schedule = state.workoutAndMealSchedule.workoutSchedule.schedule;
@@ -81,7 +107,9 @@ export default function ChatArea() {
     }
 
     newMessages.push({ content: 'Is there anything else I can help with?', isSelf: false });
+    setMessages(newMessages);
     resetValues();
+    forceUpdate();
   };
 
   const handleStarterResponse = (newMessages, input) => {
@@ -171,7 +199,10 @@ export default function ChatArea() {
     } else {
       await dispatch(updateUserProfile({ [profileEditField]: input }));
       newMessages.push({ content: 'Your profile has been updated', isSelf: false });
+
+      setMessages(newMessages);
       resetValues();
+      forceUpdate();
     }
   };
 
@@ -180,7 +211,10 @@ export default function ChatArea() {
       [profileEditField]: inputMultiSelect.length === 0 ? formSelect : inputMultiSelect,
     }));
     newMessages.push({ content: 'Your profile has been updated. Is there anything else I can help with?', isSelf: false });
+
+    setMessages(newMessages);
     resetValues();
+    forceUpdate();
   };
 
   const handleConfirmEditResponse = (newMessages, input) => {
@@ -206,7 +240,7 @@ export default function ChatArea() {
     }
   };
 
-  const handleCommand = (newMessages, input) => {
+  const handleCommand = async (newMessages, input) => {
     switch (mode) {
       case 'starter':
         handleStarterResponse(newMessages, input);
@@ -215,7 +249,13 @@ export default function ChatArea() {
         handleEditResponse(newMessages, input);
         break;
       case 'generatePlanWithCustom':
-        generatePlan(newMessages, 'custom', input);
+        try {
+          await generatePlan(newMessages, 'custom', input);
+        } catch (e) {
+          newMessages.push({ content: 'It appears you do not have a schedule, give me a moment to generate one for you', isSelf: false });
+
+          generatePlan(newMessages, 'new');
+        }
         break;
       case 'confirmCustomInput':
         handleConfirmCustomInput(newMessages);
