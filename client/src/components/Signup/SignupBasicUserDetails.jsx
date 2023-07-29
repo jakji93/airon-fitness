@@ -8,10 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 
 import { genderOptions } from '../../constants/BasicProfile';
-import { resetAuth } from '../../reducers/Auth';
 import { setSignup } from '../../reducers/Signup';
 import { ToastContext } from '../common/context/ToastContextProvider';
-import Spinner from '../common/Spinner';
 import Form from '../Profile/Forms/Form';
 import FormDatePicker from '../Profile/Forms/FormDatePicker';
 import FormSelect from '../Profile/Forms/FormSelect';
@@ -33,9 +31,6 @@ const validationSchema = yup.object({
 });
 
 export default function SignupBasicUserDetails() {
-  const {
-    user, isLoading, isError, isSuccess, message,
-  } = useSelector((state) => state.auth);
   const openToast = useContext(ToastContext);
   const dispatch = useDispatch();
   const signup = useSelector((state) => state.signup);
@@ -76,22 +71,6 @@ export default function SignupBasicUserDetails() {
     e.preventDefault();
     formik.handleSubmit();
   };
-
-  useEffect(() => {
-    if (isError) {
-      openToast('error', message);
-    }
-
-    if (isSuccess || user) {
-      openToast('success', 'Your account has been created! Please setup your user profile 🫡');
-    }
-
-    dispatch(resetAuth);
-  }, [user, isError, isSuccess, message, dispatch]);
-
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   return (
     <Form
