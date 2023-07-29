@@ -12,6 +12,7 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
+  redirectSignup: false,
   message: '',
 };
 
@@ -42,6 +43,15 @@ export const logout = createAsyncThunk('auth/logout', async () => {
   await authService.logoutUser();
 });
 
+export const googleLogin = createAsyncThunk('auth/googleLogin', async (userData, thunkAPI) => {
+  try {
+    return await authService.loginUser(userData);
+  } catch (error) {
+    const message = getErrorMessage(error);
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -50,6 +60,7 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = false;
       state.isError = false;
+      state.redirectSignup = false;
       state.message = '';
     },
   },
@@ -82,6 +93,20 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.user = null;
+      })
+      .addCase(googleLogin.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(googleLogin.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(googleLogin.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.user = null;
+        if (action.payload === 'Invalid credentials') state.redirectSignup = true;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;

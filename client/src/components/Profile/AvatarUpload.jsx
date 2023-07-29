@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import React, {
-  createRef, useContext, useState,
+  createRef, useContext, useEffect, useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -44,6 +44,10 @@ export default function AvatarUpload() {
   const [image, _setImage] = useState(profileImage ?? '/static/img/avatars/default-profile.svg');
   const inputFileRef = createRef();
   const imageExists = image && image !== base64Flag;
+
+  useEffect(() => {
+    _setImage(profileImage ?? '/static/img/avatars/default-profile.svg');
+  }, [profile, profileImage]);
 
   const cleanup = () => {
     URL.revokeObjectURL(image);

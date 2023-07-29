@@ -19,23 +19,22 @@ const mealCreationPrompt = (user) => `
 
   To be explicit, the JSON should be formatted like so:
   {
-    schedule:
-      {Monday:
-        {breakfast: string,
-         snack1: string,
-         lunch: string,
-         snack2: string
-         dinner: string
-         nutrition_totals: {
-          calories: number,
-          carbohydrates: number,
-          protein: number,
-          fat: number
-         }
+    {Monday:
+      {breakfast: string,
+        snack1: string,
+        lunch: string,
+        snack2: string
+        dinner: string
+        nutrition_totals: {
+        calories: number,
+        carbohydrates: number,
+        protein: number,
+        fat: number
         }
-        Tuesday:...
-        Wednesday:...
-        ...}
+      }
+      Tuesday:...
+      Wednesday:...
+      ...}
   }`;
 
 const mealUpdatePrompt = (user, inputs, schedule) => `

@@ -37,7 +37,7 @@ const generateMealScheduleHelper = async (id) => {
 
   const mealSchedule = await MealSchema.create({
     userInfoID: id,
-    schedule: generatedSchedule,
+    schedule: JSON.parse(generatedSchedule),
     inputs: [],
   });
 
