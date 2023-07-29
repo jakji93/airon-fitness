@@ -24,5 +24,5 @@ export const createMealString = (schedule, newMessages) => {
   });
 };
 
-export const starterOptions = ['Edit Profile', 'View Meal Plan', 'View Workout Plan'];
+export const starterOptions = ['Edit Profile', 'Generate Schedules', 'View Meal Plan', 'View Workout Plan'];
 export const starterLabel = 'Choose an option';

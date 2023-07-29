@@ -20,6 +20,7 @@ import { getUserProfile, updateUserProfile } from '../../../reducers/UserProfile
 import {
   getWorkoutSchedule, getMealSchedule, createWorkoutSchedule,
   createMealSchedule, updateWorkoutSchedule, updateMealSchedule,
+  getWorkoutAndMealSchedule, createWorkoutAndMealSchedule,
 } from '../../../reducers/WorkoutAndMealSchedule';
 import FormMultiSelect from '../../Profile/Forms/FormMultiSelect';
 import FormSelect from '../../Profile/Forms/FormSelect';
@@ -30,13 +31,36 @@ export default function ChatArea() {
   const [mode, setMode] = useState('starter');
   const [formSelect, setFormSelect] = useState('');
   const [inputMultiSelect, setInputMultiSelect] = useState([]);
-  const [formOptions, setFormOptions] = useState(starterOptions);
+  const [formOptions, setFormOptions] = useState(starterOptions.slice(0, 1));
   const [inputLabel, setInputLabel] = useState(starterLabel);
   const [profileEditField, setProfileEditField] = useState('');
   const [scheduleMode, setScheduleMode] = useState('');
   const dispatch = useDispatch();
   const store = useStore();
   const [token, forceUpdate] = useReducer((x) => x + 1, 0);
+
+  const resetValues = () => {
+    const state = store.getState();
+
+    setProfileEditField('');
+    setInputLabel(starterLabel);
+    setInputMultiSelect([]);
+    setFormSelect('');
+    setInputMode(1);
+    setMode('starter');
+
+    if (!state.workoutAndMealSchedule.workoutSchedule
+      && !state.workoutAndMealSchedule.workoutSchedule) {
+      setFormOptions(starterOptions.slice(0, 2));
+    } else {
+      setFormOptions(starterOptions.slice(0, 1).concat(starterOptions.slice(2)));
+    }
+  };
+
+  const initBot = async () => {
+    await dispatch(getWorkoutAndMealSchedule());
+    resetValues();
+  };
 
   useEffect(() => {
     const chatBox = document.getElementById('chatbox-messages');
@@ -50,15 +74,9 @@ export default function ChatArea() {
     chatBox.scrollTop = chatBox.scrollHeight;
   }, [token]);
 
-  const resetValues = () => {
-    setProfileEditField('');
-    setInputLabel(starterLabel);
-    setInputMultiSelect([]);
-    setFormSelect('');
-    setInputMode(1);
-    setMode('starter');
-    setFormOptions(starterOptions);
-  };
+  useEffect(() => {
+    initBot();
+  }, []);
 
   const validateExistingSchedule = (validateMode) => {
     const state = store.getState();
@@ -112,13 +130,22 @@ export default function ChatArea() {
     forceUpdate();
   };
 
-  const handleStarterResponse = (newMessages, input) => {
+  const handleStarterResponse = async (newMessages, input) => {
     if (input === 'Edit Profile') {
       newMessages.push({ content: 'For sure. Which of the following values would you like to update?', isSelf: false });
       setFormOptions(['Height', 'Weight', 'Avaibility', 'Allergies', 'Health Conditions', 'Dietary Restrictions', 'Goals']);
       setInputMode(1);
       setInputLabel('Profile');
       setMode('edit');
+    } else if (input === 'Generate Schedules') {
+      newMessages.push({ content: 'Give me one a moment to generate your schedules', isSelf: false });
+      await dispatch(createWorkoutAndMealSchedule());
+      newMessages.push({ content: 'Your schedules have been generated. Please refer to the plans tile for details.', isSelf: false });
+      newMessages.push({ content: 'Is there anything else I can help with?', isSelf: false });
+
+      setMessages(newMessages);
+      resetValues();
+      forceUpdate();
     } else {
       newMessages.push({ content: `Would you like to update your ${input.slice(input.indexOf(' ') + 1)} with custom input?`, isSelf: false });
       setMode('confirmCustomInput');
