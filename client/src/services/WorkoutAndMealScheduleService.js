@@ -19,6 +19,16 @@ const getWorkoutAndMealSchedule = async () => {
   };
 };
 
+const getPaginatedWorkoutAndMealSchedule = async (page) => {
+  const response = await axios.post(`${process.env.REACT_APP_SERVER_API_BASE}/mock/workoutMealSchedule/all`, { page }, {
+    headers: createBearerTokenHeader(),
+  });
+
+  return {
+    response,
+  };
+};
+
 const createWorkoutAndMealSchedule = async () => {
   const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/userProfile/generate/`;
 
@@ -32,6 +42,7 @@ const createWorkoutAndMealSchedule = async () => {
 const workoutAndMealScheduleService = {
   createWorkoutAndMealSchedule,
   getWorkoutAndMealSchedule,
+  getPaginatedWorkoutAndMealSchedule,
 };
 
 export default workoutAndMealScheduleService;
