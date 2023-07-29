@@ -5,7 +5,7 @@ import {
   Collapse, Grid, List, ListItem, ListItemButton, ListItemText,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 function WorkoutScheduleCollapse(props) {
@@ -61,7 +61,6 @@ WorkoutScheduleCollapse.propTypes = {
 };
 
 export default function ExistingWorkoutSchedule() {
-  const [schedule, setSchedule] = useState();
   const [selectedIndex, setSelectedIndex] = useState('');
   const { workoutSchedule } = useSelector(
     (state) => state.workoutAndMealSchedule,
@@ -75,10 +74,6 @@ export default function ExistingWorkoutSchedule() {
     }
   };
 
-  useEffect(() => {
-    setSchedule(workoutSchedule.schedule);
-  }, [workoutSchedule]);
-
   return (
     <Grid container>
       <List
@@ -86,12 +81,12 @@ export default function ExistingWorkoutSchedule() {
           width: '100%', maxheight: '100%', overflow: 'auto', bgcolor: 'background.paper',
         }}
       >
-        {schedule && Object.keys(schedule).map((day, index) => (
+        {workoutSchedule.schedule && Object.keys(workoutSchedule.schedule).map((day, index) => (
           <WorkoutScheduleCollapse
             index={index}
             handleClick={handleClick}
             selectedIndex={selectedIndex}
-            daySchedule={schedule[day]}
+            daySchedule={workoutSchedule.schedule[day]}
             key={`${day} workout`}
           />
         ))}

@@ -56,7 +56,7 @@ const generateWorkoutScheduleHelper = async (id) => {
 
   const workoutSchedule = await WorkoutSchema.create({
     userInfoID: id,
-    schedule: generatedSchedule,
+    schedule: JSON.parse(generatedSchedule),
     inputs: [],
   });
 
@@ -70,11 +70,6 @@ const generateWorkoutScheduleHelper = async (id) => {
  */
 const createWorkoutSchedule = asyncHandler(async (req, res) => {
   const id = req.user._id;
-
-  const mealScheduleExists = await WorkoutSchema.findOne({ userInfoID: id });
-  if (mealScheduleExists) {
-    res.status(400).json({ message: 'Workout schedule already exists' });
-  }
 
   const workoutSchedule = await generateWorkoutScheduleHelper(id);
 

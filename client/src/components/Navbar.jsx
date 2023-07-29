@@ -27,11 +27,11 @@ function ResponsiveAppBar() {
   const settings = useMemo(() => [
     ['PROFILE', () => navigate('/app/profile')],
     ['LOGOUT', () => {
-      navigate('/login');
       dispatch(logout());
       dispatch(resetAuth());
       dispatch(logoutUserProfile());
       dispatch(resetScheduleState());
+      navigate('/');
       openToast('success', 'You have been logged out');
     }],
   ], [navigate, dispatch]);

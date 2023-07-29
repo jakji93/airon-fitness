@@ -27,7 +27,7 @@
   <p align="center">
     AI-powered fitness app to help you kickstart your training journey.
     <br />
-    <a href="https://github.com/d-x-s/airon-fitness"><strong>View Demo »</strong></a>
+    <a href="https://airon-fitness.onrender.com/"><strong>View Demo »</strong></a>
     <br />
   </p>
 </div>
@@ -62,9 +62,7 @@
 
 Introducing AIron Fitness, an innovative fitness companion designed to support individuals on their personal fitness journey. AIron Fitness utilizes artificial intelligence to deliver customized fitness plans tailored to each user's goals and preferences. Whether you're a beginner looking to start a fitness routine or an experienced enthusiast aiming to level up, AIron Fitness has got you covered.
 
-With AIron Fitness, users can create their profiles, input their fitness goals, and receive a comprehensive fitness plan perfectly suited to their needs. The platform stores valuable user data, including personal profiles and fitness progress, allowing users to track their journey and witness their achievements over time.
-
-But AIron Fitness goes beyond just providing static plans. Time permitting, additional functionality such as computer vision can be incorporated to enhance the user experience. Through computer vision, the platform can analyze and provide real-time feedback on exercise form and technique, ensuring users perform exercises correctly and maximize their results. Furthermore, dynamic fitness plans can be generated based on live user data, allowing the platform to adapt and optimize the workout regimen as users progress.
+With AIron Fitness, users can create their profiles, input their fitness goals, and receive a comprehensive fitness plan perfectly suited to their needs, complete with guided workouts and a timer to track progress and stay motivated on their fitness journey. The platform also stores valuable user data, including personal profiles and fitness progress, allowing users to track their journey and witness their achievements over time.
 
 AIron Fitness empowers individuals to take control of their fitness goals and enjoy a personalized fitness experience. Say goodbye to generic workouts and hello to a tailored fitness solution with AIron Fitness by your side.
 
@@ -111,7 +109,7 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 - [x] Form authentication
 - [x] A user can update their profile with their own details such as diet, experience, etc.
 - [x] A user can ask their personal trainer for a new fitness plan based on their profile and any additional information (e.g. workout frequency,  experience, specific goals)
-    - [x] Investigate OpenAI
+    - [x] Investigate OpenAI API
     - [x] Setup input prompt format
     - [x] Setup initial frontend UI
     - [x] Setup backend API calls to ChatGPT
@@ -120,18 +118,17 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 
 ### Standard Requirements
 - [x] Leverage ChatGPT AI to return a custom fitness plan
-- [ ] Allow users to log their workout history
-- [ ] View meal plan user metrics and statistics
+- [x] View meal plan user metrics and statistics
 - [x] Account for user illness / physical constraints
 - [x] Secure authentication system
-- [ ] Login using Google Accounts
-- [ ] Use user stats to automatically refine workout plans
+- [x] Login using Google Accounts
+- [ ] Allow users to log their workout history
 
 ### Stretch Goals
-- [ ] Computer Vision that analyzes a users posture
+- [x] Chatbot personal trainer that allows for custom user inputs
+- [x] User can start a guided workout with timers tracking rest period and workout length (hands-free implementation) 
 - [ ] Dynamically update fitness plans as users log their history (user review and feedback in fitness plans) 
 - [ ] Live audio feedback during a workout
-- [ ] User can start a guided workout with timers tracking rest period and workout length (hands-free implementation) 
 
 ### Prototyping (Figma)
 [![Prototyping with Figma][Figma]][Figma-url]
@@ -146,71 +143,6 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- GETTING STARTED
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-<!-- ## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
-
-
-
-<!-- ROADMAP -->
-<!-- ## Roadmap
-
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
-
 
 
 <!-- ACKNOWLEDGMENTS -->

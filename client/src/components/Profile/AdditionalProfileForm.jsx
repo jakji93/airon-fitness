@@ -1,7 +1,7 @@
 import { Grid, Button } from '@mui/material';
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 
@@ -36,18 +36,20 @@ export default function AdditionalProfileForm(props) {
   } = props;
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.userProfile.profile);
+  const initialValues = {
+    healthConditions: profile?.healthConditions ?? [],
+    dietRestriction: profile?.dietRestriction ?? [],
+    allergies: profile?.allergies ?? [],
+    weeklyAvailability: profile?.weeklyAvailability ?? '',
+    bodyFat: profile?.bodyFat ?? 0,
+    muscleMass: profile?.muscleMass ?? 0,
+    duration: profile?.duration ?? 0,
+    preference: profile?.preference ?? [],
+    equipment: profile?.equipment ?? [],
+  };
+
   const formik = useFormik({
-    initialValues: {
-      healthConditions: profile?.healthConditions ?? [],
-      dietRestriction: profile?.dietRestriction ?? [],
-      allergies: profile?.allergies ?? [],
-      weeklyAvailability: profile?.weeklyAvailability ?? '',
-      bodyFat: profile?.bodyFat ?? 0,
-      muscleMass: profile?.muscleMass ?? 0,
-      duration: profile?.duration ?? 0,
-      preference: profile?.preference ?? [],
-      equipment: profile?.equipment ?? [],
-    },
+    initialValues,
     validationSchema,
     onSubmit: (values) => {
       setUpdatingProfile(true);
@@ -64,6 +66,12 @@ export default function AdditionalProfileForm(props) {
       }));
     },
   });
+
+  useEffect(() => {
+    Object.entries(initialValues).forEach(([fieldName, value]) => {
+      formik.setFieldValue(fieldName, value);
+    });
+  }, [profile]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

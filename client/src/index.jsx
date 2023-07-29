@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { configureStore } from '@reduxjs/toolkit';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -79,9 +80,11 @@ root.render(
     <Provider store={store}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <ToastContextProvider>
-          <ThemeProvider theme={theme}>
-            <RouterProvider router={router} />
-          </ThemeProvider>
+          <GoogleOAuthProvider clientId={process.env.REACT_APP_GCP_CLIENT_ID}>
+            <ThemeProvider theme={theme}>
+              <RouterProvider router={router} />
+            </ThemeProvider>
+          </GoogleOAuthProvider>
         </ToastContextProvider>
       </LocalizationProvider>
     </Provider>
