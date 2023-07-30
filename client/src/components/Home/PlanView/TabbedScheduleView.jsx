@@ -1,9 +1,9 @@
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import {
-  Tab, Tabs,
+  Card, Grid, Tab, Tabs,
 } from '@mui/material';
-import { Box } from '@mui/system';
+// import { Box } from '@mui/system';
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -37,38 +37,34 @@ export default function TabbedScheduleView() {
   }, [workoutSchedule, mealSchedule, isError, isSuccess, message, dispatch]);
 
   return (
-    <Box sx={{
-      backgroundColor: 'white',
-      position: 'relative',
-      width: '100%',
-      height: '100%',
-      zIndex: 0,
-    }}
-    >
+    <Grid container component={Card} alignItems="center" columns={2} sx={{ p: 3 }}>
       {isLoading && <RelativeSpinner />}
-      <Tabs value={value} onChange={(e, v) => setValue(v)} aria-label="icon label tabs example">
-        <Tab
-          icon={<FitnessCenterIcon fontSize="large" />}
-          label="Fitness Plan"
-          sx={{
-            width: '50%',
-          }}
-        />
-        <Tab
-          icon={<LocalDiningIcon fontSize="large" />}
-          label="Meal Plan"
-          sx={{
-            width: '50%',
-          }}
-        />
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        {workoutSchedule ? <ExistingWorkoutSchedule /> : <NoSchedule />}
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        {mealSchedule ? <ExistingMealSchedule /> : <NoSchedule />}
-      </TabPanel>
-
-    </Box>
+      <Grid item xs={10}>
+        <Tabs value={value} onChange={(e, v) => setValue(v)} aria-label="icon label tabs example">
+          <Tab
+            icon={<FitnessCenterIcon fontSize="large" />}
+            label="Fitness Plan"
+            sx={{
+              width: '50%',
+            }}
+          />
+          <Tab
+            icon={<LocalDiningIcon fontSize="large" />}
+            label="Meal Plan"
+            sx={{
+              width: '50%',
+            }}
+          />
+        </Tabs>
+      </Grid>
+      <Grid item xs={10}>
+        <TabPanel value={value} index={0}>
+          {workoutSchedule ? <ExistingWorkoutSchedule /> : <NoSchedule />}
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          {mealSchedule ? <ExistingMealSchedule /> : <NoSchedule />}
+        </TabPanel>
+      </Grid>
+    </Grid>
   );
 }
