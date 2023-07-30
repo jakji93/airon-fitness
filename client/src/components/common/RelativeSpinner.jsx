@@ -15,6 +15,7 @@ import React from 'react';
 
 const BackdropAbsolute = styled(Backdrop)(() => ({
   position: 'absolute',
+  zIndex: 10,
 }));
 
 export default function RelativeSpinner() {
