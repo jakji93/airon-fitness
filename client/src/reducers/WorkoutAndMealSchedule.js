@@ -112,7 +112,7 @@ const WorkoutAndMealScheduleSlice = createSlice({
       .addCase(updateMealSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.message = 'Your meal schedule has been created!';
+        state.message = 'Your meal schedule has been updated!';
         state.mealSchedule = action.payload;
       })
       .addCase(updateMealSchedule.rejected, (state, action) => {
@@ -127,7 +127,7 @@ const WorkoutAndMealScheduleSlice = createSlice({
       .addCase(updateWorkoutSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.message = 'Your schedule has been created!';
+        state.message = 'Your workout schedule has been updated!';
         state.workoutSchedule = action.payload;
       })
       .addCase(updateWorkoutSchedule.rejected, (state, action) => {
