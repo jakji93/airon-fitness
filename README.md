@@ -52,6 +52,7 @@
     <li><a href="#utilized-technology">Utilized Technology</a></li>
     <li><a href="#above-and-beyond">Above and Beyond</a></li>
     <li><a href="#whats-next">What's Next</a></li>
+    <li><a href="#group-contribution">Group Contribution</a></li>
     <li><a href="#the-team">The Team</a></li>
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#license">License</a></li>
@@ -134,6 +135,20 @@ In our next steps to further improve the app, we plan to dynamically update fitn
 
 <!-- CONTRIBUTION -->
 ## Group Contribution
+### Davis Song
+Davis Song made valuable contributions to our MERN project, taking the lead in designing and implementing the eye-catching landing page with meticulous theming and styling. He adeptly set up the MUI global navigation bar and introduced routing to enhance the application's user experience. Davis played a significant role in setting up the Express.js backend, ensuring seamless server-side functionality. He also implemented the UserProfile route and handled mock data setup for efficient Postman testing. Davis's technical expertise shone through as he integrated the controller connection with OpenAI and the database, performing thorough reliability testing to ensure optimal performance. Additionally, his creative talents extended to brand design, including the creation of a captivating logo and brand assets. Finally, he spearheaded the implementation of the guided workouts feature, delivering a holistic and dynamic user experience.
+
+### Jack Ji
+Jack Ji made substantial contributions to our MERN project, playing a crucial role in finalizing the API prompt and documenting the ChatGPT API format in JavaScript. He was instrumental in the initial database design, establishing the database connection, and implementing the backend routers. Additionally, Jack completed the backend implementation for profile creation and image upload to MongoDB, ensuring seamless functionality. His efforts extended to designing and testing the updated GPT prompt, enabling an improved user experience. Furthermore, Jack initiated the backend implementation for schedule history and actively conducted live service testing, ensuring a reliable and efficient application. His dedication to real user API testing and general debugging significantly contributed to the app's robustness and overall success.
+
+### Kenny Cheng
+Kenny Cheng made significant contributions to our MERN project by spearheading the project setup, bootstrapping major packages, and configuring ESLint. He played a pivotal role in building reusable front-end form components for creating and updating profile data, and also handled the Redux setup for user profile data and fitness plans. Additionally, Kenny ensured a seamless user experience by implementing end-to-end login/registration with JWT authentication, integrating Google account login, and establishing profile picture uploading capabilities. His dedication extended to enhancing the User signup process, aligning it with profile requirements, and implementing validation. Moreover, Kenny designed and created the home-page tabbed fitness and meal schedule view, meticulously following Figma designs and optimizing workflows by creating a mock router. His meticulous attention to detail and bug fixing efforts ensured a robust and efficient application.
+
+### Kevin Chung
+Kevin Chung made significant contributions to our MERN project, demonstrating his proficiency in front-end development. He skillfully developed code for creating user profiles, enabling seamless text entry, image fetch/upload, and date entry functionalities. Kevin played a pivotal role in designing and implementing the home page, fitness plan, and statistics components, bringing Figma sketches to life. His attention to detail was evident in implementing the collapse card for fitness plans, enhancing the app's styling. Moreover, Kevin's expertise in frontend development shone through as he skillfully displayed user metrics and statistics through charts, ensuring a user-friendly and informative experience in line with customized fitness and meal plans.
+
+### Kevin Wu
+Kevin Wu has been instrumental in various aspects of our MERN project. He was responsible for creating the user sign-up frontend components, skillfully setting up UI themes, and implementing fixes for the create profile UI. Additionally, Kevin played a vital role in setting up the Express backend and conducting investigations to integrate OpenAI API requests for generating user workout and meal schedules. Furthermore, Kevin showcased his ingenuity by creating a chatbot for customizing schedules and editing user profiles, enhancing the app's functionality and user experience.
 
 <!-- GROUP -->
 ## The Team
