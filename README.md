@@ -128,7 +128,12 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 <!-- WHATS NEXT -->
 ## What's Next
 
+In our next steps to further improve the app, we plan to dynamically update fitness plans based on users' logged history, incorporating user reviews and feedback to provide personalized and evolving workout routines. Additionally, we aim to implement a Computer Vision feature that analyzes users' posture, offering real-time feedback to ensure proper form during exercises. Furthermore, we plan to introduce live audio feedback during workouts, creating an immersive and interactive fitness experience for our users. These additions will enhance the app's usability and help users achieve their fitness goals more effectively.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTION -->
+## Group Contribution
 
 <!-- GROUP -->
 ## The Team
