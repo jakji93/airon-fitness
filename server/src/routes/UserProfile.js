@@ -5,6 +5,7 @@ const {
   createUserProfile,
   updateUserProfile,
   deleteUserProfileById,
+  getPaginatedScheduleHistory,
 } = require('../controllers/userProfileController');
 const {
   generateSchedules,
@@ -197,5 +198,39 @@ router.delete('/', protect, deleteUserProfileById);
  * }
  */
 router.post('/generate', protect, generateSchedules);
+
+/**
+ * @desc retrieve paginated history of user workout and meal schedules in chronological order
+ * @access Private
+ * @route POST /userProfile/history
+ * @request
+ *  body: {
+ *    "page": number
+ *  }
+ *  params: n/a
+ *  query params: n/a
+ * @response object containing page of history with pagination information
+ * {
+ *  "pagination": {
+ *    "page": number,
+ *    "max": number,
+ *    "schedules": [
+ *    {
+ *      "Monday": {
+ *        "exercises": [
+ *            ...
+ *          ],
+ *        "total_calories"
+ *      },
+ *    {
+ *      "Monday": {
+ *        "breakfast": string
+ *       ...
+ *      }, ...
+ *    ]
+ *  }
+ * }
+ */
+router.post('/history', protect, getPaginatedScheduleHistory);
 
 module.exports = router;

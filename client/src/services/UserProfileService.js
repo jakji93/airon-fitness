@@ -74,11 +74,22 @@ const updateProfileImage = async (file) => {
   return response.data;
 };
 
+const getPaginatedScheduleHistory = async (page) => {
+  const response = await axios.post(`${API_URL}/history`, { page }, {
+    headers: createBearerTokenHeader(),
+  });
+
+  return {
+    response,
+  };
+};
+
 const userProfileService = {
   createUserProfile,
   getUserProfile,
   updateUserProfile,
   updateProfileImage,
+  getPaginatedScheduleHistory,
 };
 
 export default userProfileService;

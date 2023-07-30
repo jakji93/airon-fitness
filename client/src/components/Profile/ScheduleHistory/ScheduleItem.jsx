@@ -1,11 +1,15 @@
-import { Paper, Box } from '@mui/material';
+import { Paper, Box, Grid } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import ScheduleDetails from './ScheduleDetails';
 
-export default function ScheduleItem({ details }) {
+export default function ScheduleItem({ details, token }) {
   const [showDetails, setShowDetails] = useState(false);
+
+  useEffect(() => {
+    setShowDetails(false);
+  }, [token]);
 
   const getDateString = () => {
     const dateObject = new Date(details.createdAt);
@@ -28,7 +32,7 @@ export default function ScheduleItem({ details }) {
   };
 
   return (
-    <Box sx={{ margin: '8px 0' }}>
+    <Grid item xs={12} lg={6} sx={{ margin: '8px 0' }}>
       <Paper
         elevation={3}
         sx={{
@@ -36,9 +40,8 @@ export default function ScheduleItem({ details }) {
         }}
         onClick={() => setShowDetails(!showDetails)}
       >
-        <Box sx={{ display: 'flex' }}>
-          <Box>Generated { Object.values(details.schedule)[0].breakfast ? 'Meal Schedule' : 'Workout Schedule' } on {getDateString()}</Box>
-          <Box sx={{ marginLeft: '64px' }}>Rating: 5</Box>
+        <Box>
+          Generated { Object.values(details.schedule)[0].breakfast ? 'Meal Schedule' : 'Workout Schedule' } on {getDateString()}
         </Box>
         <Box sx={{ marginTop: '8px' }}>
           {getCustomInputString()}
@@ -52,16 +55,17 @@ export default function ScheduleItem({ details }) {
             }}
             >
               {
-                details ? Object.values(details.schedule).map((s, idx) => <ScheduleDetails details={s} day={idx} />) : ''
+                details ? Object.values(details.schedule).map((s, idx) => <ScheduleDetails details={s} day={idx} token={token} />) : ''
               }
             </Box>
           ) : ''
       }
-    </Box>
+    </Grid>
   );
 }
 
 ScheduleItem.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   details: PropTypes.arrayOf(PropTypes.object).isRequired,
+  token: PropTypes.number.isRequired,
 };

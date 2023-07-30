@@ -1,5 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const UserProfile = require('../models/UserProfileModel');
+const WorkoutSchema = require('../models/WorkoutScheduleModel');
+const MealSchedule = require('../models/MealScheduleModel');
 const { USER_PROFILE_FIELDS } = require('../constants');
 const openAI = require('../utils/openaiUtil');
 
@@ -175,9 +177,43 @@ const deleteUserProfileById = asyncHandler(async (req, res) => {
   throw new Error('Failed to delete profile');
 });
 
+const getPaginatedScheduleHistory = asyncHandler(async (req, res) => {
+  const { page } = req.body;
+
+  const docsPerPage = 6;
+  const numDocsToRetrieve = docsPerPage * page;
+  const skip = page !== 0 ? docsPerPage * (page - 1) : 0;
+
+  const query = { userInfoID: '64b8e6040748c356e6f67978' };
+  const options = { sort: { createdBy: -1 }, limit: numDocsToRetrieve };
+
+  let combinedSchedules = await Promise.all([
+    WorkoutSchema.find(query, 'createdAt schedule inputs', options),
+    MealSchedule.find(query, 'createdAt schedule inputs', options),
+  ]);
+
+  const countWorkouts = await WorkoutSchema.countDocuments(query);
+  const countMeals = await MealSchedule.countDocuments(query);
+
+  const totalPages = Math.ceil((countWorkouts + countMeals) / docsPerPage);
+
+  combinedSchedules = combinedSchedules.flat();
+  combinedSchedules.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  combinedSchedules = combinedSchedules.slice(skip, skip + docsPerPage);
+
+  res.status(200).json({
+    pagination: {
+      page,
+      max: totalPages,
+      schedules: combinedSchedules,
+    },
+  });
+});
+
 module.exports = {
   getUserProfileById,
   createUserProfile,
   updateUserProfile,
   deleteUserProfileById,
+  getPaginatedScheduleHistory,
 };

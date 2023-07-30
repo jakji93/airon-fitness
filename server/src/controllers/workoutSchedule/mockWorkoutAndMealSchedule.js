@@ -47,49 +47,6 @@ const MOCKcreateWorkoutAndMealSchedule = asyncHandler(async (req, res) => {
   }
 });
 
-const MOCKgetPaginatedWorkoutAndMealSchedule = asyncHandler(async (req, res) => {
-  const { page } = req.body;
-  console.log(req.body);
-  const docsPerPage = 2;
-  const numDocsToRetrieve = docsPerPage * page;
-  const skip = page !== 0 ? docsPerPage * (page - 1) : 0;
-
-  const query = { userInfoID: '64b8e6040748c356e6f67978' };
-  const options = { sort: { createdBy: -1 }, limit: numDocsToRetrieve };
-
-  let combinedSchedules = await Promise.all([
-    WorkoutSchema.find(query, 'createdAt schedule inputs', options),
-    MealSchedule.find(query, 'createdAt schedule inputs', options),
-  ]);
-
-  const countWorkouts = await WorkoutSchema.countDocuments(query);
-  const countMeals = await MealSchedule.countDocuments(query);
-
-  const totalPages = Math.ceil((countWorkouts + countMeals) / docsPerPage);
-
-  combinedSchedules = combinedSchedules.flat();
-  // eslint-disable-next-line max-len
-  combinedSchedules.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-  console.log(combinedSchedules);
-  combinedSchedules = combinedSchedules.slice(skip, skip + docsPerPage);
-  console.log({
-    pagination: {
-      page,
-      max: totalPages,
-      items: combinedSchedules,
-    },
-  });
-
-  res.status(200).json({
-    pagination: {
-      page,
-      max: totalPages,
-      items: combinedSchedules,
-    },
-  });
-});
-
 module.exports = {
   MOCKcreateWorkoutAndMealSchedule,
-  MOCKgetPaginatedWorkoutAndMealSchedule,
 };
