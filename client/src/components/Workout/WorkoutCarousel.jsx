@@ -5,6 +5,7 @@ import {
 import PropTypes from 'prop-types';
 import React from 'react';
 import Carousel from 'react-material-ui-carousel';
+import Typewriter from 'typewriter-effect';
 
 import ExercisesTable from './ExercisesTable';
 import WorkoutStatesEnum from './WorkoutFlowStates';
@@ -13,7 +14,7 @@ import theme from '../../theme';
 
 const styles = {
   container: {
-    color: 'white',
+    color: theme.palette.secondary.light,
     backgroundColor: theme.palette.secondary.dark,
     flexGrow: 1,
     display: 'flex',
@@ -24,22 +25,59 @@ const styles = {
   carouselContainer: {
     width: '75vw',
   },
+  typewriterContainer: {
+    fontFamily: theme.typography.fontFamily,
+    color: '#F3F3F0',
+    fontWeight: 400,
+    fontSize: '4vw',
+    paddingBottom: '30px',
+  },
+  paperContainer: {
+    display: 'flex',
+    flexDirection: 'column', // Arrange children vertically
+    justifyContent: 'center', // Vertically center the content
+    alignItems: 'center', // Horizontally center the content
+  },
+  dayTypography: {
+    color: theme.palette.secondary.dark,
+    fontSize: '4vw',
+    paddingTop: '20px',
+  },
+  workoutSelectButton: {
+    fontWeight: 'normal',
+    color: theme.palette.secondary.light,
+    borderColor: '#B5936B',
+    backgroundColor: theme.palette.secondary.dark,
+    marginTop: '25px',
+    marginBottom: '25px',
+    padding: '15px',
+    fontSize: '0.75vw',
+    width: '15vw',
+    position: 'relative', // Set the position to relative for the pseudo-element
+    overflow: 'hidden', // Hide any overflow from the pseudo-element
+    '&:hover': {
+      color: theme.palette.secondary.light,
+      borderColor: '#F3F3F0',
+      backgroundColor: theme.palette.secondary.main,
+      transition: 'background-color 0.5s ease',
+    },
+  },
 };
 
-function Item({ workout }) {
+function Item({ workout, onNext }) {
   const day = Object.keys(workout)[0];
   const exercisesArray = workout[day];
 
   return (
     <Box>
-      <Paper>
-        <h2>{day}</h2>
-        {/* <pre>{JSON.stringify(exercise, null, 2)}</pre> */}
-        {/* <pre>{JSON.stringify(workout, null, 2)}</pre> */}
-        <ExercisesTable exercises={exercisesArray} />
-        <Button className="CheckButton">
-          Press this button!
+      <Paper sx={styles.paperContainer}>
+        <Typography sx={styles.dayTypography}>
+          {day}
+        </Typography>
+        <Button onClick={() => onNext(WorkoutStatesEnum.IN_SESSION)} variant="outlined" sx={styles.workoutSelectButton}>
+          START WORKOUT
         </Button>
+        <ExercisesTable exercises={exercisesArray} />
       </Paper>
     </Box>
 
@@ -54,15 +92,15 @@ export default function WorkoutCarousel({ workoutData, onNext }) {
 
   return (
     <Box sx={styles.container}>
-      <Box>
-        <Typography variant="h1" sx={{ color: '#ffffff' }}>
-          Choose your workout.
-        </Typography>
+      <Box sx={styles.typewriterContainer}>
+        <Typewriter
+          onInit={(typewriter) => {
+            typewriter.changeDelay(40)
+              .typeString('Choose your workout.')
+              .start();
+          }}
+        />
       </Box>
-
-      <Button onClick={() => onNext(WorkoutStatesEnum.IN_SESSION)} variant="outlined" sx={{ color: '#ffffff' }}>
-        START WORKOUT
-      </Button>
 
       <Box>
         <Carousel
@@ -84,7 +122,13 @@ export default function WorkoutCarousel({ workoutData, onNext }) {
           }}
         >
           {
-              workouts.map((workout) => <Item key={Object.keys(workout)[0]} workout={workout} />)
+              workouts.map((workout) => (
+                <Item
+                  key={Object.keys(workout)[0]}
+                  workout={workout}
+                  onNext={onNext}
+                />
+              ))
           }
         </Carousel>
       </Box>

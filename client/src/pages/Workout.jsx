@@ -11,6 +11,7 @@ import WorkoutSelector from '../components/Workout/WorkoutSelector';
 import theme from '../theme';
 
 const styles = {
+  font: theme.typography.fontFamily,
   container: {
     backgroundColor: theme.palette.secondary.dark,
     flexGrow: 1,
@@ -32,7 +33,7 @@ export default function Workout() {
   };
 
   return (
-    <Box>
+    <Box sx={styles.font}>
       {workoutSchedule ? (
         <Box sx={styles.container}>
           {step === StepEnum.START_WORKOUT
