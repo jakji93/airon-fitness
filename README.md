@@ -49,6 +49,9 @@
         <li><a href="#stretch-goals">Stretch Goals</a></li>
       </ul>
     </li>
+    <li><a href="#utilized-technology">Utilized Technology</a></li>
+    <li><a href="#above-and-beyond">Above and Beyond</a></li>
+    <li><a href="#whats-next">What's Next</a></li>
     <li><a href="#the-team">The Team</a></li>
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#license">License</a></li>
@@ -114,6 +117,16 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 3. Express plays a pivotal role as the backend framework, enabling the implementation of multiple API functionalities such as GET, POST, PUT, and DELETE. Each API efficiently returns the result of its respective operation or throws the appropriate error if the operation is unsuccessful, ensuring smooth communication between the front-end and back-end through the use of Redux thunks. Moreover, we prioritize security by introducing user authentication via JWT tokens, safeguarding sensitive data with an added layer of protection.
 4. MongoDB serves as our primary database, offering a flexible and scalable solution for storing and managing user data and generated schedules. Its NoSQL nature allows us to store complex data structures with ease, improving data retrieval performance and enhancing the app's overall efficiency. To improve security, we separated user login verification and the rest of the user data. The combination of JWT Token and model design ensures a secure and reliable access to sensitive information.
 5. Our current application is deployed on Render. Render's seamless integration with GitHub enables automatic builds and deployments, ensuring continuous deployment and reducing manual intervention. Its user-friendly interface and scalability provide a reliable and efficient platform for hosting our production-level web application.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ABOVE AND BEYOND -->
+## Above and Beyond
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- WHATS NEXT -->
+## What's Next
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
