@@ -82,7 +82,7 @@ FormSelect.propTypes = {
   label: PropTypes.string.isRequired,
   showTitleLabel: PropTypes.bool,
   half: PropTypes.bool,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   setValue: PropTypes.func,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   endAdornment: PropTypes.string,
