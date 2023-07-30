@@ -48,8 +48,9 @@ export const updateWorkoutSchedule = createAsyncThunk(
     }
   },
 );
+
 export const updateMealSchedule = createAsyncThunk(
-  'workoutAndMealSchedule/updateWorkoutSchedule',
+  'workoutAndMealSchedule/updateMealSchedule',
   async (_, thunkAPI) => {
     try {
       return await workoutAndMealScheduleService.updateMealSchedule();

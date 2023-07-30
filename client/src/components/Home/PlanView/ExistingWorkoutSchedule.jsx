@@ -2,11 +2,15 @@ import {
   ExpandLess, ExpandMore,
 } from '@mui/icons-material';
 import {
+  Button,
   Collapse, Grid, List, ListItem, ListItemButton, ListItemText,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import UpdateConfirmationModal from './UpdateConfirmationModal';
+import { updateWorkoutSchedule } from '../../../reducers/WorkoutAndMealSchedule';
 
 function WorkoutScheduleCollapse(props) {
   const {
@@ -61,8 +65,10 @@ WorkoutScheduleCollapse.propTypes = {
 };
 
 export default function ExistingWorkoutSchedule() {
+  const dispatch = useDispatch();
   const [schedule, setSchedule] = useState();
   const [selectedIndex, setSelectedIndex] = useState('');
+  const [updateWorkoutModal, setUpdateWorkoutModal] = useState(false);
   const { workoutSchedule } = useSelector(
     (state) => state.workoutAndMealSchedule,
   );
@@ -81,21 +87,41 @@ export default function ExistingWorkoutSchedule() {
 
   return (
     <Grid container>
-      <List
-        sx={{
-          width: '100%', maxheight: '100%', overflow: 'auto', bgcolor: 'background.paper',
-        }}
-      >
-        {schedule && Object.keys(schedule).map((day, index) => (
-          <WorkoutScheduleCollapse
-            index={index}
-            handleClick={handleClick}
-            selectedIndex={selectedIndex}
-            daySchedule={schedule[day]}
-            key={`${day} workout`}
-          />
-        ))}
-      </List>
+      <Grid item xs={12}>
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{ mb: 1 }}
+          size="medium"
+          onClick={() => setUpdateWorkoutModal(true)}
+        >Re-create Workout Plan
+        </Button>
+      </Grid>
+      <UpdateConfirmationModal
+        open={updateWorkoutModal}
+        setOpen={setUpdateWorkoutModal}
+        onYes={() => dispatch(updateWorkoutSchedule())}
+        dialogTitle="Re-create your workout plan?"
+        dialogContent="Would you like to re-create your workout plan using updated profile data
+        and/or previous custom inputs? This may take 0-2 minutes."
+      />
+      <Grid item xs={12}>
+        <List
+          sx={{
+            width: '100%', maxheight: '100%', overflow: 'auto', bgcolor: 'background.paper',
+          }}
+        >
+          {schedule && Object.keys(schedule).map((day, index) => (
+            <WorkoutScheduleCollapse
+              index={index}
+              handleClick={handleClick}
+              selectedIndex={selectedIndex}
+              daySchedule={schedule[day]}
+              key={`${day} workout`}
+            />
+          ))}
+        </List>
+      </Grid>
     </Grid>
   );
 }

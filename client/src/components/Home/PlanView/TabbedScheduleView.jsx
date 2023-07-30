@@ -73,7 +73,6 @@ export default function TabbedScheduleView() {
       <TabPanel value={value} index={1}>
         {mealSchedule ? <ExistingMealSchedule /> : <NoSchedule />}
       </TabPanel>
-
     </Box>
   );
 }

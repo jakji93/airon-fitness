@@ -2,11 +2,20 @@ import {
   ExpandLess, ExpandMore,
 } from '@mui/icons-material';
 import {
-  Collapse, Grid, List, ListItem, ListItemButton, ListItemText,
+  Button,
+  Collapse,
+  Grid,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import UpdateConfirmationModal from './UpdateConfirmationModal';
+import { updateMealSchedule } from '../../../reducers/WorkoutAndMealSchedule';
 
 function MealScheduleCollapse(props) {
   const {
@@ -61,7 +70,9 @@ MealScheduleCollapse.propTypes = {
 };
 
 export default function ExistingMealSchedule() {
+  const dispatch = useDispatch();
   const [schedule, setSchedule] = useState();
+  const [updateMealModal, setUpdateMealModal] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState('');
   const { mealSchedule } = useSelector(
     (state) => state.workoutAndMealSchedule,
@@ -81,21 +92,42 @@ export default function ExistingMealSchedule() {
 
   return (
     <Grid container>
-      <List
-        sx={{
-          width: '100%', maxheight: '100%', overflow: 'auto', bgcolor: 'background.paper',
-        }}
-      >
-        {schedule && Object.keys(schedule).map((day, index) => (
-          <MealScheduleCollapse
-            daySchedule={schedule[day]}
-            handleClick={handleClick}
-            index={index}
-            key={`${day} meal`}
-            selectedIndex={selectedIndex}
-          />
-        ))}
-      </List>
+      <Grid item xs={12}>
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{ mb: 1 }}
+          size="medium"
+          onClick={() => setUpdateMealModal(true)}
+        >
+          Re-create Meal Plan
+        </Button>
+      </Grid>
+      <UpdateConfirmationModal
+        open={updateMealModal}
+        setOpen={setUpdateMealModal}
+        onYes={() => dispatch(updateMealSchedule())}
+        dialogTitle="Re-create your meal plan?"
+        dialogContent="Would you like to re-create your meal plan using updated profile data
+        and/or previous custom inputs? This may take 0-2 minutes."
+      />
+      <Grid item xs={12}>
+        <List
+          sx={{
+            width: '100%', maxheight: '100%', overflow: 'auto', bgcolor: 'background.paper',
+          }}
+        >
+          {schedule && Object.keys(schedule).map((day, index) => (
+            <MealScheduleCollapse
+              daySchedule={schedule[day]}
+              handleClick={handleClick}
+              index={index}
+              key={`${day} meal`}
+              selectedIndex={selectedIndex}
+            />
+          ))}
+        </List>
+      </Grid>
     </Grid>
   );
 }
