@@ -111,7 +111,7 @@ export default function SignupRequireUserDetails() {
         error={formik.touched.weight && Boolean(formik.errors.weight)}
         helperText={formik.touched.weight && formik.errors.weight}
         onBlur={formik.handleBlur}
-        placeholder="69"
+        placeholder="0"
         size="medium"
         required
       />
@@ -131,7 +131,7 @@ export default function SignupRequireUserDetails() {
         error={formik.touched.height && Boolean(formik.errors.height)}
         helperText={formik.touched.height && formik.errors.height}
         onBlur={formik.handleBlur}
-        placeholder="69"
+        placeholder="0"
         size="medium"
       />
       <FormMultiSelect
