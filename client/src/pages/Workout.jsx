@@ -51,7 +51,9 @@ export default function Workout() {
           )}
         </Box>
       ) : (
-        <p> please generate schedules </p>
+        <Box sx={styles.container}>
+          <p> please generate schedules </p>
+        </Box>
       )}
     </Box>
 

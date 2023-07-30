@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 
+import ExercisesTable from './ExercisesTable';
 import WorkoutStatesEnum from './WorkoutFlowStates';
 import WorkoutScheduleShape from './WorkoutPropTypes';
 import theme from '../../theme';
@@ -21,26 +22,32 @@ const styles = {
     alignItems: 'center', // Horizontally center the content
   },
   carouselContainer: {
-    width: '500px',
+    width: '75vw',
   },
 };
 
 function Item({ workout }) {
-  return (
-    <Paper>
-      {/* <h2>{day}</h2> */}
-      {/* <pre>{JSON.stringify(exercise, null, 2)}</pre> */}
-      <pre>{JSON.stringify(workout, null, 2)}</pre>
+  const day = Object.keys(workout)[0];
+  const exercisesArray = workout[day];
 
-      <Button className="CheckButton">
-        Press this button!
-      </Button>
-    </Paper>
+  return (
+    <Box>
+      <Paper>
+        <h2>{day}</h2>
+        {/* <pre>{JSON.stringify(exercise, null, 2)}</pre> */}
+        {/* <pre>{JSON.stringify(workout, null, 2)}</pre> */}
+        <ExercisesTable exercises={exercisesArray} />
+        <Button className="CheckButton">
+          Press this button!
+        </Button>
+      </Paper>
+    </Box>
+
   );
 }
 
 export default function WorkoutCarousel({ workoutData, onNext }) {
-  const items = Object.entries(workoutData.schedule)
+  const workouts = Object.entries(workoutData.schedule)
     .map(([day, { exercises }]) => ({
       [day]: exercises,
     }));
@@ -48,18 +55,36 @@ export default function WorkoutCarousel({ workoutData, onNext }) {
   return (
     <Box sx={styles.container}>
       <Box>
-        <Typography variant="h4" sx={{ color: '#ffffff' }}>
-          WORKOUT CAROUSEL
+        <Typography variant="h1" sx={{ color: '#ffffff' }}>
+          Choose your workout.
         </Typography>
-        <Button onClick={() => onNext(WorkoutStatesEnum.IN_SESSION)} variant="outlined" sx={{ color: '#ffffff' }}>
-          START WORKOUT
-        </Button>
       </Box>
 
+      <Button onClick={() => onNext(WorkoutStatesEnum.IN_SESSION)} variant="outlined" sx={{ color: '#ffffff' }}>
+        START WORKOUT
+      </Button>
+
       <Box>
-        <Carousel sx={styles.carouselContainer}>
+        <Carousel
+          sx={styles.carouselContainer}
+          indicatorIconButtonProps={{
+            style: {
+              color: theme.palette.secondary.main,
+            },
+          }}
+          activeIndicatorIconButtonProps={{
+            style: {
+              backgroundColor: theme.palette.secondary.light,
+            },
+          }}
+          indicatorContainerProps={{
+            style: {
+              padding: '20px',
+            },
+          }}
+        >
           {
-              items.map((workout) => <Item key={Object.keys(workout)[0]} workout={workout} />)
+              workouts.map((workout) => <Item key={Object.keys(workout)[0]} workout={workout} />)
           }
         </Carousel>
       </Box>
