@@ -4,10 +4,11 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import Typewriter from 'typewriter-effect';
 
 import WorkoutStatesEnum from './WorkoutFlowStates';
+import WorkoutScheduleShape from './WorkoutPropTypes';
 import AironLogo from '../../assets/design/LogoTan.png';
 import theme from '../../theme';
 
@@ -79,13 +80,11 @@ const getDayOfWeekName = () => {
   return daysOfWeekNames[dayOfWeek];
 };
 
-export default function WorkoutSelector({ onNext }) {
-  const { workoutSchedule } = useSelector((state) => state.workoutAndMealSchedule);
-
+export default function WorkoutSelector({ workoutData, onNext }) {
   return (
     <Box sx={styles.container}>
       <Box sx={styles.typewriterContainer}>
-        {workoutSchedule ? (
+        {workoutData ? (
           <Typewriter
             onInit={(typewriter) => {
               typewriter.changeDelay(40)
@@ -118,7 +117,7 @@ export default function WorkoutSelector({ onNext }) {
         style={styles.logo}
       />
 
-      {workoutSchedule ? (
+      {workoutData ? (
         <Button onClick={() => onNext(WorkoutStatesEnum.IN_SESSION)} variant="outlined" sx={styles.startButton}>
           START WORKOUT
         </Button>
@@ -127,12 +126,11 @@ export default function WorkoutSelector({ onNext }) {
           CHOOSE WORKOUT
         </Button>
       )}
-
     </Box>
-
   );
 }
 
 WorkoutSelector.propTypes = {
+  workoutData: WorkoutScheduleShape.isRequired,
   onNext: PropTypes.func.isRequired,
 };

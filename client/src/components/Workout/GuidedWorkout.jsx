@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import WorkoutStatesEnum from './WorkoutFlowStates';
+import WorkoutScheduleShape from './WorkoutPropTypes';
 
-export default function GuidedWorkout({ onNext }) {
+export default function GuidedWorkout({ workoutData, onNext }) {
   return (
     <Box>
       <Typography variant="h1">
         Guided Workouts Component
+        {JSON.stringify(workoutData, null, 2)}
       </Typography>
       <Button onClick={() => onNext(WorkoutStatesEnum.SELECT_WORKOUT)} variant="outlined">
         CHOOSE ANOTHER WORKOUT
@@ -22,5 +24,6 @@ export default function GuidedWorkout({ onNext }) {
 }
 
 GuidedWorkout.propTypes = {
+  workoutData: WorkoutScheduleShape.isRequired,
   onNext: PropTypes.func.isRequired,
 };

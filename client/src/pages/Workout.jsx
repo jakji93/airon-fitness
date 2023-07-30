@@ -2,6 +2,7 @@ import {
   Box,
 } from '@mui/material';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import GuidedWorkout from '../components/Workout/GuidedWorkout';
 import WorkoutCarousel from '../components/Workout/WorkoutCarousel';
@@ -22,6 +23,7 @@ const styles = {
 };
 
 export default function Workout() {
+  const { workoutSchedule } = useSelector((state) => state.workoutAndMealSchedule);
   const [step, setStep] = useState(StepEnum.START_WORKOUT);
 
   // States: START_WORKOUT, SELECT_WORKOUT, IN_SESSION
@@ -33,17 +35,17 @@ export default function Workout() {
     <Box sx={styles.container}>
       {step === StepEnum.START_WORKOUT
       && (
-      <WorkoutSelector onNext={handleNext} />
+      <WorkoutSelector workoutData={workoutSchedule} onNext={handleNext} />
       )}
 
       {step === StepEnum.SELECT_WORKOUT
       && (
-      <WorkoutCarousel onNext={handleNext} />
+      <WorkoutCarousel workoutData={workoutSchedule} onNext={handleNext} />
       )}
 
       {step === StepEnum.IN_SESSION
       && (
-      <GuidedWorkout onNext={handleNext} />
+      <GuidedWorkout workoutData={workoutSchedule} onNext={handleNext} />
       )}
     </Box>
   );

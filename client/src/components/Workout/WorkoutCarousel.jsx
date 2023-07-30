@@ -6,6 +6,7 @@ import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 
 import WorkoutStatesEnum from './WorkoutFlowStates';
+import WorkoutScheduleShape from './WorkoutPropTypes';
 
 function Item({ item }) {
   const { name, description } = item;
@@ -22,7 +23,7 @@ function Item({ item }) {
   );
 }
 
-export default function WorkoutCarousel({ onNext }) {
+export default function WorkoutCarousel({ workoutData, onNext }) {
   const items = [
     {
       name: 'Random Name #1',
@@ -37,8 +38,8 @@ export default function WorkoutCarousel({ onNext }) {
   return (
     <Box>
       <Box>
-        <Typography variant="h1">
-          Workout Selection Carousel
+        <Typography variant="h4">
+          {JSON.stringify(workoutData, null, 2)}
         </Typography>
         <Button onClick={() => onNext(WorkoutStatesEnum.IN_SESSION)} variant="outlined">
           START WORKOUT
@@ -57,6 +58,7 @@ export default function WorkoutCarousel({ onNext }) {
 }
 
 WorkoutCarousel.propTypes = {
+  workoutData: WorkoutScheduleShape.isRequired,
   onNext: PropTypes.func.isRequired,
 };
 
