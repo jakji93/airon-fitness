@@ -7,7 +7,7 @@ import React from 'react';
 import Typewriter from 'typewriter-effect';
 
 import WorkoutStatesEnum from './WorkoutFlowStates';
-import WorkoutScheduleShape from './WorkoutPropTypes';
+import { WorkoutScheduleShape } from './WorkoutPropTypes';
 import AironLogo from '../../assets/design/LogoTan.png';
 import theme from '../../theme';
 

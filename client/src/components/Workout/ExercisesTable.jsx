@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,22 +6,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import PropTypes from 'prop-types';
 import * as React from 'react';
 
-// function createData(exercise, sets, reps, rest, duration, intensity, calories) {
-//   return {
-//     exercise, sets, reps, rest, duration, intensity, calories,
-//   };
-// }
-
-// const rows = [
-//   createData('Dumbbell Bench Press', 3, 8, 60, 20, 75, 150),
-//   createData('Dumbbell Shoulder Press', 3, 10, 60, 20, 70, 120),
-//   createData('Dumbbell Bicep Curls', 3, 12, 60, 15, 65, 90),
-//   createData('Dumbbell Tricep Extensions', 3, 12, 60, 15, 65, 90),
-//   createData('Dumbbell Lunges', 3, 10, 60, 15, 70, 120),
-//   createData('Plank', 3, 60, 60, 30, 60, 80),
-// ];
+import { ExerciseShape } from './WorkoutPropTypes';
 
 export default function ExercisesTable({ exercises }) {
   const columns = [
@@ -112,3 +99,7 @@ export default function ExercisesTable({ exercises }) {
     </Paper>
   );
 }
+
+ExercisesTable.propTypes = {
+  exercises: PropTypes.arrayOf(ExerciseShape).isRequired,
+};

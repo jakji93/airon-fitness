@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import WorkoutStatesEnum from './WorkoutFlowStates';
-import WorkoutScheduleShape from './WorkoutPropTypes';
+import { WorkoutScheduleShape } from './WorkoutPropTypes';
 
 export default function GuidedWorkout({ workoutData, onNext }) {
   return (

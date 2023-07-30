@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const exerciseShape = PropTypes.shape({
+const ExerciseShape = PropTypes.shape({
   exercise: PropTypes.string.isRequired,
   sets: PropTypes.number.isRequired,
   reps: PropTypes.number.isRequired,
@@ -10,23 +10,27 @@ const exerciseShape = PropTypes.shape({
   calories: PropTypes.number.isRequired,
 });
 
-const dayOfWeekShape = PropTypes.shape({
-  exercises: PropTypes.arrayOf(exerciseShape).isRequired,
+const DayOfWeekShape = PropTypes.shape({
+  exercises: PropTypes.arrayOf(ExerciseShape).isRequired,
   total_calories: PropTypes.number.isRequired,
 });
 
 const WorkoutScheduleShape = PropTypes.shape({
   userInfoID: PropTypes.string.isRequired,
   schedule: PropTypes.shape({
-    Monday: dayOfWeekShape.isRequired,
-    Tuesday: dayOfWeekShape.isRequired,
-    Wednesday: dayOfWeekShape.isRequired,
-    Thursday: dayOfWeekShape.isRequired,
-    Friday: dayOfWeekShape.isRequired,
-    Saturday: dayOfWeekShape.isRequired,
-    Sunday: dayOfWeekShape.isRequired,
+    Monday: DayOfWeekShape.isRequired,
+    Tuesday: DayOfWeekShape.isRequired,
+    Wednesday: DayOfWeekShape.isRequired,
+    Thursday: DayOfWeekShape.isRequired,
+    Friday: DayOfWeekShape.isRequired,
+    Saturday: DayOfWeekShape.isRequired,
+    Sunday: DayOfWeekShape.isRequired,
   }).isRequired,
   inputs: PropTypes.arrayOf(PropTypes.string).isRequired,
 });
 
-export default WorkoutScheduleShape;
+export {
+  ExerciseShape,
+  DayOfWeekShape,
+  WorkoutScheduleShape,
+};

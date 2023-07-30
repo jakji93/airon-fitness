@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   Box, Button, Paper, Typography,
 } from '@mui/material';
@@ -9,7 +8,7 @@ import Typewriter from 'typewriter-effect';
 
 import ExercisesTable from './ExercisesTable';
 import WorkoutStatesEnum from './WorkoutFlowStates';
-import WorkoutScheduleShape from './WorkoutPropTypes';
+import { ExerciseShape, WorkoutScheduleShape } from './WorkoutPropTypes';
 import theme from '../../theme';
 
 const styles = {
@@ -142,8 +141,6 @@ WorkoutCarousel.propTypes = {
 };
 
 Item.propTypes = {
-  item: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-  }).isRequired,
+  workout: PropTypes.arrayOf(ExerciseShape).isRequired,
+  onNext: PropTypes.func.isRequired,
 };
