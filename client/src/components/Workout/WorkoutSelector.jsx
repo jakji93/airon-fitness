@@ -80,6 +80,10 @@ const getDayOfWeekName = () => {
   return daysOfWeekNames[dayOfWeek];
 };
 
+// const isWorkoutDay = () => {
+
+// };
+
 export default function WorkoutSelector({ workoutData, onNext }) {
   return (
     <Box sx={styles.container}>

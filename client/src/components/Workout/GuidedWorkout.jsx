@@ -8,9 +8,9 @@ import WorkoutScheduleShape from './WorkoutPropTypes';
 export default function GuidedWorkout({ workoutData, onNext }) {
   return (
     <Box>
-      <Typography variant="h1">
+      <Typography variant="h1" color="#ffffff" sx={{ color: '#ffffff' }}>
         Guided Workouts Component
-        {JSON.stringify(workoutData, null, 2)}
+        <pre>{JSON.stringify(workoutData, null, 2)}</pre>
       </Typography>
       <Button onClick={() => onNext(WorkoutStatesEnum.SELECT_WORKOUT)} variant="outlined">
         CHOOSE ANOTHER WORKOUT

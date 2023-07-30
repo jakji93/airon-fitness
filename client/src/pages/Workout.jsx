@@ -32,21 +32,28 @@ export default function Workout() {
   };
 
   return (
-    <Box sx={styles.container}>
-      {step === StepEnum.START_WORKOUT
-      && (
-      <WorkoutSelector workoutData={workoutSchedule} onNext={handleNext} />
-      )}
+    <Box>
+      {workoutSchedule ? (
+        <Box sx={styles.container}>
+          {step === StepEnum.START_WORKOUT
+          && (
+          <WorkoutSelector workoutData={workoutSchedule} onNext={handleNext} />
+          )}
 
-      {step === StepEnum.SELECT_WORKOUT
-      && (
-      <WorkoutCarousel workoutData={workoutSchedule} onNext={handleNext} />
-      )}
+          {step === StepEnum.SELECT_WORKOUT
+          && (
+          <WorkoutCarousel workoutData={workoutSchedule} onNext={handleNext} />
+          )}
 
-      {step === StepEnum.IN_SESSION
-      && (
-      <GuidedWorkout workoutData={workoutSchedule} onNext={handleNext} />
+          {step === StepEnum.IN_SESSION
+          && (
+          <GuidedWorkout workoutData={workoutSchedule} onNext={handleNext} />
+          )}
+        </Box>
+      ) : (
+        <p> please generate schedules </p>
       )}
     </Box>
+
   );
 }

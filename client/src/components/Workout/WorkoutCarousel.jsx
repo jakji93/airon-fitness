@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   Box, Button, Paper, Typography,
 } from '@mui/material';
@@ -7,52 +8,61 @@ import Carousel from 'react-material-ui-carousel';
 
 import WorkoutStatesEnum from './WorkoutFlowStates';
 import WorkoutScheduleShape from './WorkoutPropTypes';
+import theme from '../../theme';
 
-function Item({ item }) {
-  const { name, description } = item;
+const styles = {
+  container: {
+    color: 'white',
+    backgroundColor: theme.palette.secondary.dark,
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column', // Arrange children vertically
+    justifyContent: 'center', // Vertically center the content
+    alignItems: 'center', // Horizontally center the content
+  },
+  carouselContainer: {
+    width: '500px',
+  },
+};
 
+function Item({ workout }) {
   return (
     <Paper>
-      <h2>{name}</h2>
-      <p>{description}</p>
+      {/* <h2>{day}</h2> */}
+      {/* <pre>{JSON.stringify(exercise, null, 2)}</pre> */}
+      <pre>{JSON.stringify(workout, null, 2)}</pre>
 
       <Button className="CheckButton">
-        Check it out!
+        Press this button!
       </Button>
     </Paper>
   );
 }
 
 export default function WorkoutCarousel({ workoutData, onNext }) {
-  const items = [
-    {
-      name: 'Random Name #1',
-      description: 'Probably the most random thing you have ever seen!',
-    },
-    {
-      name: 'Random Name #2',
-      description: 'Hello World!',
-    },
-  ];
+  const items = Object.entries(workoutData.schedule)
+    .map(([day, { exercises }]) => ({
+      [day]: exercises,
+    }));
 
   return (
-    <Box>
+    <Box sx={styles.container}>
       <Box>
-        <Typography variant="h4">
-          {JSON.stringify(workoutData, null, 2)}
+        <Typography variant="h4" sx={{ color: '#ffffff' }}>
+          WORKOUT CAROUSEL
         </Typography>
-        <Button onClick={() => onNext(WorkoutStatesEnum.IN_SESSION)} variant="outlined">
+        <Button onClick={() => onNext(WorkoutStatesEnum.IN_SESSION)} variant="outlined" sx={{ color: '#ffffff' }}>
           START WORKOUT
         </Button>
       </Box>
 
-      <Carousel>
-        {
-            // eslint-disable-next-line react/no-array-index-key
-            items.map((item, i) => <Item key={i} item={item} />)
-        }
-      </Carousel>
-
+      <Box>
+        <Carousel sx={styles.carouselContainer}>
+          {
+              items.map((workout) => <Item key={Object.keys(workout)[0]} workout={workout} />)
+          }
+        </Carousel>
+      </Box>
     </Box>
   );
 }
