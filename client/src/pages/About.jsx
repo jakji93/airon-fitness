@@ -9,6 +9,13 @@ import React from 'react';
 import logo from '../assets/design/LogoTan.png';
 import theme from '../theme';
 
+const textSize = 8;
+const marginSize = 2;
+
+function Margin() {
+  return <Grid item sm={marginSize} xs={0} />;
+}
+
 export default function About() {
   const teamMembers = [
     {
@@ -48,21 +55,25 @@ export default function About() {
         backgroundColor: theme.palette.background.default,
         height: '100vh',
         width: '100vw',
+        display: 'flex',
+        justifyContent: 'center',
       }}
     >
-      <Grid item xs={12}>
+      <Grid item xs={12} textAlign="center">
         <Typography variant="h2" gutterBottom color={theme.palette.secondary.light}>
           About Us
         </Typography>
       </Grid>
-      <Grid item xs={12} color={theme.palette.secondary.main}>
+      <Margin />
+      <Grid item sm={textSize} xs={12} color={theme.palette.secondary.main}>
         <Typography variant="body1" gutterBottom>
           Introducing AIron Fitness, your ultimate fitness companion,
           powered by cutting-edge artificial intelligence.
           Get ready to embark on a fitness journey like no other!
         </Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Margin /><Margin />
+      <Grid item sm={textSize} xs={12}>
         <Typography variant="body1" gutterBottom color={theme.palette.secondary.main}>
           AIron Fitness is more than just a fitness app;
           it&apos;s your personalized fitness guru,
@@ -72,7 +83,8 @@ export default function About() {
           personalized fitness plans that align perfectly with your goals and preferences.
         </Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Margin /><Margin />
+      <Grid item sm={textSize} xs={12}>
         <Typography variant="body1" gutterBottom color={theme.palette.secondary.main}>
           Whether you&apos;re a fitness beginner,
           looking to take your first steps into a healthier lifestyle,
@@ -82,7 +94,8 @@ export default function About() {
           and embrace a fitness solution that&apos;s tailor-made just for you.
         </Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Margin /><Margin />
+      <Grid item sm={textSize} xs={12}>
         <Typography variant="body1" gutterBottom color={theme.palette.secondary.main}>
           Creating your profile is just the beginning.
           Input your fitness goals, and let AIron Fitness work its magic.
@@ -91,7 +104,8 @@ export default function About() {
           It&apos;s like having your very own fitness coach available 24/7!
         </Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Margin /><Margin />
+      <Grid item sm={textSize} xs={12}>
         <Typography variant="body1" gutterBottom color={theme.palette.secondary.main}>
           But that&apos;s not all,
           AIron Fitness goes beyond the surface.
@@ -102,7 +116,8 @@ export default function About() {
           you witness the remarkable transformation you&apos;re capable of.
         </Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Margin /><Margin />
+      <Grid item sm={textSize} xs={12}>
         <Typography variant="body1" gutterBottom color={theme.palette.secondary.main}>
           With AIron Fitness, you&apos;re in control.
           Embrace a fitness journey that is uniquely yours,
@@ -112,13 +127,14 @@ export default function About() {
           Get started today and redefine what&apos;s possible!
         </Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Margin />
+      <Grid item xs={12} textAlign="center">
         <Typography variant="h2" gutterBottom color={theme.palette.secondary.light}>
           Meet the Team
         </Typography>
       </Grid>
       {teamMembers.map((member) => (
-        <Grid item xs={2} key={member.name} align="center">
+        <Grid item sm={2.4} sx={6} key={member.name} align="center">
           <Avatar alt={member.name} src={member.profilePicture} />
           <Typography variant="h6" gutterBottom color={theme.palette.secondary.light}>
             {member.name}
@@ -131,7 +147,8 @@ export default function About() {
           </Link>
         </Grid>
       ))}
-      <Grid item xs={12}>
+      <Margin />
+      <Grid item sm={textSize} xs={12}>
         <Typography variant="body2" gutterBottom color={theme.palette.secondary.main}>
           Disclaimer: This fitness application is intended for general informational purposes only.
           The content provided, including workouts, exercises, and nutritional guidance,
@@ -151,6 +168,7 @@ export default function About() {
           terms and conditions outlined in this disclaimer.
         </Typography>
       </Grid>
+      <Margin />
     </Grid>
   );
 }

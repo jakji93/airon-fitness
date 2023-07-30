@@ -16,7 +16,7 @@ import { logoutUserProfile } from '../reducers/UserProfile';
 import { resetScheduleState } from '../reducers/WorkoutAndMealSchedule';
 import theme from '../theme';
 
-const pages = [['HOME', '/app'], ['ABOUT', '../about'], ['PROFILE', 'profile']];
+const pages = [['HOME', '/app'], ['ABOUT', 'about'], ['PROFILE', 'profile']];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
