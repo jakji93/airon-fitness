@@ -1,13 +1,15 @@
 import {
   Button, Grid, Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import ConfirmationModal from './ConfirmationModal';
 import { createWorkoutAndMealSchedule } from '../../../reducers/WorkoutAndMealSchedule';
 
 export default function NoSchedule() {
   const dispatch = useDispatch();
+  const [confirmationModal, setConfirmationModal] = useState(false);
 
   const createSchedules = () => dispatch(createWorkoutAndMealSchedule());
 
@@ -18,7 +20,17 @@ export default function NoSchedule() {
           Get started by creating a plan!
         </Typography>
       </Grid>
-      <Button variant="outlined" onClick={createSchedules}>Create My Plans</Button>
+      <Button variant="outlined" onClick={() => setConfirmationModal(true)}>Create My Plans</Button>
+      <ConfirmationModal
+        open={confirmationModal}
+        setOpen={setConfirmationModal}
+        onYes={createSchedules}
+        dialogTitle="Create your workout and meal plans?"
+        dialogContent="Are you ready to create your workout and meal plan powered by AI?
+        This will use all the basic and additional customizable profile information you provided.
+        You may update or confirm your profile information in your Profile page before continuing.
+        This may take 0-2 minutes."
+      />
     </Grid>
   );
 }

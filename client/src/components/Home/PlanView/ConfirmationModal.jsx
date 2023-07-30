@@ -4,7 +4,7 @@ import {
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export default function UpdateConfirmationModal(props) {
+export default function ConfirmationModal(props) {
   const {
     open,
     setOpen,
@@ -47,7 +47,7 @@ export default function UpdateConfirmationModal(props) {
   );
 }
 
-UpdateConfirmationModal.propTypes = {
+ConfirmationModal.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
   onYes: PropTypes.func.isRequired,

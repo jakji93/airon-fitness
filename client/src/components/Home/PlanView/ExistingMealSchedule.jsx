@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import UpdateConfirmationModal from './UpdateConfirmationModal';
+import ConfirmationModal from './ConfirmationModal';
 import { updateMealSchedule } from '../../../reducers/WorkoutAndMealSchedule';
 
 function MealScheduleCollapse(props) {
@@ -98,7 +98,7 @@ export default function ExistingMealSchedule() {
           Re-create Meal Plan
         </Button>
       </Grid>
-      <UpdateConfirmationModal
+      <ConfirmationModal
         open={updateMealModal}
         setOpen={setUpdateMealModal}
         onYes={() => dispatch(updateMealSchedule())}
