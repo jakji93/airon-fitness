@@ -131,6 +131,26 @@ export default function About() {
           </Link>
         </Grid>
       ))}
+      <Grid item xs={12}>
+        <Typography variant="body2" gutterBottom color={theme.palette.secondary.main}>
+          Disclaimer: This fitness application is intended for general informational purposes only.
+          The content provided, including workouts, exercises, and nutritional guidance,
+          is not intended to replace professional advice or personalized training.
+          Always consult with a qualified fitness trainer, healthcare professional,
+          or nutritionist before starting any new exercise or dietary program.
+          Participating in physical activities involves inherent risks,
+          and by using this application,
+          you acknowledge and accept full responsibility for any
+          potential consequences arising from its use.
+          We are not liable for any injuries, damages,
+          or losses resulting from the use of this application.
+          Please use your best judgment and listen to your body during workouts.
+          Results may vary, and individual fitness goals
+          should be discussed with a certified fitness expert.
+          By using this application, you agree to the
+          terms and conditions outlined in this disclaimer.
+        </Typography>
+      </Grid>
     </Grid>
   );
 }
