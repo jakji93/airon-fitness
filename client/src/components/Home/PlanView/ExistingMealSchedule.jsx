@@ -11,7 +11,7 @@ import {
   ListItemText,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import UpdateConfirmationModal from './UpdateConfirmationModal';
@@ -71,7 +71,6 @@ MealScheduleCollapse.propTypes = {
 
 export default function ExistingMealSchedule() {
   const dispatch = useDispatch();
-  const [schedule, setSchedule] = useState();
   const [updateMealModal, setUpdateMealModal] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState('');
   const { mealSchedule } = useSelector(
@@ -85,10 +84,6 @@ export default function ExistingMealSchedule() {
       setSelectedIndex(index);
     }
   };
-
-  useEffect(() => {
-    setSchedule(mealSchedule.schedule);
-  }, [mealSchedule]);
 
   return (
     <Grid container>
@@ -117,9 +112,9 @@ export default function ExistingMealSchedule() {
             width: '100%', maxheight: '100%', overflow: 'auto', bgcolor: 'background.paper',
           }}
         >
-          {schedule && Object.keys(schedule).map((day, index) => (
+          {mealSchedule.schedule && Object.keys(mealSchedule.schedule).map((day, index) => (
             <MealScheduleCollapse
-              daySchedule={schedule[day]}
+              daySchedule={mealSchedule.schedule[day]}
               handleClick={handleClick}
               index={index}
               key={`${day} meal`}

@@ -56,7 +56,7 @@ const generateWorkoutScheduleHelper = async (id) => {
 
   const workoutSchedule = await WorkoutSchema.create({
     userInfoID: id,
-    schedule: generatedSchedule,
+    schedule: JSON.parse(generatedSchedule),
     inputs: [],
   });
 

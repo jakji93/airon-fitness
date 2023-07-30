@@ -6,7 +6,7 @@ import {
   Collapse, Grid, List, ListItem, ListItemButton, ListItemText,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import UpdateConfirmationModal from './UpdateConfirmationModal';
@@ -66,7 +66,6 @@ WorkoutScheduleCollapse.propTypes = {
 
 export default function ExistingWorkoutSchedule() {
   const dispatch = useDispatch();
-  const [schedule, setSchedule] = useState();
   const [selectedIndex, setSelectedIndex] = useState('');
   const [updateWorkoutModal, setUpdateWorkoutModal] = useState(false);
   const { workoutSchedule } = useSelector(
@@ -80,10 +79,6 @@ export default function ExistingWorkoutSchedule() {
       setSelectedIndex(index);
     }
   };
-
-  useEffect(() => {
-    setSchedule(workoutSchedule.schedule);
-  }, [workoutSchedule]);
 
   return (
     <Grid container>
@@ -111,12 +106,12 @@ export default function ExistingWorkoutSchedule() {
             width: '100%', maxheight: '100%', overflow: 'auto', bgcolor: 'background.paper',
           }}
         >
-          {schedule && Object.keys(schedule).map((day, index) => (
+          {workoutSchedule.schedule && Object.keys(workoutSchedule.schedule).map((day, index) => (
             <WorkoutScheduleCollapse
               index={index}
               handleClick={handleClick}
               selectedIndex={selectedIndex}
-              daySchedule={schedule[day]}
+              daySchedule={workoutSchedule.schedule[day]}
               key={`${day} workout`}
             />
           ))}

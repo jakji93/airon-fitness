@@ -19,9 +19,11 @@ import FormTextFieldWithRadio from '../Profile/Forms/FormTextWithRadio';
 const validationSchema = yup.object({
   weight: yup
     .number('Enter your weight')
+    .min(0, 'weight must be >= 0')
     .required('weight is required'),
   height: yup
     .number('Enter your height')
+    .min(0, 'height must be >= 0')
     .required('height is required'),
   weightUnit: yup
     .string()

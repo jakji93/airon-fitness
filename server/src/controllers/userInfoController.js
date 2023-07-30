@@ -10,6 +10,11 @@ const generateToken = (_id) => jwt.sign({ _id }, process.env.JWT_SECRET, {
   expiresIn: '30d',
 });
 
+/**
+ * @desc registers a new user, returns authentication token
+ * @route POST /userInfo
+ * @access Public
+ */
 const registerUser = asyncHandler(async (req, res) => {
   const {
     password, email,

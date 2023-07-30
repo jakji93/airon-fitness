@@ -1,2 +1,3 @@
 # ensure all env variable start with  REACT_APP_
 REACT_APP_SERVER_API_BASE=http://localhost:3001
+REACT_APP_GCP_CLIENT_ID=abcde
