@@ -1,7 +1,13 @@
-import { Grid, Typography, Avatar } from '@mui/material';
+import {
+  Grid,
+  Typography,
+  Avatar,
+  Link,
+} from '@mui/material';
 import React from 'react';
 
 import logo from '../assets/design/LogoTan.png';
+import theme from '../theme';
 
 export default function About() {
   const teamMembers = [
@@ -34,13 +40,22 @@ export default function About() {
   ];
 
   return (
-    <Grid container spacing={2}>
+    <Grid
+      container
+      spacing={2}
+      sx={{ p: 2 }}
+      style={{
+        backgroundColor: theme.palette.background.default,
+        height: '100vh',
+        width: '100vw',
+      }}
+    >
       <Grid item xs={12}>
-        <Typography variant="h2" gutterBottom>
+        <Typography variant="h2" gutterBottom color={theme.palette.secondary.light}>
           About Us
         </Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} color={theme.palette.secondary.main}>
         <Typography variant="body1" gutterBottom>
           Introducing AIron Fitness, your ultimate fitness companion,
           powered by cutting-edge artificial intelligence.
@@ -48,7 +63,7 @@ export default function About() {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body1" gutterBottom>
+        <Typography variant="body1" gutterBottom color={theme.palette.secondary.main}>
           AIron Fitness is more than just a fitness app;
           it&apos;s your personalized fitness guru,
           here to empower you every step of the way.
@@ -58,7 +73,7 @@ export default function About() {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body1" gutterBottom>
+        <Typography variant="body1" gutterBottom color={theme.palette.secondary.main}>
           Whether you&apos;re a fitness beginner,
           looking to take your first steps into a healthier lifestyle,
           or a seasoned enthusiast aiming to reach new heights,
@@ -68,7 +83,7 @@ export default function About() {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body1" gutterBottom>
+        <Typography variant="body1" gutterBottom color={theme.palette.secondary.main}>
           Creating your profile is just the beginning.
           Input your fitness goals, and let AIron Fitness work its magic.
           You&apos;ll receive a comprehensive fitness plan,
@@ -77,7 +92,7 @@ export default function About() {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body1" gutterBottom>
+        <Typography variant="body1" gutterBottom color={theme.palette.secondary.main}>
           But that&apos;s not all,
           AIron Fitness goes beyond the surface.
           Our platform stores your valuable fitness data,
@@ -88,7 +103,7 @@ export default function About() {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body1" gutterBottom>
+        <Typography variant="body1" gutterBottom color={theme.palette.secondary.main}>
           With AIron Fitness, you&apos;re in control.
           Embrace a fitness journey that is uniquely yours,
           and experience the thrill of a personalized fitness adventure.
@@ -98,21 +113,22 @@ export default function About() {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="h2" gutterBottom>
+        <Typography variant="h2" gutterBottom color={theme.palette.secondary.light}>
           Meet the Team
         </Typography>
       </Grid>
       {teamMembers.map((member) => (
-        <Grid item xs={2} key={member.name}>
+        <Grid item xs={2} key={member.name} align="center">
           <Avatar alt={member.name} src={member.profilePicture} />
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom color={theme.palette.secondary.light}>
             {member.name}
           </Typography>
-          <Typography variant="body1">
-            <a href={member.linkedIn} target="_blank" rel="noopener noreferrer">
-              LinkedIn Profile
-            </a>
-          </Typography>
+          <Link
+            href={member.linkedIn}
+            color={theme.palette.secondary.main}
+          >
+            LinkedIn Profile
+          </Link>
         </Grid>
       ))}
     </Grid>
