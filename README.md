@@ -40,14 +40,17 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
+    </li>
+    <li>
+      <a href="#goals">Goals</a>
       <ul>
-        <li><a href="#the-team">The Team</a></li>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#minimal-requirements">Minimal Requirements</a></li>
+        <li><a href="#standard-requirements">Standard Requirements</a></li>
+        <li><a href="#stretch-goals">Stretch Goals</a></li>
       </ul>
     </li>
-    <li><a href="#minimal-requirements">Minimal Requirements</a></li>
-    <li><a href="#standard-requirements">Standard Requirements</a></li>
-    <li><a href="#stretch-goals">Stretch Goals</a></li>
+    <li><a href="#the-team">The Team</a></li>
+    <li><a href="#built-with">Built With</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -68,37 +71,8 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- GROUP -->
-## The Team
-
-[@Davis Song](https://www.linkedin.com/in/davissong/)<br>
-[@Jack Ji](https://www.linkedin.com/in/jack-ji-5643a011a/)<br>
-[@Kenny Cheng](https://www.linkedin.com/in/kennyjhcheng/)<br>
-[@Kevin Chung](https://www.linkedin.com/in/kevin-chung07/)<br>
-[@Kevin Wu](https://www.linkedin.com/in/kevin-wu1/)<br>
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-## Built With
-* [![NPM][NPM]][NPM-url]
-* [![Node.js][Node.js]][Node-url]
-* [![React][React.js]][React-url]
-* [![MaterialUI][MaterialUI]][MaterialUI-url]
-* [![MongoDB][MongoDB]][MongoDB-url]
-* [![Express][Express.js]][Express-url]
-* [![Redux][Redux]][Redux-url]
-* [![OpenAI][OpenAI]][OpenAI-url]
-* [![JWT][JWT]][JWT-url]
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 <!-- Roadmap -->
+## Goals
 ### Minimal Requirements
 - [x] A user can create a profile that can be saved
     - [x] Develop Frontend UI
@@ -130,12 +104,51 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 - [ ] Dynamically update fitness plans as users log their history (user review and feedback in fitness plans) 
 - [ ] Live audio feedback during a workout
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- UTILIZATION -->
+## Utilized Technology
+
+1. In our project, the use of HTML provides the foundation of the web page structures. JS, within React components, adds dynamic functionality, surpassing other similar technologies in responsiveness. Instead of CSS, we utilized Material-UI (MUI) which has significantly improved the app's user interface and design. MUI's pre-built components and theming capabilities enable the team for the rapid development of a visually appealing and consistent user experience.
+2. In our project, React and Redux play critical roles in enhancing the application's front-end development and state management. React's component-based architecture enables modular and reusable UI elements, resulting in improved maintainability and scalability. The most noticeable usage of React components would be in our Profile Form, where we reuse multiple Input components developed by one of the team member. With Redux, we efficiently manage the application's state, providing a centralized data store and allow our generated schedules to seamlessly flow across multiple components without refetching from our database.
+3. 
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GROUP -->
+## The Team
+
+[@Davis Song](https://www.linkedin.com/in/davissong/)<br>
+[@Jack Ji](https://www.linkedin.com/in/jack-ji-5643a011a/)<br>
+[@Kenny Cheng](https://www.linkedin.com/in/kennyjhcheng/)<br>
+[@Kevin Chung](https://www.linkedin.com/in/kevin-chung07/)<br>
+[@Kevin Wu](https://www.linkedin.com/in/kevin-wu1/)<br>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+## Built With
+* [![NPM][NPM]][NPM-url]
+* [![Node.js][Node.js]][Node-url]
+* [![React][React.js]][React-url]
+* [![MaterialUI][MaterialUI]][MaterialUI-url]
+* [![MongoDB][MongoDB]][MongoDB-url]
+* [![Express][Express.js]][Express-url]
+* [![Redux][Redux]][Redux-url]
+* [![OpenAI][OpenAI]][OpenAI-url]
+* [![JWT][JWT]][JWT-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- DEVELOPMENT -->
+## Development Tools
 ### Prototyping (Figma)
 [![Prototyping with Figma][Figma]][Figma-url]
 
 ### Agile Development
 [![Planning with Jira][Jira]][Jira-url]
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
 ## License
@@ -156,8 +169,6 @@ Resources we found helpful along the way!
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
