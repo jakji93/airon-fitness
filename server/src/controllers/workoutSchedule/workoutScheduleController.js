@@ -110,7 +110,7 @@ const updateUserWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
     schedule,
   );
 
-  workoutSchedule.schedule = updatedWorkoutSchedule;
+  workoutSchedule.schedule = JSON.parse(updatedWorkoutSchedule);
   workoutSchedule.inputs = updatedInputs;
   const savedWorkoutSchedule = await workoutSchedule.save();
 

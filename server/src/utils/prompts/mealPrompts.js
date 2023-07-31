@@ -49,11 +49,33 @@ const mealUpdatePrompt = (user, inputs, schedule) => `
   Here are the additional requirements or changes that the user has requested:
   ${inputs}
 
-  Please take the following existing JSON workout schedule and make the necessary tweaks based on the additional requirements or changes:
+  Please take the following existing JSON meal schedule and make the necessary tweaks based on the additional requirements or changes:
   ${schedule}
 
-  Please make the necessary modifications and return the updated workout schedule in the same JSON format. Thank you!
-  Don't include Note. For null values use 0 instead.`;
+  Please make the necessary modifications and return the updated meal schedule in the same JSON format.
+  In the JSON, include the total amount of nutritional macros (as nutrition_totals) for each day provided by the meal plan. 
+  Don't include the nutritional macros per food item. 
+  Don't include any Note. For null values use 0 instead.
+
+  To be explicit, the JSON should be formatted like so:
+  {
+    {Monday:
+      {breakfast: string,
+        snack1: string,
+        lunch: string,
+        snack2: string
+        dinner: string
+        nutrition_totals: {
+        calories: number,
+        carbohydrates: number,
+        protein: number,
+        fat: number
+        }
+      }
+      Tuesday:...
+      Wednesday:...
+      ...}
+  }`;
 
 const mealPrompt = (mode, user, inputs, schedule) => [
   {
