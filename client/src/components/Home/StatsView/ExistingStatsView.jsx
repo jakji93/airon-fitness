@@ -94,7 +94,7 @@ export default function ExistingStatsView() {
           <BarChart
             xAxis={[{ scaleType: 'band', data: fAxis }]}
             series={[{ data: fMacro, label: 'Calories burned [kcal]', color: '#355C7D' }]}
-            width={500}
+            width={400}
             height={250}
           />
         </Grid>
@@ -113,7 +113,7 @@ export default function ExistingStatsView() {
               { data: mData[2], label: 'Carbs [g]', color: '#C06C84' },
               { data: mData[3], label: 'Fat [g]', color: '#F67280' },
             ]}
-            width={500}
+            width={400}
             height={300}
           />
         </Grid>
