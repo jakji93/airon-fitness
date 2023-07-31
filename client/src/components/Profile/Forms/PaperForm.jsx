@@ -25,7 +25,7 @@ export default function PaperForm(props) {
 
   return (
     <Paper elevation={3} sx={{ marginRight: '15%', marginLeft: '15%' }}>
-      <Box sx={{ padding: 5 }}>
+      <Box sx={{ padding: 5, backgroundColor: theme.palette.background.default }}>
         {formTitle && <Typography variant="h6" gutterBottom sx={{ paddingBottom: 5, color: theme.palette.secondary.light }}> {formTitle}</Typography>}
         <form onSubmit={handleSubmit} onKeyPress={handleKeyPress}>
           <Grid
