@@ -24,12 +24,24 @@ const styles = {
 };
 
 export default function Workout() {
+  const getDayOfWeekName = () => {
+    const currentDate = new Date();
+    const dayOfWeek = currentDate.getDay();
+    const daysOfWeekNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return daysOfWeekNames[dayOfWeek];
+  };
+
   const { workoutSchedule } = useSelector((state) => state.workoutAndMealSchedule);
   const [step, setStep] = useState(StepEnum.START_WORKOUT);
+  const [day, setDay] = useState(getDayOfWeekName());
 
   // States: START_WORKOUT, SELECT_WORKOUT, IN_SESSION
   const handleNext = (nextStep) => {
     setStep(nextStep);
+  };
+
+  const handleDay = (newDay) => {
+    setDay(newDay);
   };
 
   return (
@@ -38,17 +50,29 @@ export default function Workout() {
         <Box sx={styles.container}>
           {step === StepEnum.START_WORKOUT
           && (
-          <WorkoutSelector workoutData={workoutSchedule} onNext={handleNext} />
+          <WorkoutSelector
+            currentDay={getDayOfWeekName()}
+            workoutData={workoutSchedule}
+            onNext={handleNext}
+          />
           )}
 
           {step === StepEnum.SELECT_WORKOUT
           && (
-          <WorkoutCarousel workoutData={workoutSchedule} onNext={handleNext} />
+          <WorkoutCarousel
+            handleDay={handleDay}
+            workoutData={workoutSchedule}
+            onNext={handleNext}
+          />
           )}
 
           {step === StepEnum.IN_SESSION
           && (
-          <GuidedWorkout workoutData={workoutSchedule} onNext={handleNext} />
+          <GuidedWorkout
+            sessionDay={day}
+            workoutData={workoutSchedule}
+            onNext={handleNext}
+          />
           )}
         </Box>
       ) : (

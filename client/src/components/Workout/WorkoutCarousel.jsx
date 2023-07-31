@@ -63,7 +63,7 @@ const styles = {
   },
 };
 
-function Item({ workout, onNext }) {
+function Item({ handleDay, workout, onNext }) {
   const day = Object.keys(workout)[0];
   const exercisesArray = workout[day];
 
@@ -73,17 +73,23 @@ function Item({ workout, onNext }) {
         <Typography sx={styles.dayTypography}>
           {day}
         </Typography>
-        <Button onClick={() => onNext(WorkoutStatesEnum.IN_SESSION)} variant="outlined" sx={styles.workoutSelectButton}>
+        <Button
+          onClick={() => {
+            onNext(WorkoutStatesEnum.IN_SESSION);
+            handleDay(day);
+          }}
+          variant="outlined"
+          sx={styles.workoutSelectButton}
+        >
           START WORKOUT
         </Button>
         <ExercisesTable exercises={exercisesArray} />
       </Paper>
     </Box>
-
   );
 }
 
-export default function WorkoutCarousel({ workoutData, onNext }) {
+export default function WorkoutCarousel({ handleDay, workoutData, onNext }) {
   const workouts = Object.entries(workoutData.schedule)
     .map(([day, { exercises }]) => ({
       [day]: exercises,
@@ -124,6 +130,7 @@ export default function WorkoutCarousel({ workoutData, onNext }) {
               workouts.map((workout) => (
                 <Item
                   key={Object.keys(workout)[0]}
+                  handleDay={handleDay}
                   workout={workout}
                   onNext={onNext}
                 />
@@ -136,11 +143,13 @@ export default function WorkoutCarousel({ workoutData, onNext }) {
 }
 
 WorkoutCarousel.propTypes = {
+  handleDay: PropTypes.func.isRequired,
   workoutData: WorkoutScheduleShape.isRequired,
   onNext: PropTypes.func.isRequired,
 };
 
 Item.propTypes = {
+  handleDay: PropTypes.func.isRequired,
   workout: PropTypes.arrayOf(ExerciseShape).isRequired,
   onNext: PropTypes.func.isRequired,
 };

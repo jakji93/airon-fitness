@@ -72,18 +72,11 @@ const styles = {
   },
 };
 
-const getDayOfWeekName = () => {
-  const currentDate = new Date();
-  const dayOfWeek = currentDate.getDay();
-  const daysOfWeekNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  return daysOfWeekNames[dayOfWeek];
-};
-
 // const isWorkoutDay = () => {
 
 // };
 
-export default function WorkoutSelector({ workoutData, onNext }) {
+export default function WorkoutSelector({ currentDay, workoutData, onNext }) {
   return (
     <Box sx={styles.container}>
       <Box sx={styles.typewriterContainer}>
@@ -92,7 +85,7 @@ export default function WorkoutSelector({ workoutData, onNext }) {
             onInit={(typewriter) => {
               typewriter.changeDelay(40)
                 .changeDeleteSpeed(10)
-                .typeString(`Time for your ${getDayOfWeekName()} workout.`)
+                .typeString(`Time for your ${currentDay} workout.`)
                 .pauseFor(2500)
                 .deleteAll()
                 .typeString('Ready to go? Press the start button.')
@@ -104,7 +97,7 @@ export default function WorkoutSelector({ workoutData, onNext }) {
             onInit={(typewriter) => {
               typewriter.changeDelay(40)
                 .changeDeleteSpeed(10)
-                .typeString(`No workout scheduled for ${getDayOfWeekName()}.`)
+                .typeString(`No workout scheduled for ${currentDay}.`)
                 .pauseFor(2500)
                 .deleteAll()
                 .typeString('Manually start another workout?')
@@ -134,6 +127,7 @@ export default function WorkoutSelector({ workoutData, onNext }) {
 }
 
 WorkoutSelector.propTypes = {
+  currentDay: PropTypes.string.isRequired,
   workoutData: WorkoutScheduleShape.isRequired,
   onNext: PropTypes.func.isRequired,
 };
