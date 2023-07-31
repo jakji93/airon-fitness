@@ -52,7 +52,7 @@ const mealUpdatePrompt = (user, inputs, schedule) => `
   Please take the following existing JSON meal schedule and make the necessary tweaks based on the additional requirements or changes:
   ${schedule}
 
-  Please make the necessary modifications and return the updated meal schedule in the same JSON format.
+  Please make the necessary modifications and return ONLY the updated meal schedule in the same JSON format, do not comment.
   In the JSON, include the total amount of nutritional macros (as nutrition_totals) for each day provided by the meal plan. 
   Don't include the nutritional macros per food item. 
   Don't include any Note. For null values use 0 instead.
