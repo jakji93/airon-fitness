@@ -137,7 +137,6 @@ export default function Login() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              backgroundColor: theme.palette.secondary.light,
               borderRadius: 3,
             }}
           >
@@ -156,6 +155,7 @@ export default function Login() {
                   onBlur={formik.handleBlur}
                   error={formik.touched.email && Boolean(formik.errors.email)}
                   helperText={formik.touched.email && formik.errors.email}
+                  sx={{ backgroundColor: theme.palette.secondary.light }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -172,6 +172,7 @@ export default function Login() {
                   onBlur={formik.handleBlur}
                   error={formik.touched.password && Boolean(formik.errors.password)}
                   helperText={formik.touched.password && formik.errors.password}
+                  sx={{ backgroundColor: theme.palette.secondary.light }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -199,6 +200,7 @@ export default function Login() {
                 <Link
                   to="/signup"
                   variant="body2"
+                  style={{ color: theme.palette.secondary.main }}
                   onClick={() => {
                     dispatch(removeSignup());
                   }}
