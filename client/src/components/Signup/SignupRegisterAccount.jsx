@@ -3,6 +3,7 @@ import {
   Link,
   Grid,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { GoogleLogin } from '@react-oauth/google';
 import { useFormik } from 'formik';
 // eslint-disable-next-line camelcase
@@ -40,6 +41,7 @@ export default function SignupRegisterAccount() {
     user, isLoading, isError, isSuccess, message,
   } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const theme = useTheme();
   const { step } = useSelector((state) => state.signup);
   const formik = useFormik({
     initialValues: {
@@ -112,6 +114,9 @@ export default function SignupRegisterAccount() {
         error={formik.touched.email && Boolean(formik.errors.email)}
         helperText={formik.touched.email && formik.errors.email}
         size="medium"
+        sx={{
+          color: theme.palette.secondary.light,
+        }}
       />
       <FormTextFieldInput
         id="password"
@@ -165,7 +170,7 @@ export default function SignupRegisterAccount() {
       </Grid>
       <Grid container justifyContent="flex-end">
         <Grid item sx={{ mt: 1 }}>
-          <Link href="/login" variant="body2">
+          <Link href="/login" variant="body2" color={theme.palette.secondary.main}>
             Already have an account? Sign in
           </Link>
         </Grid>
