@@ -1,6 +1,7 @@
 import {
   Box, Button, CssBaseline, Grid, TextField, Typography,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { Container } from '@mui/system';
 import { GoogleLogin } from '@react-oauth/google';
 import { useFormik } from 'formik';
@@ -18,7 +19,6 @@ import {
   googleLogin, login, register, resetAuth,
 } from '../reducers/Auth';
 import { removeSignup, setSignup } from '../reducers/Signup';
-import theme from '../theme';
 
 const validationSchema = yup.object({
   email: yup
@@ -35,6 +35,7 @@ export default function Login() {
   const openToast = useContext(ToastContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const theme = useTheme();
   const {
     user, isLoading, isError, isSuccess, message, redirectSignup,
   } = useSelector((state) => state.auth);
