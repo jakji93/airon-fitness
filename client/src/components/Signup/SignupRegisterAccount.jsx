@@ -164,7 +164,7 @@ export default function SignupRegisterAccount() {
         />
       </Grid>
       <Grid container justifyContent="flex-end">
-        <Grid item>
+        <Grid item sx={{ mt: 1 }}>
           <Link href="/login" variant="body2">
             Already have an account? Sign in
           </Link>

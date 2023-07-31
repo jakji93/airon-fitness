@@ -195,7 +195,7 @@ export default function Login() {
               </Grid>
             </Grid>
             <Grid container justifyContent="flex-end">
-              <Grid item>
+              <Grid item sx={{ mt: 1 }}>
                 <Link
                   to="/signup"
                   variant="body2"
