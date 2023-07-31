@@ -104,11 +104,8 @@ export default function ExistingStatsView() {
           </Typography>
           <BarChart
             xAxis={[{ scaleType: 'band', data: mAxis }]}
-            legend={{
-              direction: 'column',
-            }}
             series={[
-              { data: mData[0], label: 'Calories [kcal]', color: '#355C7D' },
+              { data: mData[0], label: 'Cal [kcal]', color: '#355C7D' },
               { data: mData[1], label: 'Protein [g]', color: '#6C5B7B' },
               { data: mData[2], label: 'Carbs [g]', color: '#C06C84' },
               { data: mData[3], label: 'Fat [g]', color: '#F67280' },
