@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { Paper, Typography, Grid } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -20,10 +21,12 @@ export default function PaperForm(props) {
     children,
   } = props;
 
+  const theme = useTheme();
+
   return (
     <Paper elevation={3} sx={{ marginRight: '15%', marginLeft: '15%' }}>
       <Box sx={{ padding: 5 }}>
-        {formTitle && <Typography variant="h6" gutterBottom sx={{ paddingBottom: 5 }}> {formTitle}</Typography>}
+        {formTitle && <Typography variant="h6" gutterBottom sx={{ paddingBottom: 5, color: theme.palette.secondary.light }}> {formTitle}</Typography>}
         <form onSubmit={handleSubmit} onKeyPress={handleKeyPress}>
           <Grid
             container

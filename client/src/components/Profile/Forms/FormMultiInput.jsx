@@ -2,6 +2,7 @@
 import {
   Autocomplete, Chip, Grid, TextField,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -20,6 +21,8 @@ export default function FormMultiInput(props) {
     size,
     placeholder,
   } = props;
+
+  const theme = useTheme();
 
   return (
     <>
@@ -64,6 +67,9 @@ export default function FormMultiInput(props) {
                   }}
                   required={required}
                   placeholder={placeholder}
+                  sx={{
+                    backgroundColor: theme.palette.secondary.light,
+                  }}
                 />
               );
             }
@@ -73,6 +79,9 @@ export default function FormMultiInput(props) {
                 variant="outlined"
                 label={label}
                 placeholder={label}
+                sx={{
+                  backgroundColor: theme.palette.secondary.light,
+                }}
               />
             );
           }}

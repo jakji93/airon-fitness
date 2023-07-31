@@ -3,6 +3,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import {
   Autocomplete, Grid, MenuItem, TextField,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -22,6 +23,8 @@ export default function FormMultiSelect(props) {
     limitTags,
     onBlur, error, helperText, size,
   } = props;
+
+  const theme = useTheme();
 
   return (
     <>
@@ -68,6 +71,9 @@ export default function FormMultiSelect(props) {
                   error={error}
                   helperText={helperText}
                   onBlur={onBlur}
+                  sx={{
+                    backgroundColor: theme.palette.secondary.light,
+                  }}
                 />
               );
             }
@@ -78,6 +84,9 @@ export default function FormMultiSelect(props) {
                 variant="outlined"
                 label={label}
                 placeholder={label}
+                sx={{
+                  backgroundColor: theme.palette.secondary.light,
+                }}
               />
             );
           }}
