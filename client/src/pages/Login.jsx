@@ -18,6 +18,7 @@ import {
   googleLogin, login, register, resetAuth,
 } from '../reducers/Auth';
 import { removeSignup, setSignup } from '../reducers/Signup';
+import theme from '../theme';
 
 const validationSchema = yup.object({
   email: yup
@@ -122,7 +123,7 @@ export default function Login() {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" color={theme.palette.secondary.light}>
             Login
           </Typography>
           <Box
@@ -130,7 +131,13 @@ export default function Login() {
             noValidate
             onSubmit={handleSubmit}
             sx={{
-              mt: 3, display: 'flex', flexDirection: 'column', alignItems: 'center',
+              mt: 3,
+              p: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              backgroundColor: theme.palette.secondary.light,
+              borderRadius: 3,
             }}
           >
             <Grid container spacing={2}>
