@@ -35,6 +35,7 @@ export default function ChatArea() {
   const [inputLabel, setInputLabel] = useState(starterLabel);
   const [profileEditField, setProfileEditField] = useState('');
   const [scheduleMode, setScheduleMode] = useState('');
+  const [lock, setLock] = useState(false);
   const dispatch = useDispatch();
   const store = useStore();
   const [token, forceUpdate] = useReducer((x) => x + 1, 0);
@@ -98,6 +99,7 @@ export default function ChatArea() {
 
   const generatePlan = async (newMessages, call, customInput) => {
     let state = store.getState();
+    setLock(true);
 
     try {
       switch (call) {
@@ -116,6 +118,8 @@ export default function ChatArea() {
       }
     } catch (e) {
       throw new Error('No existing schedule');
+    } finally {
+      setLock(false);
     }
 
     state = store.getState();
@@ -304,7 +308,7 @@ export default function ChatArea() {
   const handleSubmit = (e) => {
     const { value } = e.target;
 
-    if (e.key === 'Enter' && value !== '') {
+    if (e.key === 'Enter' && value !== '' && !lock) {
       const newMessages = [...messages, { content: value, isSelf: true }];
       handleCommand(newMessages, value);
       setMessages(newMessages);
@@ -316,26 +320,28 @@ export default function ChatArea() {
   const handleSendButton = () => {
     let message;
 
-    switch (inputMode) {
-      case 0:
-        if (document.getElementById('chatbox-inputfield').value === '') return;
-        message = document.getElementById('chatbox-inputfield').value;
-        break;
-      case 1:
-        message = formSelect;
-        break;
-      case 2:
-        inputMultiSelect.forEach((i, idx) => {
-          message = idx === 0 ? i : `${message}, ${i}`;
-        });
-        break;
-      default:
-        return;
-    }
+    if (!lock) {
+      switch (inputMode) {
+        case 0:
+          if (document.getElementById('chatbox-inputfield').value === '') return;
+          message = document.getElementById('chatbox-inputfield').value;
+          break;
+        case 1:
+          message = formSelect;
+          break;
+        case 2:
+          inputMultiSelect.forEach((i, idx) => {
+            message = idx === 0 ? i : `${message}, ${i}`;
+          });
+          break;
+        default:
+          return;
+      }
 
-    const newMessages = [...messages, { content: message, isSelf: true }];
-    handleCommand(newMessages, message);
-    setMessages(newMessages);
+      const newMessages = [...messages, { content: message, isSelf: true }];
+      handleCommand(newMessages, message);
+      setMessages(newMessages);
+    }
   };
 
   return (
