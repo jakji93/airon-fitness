@@ -58,7 +58,12 @@ export default function ChatArea() {
   };
 
   const initBot = async () => {
-    await dispatch(getWorkoutAndMealSchedule());
+    const state = store.getState();
+
+    if (!state.workoutAndMealSchedule.workoutSchedule
+      || !state.workoutAndMealSchedule.workoutSchedule) {
+      await dispatch(getWorkoutAndMealSchedule());
+    }
     resetValues();
   };
 
