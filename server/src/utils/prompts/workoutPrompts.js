@@ -56,27 +56,7 @@ const workoutUpdatePrompt = (user, inputs, schedule) => `
   ${schedule}
 
   Please make the necessary modifications and return the updated workout schedule in the same JSON format.
-  Don't include Note or any additional strings besides the JSON data. For null values use 0 instead.
-  
-  To be explicit, the JSON should be formatted like so: 
-  {
-    {Monday: 
-      {exercises: 
-        [{exercise: string, 
-          sets: number, 
-          reps: number, 
-          rest: number, 
-          duration: number, 
-          intensity: number,
-          calories: number
-          },
-        ...
-        ], 
-      }
-      total_calories: number
-    }
-    ...
-   }`;
+  Don't include Note. For null values use 0 instead.`;
 
 const workoutPrompt = (mode, user, inputs, schedule) => [
   {
