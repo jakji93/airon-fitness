@@ -35,7 +35,7 @@ async function updateMealSchedule(userData, inputs, schedule) {
     temperature: 0,
   }, { headers: getHeader(userData), timeout: 500000 });
 
-  return response.data.choices[0].message.content;
+  return JSON.parse(response.data.choices[0].message.content);
 }
 
 async function generateWorkoutSchedule(userData) {
@@ -55,7 +55,7 @@ async function updateWorkoutSchedule(userData, inputs, schedule) {
     temperature: 0,
   }, { headers: getHeader(userData), timeout: 500000 });
 
-  return response.data.choices[0].message.content;
+  return JSON.parse(response.data.choices[0].message.content);
 }
 
 async function verifyAPIKey(verifyKey) {

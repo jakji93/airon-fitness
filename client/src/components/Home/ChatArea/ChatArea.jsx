@@ -7,7 +7,8 @@ import { useDispatch, useStore } from 'react-redux';
 
 import ChatMessages from './ChatMessages';
 import {
-  createWorkoutString, createMealString, starterOptions, starterLabel,
+  createWorkoutString, createMealString, starterOptions,
+  starterLabel, checkExistingMeal, checkExistingWorkout,
 } from './util';
 import {
   allergiesIntolerancesOptions,
@@ -18,8 +19,7 @@ import {
 import { goalsOptions } from '../../../constants/BasicProfile';
 import { getUserProfile, updateUserProfile } from '../../../reducers/UserProfile';
 import {
-  getWorkoutSchedule, getMealSchedule, createWorkoutSchedule,
-  createMealSchedule, updateWorkoutSchedule, updateMealSchedule,
+  getWorkoutSchedule, getMealSchedule, updateWorkoutSchedule, updateMealSchedule,
   getWorkoutAndMealSchedule, createWorkoutAndMealSchedule,
 } from '../../../reducers/WorkoutAndMealSchedule';
 import FormMultiSelect from '../../Profile/Forms/FormMultiSelect';
@@ -97,7 +97,7 @@ export default function ChatArea() {
     try {
       switch (call) {
         case 'new':
-          await dispatch(scheduleMode === 'Workout' ? createWorkoutSchedule() : createMealSchedule());
+          await dispatch(scheduleMode === 'Workout' ? checkExistingWorkout(state) : checkExistingMeal(state));
           break;
         case 'curr':
           validateExistingSchedule(scheduleMode === 'Workout');
@@ -277,6 +277,7 @@ export default function ChatArea() {
         break;
       case 'generatePlanWithCustom':
         try {
+          newMessages.push({ content: 'Please give me a moment to update your schedule', isSelf: false });
           await generatePlan(newMessages, 'custom', input);
         } catch (e) {
           newMessages.push({ content: 'It appears you do not have a schedule, give me a moment to generate one for you', isSelf: false });

@@ -50,7 +50,7 @@ const createWorkoutAndMealSchedule = async () => {
 };
 
 const createWorkoutSchedule = async () => {
-  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/mock/workoutSchedule/`;
+  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/workoutSchedule/`;
 
   const response = await axios.post(apiUrl, {}, {
     headers: createBearerTokenHeader(),
@@ -60,7 +60,7 @@ const createWorkoutSchedule = async () => {
 };
 
 const createMealSchedule = async () => {
-  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/mock/mealSchedule/`;
+  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/mealSchedule/`;
 
   const response = await axios.post(apiUrl, {}, {
     headers: createBearerTokenHeader(),
@@ -70,7 +70,7 @@ const createMealSchedule = async () => {
 };
 
 const updateWorkoutSchedule = async (customInput) => {
-  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/mock/workoutSchedule/`;
+  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/workoutSchedule/`;
 
   const response = await axios.put(apiUrl, { customInput }, {
     headers: createBearerTokenHeader(),
@@ -80,7 +80,7 @@ const updateWorkoutSchedule = async (customInput) => {
 };
 
 const updateMealSchedule = async (customInput) => {
-  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/mock/mealSchedule/`;
+  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/mealSchedule/`;
 
   const response = await axios.put(apiUrl, { customInput }, {
     headers: createBearerTokenHeader(),
