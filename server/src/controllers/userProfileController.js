@@ -184,7 +184,7 @@ const getPaginatedScheduleHistory = asyncHandler(async (req, res) => {
   const numDocsToRetrieve = docsPerPage * page;
   const skip = page !== 0 ? docsPerPage * (page - 1) : 0;
 
-  const query = { userInfoID: '64b8e6040748c356e6f67978' };
+  const query = { userInfoID: req.user._id };
   const options = { sort: { createdBy: -1 }, limit: numDocsToRetrieve };
 
   let combinedSchedules = await Promise.all([

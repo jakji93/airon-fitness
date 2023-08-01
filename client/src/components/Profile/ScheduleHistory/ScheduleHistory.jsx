@@ -15,9 +15,8 @@ export default function ScheduleHistory() {
       });
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const handlePageChange = async (_, page) => {
-    userProfileService.getPaginatedScheduleHistory(page)
+  const handlePageChange = async (...args) => {
+    userProfileService.getPaginatedScheduleHistory(args[1])
       .then((res) => {
         setHistory(res.response.data.pagination);
       });
