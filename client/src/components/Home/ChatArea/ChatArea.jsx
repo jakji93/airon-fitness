@@ -318,6 +318,7 @@ export default function ChatArea() {
 
     switch (inputMode) {
       case 0:
+        if (document.getElementById('chatbox-inputfield').value === '') return;
         message = document.getElementById('chatbox-inputfield').value;
         break;
       case 1:
