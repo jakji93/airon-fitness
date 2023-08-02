@@ -16,20 +16,21 @@ function WorkoutScheduleCollapse(props) {
   const {
     index,
     handleClick,
-    selectedIndex,
+    selectedIndices,
     daySchedule,
   } = props;
   const workoutSchedule = daySchedule.exercises;
+  const isExpanded = selectedIndices.includes(index);
   return (
     <div>
       <ListItemButton key={index} onClick={() => { handleClick(index); }} divider>
         <ListItemText primary={`Day ${index + 1}`} />
-        {index === selectedIndex ? <ExpandLess /> : <ExpandMore />}
+        {isExpanded ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       {workoutSchedule && workoutSchedule.map((workout) => (
         <Collapse
           key={`${index}-${workout.exercise}`}
-          in={index === selectedIndex}
+          in={isExpanded}
           timeout="auto"
           unmountOnExit
         >
@@ -50,7 +51,7 @@ function WorkoutScheduleCollapse(props) {
 WorkoutScheduleCollapse.propTypes = {
   index: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
-  selectedIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  selectedIndices: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   daySchedule: PropTypes.shape({
     exercises: PropTypes.arrayOf(PropTypes.shape({
       exercise: PropTypes.string,
@@ -66,7 +67,7 @@ WorkoutScheduleCollapse.propTypes = {
 
 export default function ExistingWorkoutSchedule() {
   const dispatch = useDispatch();
-  const [selectedIndex, setSelectedIndex] = useState('');
+  const [selectedIndices, setSelectedIndices] = useState([]);
   const [updateWorkoutModal, setUpdateWorkoutModal] = useState(false);
   const [updateBothModal, setUpdateBothModal] = useState(false);
   const { workoutSchedule } = useSelector(
@@ -74,11 +75,10 @@ export default function ExistingWorkoutSchedule() {
   );
 
   const handleClick = (index) => {
-    if (index === selectedIndex) {
-      setSelectedIndex('');
-    } else {
-      setSelectedIndex(index);
+    if (selectedIndices.includes(index)) {
+      return setSelectedIndices((prevIndices) => prevIndices.filter((i) => i !== index));
     }
+    return setSelectedIndices((prevIndices) => [...prevIndices, index]);
   };
 
   return (
@@ -130,7 +130,7 @@ export default function ExistingWorkoutSchedule() {
             <WorkoutScheduleCollapse
               index={index}
               handleClick={handleClick}
-              selectedIndex={selectedIndex}
+              selectedIndices={selectedIndices}
               daySchedule={workoutSchedule.schedule[day]}
               key={`${day} workout`}
             />
