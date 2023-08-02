@@ -29,7 +29,7 @@ export default function NoSchedule() {
         dialogContent="Are you ready to create your workout and meal plan powered by AI?
         This will use all the basic and additional customizable profile information you provided.
         You may update or confirm your profile information in your Profile page before continuing.
-        This may take 0-2 minutes."
+        This may take a couple minutes."
       />
     </Grid>
   );

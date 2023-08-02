@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ConfirmationModal from './ConfirmationModal';
-import { updateWorkoutSchedule } from '../../../reducers/WorkoutAndMealSchedule';
+import { createWorkoutAndMealSchedule, createWorkoutSchedule } from '../../../reducers/WorkoutAndMealSchedule';
 
 function WorkoutScheduleCollapse(props) {
   const {
@@ -68,6 +68,7 @@ export default function ExistingWorkoutSchedule() {
   const dispatch = useDispatch();
   const [selectedIndex, setSelectedIndex] = useState('');
   const [updateWorkoutModal, setUpdateWorkoutModal] = useState(false);
+  const [updateBothModal, setUpdateBothModal] = useState(false);
   const { workoutSchedule } = useSelector(
     (state) => state.workoutAndMealSchedule,
   );
@@ -88,6 +89,17 @@ export default function ExistingWorkoutSchedule() {
           variant="contained"
           sx={{ mb: 1 }}
           size="medium"
+          onClick={() => setUpdateBothModal(true)}
+        >
+          Re-create Both Plans
+        </Button>
+      </Grid>
+      <Grid item xs={12}>
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{ mb: 1 }}
+          size="medium"
           onClick={() => setUpdateWorkoutModal(true)}
         >Re-create Workout Plan
         </Button>
@@ -95,10 +107,18 @@ export default function ExistingWorkoutSchedule() {
       <ConfirmationModal
         open={updateWorkoutModal}
         setOpen={setUpdateWorkoutModal}
-        onYes={() => dispatch(updateWorkoutSchedule())}
+        onYes={() => dispatch(createWorkoutSchedule())}
         dialogTitle="Re-create your workout plan?"
         dialogContent="Would you like to re-create your workout plan using updated profile data
-        and/or previous custom inputs? This may take 0-2 minutes."
+        and/or previous custom inputs? This may take a couple minutes."
+      />
+      <ConfirmationModal
+        open={updateBothModal}
+        setOpen={setUpdateBothModal}
+        onYes={() => dispatch(createWorkoutAndMealSchedule())}
+        dialogTitle="Re-create both plans?"
+        dialogContent="Would you like to re-create both your meal plan and workout plan using updated profile data
+        and/or previous custom inputs? This may take a couple minutes."
       />
       <Grid item xs={12}>
         <List

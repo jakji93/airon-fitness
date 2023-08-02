@@ -37,11 +37,11 @@ export const createWorkoutAndMealSchedule = createAsyncThunk(
   },
 );
 
-export const updateWorkoutSchedule = createAsyncThunk(
-  'workoutAndMealSchedule/updateWorkoutSchedule',
+export const createWorkoutSchedule = createAsyncThunk(
+  'workoutAndMealSchedule/createWorkoutSchedule',
   async (_, thunkAPI) => {
     try {
-      return await workoutAndMealScheduleService.updateWorkoutSchedule();
+      return await workoutAndMealScheduleService.createWorkoutSchedule();
     } catch (e) {
       const message = getErrorMessage(e);
       return thunkAPI.rejectWithValue(message);
@@ -49,11 +49,11 @@ export const updateWorkoutSchedule = createAsyncThunk(
   },
 );
 
-export const updateMealSchedule = createAsyncThunk(
-  'workoutAndMealSchedule/updateMealSchedule',
+export const createMealSchedule = createAsyncThunk(
+  'workoutAndMealSchedule/createdMealSchedule',
   async (_, thunkAPI) => {
     try {
-      return await workoutAndMealScheduleService.updateMealSchedule();
+      return await workoutAndMealScheduleService.createMealSchedule();
     } catch (e) {
       const message = getErrorMessage(e);
       return thunkAPI.rejectWithValue(message);
@@ -96,7 +96,7 @@ const WorkoutAndMealScheduleSlice = createSlice({
       .addCase(createWorkoutAndMealSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.message = 'Your schedule has been created!';
+        state.message = 'Your schedules have been created!';
         state.workoutSchedule = action.payload.workoutSchedule;
         state.mealSchedule = action.payload.mealSchedule;
       })
@@ -106,31 +106,31 @@ const WorkoutAndMealScheduleSlice = createSlice({
         state.message = action.payload;
         state.profile = null;
       })
-      .addCase(updateMealSchedule.pending, (state) => {
+      .addCase(createWorkoutSchedule.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(updateMealSchedule.fulfilled, (state, action) => {
+      .addCase(createWorkoutSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.message = 'Your meal schedule has been updated!';
-        state.mealSchedule = action.payload;
+        state.message = 'Your workout schedule has been generated!';
+        state.workoutSchedule = action.payload;
       })
-      .addCase(updateMealSchedule.rejected, (state, action) => {
+      .addCase(createWorkoutSchedule.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
         state.profile = null;
       })
-      .addCase(updateWorkoutSchedule.pending, (state) => {
+      .addCase(createMealSchedule.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(updateWorkoutSchedule.fulfilled, (state, action) => {
+      .addCase(createMealSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.message = 'Your workout schedule has been updated!';
-        state.workoutSchedule = action.payload;
+        state.message = 'Your meal schedule has been generated!';
+        state.mealSchedule = action.payload;
       })
-      .addCase(updateWorkoutSchedule.rejected, (state, action) => {
+      .addCase(createMealSchedule.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
