@@ -1,6 +1,7 @@
 import {
   Grid, InputLabel, FormControl, Select, MenuItem, InputAdornment, FormHelperText,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -27,6 +28,8 @@ export default function FormSelect(props) {
     helperText,
     size,
   } = props;
+
+  const theme = useTheme();
 
   return (
     <>
@@ -67,6 +70,9 @@ export default function FormSelect(props) {
             placeholder={placeholder}
             onBlur={onBlur}
             error={error}
+            sx={{
+              backgroundColor: theme.palette.secondary.light,
+            }}
           >
             {options.map((val) => (
               <MenuItem value={val} key={val}>{val}</MenuItem>
@@ -84,7 +90,7 @@ FormSelect.propTypes = {
   label: PropTypes.string.isRequired,
   showTitleLabel: PropTypes.bool,
   half: PropTypes.bool,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   setValue: PropTypes.func,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   endAdornment: PropTypes.string,

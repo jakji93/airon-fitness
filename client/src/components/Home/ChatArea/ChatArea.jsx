@@ -1,6 +1,6 @@
 import SendIcon from '@mui/icons-material/Send';
 import {
-  Card, Grid, Divider, TextField, Typography, Fab,
+  Card, Grid, Divider, TextField, Fab,
 } from '@mui/material';
 import React, { useState, useEffect, useReducer } from 'react';
 import { useDispatch, useStore } from 'react-redux';
@@ -346,16 +346,11 @@ export default function ChatArea() {
 
   return (
     <div>
-      <Grid container>
-        <Grid item xs={6}>
-          <Typography variant="h5" className="header-message">Chat</Typography>
-        </Grid>
-      </Grid>
-      <Grid container component={Card}>
+      <Grid container component={Card} sx={{ p: 1 }}>
         <Grid item style={{ width: '100%' }}>
           <ChatMessages messages={messages} />
           <Divider />
-          <Grid container style={{ padding: '20px' }}>
+          <Grid container style={{ padding: '20px', alignItems: 'center', flexWrap: 'nowrap' }}>
             <Grid item xs={11}>
               { inputMode === 0
                 ? <TextField id="chatbox-inputfield" label="Provide a valid value" onKeyDown={handleSubmit} fullWidth />
@@ -390,7 +385,7 @@ export default function ChatArea() {
                   ) : ''
               }
             </Grid>
-            <Grid item xs={1}>
+            <Grid item>
               <Fab color="primary" aria-label="add"><SendIcon onClick={handleSendButton} /></Fab>
             </Grid>
           </Grid>
