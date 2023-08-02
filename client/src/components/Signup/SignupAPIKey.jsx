@@ -1,6 +1,7 @@
 import {
-  Grid, Button, Typography,
+  Grid, Button, Typography, Link,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,6 +19,7 @@ const validationSchema = yup.object({
 
 export default function SignupAPIKey() {
   const dispatch = useDispatch();
+  const theme = useTheme();
   const signup = useSelector((state) => state.signup);
   const initialValues = {
     apiKey: signup.user.apiKey ?? '',
@@ -62,8 +64,11 @@ export default function SignupAPIKey() {
         xs={12}
         sm={12}
       >
-        <Typography variant="subtitle1">
-          If you don&apos;t know your API Key, checkout <a href="https://www.maisieai.com/help/how-to-get-an-openai-api-key-for-chatgpt#:~:text=How%20do%20I%C2%A0get%20an%20OpenAI%C2%A0API%C2%A0Key%3F" target="_blank" rel="noreferrer">this tutorial.</a>
+        <Typography variant="subtitle1" sx={{ color: theme.palette.secondary.light }}>
+          If you don&apos;t know your API Key, checkout {' '}
+          <Link href="https://www.maisieai.com/help/how-to-get-an-openai-api-key-for-chatgpt#:~:text=How%20do%20I%C2%A0get%20an%20OpenAI%C2%A0API%C2%A0Key%3F" target="_blank" rel="noreferrer" color={theme.palette.secondary.main}>
+            this tutorial.
+          </Link>
         </Typography>
       </Grid>
       <FormTextFieldInput
