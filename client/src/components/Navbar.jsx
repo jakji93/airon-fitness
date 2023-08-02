@@ -158,21 +158,29 @@ function ResponsiveAppBar() {
           }}
           >
             {pages.map((page) => (
-              <Button
-                key={page[0]}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
+              <Link
+                style={{
+                  textDecoration: 'none',
                   color: theme.palette.secondary.main,
                   display: 'block',
                   '&:hover': {
                     color: 'white',
                     transition: 'background-color 1.0s ease-in-out',
                   },
+                  my: 2,
                 }}
+                to={page[1]}
+                key={page[0]}
               >
-                <Link style={{ textDecoration: 'none', color: 'inherit' }} to={page[1]}>{page[0]}</Link>
-              </Button>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    color: 'inherit',
+                  }}
+                >
+                  {page[0]}
+                </Button>
+              </Link>
             ))}
           </Box>
 

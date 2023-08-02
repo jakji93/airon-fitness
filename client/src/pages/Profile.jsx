@@ -52,14 +52,15 @@ export default function Profile() {
         aria-label="icon label tabs example"
         variant="fullWidth"
         textColor="secondary"
+        indicatorColor="secondary"
       >
         <Tab
           label="Basic Profile"
-          sx={{ width: '100%' }}
+          sx={{ width: '100%', color: 'white' }}
         />
         <Tab
           label="Additional Profile"
-          sx={{ width: '100%' }}
+          sx={{ width: '100%', color: 'white' }}
         />
       </Tabs>
       <TabPanel value={value} index={0}>
