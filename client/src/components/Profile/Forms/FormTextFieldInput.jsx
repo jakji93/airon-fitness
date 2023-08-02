@@ -1,6 +1,7 @@
 import {
   Grid, InputAdornment, TextField,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -28,6 +29,8 @@ export default function FormTextFieldInput(props) {
     helperText,
     size,
   } = props;
+
+  const theme = useTheme();
 
   return (
     <>
@@ -60,6 +63,9 @@ export default function FormTextFieldInput(props) {
           onBlur={onBlur}
           error={error}
           helperText={helperText}
+          sx={{
+            backgroundColor: theme.palette.secondary.light,
+          }}
         />
       </Grid>
     </>
