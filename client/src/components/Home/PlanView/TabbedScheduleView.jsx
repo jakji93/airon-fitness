@@ -37,7 +37,7 @@ export default function TabbedScheduleView() {
   }, [workoutSchedule, mealSchedule, isError, isSuccess, message, dispatch]);
 
   return (
-    <Grid container component={Card} alignItems="center" columns={2} sx={{ p: 3 }}>
+    <Grid container component={Card} alignItems="center" columns={2} sx={{ p: 3, position: 'relative' }}>
       {isLoading && <RelativeSpinner />}
       <Grid item xs={10}>
         <Tabs value={value} onChange={(e, v) => setValue(v)} aria-label="icon label tabs example">
