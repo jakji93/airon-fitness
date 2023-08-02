@@ -86,31 +86,31 @@ export default function ExistingStatsView() {
 
   return (
     <div>
-      <Grid container component={Card} alignItems="center" sx={{ p: 2 }}>
-        <Grid item xs>
+      <Grid container component={Card} alignItems="center" justifyContent="center" sx={{ p: 3 }}>
+        <Grid item>
           <Typography variant="h6" component="div" color="text.secondary">
             Fitness Plan
           </Typography>
           <BarChart
             xAxis={[{ scaleType: 'band', data: fAxis }]}
-            series={[{ data: fMacro, label: 'Calories burned' }]}
-            width={500}
+            series={[{ data: fMacro, label: 'Calories burned [kcal]', color: '#355C7D' }]}
+            width={400}
             height={250}
           />
         </Grid>
-        <Grid item xs>
+        <Grid item>
           <Typography variant="h6" component="div" color="text.secondary">
             Meal Plan
           </Typography>
           <BarChart
             xAxis={[{ scaleType: 'band', data: mAxis }]}
             series={[
-              { data: mData[0], label: 'Calories' },
-              { data: mData[1], label: 'Protein' },
-              { data: mData[2], label: 'Carbs' },
-              { data: mData[3], label: 'Fat' },
+              { data: mData[0], label: 'Cal [kcal]', color: '#355C7D' },
+              { data: mData[1], label: 'Protein [g]', color: '#6C5B7B' },
+              { data: mData[2], label: 'Carbs [g]', color: '#C06C84' },
+              { data: mData[3], label: 'Fat [g]', color: '#F67280' },
             ]}
-            width={500}
+            width={400}
             height={300}
           />
         </Grid>

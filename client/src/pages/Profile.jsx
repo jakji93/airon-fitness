@@ -51,6 +51,7 @@ export default function Profile() {
         onChange={(e, v) => setValue(v)}
         aria-label="icon label tabs example"
         variant="fullWidth"
+        textColor="secondary"
       >
         <Tab
           label="Basic Profile"
