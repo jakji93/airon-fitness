@@ -29,9 +29,31 @@ const createWorkoutAndMealSchedule = async () => {
   return response.data;
 };
 
+const createWorkoutSchedule = async () => {
+  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/workoutSchedule/`;
+
+  const response = await axios.post(apiUrl, {}, {
+    headers: createBearerTokenHeader(),
+  });
+
+  return response.data;
+};
+
+const createMealSchedule = async () => {
+  const apiUrl = `${process.env.REACT_APP_SERVER_API_BASE}/mealSchedule/`;
+
+  const response = await axios.post(apiUrl, {}, {
+    headers: createBearerTokenHeader(),
+  });
+
+  return response.data;
+};
+
 const workoutAndMealScheduleService = {
   createWorkoutAndMealSchedule,
   getWorkoutAndMealSchedule,
+  createWorkoutSchedule,
+  createMealSchedule,
 };
 
 export default workoutAndMealScheduleService;
