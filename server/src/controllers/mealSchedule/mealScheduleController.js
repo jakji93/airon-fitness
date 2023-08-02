@@ -95,7 +95,7 @@ const updateMealScheduleForUser = asyncHandler(async (req, res) => {
   const updatedMealSchedule = await openAI.updateMealSchedule(userData, updatedInputs, schedule);
 
   // Update the MongoDB document
-  mealSchedule.schedule = updatedMealSchedule;
+  mealSchedule.schedule = JSON.parse(updatedMealSchedule);
   mealSchedule.inputs = updatedInputs;
   const savedMealSchedule = await mealSchedule.save();
 
