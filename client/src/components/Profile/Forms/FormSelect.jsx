@@ -55,7 +55,7 @@ export default function FormSelect(props) {
               if (setValue) setValue(e.target.value);
               if (onChange) onChange(e);
             }}
-            sx={fillHeight ? { height: '100%' } : ''}
+            sx={fillHeight ? { height: '100%', backgroundColor: theme.palette.secondary.light } : { backgroundColor: theme.palette.secondary.light }}
             endAdornment={(
               <InputAdornment
                 sx={{
@@ -70,9 +70,6 @@ export default function FormSelect(props) {
             placeholder={placeholder}
             onBlur={onBlur}
             error={error}
-            sx={{
-              backgroundColor: theme.palette.secondary.light,
-            }}
           >
             {options.map((val) => (
               <MenuItem value={val} key={val}>{val}</MenuItem>
