@@ -20,6 +20,7 @@ export default function FormSelect(props) {
     options,
     endAdornment,
     customTextFieldGridSize,
+    fillHeight,
     required,
     placeholder,
     onBlur,
@@ -33,8 +34,8 @@ export default function FormSelect(props) {
   return (
     <>
       { showTitleLabel && <GridInputLabel id={id} label={label} /> }
-      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)}>
-        <FormControl fullWidth size={size}>
+      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)} sx={fillHeight ? { height: '100%' } : ''}>
+        <FormControl fullWidth size={size} sx={fillHeight ? { height: '100%' } : ''}>
           <InputLabel
             id={`${id}-label`}
             sx={{
@@ -54,6 +55,7 @@ export default function FormSelect(props) {
               if (setValue) setValue(e.target.value);
               if (onChange) onChange(e);
             }}
+            sx={fillHeight ? { height: '100%', backgroundColor: theme.palette.secondary.light } : { backgroundColor: theme.palette.secondary.light }}
             endAdornment={(
               <InputAdornment
                 sx={{
@@ -68,9 +70,6 @@ export default function FormSelect(props) {
             placeholder={placeholder}
             onBlur={onBlur}
             error={error}
-            sx={{
-              backgroundColor: theme.palette.secondary.light,
-            }}
           >
             {options.map((val) => (
               <MenuItem value={val} key={val}>{val}</MenuItem>
@@ -93,6 +92,7 @@ FormSelect.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   endAdornment: PropTypes.string,
   customTextFieldGridSize: PropTypes.number,
+  fillHeight: PropTypes.bool,
   required: PropTypes.bool,
   placeholder: PropTypes.string,
   onBlur: PropTypes.func,
@@ -108,6 +108,7 @@ FormSelect.defaultProps = {
   showTitleLabel: true,
   customTextFieldGridSize: 0,
   required: false,
+  fillHeight: false,
   placeholder: '',
   onBlur: null,
   onChange: null,

@@ -55,7 +55,7 @@ const workoutUpdatePrompt = (user, inputs, schedule) => `
   Please take the following existing JSON workout schedule and make the necessary tweaks based on the additional requirements or changes:
   ${schedule}
 
-  Please make the necessary modifications and return the updated workout schedule in the same JSON format. Thank you!
+  Please make the necessary modifications and return the updated workout schedule in the same JSON format.
   Don't include Note. For null values use 0 instead.`;
 
 const workoutPrompt = (mode, user, inputs, schedule) => [

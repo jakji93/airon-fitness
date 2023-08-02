@@ -51,7 +51,9 @@ function WorkoutScheduleCollapse(props) {
 WorkoutScheduleCollapse.propTypes = {
   index: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
-  selectedIndices: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  selectedIndices: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  ).isRequired,
   daySchedule: PropTypes.shape({
     exercises: PropTypes.arrayOf(PropTypes.shape({
       exercise: PropTypes.string,
