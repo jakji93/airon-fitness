@@ -124,6 +124,12 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 <!-- ABOVE AND BEYOND -->
 ## Above and Beyond
 
+In our MERN web application, we went above and beyond the standard requirements by incorporating advanced functionalities that elevate user experience and personalization. First, we integrated Google Login, streamlining the authentication process and ensuring a seamless user journey. Leveraging JWT token authentication, we further enforced the app's security, safeguarding any sensitive user data. Additionally, we crafted custom reusable form components using Formik and yup validation, streamlining user interactions for login, signup, and profile updates. These meticulously designed components enhance usability while maintaining robust data integrity.
+
+Our main focus is to utilize the capability of ChatGPT, engineering prompts to generate personalized workout and meal schedules based on the user profile while minimize the cost of requesting from OpenAI. This feature customized a users' fitness experience, providing users with intelligent and adaptive recommendations. We also introduced a chat-bot system that enables fine-tuning of base schedules, tailoring fitness and meal plans to individual preferences and restriction. 
+
+By implementing Google Login, JWT authentication, a powerful chatbot, and ChatGPT integration, we have crafted an innovative fitness platform that redefines the way users interact with their workout and meal plans. The application's user-friendly experience, coupled with personalized features, ensures that each individual's fitness journey is tailored just for them.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- WHATS NEXT -->
