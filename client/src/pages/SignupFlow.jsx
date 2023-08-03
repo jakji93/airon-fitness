@@ -1,5 +1,5 @@
 import {
-  Stepper, Step, StepLabel, Box,
+  CssBaseline, Stepper, Step, StepLabel, Box,
 } from '@mui/material';
 import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -46,9 +46,31 @@ export default function SignupFlow() {
 
   return (
     <Box>
-      <Stepper activeStep={step} sx={{ margin: '3%' }}>
+      <CssBaseline />
+      <Stepper activeStep={step} sx={{ margin: '3%' }} alternativeLabel>
         {stepTitles.map((label) => (
-          <Step key={label}>
+          <Step
+            key={label}
+            sx={{
+              '& .MuiStepLabel-root .Mui-completed': {
+                color: 'secondary.main', // circle color (COMPLETED)
+              },
+              '& .MuiStepLabel-label.Mui-completed.MuiStepLabel-alternativeLabel':
+                {
+                  color: 'secondary.main', // Just text label (COMPLETED)
+                },
+              '& .MuiStepLabel-root .Mui-active': {
+                color: 'secondary.main', // circle color (ACTIVE)
+              },
+              '& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel':
+                {
+                  color: 'secondary.light', // Just text label (ACTIVE)
+                },
+              '& .MuiStepLabel-root .Mui-active .MuiStepIcon-text': {
+                fill: 'secondary.light', // circle's number (ACTIVE)
+              },
+            }}
+          >
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}

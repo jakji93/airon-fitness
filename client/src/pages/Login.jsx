@@ -1,6 +1,7 @@
 import {
   Box, Button, CssBaseline, Grid, TextField, Typography,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { Container } from '@mui/system';
 import { GoogleLogin } from '@react-oauth/google';
 import { useFormik } from 'formik';
@@ -34,6 +35,7 @@ export default function Login() {
   const openToast = useContext(ToastContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const theme = useTheme();
   const {
     user, isLoading, isError, isSuccess, message, redirectSignup,
   } = useSelector((state) => state.auth);
@@ -122,7 +124,7 @@ export default function Login() {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" color={theme.palette.secondary.light}>
             Login
           </Typography>
           <Box
@@ -130,7 +132,12 @@ export default function Login() {
             noValidate
             onSubmit={handleSubmit}
             sx={{
-              mt: 3, display: 'flex', flexDirection: 'column', alignItems: 'center',
+              mt: 3,
+              p: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              borderRadius: 3,
             }}
           >
             <Grid container spacing={2}>
@@ -148,6 +155,7 @@ export default function Login() {
                   onBlur={formik.handleBlur}
                   error={formik.touched.email && Boolean(formik.errors.email)}
                   helperText={formik.touched.email && formik.errors.email}
+                  sx={{ backgroundColor: theme.palette.secondary.light }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -164,6 +172,7 @@ export default function Login() {
                   onBlur={formik.handleBlur}
                   error={formik.touched.password && Boolean(formik.errors.password)}
                   helperText={formik.touched.password && formik.errors.password}
+                  sx={{ backgroundColor: theme.palette.secondary.light }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -187,10 +196,11 @@ export default function Login() {
               </Grid>
             </Grid>
             <Grid container justifyContent="flex-end">
-              <Grid item>
+              <Grid item sx={{ mt: 1 }}>
                 <Link
                   to="/signup"
                   variant="body2"
+                  style={{ color: theme.palette.secondary.main }}
                   onClick={() => {
                     dispatch(removeSignup());
                   }}

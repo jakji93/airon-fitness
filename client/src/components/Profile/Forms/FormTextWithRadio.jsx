@@ -1,6 +1,7 @@
 import {
   FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Grid,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -24,6 +25,8 @@ export default function FormTextFieldWithRadio(props) {
     helperText,
     size,
   } = props;
+
+  const theme = useTheme();
 
   return (
     <>
@@ -59,11 +62,24 @@ export default function FormTextFieldWithRadio(props) {
               if (setRadioSelection) setRadioSelection(e.target.value);
               if (onChangeRadio) onChangeRadio(e);
             }}
+            sx={{
+              color: theme.palette.secondary.light,
+            }}
           >
             {radioGroups.map((val) => (
               <FormControlLabel
                 value={val}
-                control={<Radio />}
+                control={
+                  (
+                    <Radio
+                      sx={{
+                        '&, &.Mui-checked': {
+                          color: theme.palette.secondary.light,
+                        },
+                      }}
+                    />
+                  )
+                }
                 label={val}
                 key={val}
               />

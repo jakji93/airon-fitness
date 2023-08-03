@@ -3,9 +3,9 @@ const express = require('express');
 
 const router = express.Router();
 const { protect } = require('../middleware/authMiddleware');
-const { MOCKcreateMealScheduleForUser, MOCKupdateMealScheduleForUser } = require('../controllers/workoutSchedule/mockMealScheduleController');
-const { MOCKupdateUserWorkoutScheduleByUserID, MOCKcreateWorkoutSchedule } = require('../controllers/workoutSchedule/mockWorkoutScheduleController');
-const { MOCKcreateWorkoutAndMealSchedule } = require('../controllers/workoutSchedule/mockWorkoutAndMealSchedule');
+const { MOCKcreateMealScheduleForUser, MOCKupdateMealScheduleForUser } = require('../controllers/mock/mockMealScheduleController');
+const { MOCKupdateUserWorkoutScheduleByUserID, MOCKcreateWorkoutSchedule } = require('../controllers/mock/mockWorkoutScheduleController');
+const { MOCKcreateWorkoutAndMealSchedule } = require('../controllers/mock/mockWorkoutAndMealSchedule');
 
 /**
  * @desc use mock data to create a user schedule (NO OPENAI CALL)
@@ -18,15 +18,23 @@ const { MOCKcreateWorkoutAndMealSchedule } = require('../controllers/workoutSche
  * @response created mealSchedule
  *   {userInfoID: string,
  *    schedule:
- *      {Monday:
- *        {breakfast: string,
- *         snack1: string,
- *         lunch: string,
- *         snack2: string
- *         dinner: string}
- *       Tuesday:...
- *       Wednesday:...
- *       ...}}
+ *      {
+ *        Monday: {
+ *           breakfast: string,
+ *           snack1: string,
+ *           lunch: string,
+ *           snack2: string,
+ *           dinner: string,
+ *           "nutrition_totals": {
+ *              "calories": 1630,
+ *              "protein": 110,
+ *              "carbohydrates": 120,
+ *              "fat": 65
+ *           }
+ *        },
+ *        Tuesday:...
+ *        Wednesday:...
+ *      },
  *    inputs: [string]}
  */
 router.post('/mealSchedule', protect, MOCKcreateMealScheduleForUser);
@@ -43,15 +51,23 @@ router.post('/mealSchedule', protect, MOCKcreateMealScheduleForUser);
  * @response updated mealSchedule
  *   {userInfoID: string,
  *    schedule:
- *      {Monday:
- *        {breakfast: string,
- *         snack1: string,
- *         lunch: string,
- *         snack2: string
- *         dinner: string}
- *       Tuesday:...
- *       Wednesday:...
- *       ...}}
+ *      {
+ *        Monday: {
+ *           breakfast: string,
+ *           snack1: string,
+ *           lunch: string,
+ *           snack2: string,
+ *           dinner: string,
+ *           "nutrition_totals": {
+ *              "calories": 1630,
+ *              "protein": 110,
+ *              "carbohydrates": 120,
+ *              "fat": 65
+ *           }
+ *        },
+ *        Tuesday:...
+ *        Wednesday:...
+ *      },
  *    inputs: [string]}
  */
 router.put('/mealSchedule', protect, MOCKupdateMealScheduleForUser);
@@ -68,15 +84,22 @@ router.put('/mealSchedule', protect, MOCKupdateMealScheduleForUser);
  *    {userInfoID: string,
  *     schedule:
  *       {Monday:
- *         {exercise: string,
- *          sets: num,
- *          reps: num,
- *          rest: num
- *          duration: num
- *          intensity: num}
+ *         "exercises": [
+ *            {
+ *              "exercise": "Barbell Squats",
+ *              "sets": 3,
+ *              "reps": 10,
+ *              "rest": 60,
+ *              "duration": null,
+ *              "intensity": 75
+ *            },
+ *            ...
+ *          ],
+ *          "total_calories": 523
+ *        },
  *        Tuesday:...
  *        Wednesday:...
- *        ...}}
+ *     }
  *     inputs: [string]}
  */
 router.post('/workoutSchedule', protect, MOCKcreateWorkoutSchedule);
@@ -94,15 +117,22 @@ router.post('/workoutSchedule', protect, MOCKcreateWorkoutSchedule);
  *    {userInfoID: string,
  *     schedule:
  *       {Monday:
- *         {exercise: string,
- *          sets: num,
- *          reps: num,
- *          rest: num
- *          duration: num
- *          intensity: num}
+ *         "exercises": [
+ *            {
+ *              "exercise": "Barbell Squats",
+ *              "sets": 3,
+ *              "reps": 10,
+ *              "rest": 60,
+ *              "duration": null,
+ *              "intensity": 75
+ *            },
+ *            ...
+ *          ],
+ *          "total_calories": 523
+ *        },
  *        Tuesday:...
  *        Wednesday:...
- *        ...}}
+ *     }
  *     inputs: [string]}
  */
 router.put('/workoutSchedule', protect, MOCKupdateUserWorkoutScheduleByUserID);

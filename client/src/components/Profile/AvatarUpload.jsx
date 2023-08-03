@@ -113,6 +113,7 @@ export default function AvatarUpload() {
           color="primary"
           onClick={handleClick}
           component="span"
+          sx={{ mt: 2 }}
         >
           {imageExists ? <DeleteIcon /> : <UploadIcon />}
           {imageExists ? 'Delete' : 'Upload'}
