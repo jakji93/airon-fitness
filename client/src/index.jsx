@@ -44,6 +44,10 @@ const router = createBrowserRouter([
         path: 'workout',
         element: <Workout />,
       },
+      {
+        path: 'about',
+        element: <About />,
+      },
     ],
   },
   {

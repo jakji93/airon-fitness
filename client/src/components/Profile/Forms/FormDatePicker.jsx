@@ -1,4 +1,5 @@
 import { Grid } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { DatePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
@@ -21,6 +22,8 @@ export default function FormDatePicker(props) {
     setValue,
   } = props;
 
+  const theme = useTheme();
+
   return (
     <>
       {showTitleLabel && (
@@ -40,6 +43,7 @@ export default function FormDatePicker(props) {
           disableFuture={disableFuture}
           sx={{
             width: '100%',
+            backgroundColor: theme.palette.secondary.light,
           }}
         />
       </Grid>

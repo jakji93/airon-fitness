@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const WorkoutSchema = require('../../models/WorkoutScheduleModel');
 const { workoutScheduleMock } = require('../../mock/WorkoutScheduleMockData');
+const { sleep } = require('../../utils/util');
 
 /**
  * @desc    use mock data to create workout schedule (NO OPENAI CALL)
@@ -75,6 +76,7 @@ const MOCKupdateUserWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
   const savedWorkoutSchedule = await workoutSchedule.save();
 
   if (savedWorkoutSchedule) {
+    await sleep(10000);
     res.status(200).json({
       userInfoID: savedWorkoutSchedule.id,
       schedule: savedWorkoutSchedule.schedule,
