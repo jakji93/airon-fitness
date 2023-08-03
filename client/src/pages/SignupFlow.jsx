@@ -69,6 +69,10 @@ export default function SignupFlow() {
               '& .MuiStepLabel-root .Mui-active .MuiStepIcon-text': {
                 fill: 'secondary.light', // circle's number (ACTIVE)
               },
+              '& .MuiStepLabel-label.Mui-disabled.MuiStepLabel-alternativeLabel':
+              {
+                color: 'secondary.light', // Just text label (INACTIVE)
+              },
             }}
           >
             <StepLabel>{label}</StepLabel>
