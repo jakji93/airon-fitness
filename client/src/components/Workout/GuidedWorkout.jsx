@@ -1,5 +1,5 @@
 import {
-  Box, Button, Typography,
+  Box, Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -117,13 +117,6 @@ export default function GuidedWorkout({ sessionDay, workoutData, onNext }) {
           No workout for this day.
         </Typography>
       )}
-
-      <Button
-        variant="outlined"
-        sx={styles.workoutSelectButton}
-      >
-        SKIP EXERCISE
-      </Button>
     </Box>
 
   );

@@ -1,5 +1,5 @@
 import {
-  Box,
+  Box, Typography, Button,
 } from '@mui/material';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -20,6 +20,25 @@ const styles = {
     justifyContent: 'center', // Vertically center the content
     alignItems: 'center', // Horizontally center the content
     minHeight: '95vh',
+  },
+  workoutSelectButton: {
+    fontWeight: 'normal',
+    color: theme.palette.secondary.light,
+    borderColor: '#B5936B',
+    backgroundColor: theme.palette.secondary.dark,
+    marginTop: '25px',
+    marginBottom: '25px',
+    padding: '15px',
+    fontSize: '0.75vw',
+    width: '15vw',
+    position: 'relative', // Set the position to relative for the pseudo-element
+    overflow: 'hidden', // Hide any overflow from the pseudo-element
+    '&:hover': {
+      color: theme.palette.secondary.light,
+      borderColor: '#F3F3F0',
+      backgroundColor: theme.palette.secondary.main,
+      transition: 'background-color 0.5s ease',
+    },
   },
 };
 
@@ -77,7 +96,16 @@ export default function Workout() {
         </Box>
       ) : (
         <Box sx={styles.container}>
-          <p> please generate schedules </p>
+          <Typography sx={{ fontSize: '3vw', color: theme.palette.secondary.main }}>
+            Please generate your workouts on the home page first.
+          </Typography>
+          <Button
+            href="/app"
+            variant="outlined"
+            sx={styles.workoutSelectButton}
+          >
+            BACK TO HOME
+          </Button>
         </Box>
       )}
     </Box>
