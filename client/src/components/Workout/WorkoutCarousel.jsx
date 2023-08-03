@@ -42,7 +42,7 @@ const styles = {
     fontSize: '4vw',
     paddingTop: '20px',
   },
-  workoutSelectButton: {
+  workoutButton: {
     fontWeight: 'normal',
     color: theme.palette.secondary.light,
     borderColor: '#B5936B',
@@ -79,7 +79,7 @@ function Item({ handleDay, workout, onNext }) {
             handleDay(day);
           }}
           variant="outlined"
-          sx={styles.workoutSelectButton}
+          sx={styles.workoutButton}
         >
           START WORKOUT
         </Button>

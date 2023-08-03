@@ -38,7 +38,7 @@ const styles = {
     flex: '1',
     maxWidth: '100%',
   },
-  workoutSelectButton: {
+  workoutButton: {
     fontWeight: 'normal',
     color: theme.palette.secondary.light,
     borderColor: '#B5936B',
@@ -267,14 +267,14 @@ export default function GuidedExercise({
             <Button
               onClick={() => onNext(WorkoutStatesEnum.SELECT_WORKOUT)}
               variant="outlined"
-              sx={styles.workoutSelectButton}
+              sx={styles.workoutButton}
             >
               CHOOSE ANOTHER WORKOUT
             </Button>
             <Button
               href="/app"
               variant="outlined"
-              sx={styles.workoutSelectButton}
+              sx={styles.workoutButton}
             >
               BACK TO HOME
             </Button>
@@ -283,7 +283,7 @@ export default function GuidedExercise({
           <Box sx={styles.bottomRowButtonsContainer}>
             <Button
               variant="outlined"
-              sx={styles.workoutSelectButton}
+              sx={styles.workoutButton}
               onClick={() => {
                 handleFinishedSet();
                 handleTimerStart();
@@ -294,7 +294,7 @@ export default function GuidedExercise({
             <Button
               variant="outlined"
               onClick={handleTimerStart}
-              sx={[styles.workoutSelectButton, styles.timerButton]}
+              sx={[styles.workoutButton, styles.timerButton]}
             >
               <Typography sx={{ fontSize: '2vw' }}>
                 {restTimer}
@@ -306,7 +306,7 @@ export default function GuidedExercise({
             <Button
               variant="outlined"
               onClick={handleTimerAddition}
-              sx={styles.workoutSelectButton}
+              sx={styles.workoutButton}
             >
               +15 SECONDS
             </Button>

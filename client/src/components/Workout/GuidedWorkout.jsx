@@ -39,7 +39,7 @@ const styles = {
     color: theme.palette.secondary.dark,
     fontSize: '4vw',
   },
-  workoutSelectButton: {
+  workoutButton: {
     fontWeight: 'normal',
     color: theme.palette.secondary.light,
     borderColor: '#B5936B',

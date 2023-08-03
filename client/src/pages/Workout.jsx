@@ -21,7 +21,7 @@ const styles = {
     alignItems: 'center', // Horizontally center the content
     minHeight: '95vh',
   },
-  workoutSelectButton: {
+  workoutButton: {
     fontWeight: 'normal',
     color: theme.palette.secondary.light,
     borderColor: '#B5936B',
@@ -102,7 +102,7 @@ export default function Workout() {
           <Button
             href="/app"
             variant="outlined"
-            sx={styles.workoutSelectButton}
+            sx={styles.workoutButton}
           >
             BACK TO HOME
           </Button>
