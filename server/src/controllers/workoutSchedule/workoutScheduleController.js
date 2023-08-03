@@ -54,13 +54,17 @@ const generateWorkoutScheduleHelper = async (id) => {
   const userData = userUtil.generateUserObject(userProfile);
   const generatedSchedule = await openAI.generateWorkoutSchedule(userData);
 
-  const workoutSchedule = await WorkoutSchema.create({
-    userInfoID: id,
-    schedule: JSON.parse(generatedSchedule),
-    inputs: [],
-  });
-
-  return workoutSchedule;
+  try {
+    const parsedSchedule = JSON.parse(generatedSchedule);
+    const workoutSchedule = await WorkoutSchema.create({
+      userInfoID: id,
+      schedule: parsedSchedule,
+      inputs: [],
+    });
+    return workoutSchedule;
+  } catch {
+    return false;
+  }
 };
 
 /**
@@ -110,16 +114,21 @@ const updateUserWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
     schedule,
   );
 
-  workoutSchedule.schedule = JSON.parse(updatedWorkoutSchedule);
-  workoutSchedule.inputs = updatedInputs;
-  const savedWorkoutSchedule = await workoutSchedule.save();
+  try {
+    const parsedSchedule = JSON.parse(updatedWorkoutSchedule);
+    workoutSchedule.schedule = parsedSchedule;
+    workoutSchedule.inputs = updatedInputs;
+    const savedWorkoutSchedule = await workoutSchedule.save();
 
-  if (savedWorkoutSchedule) {
-    res.status(200).json({
-      userInfoID: savedWorkoutSchedule.id,
-      schedule: savedWorkoutSchedule.schedule,
-      inputs: savedWorkoutSchedule.inputs,
-    });
+    if (savedWorkoutSchedule) {
+      res.status(200).json({
+        userInfoID: savedWorkoutSchedule.id,
+        schedule: savedWorkoutSchedule.schedule,
+        inputs: savedWorkoutSchedule.inputs,
+      });
+    }
+  } catch {
+    res.status(400).json({ message: 'invalid workout schedule data' });
   }
 });
 
