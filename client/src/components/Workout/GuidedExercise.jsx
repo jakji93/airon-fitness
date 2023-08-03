@@ -6,6 +6,8 @@ import {
 // import PropTypes from 'prop-types';
 import React from 'react';
 
+// import CalorieDial from './CalorieDial';
+import CalorieDial from './CalorieDial';
 import WorkoutStatesEnum from './WorkoutFlowStates';
 // import { WorkoutScheduleShape } from './WorkoutPropTypes';
 import theme from '../../theme';
@@ -121,6 +123,9 @@ export default function GuidedExercise({
 
   const open = Boolean(anchorEl);
 
+  // Calorie counter state
+  const [calorieCount, setCalorieCount] = React.useState(0);
+
   // Set count state
   const [currentExerciseSetCount, setCurrentExerciseSetCount] = React.useState(null);
 
@@ -128,17 +133,19 @@ export default function GuidedExercise({
     setCurrentExerciseSetCount(n);
   };
 
+  React.useEffect(() => {
+    initExerciseSetCount(e.sets);
+  }, [e.sets]);
+
+  // Set and Calorie shared handler
   const handleFinishedSet = () => {
     if (currentExerciseSetCount > 0) {
       setCurrentExerciseSetCount((prevCount) => prevCount - 1);
+      setCalorieCount((prevCount) => prevCount + (e.calories / e.sets));
     } else {
       openToast('info', 'All sets finished. Go next!');
     }
   };
-
-  React.useEffect(() => {
-    initExerciseSetCount(e.sets);
-  }, [e.sets]);
 
   // Rest timer state
   const [restTimer, setRestTimer] = React.useState(e.rest);
@@ -291,14 +298,13 @@ export default function GuidedExercise({
         >
           <Paper sx={[styles.circularDataDisplay, styles.circularDataCalories]}>
             <Typography sx={{ fontSize: 'clamp(20px, 6vw, 90px)' }}>
-              {e.calories}
+              <CalorieDial maxValue={calorieCount} />
             </Typography>
           </Paper>
           <Typography>
-            Calories
+            Calories Burnt
           </Typography>
         </Box>
-
       </Box>
 
       <Box sx={{
