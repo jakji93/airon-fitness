@@ -77,8 +77,8 @@ const styles = {
     marginBottom: '25px',
     padding: '15px',
     fontSize: '0.75vw',
-    width: 'clamp(100px, 7.5vw, 200px)',
-    height: 'clamp(100px, 7.5vw, 200px)',
+    width: 'clamp(100px, 5vw, 200px)',
+    height: 'clamp(100px, 5vw, 200px)',
     position: 'relative', // Set the position to relative for the pseudo-element
     overflow: 'hidden', // Hide any overflow from the pseudo-element
     '&:hover': {
@@ -270,7 +270,7 @@ export default function GuidedExercise({
               {currentExerciseSetCount}
             </Typography>
           </Paper>
-          <Typography>
+          <Typography sx={{ fontSize: 'clamp(15px, 0.5vw, 30px)' }}>
             Sets Remaining
           </Typography>
         </Box>
@@ -288,7 +288,7 @@ export default function GuidedExercise({
               {e.reps}
             </Typography>
           </Paper>
-          <Typography>
+          <Typography sx={{ fontSize: 'clamp(15px, 0.5vw, 30px)' }}>
             Reps
           </Typography>
         </Box>
@@ -306,7 +306,7 @@ export default function GuidedExercise({
               <CalorieDial maxValue={calorieCount} />
             </Typography>
           </Paper>
-          <Typography>
+          <Typography sx={{ fontSize: 'clamp(15px, 0.5vw, 30px)' }}>
             Calories Burnt
           </Typography>
         </Box>
@@ -360,10 +360,10 @@ export default function GuidedExercise({
               onClick={handleTimerStart}
               sx={styles.workoutTimerButton}
             >
-              <Typography sx={{ fontSize: '3vw' }}>
+              <Typography sx={{ fontSize: '2vw' }}>
                 {restTimer}
               </Typography>
-              <Typography sx={{ fontSize: '1vw' }}>
+              <Typography sx={{ fontSize: '0.5vw' }}>
                 Rest Timer
               </Typography>
             </Button>

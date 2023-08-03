@@ -86,6 +86,7 @@ export default function GuidedWorkout({ sessionDay, workoutData, onNext }) {
         <Carousel
           sx={styles.carouselContainer}
           autoPlay={false}
+          navButtonsAlwaysVisible
           indicatorIconButtonProps={{
             style: {
               color: theme.palette.secondary.main,
