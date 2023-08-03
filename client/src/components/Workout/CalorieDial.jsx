@@ -7,7 +7,6 @@ function CalorieDial({ maxValue }) {
     from: { number: 0 },
     number: maxValue,
     config: { mass: 1, tension: 20, duration: 1000 },
-    // onRest: () => reset(), // Reset the animation when it's finished
   });
 
   return <animated.div>{number.interpolate((val) => Math.floor(val))}</animated.div>;
