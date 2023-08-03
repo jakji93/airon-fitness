@@ -20,7 +20,7 @@ const styles = {
     alignItems: 'center', // Horizontally center the content
   },
   carouselContainer: {
-    width: '75vw',
+    width: '65vw',
   },
   typewriterContainer: {
     fontFamily: theme.typography.fontFamily,
@@ -86,7 +86,7 @@ export default function GuidedWorkout({ sessionDay, workoutData, onNext }) {
         <Carousel
           sx={styles.carouselContainer}
           autoPlay={false}
-          navButtonsAlwaysVisible
+          navButtonsAlwaysVisible={false}
           indicatorIconButtonProps={{
             style: {
               color: theme.palette.secondary.main,
