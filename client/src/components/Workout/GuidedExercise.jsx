@@ -51,6 +51,7 @@ const styles = {
     fontWeight: 'normal',
     color: theme.palette.secondary.light,
     borderColor: '#B5936B',
+    borderRadius: '10px',
     backgroundColor: theme.palette.secondary.dark,
     marginTop: '25px',
     marginBottom: '25px',
@@ -70,20 +71,24 @@ const styles = {
     fontWeight: 'normal',
     color: theme.palette.secondary.light,
     borderColor: '#B5936B',
-    backgroundColor: theme.palette.secondary.dark,
+    borderRadius: '10px',
+    backgroundColor: theme.palette.secondary.main,
     marginTop: '25px',
     marginBottom: '25px',
     padding: '15px',
     fontSize: '0.75vw',
-    width: '15vw',
+    width: 'clamp(100px, 7.5vw, 200px)',
+    height: 'clamp(100px, 7.5vw, 200px)',
     position: 'relative', // Set the position to relative for the pseudo-element
     overflow: 'hidden', // Hide any overflow from the pseudo-element
     '&:hover': {
       color: theme.palette.secondary.light,
       borderColor: '#F3F3F0',
-      backgroundColor: theme.palette.secondary.main,
+      backgroundColor: theme.palette.secondary.dark,
       transition: 'background-color 0.5s ease',
     },
+    display: 'flex',
+    flexDirection: 'column',
   },
   circularDataDisplay: {
     color: theme.palette.secondary.light,
@@ -335,6 +340,8 @@ export default function GuidedExercise({
         ) : (
           <Box sx={{
             display: 'flex',
+            alignItems: 'center',
+            padding: '10px',
             gap: '1vw',
           }}
           >
@@ -351,9 +358,14 @@ export default function GuidedExercise({
             <Button
               variant="outlined"
               onClick={handleTimerStart}
-              sx={styles.workoutSelectButton}
+              sx={styles.workoutTimerButton}
             >
-              {pause ? `START ${restTimer} SECONDS REST` : `${restTimer} s`}
+              <Typography sx={{ fontSize: '3vw' }}>
+                {restTimer}
+              </Typography>
+              <Typography sx={{ fontSize: '1vw' }}>
+                Rest Timer
+              </Typography>
             </Button>
             <Button
               variant="outlined"
