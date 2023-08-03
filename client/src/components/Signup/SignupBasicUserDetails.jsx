@@ -1,6 +1,7 @@
 import {
   Grid, Button,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import dayjs from 'dayjs';
 import { useFormik } from 'formik';
 import React, { useContext, useEffect } from 'react';
@@ -33,6 +34,7 @@ const validationSchema = yup.object({
 export default function SignupBasicUserDetails() {
   const openToast = useContext(ToastContext);
   const dispatch = useDispatch();
+  const theme = useTheme();
   const signup = useSelector((state) => state.signup);
   const initialValues = {
     gender: signup.user.gender ?? '',
@@ -150,6 +152,7 @@ export default function SignupBasicUserDetails() {
           type="submit"
           variant="contained"
           fullWidth
+          sx={{ backgroundColor: theme.palette.secondary.main }}
         >
           Next
         </Button>

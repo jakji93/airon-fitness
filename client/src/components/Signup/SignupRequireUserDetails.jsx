@@ -1,6 +1,7 @@
 import {
   Grid, Button,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -45,6 +46,7 @@ const validationSchema = yup.object({
 
 export default function SignupRequireUserDetails() {
   const dispatch = useDispatch();
+  const theme = useTheme();
   const signup = useSelector((state) => state.signup);
   const initialValues = {
     weight: signup.user.weight ?? '',
@@ -179,6 +181,7 @@ export default function SignupRequireUserDetails() {
           onClick={handleBack}
           variant="contained"
           fullWidth
+          sx={{ backgroundColor: theme.palette.secondary.main }}
         >
           Back
         </Button>
@@ -192,6 +195,7 @@ export default function SignupRequireUserDetails() {
           type="submit"
           variant="contained"
           fullWidth
+          sx={{ backgroundColor: theme.palette.secondary.main }}
         >
           Next
         </Button>
