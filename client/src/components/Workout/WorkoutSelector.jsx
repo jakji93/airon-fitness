@@ -72,10 +72,6 @@ const styles = {
   },
 };
 
-// const isWorkoutDay = () => {
-
-// };
-
 export default function WorkoutSelector({ currentDay, workoutData, onNext }) {
   return (
     <Box sx={styles.container}>

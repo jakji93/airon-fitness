@@ -9,6 +9,7 @@ import React from 'react';
 import WorkoutStatesEnum from './WorkoutFlowStates';
 // import { WorkoutScheduleShape } from './WorkoutPropTypes';
 import theme from '../../theme';
+import { ToastContext } from '../common/context/ToastContextProvider';
 
 const styles = {
   container: {
@@ -37,6 +38,10 @@ const styles = {
     alignItems: 'center', // Horizontally center the content
   },
   exerciseTypography: {
+    paddingTop: '15px',
+    paddingBottom: '15px',
+    paddingLeft: '7.5px',
+    paddingRight: '7.5px',
     color: theme.palette.secondary.dark,
     fontSize: '4vw',
   },
@@ -59,19 +64,50 @@ const styles = {
       transition: 'background-color 0.5s ease',
     },
   },
+  workoutTimerButton: {
+    fontWeight: 'normal',
+    color: theme.palette.secondary.light,
+    borderColor: '#B5936B',
+    backgroundColor: theme.palette.secondary.dark,
+    marginTop: '25px',
+    marginBottom: '25px',
+    padding: '15px',
+    fontSize: '0.75vw',
+    width: '15vw',
+    position: 'relative', // Set the position to relative for the pseudo-element
+    overflow: 'hidden', // Hide any overflow from the pseudo-element
+    '&:hover': {
+      color: theme.palette.secondary.light,
+      borderColor: '#F3F3F0',
+      backgroundColor: theme.palette.secondary.main,
+      transition: 'background-color 0.5s ease',
+    },
+  },
   circularDataDisplay: {
-    width: '100px',
-    height: '100px',
+    color: theme.palette.secondary.light,
+    width: 'clamp(100px, 15vw, 200px)',
+    height: 'clamp(100px, 15vw, 200px)',
     borderRadius: '50%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  circularDataSets: {
+    backgroundColor: '#6C5B7B',
+  },
+  circularDataReps: {
+    backgroundColor: '#C06C84',
+  },
+  circularDataCalories: {
+    backgroundColor: '#F67280',
   },
 };
 
 export default function GuidedExercise({
   e, onNext, isLastExercise,
 }) {
+  const openToast = React.useContext(ToastContext);
+
   // Popover state
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -93,7 +129,11 @@ export default function GuidedExercise({
   };
 
   const handleFinishedSet = () => {
-    setCurrentExerciseSetCount(currentExerciseSetCount - 1);
+    if (currentExerciseSetCount > 0) {
+      setCurrentExerciseSetCount((prevCount) => prevCount - 1);
+    } else {
+      openToast('info', 'All sets finished. Go next!');
+    }
   };
 
   React.useEffect(() => {
@@ -127,13 +167,17 @@ export default function GuidedExercise({
     return () => clearInterval(intervalRef.current);
   }, [pause, restTimer]);
 
-  const handleTimerClick = () => {
+  const handleTimerStart = () => {
     if (restTimer === 0) {
       setPause(true);
       setRestTimer(initialRestTimer.current);
     } else {
       setPause((prev) => !prev);
     }
+  };
+
+  const handleTimerAddition = () => {
+    setRestTimer((prev) => prev + 15);
   };
 
   return (
@@ -155,14 +199,16 @@ export default function GuidedExercise({
         <Typography sx={styles.exerciseTypography}>
           {e.exercise}
         </Typography>
-        <Typography
+        <InfoIcon
           aria-owns={open ? 'mouse-over-popover' : undefined}
           aria-haspopup="true"
           onMouseEnter={handlePopoverOpen}
           onMouseLeave={handlePopoverClose}
-        >
-          <InfoIcon />
-        </Typography>
+          sx={{
+            height: 'clamp(25px, 3vw, 50px)',
+            width: 'clamp(25px, 3vw, 50px)',
+          }}
+        />
         <Popover
           id="mouse-over-popover"
           sx={{
@@ -181,27 +227,78 @@ export default function GuidedExercise({
           onClose={handlePopoverClose}
           disableRestoreFocus
         >
-          <Typography sx={{ p: 1 }}>
-            <pre>duration: {JSON.stringify(e.duration, null, 2)}</pre>
-            <pre>intensity: {JSON.stringify(e.intensity, null, 2)}</pre>
-          </Typography>
+          <Box sx={{ padding: '10px' }}>
+            <Typography sx={{ fontSize: 'clamp(15px, 1vw, 20px)' }}>
+              Recommended
+              Duration: {e.duration} minutes
+            </Typography>
+            <Typography sx={{ fontSize: 'clamp(15px, 1vw, 20px)' }}>
+              Recommended Intensity: {e.intensity}% effort
+            </Typography>
+          </Box>
         </Popover>
       </Box>
 
       <Box sx={{
+        color: theme.palette.secondary.dark,
         display: 'flex',
         gap: '50px',
       }}
       >
-        <Paper sx={styles.circularDataDisplay}>
-          <pre>sets remaining: {currentExerciseSetCount}</pre>
-        </Paper>
-        <Paper sx={styles.circularDataDisplay}>
-          <pre>reps: {JSON.stringify(e.reps, null, 2)}</pre>
-        </Paper>
-        <Paper sx={styles.circularDataDisplay}>
-          <pre>calories: {JSON.stringify(e.calories, null, 2)}</pre>
-        </Paper>
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '0.5vh',
+        }}
+        >
+          <Paper sx={[styles.circularDataDisplay, styles.circularDataSets]}>
+            <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
+              {currentExerciseSetCount}
+            </Typography>
+          </Paper>
+          <Typography>
+            Sets Remaining
+          </Typography>
+        </Box>
+
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '0.5vh',
+        }}
+        >
+          <Paper sx={[styles.circularDataDisplay, styles.circularDataReps]}>
+            <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
+              {e.reps}
+            </Typography>
+          </Paper>
+          <Typography>
+            Reps
+          </Typography>
+        </Box>
+
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '0.5vh',
+        }}
+        >
+          <Paper sx={[styles.circularDataDisplay, styles.circularDataCalories]}>
+            <Typography sx={{ fontSize: 'clamp(20px, 6vw, 90px)' }}>
+              {e.calories}
+            </Typography>
+          </Paper>
+          <Typography>
+            Calories
+          </Typography>
+        </Box>
+
       </Box>
 
       <Box sx={{
@@ -209,41 +306,55 @@ export default function GuidedExercise({
       }}
       >
         {(isLastExercise && (currentExerciseSetCount === 0)) ? (
-          <Paper>
-            <Button onClick={() => onNext(WorkoutStatesEnum.SELECT_WORKOUT)} variant="outlined">
+          <Box sx={{
+            display: 'flex',
+            gap: '50px',
+          }}
+          >
+            <Button
+              onClick={() => onNext(WorkoutStatesEnum.SELECT_WORKOUT)}
+              variant="outlined"
+              sx={styles.workoutSelectButton}
+            >
               CHOOSE ANOTHER WORKOUT
             </Button>
-            <Button href="/app" variant="outlined">
+            <Button
+              href="/app"
+              variant="outlined"
+              sx={styles.workoutSelectButton}
+            >
               BACK TO HOME
             </Button>
-          </Paper>
+          </Box>
         ) : (
-          <Box>
+          <Box sx={{
+            display: 'flex',
+            gap: '1vw',
+          }}
+          >
             <Button
               variant="outlined"
               sx={styles.workoutSelectButton}
+              onClick={() => {
+                handleFinishedSet();
+                handleTimerStart();
+              }}
             >
-              RESET REST
+              FINISH SET
             </Button>
             <Button
               variant="outlined"
-              onClick={handleTimerClick}
+              onClick={handleTimerStart}
               sx={styles.workoutSelectButton}
             >
-              {pause ? `Rest for ${restTimer} seconds` : `${restTimer} s`}
+              {pause ? `START ${restTimer} SECONDS REST` : `${restTimer} s`}
             </Button>
             <Button
               variant="outlined"
+              onClick={handleTimerAddition}
               sx={styles.workoutSelectButton}
             >
               +15 SECONDS
-            </Button>
-            <Button
-              variant="outlined"
-              sx={styles.workoutSelectButton}
-              onClick={handleFinishedSet}
-            >
-              Finish Set
             </Button>
           </Box>
 
