@@ -1,8 +1,10 @@
+/* eslint-disable no-await-in-loop */
 const asyncHandler = require('express-async-handler');
 const openAI = require('../../utils/openaiUtil');
 const userUtil = require('../../utils/userUtil');
 const MealSchema = require('../../models/MealScheduleModel');
 const UserProfile = require('../../models/UserProfileModel');
+const { sleep } = require('../../utils/util');
 
 /**
  * @desc    get meal schedule for user (userID)
@@ -10,11 +12,18 @@ const UserProfile = require('../../models/UserProfileModel');
  * @access  Private
  */
 const getMealScheduleByUser = asyncHandler(async (req, res) => {
-  const userMealSchedule = await MealSchema
+  let userMealSchedule = await MealSchema
     .findOne({ userInfoID: req.user._id })
     .sort({ _id: -1 });
 
-  if (!userMealSchedule || !userMealSchedule.schedule) {
+  while (userMealSchedule.isLoading) {
+    sleep(3000);
+    userMealSchedule = await MealSchema
+      .findOne({ userInfoID: req.user._id })
+      .sort({ _id: -1 });
+  }
+
+  if (!userMealSchedule?.schedule) {
     res.status(404).json({ message: 'Meal schedule not found' });
   } else {
     const { userInfoID, schedule, inputs } = userMealSchedule;
@@ -32,16 +41,21 @@ const getMealScheduleByUser = asyncHandler(async (req, res) => {
 const generateMealScheduleHelper = async (id) => {
   const userProfile = await UserProfile.findOne({ userInfoID: id });
 
+  const mealSchedule = await MealSchema.create({
+    userInfoID: id,
+    schedule: {},
+    inputs: [],
+    isLoading: true,
+  });
+
   const userData = userUtil.generateUserObject(userProfile);
   const generatedSchedule = await openAI.generateMealSchedule(userData);
 
-  const mealSchedule = await MealSchema.create({
-    userInfoID: id,
-    schedule: JSON.parse(generatedSchedule),
-    inputs: [],
-  });
+  mealSchedule.schedule = JSON.parse(generatedSchedule);
+  mealSchedule.isLoading = false;
+  const savedSchedule = await mealSchedule.save();
 
-  return mealSchedule;
+  return savedSchedule;
 };
 
 /**
@@ -56,7 +70,7 @@ const createMealScheduleForUser = asyncHandler(async (req, res) => {
 
   if (mealSchedule) {
     res.status(201).json({
-      userInfoID: mealSchedule.id,
+      userInfoID: req.user._id,
       schedule: mealSchedule.schedule,
       inputs: mealSchedule.inputs,
     });

@@ -1,8 +1,10 @@
+/* eslint-disable no-await-in-loop */
 const asyncHandler = require('express-async-handler');
 const openAI = require('../../utils/openaiUtil');
 const WorkoutSchema = require('../../models/WorkoutScheduleModel');
 const UserProfile = require('../../models/UserProfileModel');
 const userUtil = require('../../utils/userUtil');
+const { sleep } = require('../../utils/util');
 
 /**
  * @desc    get latest workout schedule for user (userID)
@@ -10,9 +12,16 @@ const userUtil = require('../../utils/userUtil');
  * @access  Private
  */
 const getLatestWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
-  const userWorkoutSchedule = await WorkoutSchema.findOne(
+  let userWorkoutSchedule = await WorkoutSchema.findOne(
     { userInfoID: req.user._id },
   ).sort({ _id: -1 });
+
+  while (userWorkoutSchedule.isLoading) {
+    sleep(3000);
+    userWorkoutSchedule = await WorkoutSchema
+      .findOne({ userInfoID: req.user._id })
+      .sort({ _id: -1 });
+  }
 
   if (!userWorkoutSchedule || !userWorkoutSchedule.schedule) {
     res.status(404).json({ message: 'Workout schedule not found' });
@@ -51,16 +60,21 @@ const getAllWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
 const generateWorkoutScheduleHelper = async (id) => {
   const userProfile = await UserProfile.findOne({ userInfoID: id });
 
+  const workoutSchedule = await WorkoutSchema.create({
+    userInfoID: id,
+    schedule: {},
+    inputs: [],
+    isLoading: true,
+  });
+
   const userData = userUtil.generateUserObject(userProfile);
   const generatedSchedule = await openAI.generateWorkoutSchedule(userData);
 
-  const workoutSchedule = await WorkoutSchema.create({
-    userInfoID: id,
-    schedule: JSON.parse(generatedSchedule),
-    inputs: [],
-  });
+  workoutSchedule.schedule = JSON.parse(generatedSchedule);
+  workoutSchedule.isLoading = false;
+  const savedSchedule = await workoutSchedule.save();
 
-  return workoutSchedule;
+  return savedSchedule;
 };
 
 /**
@@ -75,7 +89,7 @@ const createWorkoutSchedule = asyncHandler(async (req, res) => {
 
   if (workoutSchedule) {
     res.status(201).json({
-      userInfoID: workoutSchedule.id,
+      userInfoID: req.user._id,
       schedule: workoutSchedule.schedule,
       inputs: workoutSchedule.inputs,
     });
