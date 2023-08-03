@@ -55,7 +55,7 @@ export default function ScheduleItem({ details, token }) {
             }}
             >
               {
-                details ? Object.values(details.schedule).map((s, idx) => <ScheduleDetails details={s} day={idx} token={token} />) : ''
+                details ? Object.values(details.schedule).map((s, idx) => <ScheduleDetails key={`details-${idx + 1}`} details={s} day={idx} token={token} />) : ''
               }
             </Box>
           ) : ''
@@ -66,6 +66,6 @@ export default function ScheduleItem({ details, token }) {
 
 ScheduleItem.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  details: PropTypes.arrayOf(PropTypes.object).isRequired,
+  details: PropTypes.object.isRequired,
   token: PropTypes.number.isRequired,
 };

@@ -4,28 +4,45 @@ import React from 'react';
 
 export default function ScheduleDetails({ details, day }) {
   const getContent = (content, idx) => {
-    if (typeof content[1] === 'object') {
+    if (content[0] === 'nutrition_totals') {
       return (
-        <p key={`details-${idx}`}>
-          {`${content[1].exercise}: ${content[1].sets} sets of `
-          + `${content[1].reps} reps with ${content[1].rest} seconds of rest`}
-        </p>
+        <p key={content[0]}>Nutrition Information: {`${content[1].calories} Calories, ${content[1].carbohydrates}g Carbohydrates, ${content[1].fat}g Fat, ${content[1].protein}g Protein`}</p>
       );
     }
+
+    if (content[0] === 'total_calories') {
+      return (
+        <p key={content[0]}>Calories Burned: {content[1]}</p>
+      );
+    }
+
+    if (typeof content[1] === 'object') {
+      return (
+        content[1].map((c) => (
+          <div key={c.exercise}>
+            <p key={`details-${idx}`}>
+              {`${c.exercise}: ${c.sets} sets of `
+              + `${c.reps} reps with ${c.rest} seconds of rest`}
+            </p>
+          </div>
+        ))
+      );
+    }
+
     return (
-      <p key={`details-${idx}`}>
-        {content[0]}: {content[1]}
+      <p key={content[0]}>
+        {content[0].charAt(0).toUpperCase() + content[0].slice(1)}: {content[1]}
       </p>
     );
   };
 
   return (
-    <Box>
+    <Box key={`ScheduleDetails-${day}`}>
       <Typography variant="h4">
         Day {day + 1}
       </Typography>
       {
-        Object.entries(details).map((content, idx) => getContent(content, idx))
+        Object.entries(details).map((content, idx) => getContent(content, idx, details.length))
       }
     </Box>
   );
