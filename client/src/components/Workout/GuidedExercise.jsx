@@ -1,15 +1,13 @@
-/* eslint-disable react/prop-types */
 import InfoIcon from '@mui/icons-material/Info';
 import {
   Box, Button, Typography, Paper, Popover,
 } from '@mui/material';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React from 'react';
 
-// import CalorieDial from './CalorieDial';
 import CalorieDial from './CalorieDial';
 import WorkoutStatesEnum from './WorkoutFlowStates';
-// import { WorkoutScheduleShape } from './WorkoutPropTypes';
+import { ExerciseShape } from './WorkoutPropTypes';
 import theme from '../../theme';
 import { ToastContext } from '../common/context/ToastContextProvider';
 
@@ -18,9 +16,9 @@ const styles = {
     backgroundColor: theme.palette.secondary.light,
     color: theme.palette.secondary.main,
     display: 'flex',
-    flexDirection: 'column', // Arrange children vertically
-    justifyContent: 'center', // Vertically center the content
-    alignItems: 'center', // Horizontally center the content
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   topRowTopographyContainer: {
     display: 'flex',
@@ -319,4 +317,7 @@ export default function GuidedExercise({
 }
 
 GuidedExercise.propTypes = {
+  e: ExerciseShape.isRequired,
+  onNext: PropTypes.func.isRequired,
+  isLastExercise: PropTypes.bool.isRequired,
 };

@@ -17,9 +17,9 @@ const styles = {
     backgroundColor: theme.palette.secondary.dark,
     flexGrow: 1,
     display: 'flex',
-    flexDirection: 'column', // Arrange children vertically
-    justifyContent: 'center', // Vertically center the content
-    alignItems: 'center', // Horizontally center the content
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   carouselContainer: {
     width: '75vw',
@@ -33,9 +33,9 @@ const styles = {
   },
   paperContainer: {
     display: 'flex',
-    flexDirection: 'column', // Arrange children vertically
-    justifyContent: 'center', // Vertically center the content
-    alignItems: 'center', // Horizontally center the content
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   dayTypography: {
     color: theme.palette.secondary.dark,

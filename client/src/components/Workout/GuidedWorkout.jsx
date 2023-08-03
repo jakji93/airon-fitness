@@ -15,9 +15,9 @@ const styles = {
     backgroundColor: theme.palette.secondary.dark,
     flexGrow: 1,
     display: 'flex',
-    flexDirection: 'column', // Arrange children vertically
-    justifyContent: 'center', // Vertically center the content
-    alignItems: 'center', // Horizontally center the content
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   carouselContainer: {
     width: '70vw',
@@ -31,9 +31,9 @@ const styles = {
   },
   paperContainer: {
     display: 'flex',
-    flexDirection: 'column', // Arrange children vertically
-    justifyContent: 'center', // Vertically center the content
-    alignItems: 'center', // Horizontally center the content
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   exerciseTypography: {
     color: theme.palette.secondary.dark,
@@ -69,7 +69,6 @@ const styles = {
 };
 
 export default function GuidedWorkout({ sessionDay, workoutData, onNext }) {
-  // Extracting exercise data
   const workouts = Object.entries(workoutData.schedule)
     .map(([day, { exercises }]) => ({
       [day]: exercises,
