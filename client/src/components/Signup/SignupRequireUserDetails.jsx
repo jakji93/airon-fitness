@@ -9,6 +9,7 @@ import * as yup from 'yup';
 import {
   HEIGHT_UNITS,
   WEIGHT_UNITS, experienceOptions, goalsOptions,
+  weightUnitOptions, heightUnitOptions,
 } from '../../constants/BasicProfile';
 import { setSignup } from '../../reducers/Signup';
 import Form from '../Profile/Forms/Form';
@@ -49,7 +50,7 @@ export default function SignupRequireUserDetails() {
     weight: signup.user.weight ?? '',
     height: signup.user.height ?? '',
     weightUnit: signup.user.weightUnit ?? WEIGHT_UNITS.KG,
-    heightUnit: signup.user.heightUnit ?? HEIGHT_UNITS.IN,
+    heightUnit: signup.user.heightUnit ?? HEIGHT_UNITS.CM,
     experience: signup.user.experience ?? '',
     goals: signup.user.goals ?? [],
   };
@@ -103,7 +104,7 @@ export default function SignupRequireUserDetails() {
         label="Weight"
         showTitleLabel={false}
         type="number"
-        radioGroups={['lb', 'kg']}
+        radioGroups={weightUnitOptions}
         half
         value={formik.values.weight}
         onChange={formik.handleChange}
@@ -122,7 +123,7 @@ export default function SignupRequireUserDetails() {
         label="Height"
         showTitleLabel={false}
         type="number"
-        radioGroups={['cm', 'in']}
+        radioGroups={heightUnitOptions}
         half
         required
         radioId="heightUnit"
