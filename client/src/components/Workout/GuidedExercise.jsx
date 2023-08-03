@@ -150,8 +150,10 @@ export default function GuidedExercise({
   const initialRestTimer = React.useRef(e.rest);
   const intervalRef = React.useRef();
 
+  const MAX_TIMER_VALUE = 999;
+
   const decrementTimer = () => {
-    setRestTimer((prev) => prev - 1);
+    setRestTimer((prev) => (prev - 1 > 0 ? prev - 1 : 0));
     if (restTimer === 1) {
       clearInterval(intervalRef.current);
     }
@@ -180,7 +182,7 @@ export default function GuidedExercise({
   };
 
   const handleTimerAddition = () => {
-    setRestTimer((prev) => prev + 15);
+    setRestTimer((prev) => (prev + 15 < MAX_TIMER_VALUE ? prev + 15 : MAX_TIMER_VALUE));
   };
 
   return (
