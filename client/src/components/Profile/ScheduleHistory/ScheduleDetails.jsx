@@ -18,14 +18,26 @@ export default function ScheduleDetails({ details, day }) {
 
     if (typeof content[1] === 'object') {
       return (
-        content[1].map((c) => (
-          <div key={c.exercise}>
-            <p key={`details-${idx}`}>
-              {`${c.exercise}: ${c.sets} sets of `
+        content[1].map((c) => {
+          // if exercise lower-case is equal to rest, then return only a rest div
+          if (c.exercise.toLowerCase() === 'rest') {
+            return (
+              <div key={c.exercise}>
+                <p key={`details-${idx}`}>
+                  {`${c.exercise}`}
+                </p>
+              </div>
+            );
+          }
+          return (
+            <div key={c.exercise}>
+              <p key={`details-${idx}`}>
+                {`${c.exercise}: ${c.sets} sets of `
               + `${c.reps} reps with ${c.rest} seconds of rest`}
-            </p>
-          </div>
-        ))
+              </p>
+            </div>
+          );
+        })
       );
     }
 
