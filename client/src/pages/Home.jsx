@@ -1,26 +1,89 @@
 import { Grid } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useStore } from 'react-redux';
 
+import RelativeSpinner from '../components/common/RelativeSpinner';
 import ChatArea from '../components/Home/ChatArea/ChatArea';
 import TabbedScheduleView from '../components/Home/PlanView/TabbedScheduleView';
 import StatsView from '../components/Home/StatsView/StatsView';
 import WorkoutTable from '../components/Home/WorkoutTable';
+import { getWorkoutAndMealSchedule } from '../reducers/WorkoutAndMealSchedule';
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+  const store = useStore();
+
+  const getSchedules = async () => {
+    try {
+      setLoading(true);
+      await dispatch(getWorkoutAndMealSchedule());
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!store.workoutAndMealSchedule?.workoutSchedule
+      || !store.workoutAndMealSchedule?.mealSchedule) {
+      getSchedules();
+    }
+  }, []);
+
+  const animateTile = (delay) => ({
+    opacity: 0,
+    animation: `slideFadeIn 0.75s ease-in-out ${delay}s forwards`,
+
+    '@keyframes slideFadeIn': {
+      '0%': {
+        opacity: 0,
+        transform: 'translateY(20px)',
+      },
+      '100%': {
+        opacity: 1,
+        transform: 'translateY(0)',
+      },
+    },
+  });
+
   return (
-    <Grid container sx={{ p: 3 }} spacing={5}>
-      <Grid item xs={12} sm={6}>
-        <TabbedScheduleView />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <StatsView />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <WorkoutTable />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <ChatArea />
-      </Grid>
-    </Grid>
+    loading
+      ? <RelativeSpinner />
+      : (
+        <Grid container sx={{ p: 3 }} spacing={5}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            sx={animateTile(0)}
+          >
+            <TabbedScheduleView />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            sx={animateTile(0.15)}
+          >
+            <StatsView />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            sx={animateTile(0.30)}
+          >
+            <WorkoutTable />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            sx={animateTile(0.45)}
+          >
+            <ChatArea />
+          </Grid>
+        </Grid>
+      )
   );
 }

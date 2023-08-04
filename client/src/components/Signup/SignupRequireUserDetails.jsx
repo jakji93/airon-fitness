@@ -1,6 +1,7 @@
 import {
   Grid, Button,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +10,7 @@ import * as yup from 'yup';
 import {
   HEIGHT_UNITS,
   WEIGHT_UNITS, experienceOptions, goalsOptions,
+  weightUnitOptions, heightUnitOptions,
 } from '../../constants/BasicProfile';
 import { setSignup } from '../../reducers/Signup';
 import Form from '../Profile/Forms/Form';
@@ -44,12 +46,13 @@ const validationSchema = yup.object({
 
 export default function SignupRequireUserDetails() {
   const dispatch = useDispatch();
+  const theme = useTheme();
   const signup = useSelector((state) => state.signup);
   const initialValues = {
     weight: signup.user.weight ?? '',
     height: signup.user.height ?? '',
     weightUnit: signup.user.weightUnit ?? WEIGHT_UNITS.KG,
-    heightUnit: signup.user.heightUnit ?? HEIGHT_UNITS.IN,
+    heightUnit: signup.user.heightUnit ?? HEIGHT_UNITS.CM,
     experience: signup.user.experience ?? '',
     goals: signup.user.goals ?? [],
   };
@@ -103,7 +106,7 @@ export default function SignupRequireUserDetails() {
         label="Weight"
         showTitleLabel={false}
         type="number"
-        radioGroups={['lb', 'kg']}
+        radioGroups={weightUnitOptions}
         half
         value={formik.values.weight}
         onChange={formik.handleChange}
@@ -122,7 +125,7 @@ export default function SignupRequireUserDetails() {
         label="Height"
         showTitleLabel={false}
         type="number"
-        radioGroups={['cm', 'in']}
+        radioGroups={heightUnitOptions}
         half
         required
         radioId="heightUnit"
@@ -178,6 +181,7 @@ export default function SignupRequireUserDetails() {
           onClick={handleBack}
           variant="contained"
           fullWidth
+          sx={{ backgroundColor: theme.palette.secondary.main }}
         >
           Back
         </Button>
@@ -191,6 +195,7 @@ export default function SignupRequireUserDetails() {
           type="submit"
           variant="contained"
           fullWidth
+          sx={{ backgroundColor: theme.palette.secondary.main }}
         >
           Next
         </Button>

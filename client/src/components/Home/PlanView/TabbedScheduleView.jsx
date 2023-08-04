@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ExistingMealSchedule from './ExistingMealSchedule';
 import ExistingWorkoutSchedule from './ExistingWorkoutSchedule';
 import NoSchedule from './NoSchedule';
-import { getWorkoutAndMealSchedule, resetWorkoutAndMealScheduleStates } from '../../../reducers/WorkoutAndMealSchedule';
+import { resetWorkoutAndMealScheduleStates } from '../../../reducers/WorkoutAndMealSchedule';
 import { ToastContext } from '../../common/context/ToastContextProvider';
 import RelativeSpinner from '../../common/RelativeSpinner';
 import TabPanel from '../../common/TabPanel';
@@ -22,12 +22,6 @@ export default function TabbedScheduleView() {
   const {
     isLoading, workoutSchedule, mealSchedule, isError, isSuccess, message,
   } = useSelector((state) => state.workoutAndMealSchedule);
-
-  useEffect(() => {
-    if (!workoutSchedule || !mealSchedule) {
-      dispatch(getWorkoutAndMealSchedule());
-    }
-  }, []);
 
   useEffect(() => {
     if (isSuccess && workoutSchedule && mealSchedule) {
