@@ -1,0 +1,26 @@
+{
+    "finishSet": {
+      "description": "Finish a set",
+      "phrases": ["finished set", "finish set", "completed set", "complete set", "set finished", "set complete", "set completed"]
+    },
+    "startTimer": {
+      "description": "Start the timer",
+      "phrases": ["start timer", "start rest", "begin timer", "begin rest"]
+    },
+    "pauseTimer": {
+      "description": "Pause the timer",
+      "phrases": ["pause timer", "stop timer", "pause rest", "stop rest"]
+    },
+    "addTime": {
+      "description": "Add 15 seconds to the timer",
+      "phrases": ["add to timer", "more rest", "more time"]
+    },
+    "addTimeCustom": {
+      "description": "Add a custom amount of time",
+      "phrases": ["add :s seconds to timer"]
+    },
+    "subtractTimeCustom": {
+      "description": "Subtract a custom amount of time (negative results reset timer)",
+      "phrases": ["subtract :s seconds from timer", "remove :s seconds from timer"]
+    }
+  }

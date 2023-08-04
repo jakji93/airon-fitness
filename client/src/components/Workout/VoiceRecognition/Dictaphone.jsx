@@ -1,58 +1,59 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable max-len */
 /* eslint-disable react/button-has-type */
-import React, { useState } from 'react';
+// import MicIcon from '@mui/icons-material/Mic';
+// import MicOffIcon from '@mui/icons-material/MicOff';
+// import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
+// import SpeakerNotesIcon from '@mui/icons-material/SpeakerNotes';
+// import VoiceOverOffIcon from '@mui/icons-material/VoiceOverOff';
+import {
+  Box, Typography, Button,
+} from '@mui/material';
+import React from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
-function Dictaphone({ timerToggle, incrementTimer, finishSet }) {
-  const [message, setMessage] = useState('');
+import voiceCommands from './VoiceCommands.json';
+
+// command (String or String Array) -> the string/phrase(s) you are listening for
+// callback (Function)              -> the function that is executed for a given command
+// matchInterim (Boolean)           -> determines if interim results should be matched
+// isFuzzyMatch (Boolean)           -> matches on % similarity instead of exact words
+// fuzzyMatchingThreshold (Number)  -> 0 (matches anything) to 1 (exact match) with default 0.8
+// bestMatchOnly (Boolean)          -> trigger callbacks when command phrase best matches speech
+function Dictaphone({
+  timerToggle, incrementTimer, incrementTimerCustom, decrementTimerCustom, finishSet, pause,
+}) {
   const commands = [
     {
-      command: 'Start Timer',
-      callback: () => timerToggle(),
+      command: voiceCommands.startTimer.phrases,
+      callback: () => {
+        if (pause) {
+          timerToggle();
+        }
+      },
     },
     {
-      command: 'Pause Timer',
-      callback: () => timerToggle(),
+      command: voiceCommands.pauseTimer.phrases,
+      callback: () => {
+        if (!pause) {
+          timerToggle();
+        }
+      },
     },
     {
-      command: 'Add to timer',
-      callback: () => incrementTimer,
+      command: voiceCommands.addTime.phrases,
+      callback: () => incrementTimer(),
     },
     {
-      command: 'Finish set',
-      callback: () => finishSet,
+      command: voiceCommands.addTimeCustom.phrases,
+      callback: (s) => incrementTimerCustom(parseInt(s, 10)),
     },
     {
-      command: 'The weather is :condition today',
-      callback: (condition) => setMessage(`Today, the weather is ${condition}`),
+      command: voiceCommands.subtractTimeCustom.phrases,
+      callback: (s) => decrementTimerCustom(parseInt(s, 10)),
     },
     {
-      command: 'My top sports are * and *',
-      callback: (sport1, sport2) => setMessage(`#1: ${sport1}, #2: ${sport2}`),
-    },
-    {
-      command: 'Pass the salt (please)',
-      callback: () => setMessage('My pleasure'),
-    },
-    {
-      command: ['Hello', 'Hi'],
-      callback: ({ command }) => setMessage(`Hi there! You said: "${command}"`),
-      matchInterim: true,
-    },
-    {
-      command: 'Beijing',
-      callback: (command, spokenPhrase, similarityRatio) => setMessage(`${command} and ${spokenPhrase} are ${similarityRatio * 100}% similar`),
-      // If the spokenPhrase is "Benji", the message would be "Beijing and Benji are 40% similar"
-      isFuzzyMatch: true,
-      fuzzyMatchingThreshold: 0.2,
-    },
-    {
-      command: ['eat', 'sleep', 'leave'],
-      callback: (command) => setMessage(`Best matching command: ${command}`),
-      isFuzzyMatch: true,
-      fuzzyMatchingThreshold: 0.2,
-      bestMatchOnly: true,
+      command: voiceCommands.finishSet.phrases,
+      callback: () => finishSet(),
     },
     {
       command: 'clear',
@@ -67,99 +68,32 @@ function Dictaphone({ timerToggle, incrementTimer, finishSet }) {
   }
 
   const handleStartListening = () => {
-    // Call the startListening function when the button is clicked
     SpeechRecognition.startListening({ continuous: true });
   };
 
   const handleStopListening = () => {
-    // Call the stopListening function when the button is clicked
     SpeechRecognition.stopListening();
   };
 
   const handleResetTranscript = () => {
-    // Call the resetTranscript function when the button is clicked
     SpeechRecognition.resetTranscript();
   };
 
   return (
-    <div style={{ paddingBottom: '25px' }}>
-      <p>Response: {message}</p>
-      <p>Transcript: {transcript}</p>
-      <button onClick={handleStartListening}>Start</button>
-      <button onClick={handleStopListening}>Stop</button>
-      <button onClick={handleResetTranscript}>Reset</button>
-    </div>
+    <Box>
+      <Typography>
+        Transcript: {transcript}
+      </Typography>
+      <Button onClick={handleStartListening}> Start </Button>
+      <Button onClick={handleStopListening}> Stop </Button>
+      <Button onClick={handleResetTranscript}> Reset </Button>
+    </Box>
+    // <div style={{ paddingBottom: '25px' }}>
+    //   <p>Transcript: {transcript}</p>
+    //   <button onClick={handleStartListening}>Start</button>
+    //   <button onClick={handleStopListening}>Stop</button>
+    //   <button onClick={handleResetTranscript}>Reset</button>
+    // </div>
   );
 }
 export default Dictaphone;
-
-// /* eslint-disable react/button-has-type */
-// import React, { useState } from 'react';
-// import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-
-// function Dictaphone() {
-//   const {
-//     transcript,
-//     listening,
-//     resetTranscript,
-//     browserSupportsSpeechRecognition,
-//   } = useSpeechRecognition();
-
-//   const [message, setMessage] = useState('');
-//   const commands = [
-//     {
-//       command: 'I would like to order *',
-//       callback: (food) => setMessage(`Your order is for: ${food}`),
-//     },
-//     {
-//       command: 'The weather is :condition today',
-//       callback: (condition) => setMessage(`Today, the weather is ${condition}`),
-//     },
-//     {
-//       command: 'My top sports are * and *',
-//       callback: (sport1, sport2) => setMessage(`#1: ${sport1}, #2: ${sport2}`),
-//     },
-//     {
-//       command: 'Pass the salt (please)',
-//       callback: () => setMessage('My pleasure'),
-//     },
-//     {
-//       command: ['Hello', 'Hi'],
-//       callback: ({ command }) => setMessage(`Hi there! You said: "${command}"`),
-//       matchInterim: true,
-//     },
-//     {
-//       command: 'Beijing',
-//       callback: (command, spokenPhrase,
-// similarityRatio) => setMessage
-// (`${command} and ${spokenPhrase} are ${similarityRatio * 100}% similar`),
-//       // If the spokenPhrase is "Benji", the message would be "Beijing and Benji are 40% similar"
-//       isFuzzyMatch: true,
-//       fuzzyMatchingThreshold: 0.2,
-//     },
-//     {
-//       command: ['eat', 'sleep', 'leave'],
-//       callback: (command) => setMessage(`Best matching command: ${command}`),
-//       isFuzzyMatch: true,
-//       fuzzyMatchingThreshold: 0.2,
-//       bestMatchOnly: true,
-//     },
-//   ];
-
-//   if (!browserSupportsSpeechRecognition) {
-//     return <span>Browser doesnt support speech recognition.</span>;
-//   }
-
-//   return (
-//     <div>
-//       <p>Microphone: {listening ? 'on' : 'off'}</p>
-//       <button onClick={() => SpeechRecognition.startListening({ commands })}>Start
-//       </button>
-//       <button onClick={SpeechRecognition.stopListening}>Stop</button>
-//       <button onClick={resetTranscript}>Reset</button>
-//       <p>Message: {message}</p>
-//       <p>{transcript}</p>
-//     </div>
-//   );
-// }
-// export default Dictaphone;

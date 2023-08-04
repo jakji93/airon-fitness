@@ -116,13 +116,6 @@ const styles = {
 export default function GuidedExercise({
   e, onNext, isLastExercise, slideIsInView,
 }) {
-  // console.log('This child has a slide index of: ', slideIndex);
-  // console.log('The index of the curent slide in view is: ', currentSlideInViewIndex);
-
-  if (slideIsInView) {
-    console.log('The slide in view is: ', e.exercise);
-  }
-
   const openToast = React.useContext(ToastContext);
 
   // Popover state
@@ -181,7 +174,7 @@ export default function GuidedExercise({
     return () => clearInterval(intervalRef.current);
   }, [pause, restTimer]);
 
-  const handleTimerStart = () => {
+  const handleTimerToggle = () => {
     if (restTimer === 0) {
       setRestTimer(initialRestTimer.current);
       setPause(true);
@@ -197,6 +190,14 @@ export default function GuidedExercise({
     setRestTimer((prev) => (prev + 15 < MAX_TIMER_VALUE ? prev + 15 : MAX_TIMER_VALUE));
   };
 
+  const handleTimerCustomAddition = (n) => {
+    setRestTimer((prev) => (prev + n < MAX_TIMER_VALUE ? prev + n : MAX_TIMER_VALUE));
+  };
+
+  const handleTimerCustomSubtraction = (n) => {
+    setRestTimer((prev) => (prev - n > 0 ? prev - n : 0));
+  };
+
   const open = Boolean(anchorEl);
 
   // Set, Rest, Calorie shared handler
@@ -205,6 +206,9 @@ export default function GuidedExercise({
       setRestTimer(e.rest);
       setCurrentExerciseSetCount((prevCount) => prevCount - 1);
       setCalorieCount((prevCount) => prevCount + (e.calories / e.sets));
+      if (currentExerciseSetCount === 1) {
+        openToast('info', 'All sets finished. Go next!');
+      }
     } else {
       openToast('info', 'All sets finished. Go next!');
     }
@@ -324,7 +328,7 @@ export default function GuidedExercise({
               onClick={() => {
                 if (pause) {
                   handleFinishedSet();
-                  handleTimerStart();
+                  handleTimerToggle();
                 } else {
                   handleFinishedSet();
                 }
@@ -334,7 +338,7 @@ export default function GuidedExercise({
             </Button>
             <Button
               variant="outlined"
-              onClick={handleTimerStart}
+              onClick={handleTimerToggle}
               sx={pause ? [styles.workoutButton, styles.timerButton]
                 : [styles.workoutButton, styles.timerButton, styles.timerButtonRunning]}
             >
@@ -357,7 +361,14 @@ export default function GuidedExercise({
         )}
       </Box>
       {slideIsInView ? (
-        <Dictaphone timerToggle={handleTimerStart} />
+        <Dictaphone
+          timerToggle={handleTimerToggle}
+          incrementTimer={handleTimerAddition}
+          incrementTimerCustom={handleTimerCustomAddition}
+          decrementTimerCustom={handleTimerCustomSubtraction}
+          finishSet={handleFinishedSet}
+          pause={pause}
+        />
       ) : (
         <Typography>weight is not active</Typography>
       )}

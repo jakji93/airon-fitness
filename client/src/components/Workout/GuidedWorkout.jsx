@@ -113,12 +113,7 @@ export default function GuidedWorkout({ sessionDay, workoutData, onNext }) {
                 e={e}
                 onNext={onNext}
                 isLastExercise={(index === getWorkoutForDay(sessionDay).length - 1)}
-                // every slide (a child of the carousel) is assigned an index starting from 0
-                // we also tell each child which slide is currently in view
-                // if the indices match, then the child is in view and the microphone is started
                 slideIsInView={index === currentSlideIndex}
-                // slideIndex={index}
-                // currentSlideInViewIndex={currentSlideIndex}
               />
             ))
           }
