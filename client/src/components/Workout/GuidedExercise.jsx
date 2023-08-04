@@ -127,6 +127,20 @@ export default function GuidedExercise({
     setAnchorEl(null);
   };
 
+  // Set count state
+  const [currentExerciseSetCount, setCurrentExerciseSetCount] = React.useState(null);
+
+  const initExerciseSetCount = (n) => {
+    setCurrentExerciseSetCount(n);
+  };
+
+  React.useEffect(() => {
+    initExerciseSetCount(e.sets);
+  }, [e.sets]);
+
+  // Calorie counter state
+  const [calorieCount, setCalorieCount] = React.useState(0);
+
   // Rest timer state
   const [restTimer, setRestTimer] = React.useState(e.rest);
   const [pause, setPause] = React.useState(true);
@@ -149,7 +163,9 @@ export default function GuidedExercise({
     } else if (restTimer === 0) {
       clearInterval(intervalRef.current);
       setPause(true);
-      setRestTimer(initialRestTimer.current);
+      if (currentExerciseSetCount !== 0) {
+        setRestTimer(initialRestTimer.current);
+      }
     } else {
       clearInterval(intervalRef.current);
     }
@@ -158,8 +174,9 @@ export default function GuidedExercise({
 
   const handleTimerStart = () => {
     if (restTimer === 0) {
-      setPause(true);
       setRestTimer(initialRestTimer.current);
+
+      setPause(true);
     } else {
       if (pause) { // for improved UX, immediately subtract 1 second when starting up a paused timer
         setRestTimer((prev) => (prev - 1 > 0 ? prev - 1 : 0));
@@ -174,21 +191,7 @@ export default function GuidedExercise({
 
   const open = Boolean(anchorEl);
 
-  // Set count state
-  const [currentExerciseSetCount, setCurrentExerciseSetCount] = React.useState(null);
-
-  const initExerciseSetCount = (n) => {
-    setCurrentExerciseSetCount(n);
-  };
-
-  React.useEffect(() => {
-    initExerciseSetCount(e.sets);
-  }, [e.sets]);
-
-  // Calorie counter state
-  const [calorieCount, setCalorieCount] = React.useState(0);
-
-  // Set and Calorie shared handler
+  // Set, Rest, Calorie shared handler
   const handleFinishedSet = () => {
     if (currentExerciseSetCount > 0) {
       setRestTimer(e.rest);
