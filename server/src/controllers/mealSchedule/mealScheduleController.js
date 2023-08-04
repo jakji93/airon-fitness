@@ -35,13 +35,17 @@ const generateMealScheduleHelper = async (id) => {
   const userData = userUtil.generateUserObject(userProfile);
   const generatedSchedule = await openAI.generateMealSchedule(userData);
 
-  const mealSchedule = await MealSchema.create({
-    userInfoID: id,
-    schedule: JSON.parse(generatedSchedule),
-    inputs: [],
-  });
-
-  return mealSchedule;
+  try {
+    const parsedSchedule = JSON.parse(generatedSchedule);
+    const mealSchedule = await MealSchema.create({
+      userInfoID: id,
+      schedule: parsedSchedule,
+      inputs: [],
+    });
+    return mealSchedule;
+  } catch {
+    return false;
+  }
 };
 
 /**
@@ -94,18 +98,23 @@ const updateMealScheduleForUser = asyncHandler(async (req, res) => {
   const userData = userUtil.generateUserObject(userProfile);
   const updatedMealSchedule = await openAI.updateMealSchedule(userData, updatedInputs, schedule);
 
-  // Update the MongoDB document
-  mealSchedule.schedule = JSON.parse(updatedMealSchedule);
-  mealSchedule.inputs = updatedInputs;
-  const savedMealSchedule = await mealSchedule.save();
+  try {
+    // Update the MongoDB document
+    const parsedSchedule = JSON.parse(updatedMealSchedule);
+    mealSchedule.schedule = parsedSchedule;
+    mealSchedule.inputs = updatedInputs;
+    const savedMealSchedule = await mealSchedule.save();
 
-  // Send updated result
-  if (savedMealSchedule) {
-    res.status(200).json({
-      userInfoID: savedMealSchedule.id,
-      schedule: savedMealSchedule.schedule,
-      inputs: savedMealSchedule.inputs,
-    });
+    // Send updated result
+    if (savedMealSchedule) {
+      res.status(200).json({
+        userInfoID: savedMealSchedule.id,
+        schedule: savedMealSchedule.schedule,
+        inputs: savedMealSchedule.inputs,
+      });
+    }
+  } catch {
+    res.status(400).json({ message: 'invalid meal schedule data' });
   }
 });
 

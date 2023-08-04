@@ -94,6 +94,7 @@ export default function SignupAPIKey() {
           onClick={handleBack}
           variant="contained"
           fullWidth
+          sx={{ backgroundColor: theme.palette.secondary.main }}
         >
           Back
         </Button>
@@ -107,6 +108,7 @@ export default function SignupAPIKey() {
           type="submit"
           variant="contained"
           fullWidth
+          sx={{ backgroundColor: theme.palette.secondary.main }}
         >
           Next
         </Button>

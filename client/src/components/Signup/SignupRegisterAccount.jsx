@@ -153,7 +153,7 @@ export default function SignupRegisterAccount() {
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ width: '100%', height: '100%' }}
+          sx={{ width: '100%', height: '100%', backgroundColor: theme.palette.secondary.main }}
           disabled={formik.isSubmitting}
         >
           Create Account

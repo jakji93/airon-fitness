@@ -80,7 +80,7 @@ export default function BasicProfileForm(props) {
     weight: profile?.weight ?? 0,
     height: profile?.height ?? 0,
     weightUnit: profile?.weightUnit ?? WEIGHT_UNITS.KG,
-    heightUnit: profile?.heightUnit ?? HEIGHT_UNITS.IN,
+    heightUnit: profile?.heightUnit ?? HEIGHT_UNITS.CM,
     experience: profile?.experience ?? '',
     goals: profile?.goals ?? [],
     apiKey: profile?.apiKey ?? '',

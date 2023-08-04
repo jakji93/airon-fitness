@@ -186,10 +186,10 @@ export default function ChatArea() {
         setProfileEditField('weight');
         responseMsg = { content: `Please provide a weight in ${state.userProfile.profile.weightUnit}`, isSelf: false };
         break;
-      case 'Avaibility':
+      case 'Availability':
         setInputMode(1);
         setFormOptions(weeklyAvailabilityOptions);
-        setInputLabel('Avaibility');
+        setInputLabel('Availability');
         setProfileEditField('weeklyAvailability');
         responseMsg = { content: 'Please choose the number of days you are available', isSelf: false };
         break;
