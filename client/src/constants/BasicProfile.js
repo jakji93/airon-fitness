@@ -33,8 +33,8 @@ export const WEIGHT_UNITS = {
 export const weightUnitOptions = Object.values(WEIGHT_UNITS);
 
 export const HEIGHT_UNITS = {
-  IN: 'in',
   CM: 'cm',
+  IN: 'in',
 };
 
 export const heightUnitOptions = Object.values(HEIGHT_UNITS);

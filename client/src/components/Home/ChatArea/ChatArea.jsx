@@ -19,8 +19,8 @@ import {
 import { goalsOptions } from '../../../constants/BasicProfile';
 import { getUserProfile, updateUserProfile } from '../../../reducers/UserProfile';
 import {
-  getWorkoutSchedule, getMealSchedule, updateWorkoutSchedule, updateMealSchedule,
-  getWorkoutAndMealSchedule, createWorkoutAndMealSchedule,
+  getWorkoutSchedule, getMealSchedule, updateWorkoutSchedule,
+  updateMealSchedule, createWorkoutAndMealSchedule,
 } from '../../../reducers/WorkoutAndMealSchedule';
 import FormMultiSelect from '../../Profile/Forms/FormMultiSelect';
 import FormSelect from '../../Profile/Forms/FormSelect';
@@ -58,16 +58,6 @@ export default function ChatArea() {
     }
   };
 
-  const initBot = async () => {
-    const state = store.getState();
-
-    if (!state.workoutAndMealSchedule.workoutSchedule
-      || !state.workoutAndMealSchedule.workoutSchedule) {
-      await dispatch(getWorkoutAndMealSchedule());
-    }
-    resetValues();
-  };
-
   useEffect(() => {
     const chatBox = document.getElementById('chatbox-messages');
 
@@ -81,7 +71,7 @@ export default function ChatArea() {
   }, [token]);
 
   useEffect(() => {
-    initBot();
+    resetValues();
   }, []);
 
   const validateExistingSchedule = (validateMode) => {
@@ -186,10 +176,10 @@ export default function ChatArea() {
         setProfileEditField('weight');
         responseMsg = { content: `Please provide a weight in ${state.userProfile.profile.weightUnit}`, isSelf: false };
         break;
-      case 'Avaibility':
+      case 'Availability':
         setInputMode(1);
         setFormOptions(weeklyAvailabilityOptions);
-        setInputLabel('Avaibility');
+        setInputLabel('Availability');
         setProfileEditField('weeklyAvailability');
         responseMsg = { content: 'Please choose the number of days you are available', isSelf: false };
         break;
