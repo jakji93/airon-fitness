@@ -70,7 +70,7 @@ const createMealScheduleForUser = asyncHandler(async (req, res) => {
 
   if (mealSchedule) {
     res.status(201).json({
-      userInfoID: req.user._id,
+      userInfoID: id,
       schedule: mealSchedule.schedule,
       inputs: mealSchedule.inputs,
     });
@@ -101,22 +101,28 @@ const updateMealScheduleForUser = asyncHandler(async (req, res) => {
   const updatedInputs = mealSchedule.inputs;
   updatedInputs.push(req.body.customInput);
 
+  const newMealSchedule = await MealSchema.create({
+    userInfoID: id,
+    schedule: {},
+    inputs: updatedInputs,
+    isLoading: true,
+  });
+
   // Look up the profile of the user
   const userProfile = await UserProfile.findOne({ userInfoID: id });
-
   // Update the schedule with OpenAI
   const userData = userUtil.generateUserObject(userProfile);
   const updatedMealSchedule = await openAI.updateMealSchedule(userData, updatedInputs, schedule);
 
   // Update the MongoDB document
-  mealSchedule.schedule = JSON.parse(updatedMealSchedule);
-  mealSchedule.inputs = updatedInputs;
-  const savedMealSchedule = await mealSchedule.save();
+  newMealSchedule.schedule = JSON.parse(updatedMealSchedule);
+  newMealSchedule.isLoading = false;
+  const savedMealSchedule = await newMealSchedule.save();
 
   // Send updated result
   if (savedMealSchedule) {
     res.status(200).json({
-      userInfoID: savedMealSchedule.id,
+      userInfoID: id,
       schedule: savedMealSchedule.schedule,
       inputs: savedMealSchedule.inputs,
     });

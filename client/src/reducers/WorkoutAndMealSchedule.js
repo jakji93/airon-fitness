@@ -214,6 +214,9 @@ const WorkoutAndMealScheduleSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
+      .addCase(updateWorkoutSchedule.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(updateWorkoutSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
@@ -226,6 +229,9 @@ const WorkoutAndMealScheduleSlice = createSlice({
         state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(updateMealSchedule.pending, (state) => {
+        state.isLoading = true;
       })
       .addCase(updateMealSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
