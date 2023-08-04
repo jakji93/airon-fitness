@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 
 import { ExerciseShape } from './WorkoutPropTypes';
+import theme from '../../theme';
 
 export default function ExercisesTable({ exercises }) {
   const columns = [
@@ -56,11 +57,17 @@ export default function ExercisesTable({ exercises }) {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map((column, index) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{
+                    minWidth: column.minWidth,
+                    color: theme.palette.secondary.light,
+                    backgroundColor: theme.palette.secondary.main,
+                    borderTopLeftRadius: index === 0 ? '10px' : '0',
+                    borderTopRightRadius: index === columns.length - 1 ? '10px' : '0',
+                  }}
                 >
                   {column.label}
                 </TableCell>

@@ -57,11 +57,21 @@ const styles = {
     },
   },
   timerButton: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.dark,
     width: 'clamp(100px, 5vw, 200px)',
     height: 'clamp(100px, 5vw, 200px)',
     display: 'flex',
     flexDirection: 'column',
+    '&:hover': {
+      color: theme.palette.secondary.dark,
+      borderColor: theme.palette.secondary.main,
+      backgroundColor: theme.palette.secondary.light,
+      transition: 'background-color 0.5s ease',
+    },
+  },
+  timerButtonRunning: {
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.secondary.light,
   },
   middleDataRowContainer: {
     color: theme.palette.secondary.dark,
@@ -177,6 +187,9 @@ export default function GuidedExercise({
       setPause(true);
       setRestTimer(initialRestTimer.current);
     } else {
+      if (pause) { // for improved UX, immediately subtract 1 second when starting up a paused timer
+        setRestTimer((prev) => (prev - 1 > 0 ? prev - 1 : 0));
+      }
       setPause((prev) => !prev);
     }
   };
@@ -285,8 +298,12 @@ export default function GuidedExercise({
               variant="outlined"
               sx={styles.workoutButton}
               onClick={() => {
-                handleFinishedSet();
-                handleTimerStart();
+                if (pause) {
+                  handleFinishedSet();
+                  handleTimerStart();
+                } else {
+                  handleFinishedSet();
+                }
               }}
             >
               FINISH SET
@@ -294,7 +311,8 @@ export default function GuidedExercise({
             <Button
               variant="outlined"
               onClick={handleTimerStart}
-              sx={[styles.workoutButton, styles.timerButton]}
+              sx={pause ? [styles.workoutButton, styles.timerButton]
+                : [styles.workoutButton, styles.timerButton, styles.timerButtonRunning]}
             >
               <Typography sx={{ fontSize: '2vw' }}>
                 {restTimer}
