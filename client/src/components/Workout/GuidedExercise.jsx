@@ -127,32 +127,6 @@ export default function GuidedExercise({
     setAnchorEl(null);
   };
 
-  const open = Boolean(anchorEl);
-
-  // Set count state
-  const [currentExerciseSetCount, setCurrentExerciseSetCount] = React.useState(null);
-
-  const initExerciseSetCount = (n) => {
-    setCurrentExerciseSetCount(n);
-  };
-
-  React.useEffect(() => {
-    initExerciseSetCount(e.sets);
-  }, [e.sets]);
-
-  // Calorie counter state
-  const [calorieCount, setCalorieCount] = React.useState(0);
-
-  // Set and Calorie shared handler
-  const handleFinishedSet = () => {
-    if (currentExerciseSetCount > 0) {
-      setCurrentExerciseSetCount((prevCount) => prevCount - 1);
-      setCalorieCount((prevCount) => prevCount + (e.calories / e.sets));
-    } else {
-      openToast('info', 'All sets finished. Go next!');
-    }
-  };
-
   // Rest timer state
   const [restTimer, setRestTimer] = React.useState(e.rest);
   const [pause, setPause] = React.useState(true);
@@ -196,6 +170,33 @@ export default function GuidedExercise({
 
   const handleTimerAddition = () => {
     setRestTimer((prev) => (prev + 15 < MAX_TIMER_VALUE ? prev + 15 : MAX_TIMER_VALUE));
+  };
+
+  const open = Boolean(anchorEl);
+
+  // Set count state
+  const [currentExerciseSetCount, setCurrentExerciseSetCount] = React.useState(null);
+
+  const initExerciseSetCount = (n) => {
+    setCurrentExerciseSetCount(n);
+  };
+
+  React.useEffect(() => {
+    initExerciseSetCount(e.sets);
+  }, [e.sets]);
+
+  // Calorie counter state
+  const [calorieCount, setCalorieCount] = React.useState(0);
+
+  // Set and Calorie shared handler
+  const handleFinishedSet = () => {
+    if (currentExerciseSetCount > 0) {
+      setRestTimer(e.rest);
+      setCurrentExerciseSetCount((prevCount) => prevCount - 1);
+      setCalorieCount((prevCount) => prevCount + (e.calories / e.sets));
+    } else {
+      openToast('info', 'All sets finished. Go next!');
+    }
   };
 
   return (
