@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import InfoIcon from '@mui/icons-material/Info';
 import {
   Box, Button, Typography, Paper, Popover,
@@ -6,6 +7,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import CalorieDial from './CalorieDial';
+import Dictaphone from './VoiceRecognition/Dictaphone';
 import WorkoutStatesEnum from './WorkoutFlowStates';
 import { ExerciseShape } from './WorkoutPropTypes';
 import theme from '../../theme';
@@ -112,8 +114,15 @@ const styles = {
 };
 
 export default function GuidedExercise({
-  e, onNext, isLastExercise,
+  e, onNext, isLastExercise, slideIsInView,
 }) {
+  // console.log('This child has a slide index of: ', slideIndex);
+  // console.log('The index of the curent slide in view is: ', currentSlideInViewIndex);
+
+  if (slideIsInView) {
+    console.log('The slide in view is: ', e.exercise);
+  }
+
   const openToast = React.useContext(ToastContext);
 
   // Popover state
@@ -128,7 +137,7 @@ export default function GuidedExercise({
   };
 
   // Set count state
-  const [currentExerciseSetCount, setCurrentExerciseSetCount] = React.useState(null);
+  const [currentExerciseSetCount, setCurrentExerciseSetCount] = React.useState(0);
 
   const initExerciseSetCount = (n) => {
     setCurrentExerciseSetCount(n);
@@ -175,7 +184,6 @@ export default function GuidedExercise({
   const handleTimerStart = () => {
     if (restTimer === 0) {
       setRestTimer(initialRestTimer.current);
-
       setPause(true);
     } else {
       if (pause) { // for improved UX, immediately subtract 1 second when starting up a paused timer
@@ -246,9 +254,15 @@ export default function GuidedExercise({
       <Box sx={styles.middleDataRowContainer}>
         <Box sx={styles.middleDataDialsContainer}>
           <Paper sx={[styles.circularDataDisplay, styles.circularDataSets]}>
-            <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
-              {currentExerciseSetCount}
-            </Typography>
+            {slideIsInView ? (
+              <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
+                <CalorieDial maxValue={currentExerciseSetCount} />
+              </Typography>
+            ) : (
+              <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
+                {currentExerciseSetCount}
+              </Typography>
+            )}
           </Paper>
           <Typography sx={{ fontSize: 'clamp(15px, 0.5vw, 30px)' }}>
             Sets Remaining
@@ -257,9 +271,15 @@ export default function GuidedExercise({
 
         <Box sx={styles.middleDataDialsContainer}>
           <Paper sx={[styles.circularDataDisplay, styles.circularDataReps]}>
-            <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
-              {e.reps}
-            </Typography>
+            {slideIsInView ? (
+              <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
+                <CalorieDial maxValue={e.reps} />
+              </Typography>
+            ) : (
+              <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
+                {e.reps}
+              </Typography>
+            )}
           </Paper>
           <Typography sx={{ fontSize: 'clamp(15px, 0.5vw, 30px)' }}>
             Reps
@@ -336,6 +356,11 @@ export default function GuidedExercise({
 
         )}
       </Box>
+      {slideIsInView ? (
+        <Dictaphone timerToggle={handleTimerStart} />
+      ) : (
+        <Typography>weight is not active</Typography>
+      )}
     </Paper>
   );
 }

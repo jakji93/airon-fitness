@@ -2,7 +2,7 @@ import {
   Box, Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import Carousel from 'react-material-ui-carousel';
 
 import GuidedExercise from './GuidedExercise';
@@ -79,10 +79,15 @@ export default function GuidedWorkout({ sessionDay, workoutData, onNext }) {
     return foundWorkout ? foundWorkout[day] : null;
   };
 
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
   return (
     <Box sx={styles.container}>
       { getWorkoutForDay(sessionDay) ? (
         <Carousel
+          // next={(next, active) => console.log(`we left ${active}, and are now at ${next}`)}
+          // prev={(prev, active) => console.log(`we left ${active}, and are now at ${prev}`)}
+          onChange={(now) => setCurrentSlideIndex(now)}
           sx={styles.carouselContainer}
           autoPlay={false}
           navButtonsAlwaysVisible={false}
@@ -108,6 +113,12 @@ export default function GuidedWorkout({ sessionDay, workoutData, onNext }) {
                 e={e}
                 onNext={onNext}
                 isLastExercise={(index === getWorkoutForDay(sessionDay).length - 1)}
+                // every slide (a child of the carousel) is assigned an index starting from 0
+                // we also tell each child which slide is currently in view
+                // if the indices match, then the child is in view and the microphone is started
+                slideIsInView={index === currentSlideIndex}
+                // slideIndex={index}
+                // currentSlideInViewIndex={currentSlideIndex}
               />
             ))
           }
