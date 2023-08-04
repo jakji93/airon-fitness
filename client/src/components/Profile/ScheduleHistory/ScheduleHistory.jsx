@@ -39,7 +39,27 @@ export default function ScheduleHistory() {
             ? history.schedules.map((i, idx) => <ScheduleItem key={`schedule-${idx}`} details={i} token={token} />) : ''
         }
       </Grid>
-      <Pagination count={history ? history.max : 1} page={history ? history.page : 1} onChange={handlePageChange} sx={{ marginTop: '20px' }} />
+      <Pagination
+        count={history ? history.max : 1}
+        page={history ? history.page : 1}
+        onChange={handlePageChange}
+        sx={{
+          marginTop: '20px',
+          '& .MuiPaginationItem-root': {
+            color: (theme) => theme.palette.secondary.light,
+          },
+          '& .MuiPaginationItem-page.Mui-selected': {
+            color: (theme) => theme.palette.secondary.light,
+            backgroundColor: (theme) => theme.palette.secondary.main,
+          },
+          '& .MuiPaginationItem-page.Mui-selected:hover': {
+            color: (theme) => theme.palette.secondary.light,
+          },
+          '& .MuiPaginationItem-root:hover': {
+            color: (theme) => theme.palette.secondary.main,
+          },
+        }}
+      />
     </Box>
   );
 }

@@ -55,7 +55,9 @@ export default function ScheduleItem({ details, token }) {
             }}
             >
               {
-                details ? Object.values(details.schedule).map((s, idx) => <ScheduleDetails key={`details-${idx + 1}`} details={s} day={idx} token={token} />) : ''
+                details
+                  ? Object.values(details.schedule).map((s, idx) => <ScheduleDetails key={`details-${idx + 1}`} details={s} day={idx} token={token} />)
+                  : ''
               }
             </Box>
           ) : ''

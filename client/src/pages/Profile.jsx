@@ -65,7 +65,7 @@ export default function Profile() {
         />
         <Tab
           label="Schedule History"
-          sx={{ width: '100%' }}
+          sx={{ width: '100%', color: 'white' }}
         />
       </Tabs>
       <TabPanel value={value} index={0}>
