@@ -1,4 +1,5 @@
 import { Grid, Button } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
@@ -35,6 +36,7 @@ export default function AdditionalProfileForm(props) {
     setUpdatingProfile,
   } = props;
   const dispatch = useDispatch();
+  const theme = useTheme();
   const profile = useSelector((state) => state.userProfile.profile);
   const initialValues = {
     healthConditions: profile?.healthConditions ?? [],
@@ -177,7 +179,11 @@ export default function AdditionalProfileForm(props) {
       <Grid item xs={12} sm={6} />
       <Grid item xs={12} sm={5} />
       <Grid item xs={12} sm={4}>
-        <Button variant="contained" type="submit">
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{ backgroundColor: theme.palette.secondary.main }}
+        >
           Save
         </Button>
       </Grid>

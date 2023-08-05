@@ -6,6 +6,7 @@ import {
   Avatar, Box, Button, styled,
 } from '@mui/material';
 import { grey } from '@mui/material/colors';
+import { useTheme } from '@mui/material/styles';
 import React, {
   createRef, useContext, useEffect, useState,
 } from 'react';
@@ -39,6 +40,7 @@ export const arrayBufferToBase64 = (buffer) => {
 export default function AvatarUpload() {
   const openToast = useContext(ToastContext);
   const dispatch = useDispatch();
+  const theme = useTheme();
   const profile = useSelector((state) => state.userProfile.profile);
   const profileImage = base64Flag + arrayBufferToBase64(profile?.profileImage?.data?.data);
   const [image, _setImage] = useState(profileImage ?? '/static/img/avatars/default-profile.svg');
@@ -113,7 +115,7 @@ export default function AvatarUpload() {
           color="primary"
           onClick={handleClick}
           component="span"
-          sx={{ mt: 2 }}
+          sx={{ mt: 2, backgroundColor: theme.palette.secondary.main }}
         >
           {imageExists ? <DeleteIcon /> : <UploadIcon />}
           {imageExists ? 'Delete' : 'Upload'}
