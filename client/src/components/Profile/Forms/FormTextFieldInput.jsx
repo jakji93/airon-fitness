@@ -47,7 +47,7 @@ export default function FormTextFieldInput(props) {
           label={label}
           fullWidth
           size={size}
-          variant="outlined"
+          variant="filled"
           value={value}
           onChange={(e) => {
             if (setValue) setValue(e.target.value);
@@ -65,6 +65,15 @@ export default function FormTextFieldInput(props) {
           helperText={helperText}
           sx={{
             backgroundColor: theme.palette.secondary.light,
+            '& .MuiFilledInput-underline:before': {
+              borderBottomColor: theme.palette.secondary.main,
+            },
+            '& .MuiFilledInput-underline:hover:before': {
+              borderBottomColor: theme.palette.secondary.main,
+            },
+            '& .MuiFilledInput-underline:after': {
+              borderBottomColor: theme.palette.secondary.main,
+            },
           }}
         />
       </Grid>
