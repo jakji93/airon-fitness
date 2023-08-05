@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
-import InfoIcon from '@mui/icons-material/Info';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import VoiceOverOffIcon from '@mui/icons-material/VoiceOverOff';
 import {
-  Box, Button, Typography, Paper, Popover,
+  Box, Button, Typography, Paper, Popover, IconButton,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -108,7 +108,7 @@ const styles = {
   bottomRowButtonsContainer: {
     display: 'flex',
     alignItems: 'center',
-    padding: '10px',
+    paddingTop: '10px',
     gap: '1vw',
   },
 };
@@ -220,39 +220,6 @@ export default function GuidedExercise({
         <Typography sx={styles.exerciseTypography}>
           {e.exercise}
         </Typography>
-        <InfoIcon
-          aria-owns={open ? 'mouse-over-popover' : undefined}
-          aria-haspopup="true"
-          onMouseEnter={handlePopoverOpen}
-          onMouseLeave={handlePopoverClose}
-          sx={{ height: 'clamp(25px, 3vw, 50px)', width: 'clamp(25px, 3vw, 50px)' }}
-        />
-        <Popover
-          id="mouse-over-popover"
-          sx={{ pointerEvents: 'none' }}
-          open={open}
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          onClose={handlePopoverClose}
-          disableRestoreFocus
-        >
-          <Box sx={{ padding: '10px' }}>
-            <Typography sx={{ fontSize: 'clamp(15px, 1vw, 20px)' }}>
-              Recommended
-              Duration: {e.duration} minutes
-            </Typography>
-            <Typography sx={{ fontSize: 'clamp(15px, 1vw, 20px)' }}>
-              Recommended Intensity: {e.intensity}% effort
-            </Typography>
-          </Box>
-        </Popover>
       </Box>
 
       <Box sx={styles.middleDataRowContainer}>
@@ -360,18 +327,54 @@ export default function GuidedExercise({
 
         )}
       </Box>
-      {slideIsInView ? (
-        <Dictaphone
-          timerToggle={handleTimerToggle}
-          incrementTimer={handleTimerAddition}
-          incrementTimerCustom={handleTimerCustomAddition}
-          decrementTimerCustom={handleTimerCustomSubtraction}
-          finishSet={handleFinishedSet}
-          pause={pause}
-        />
-      ) : (
-        <Typography>weight is not active</Typography>
-      )}
+      <Box sx={{ display: 'flex', paddingBottom: '10px' }}>
+        <IconButton
+          aria-owns={open ? 'mouse-over-popover' : undefined}
+          aria-haspopup="true"
+          onMouseEnter={handlePopoverOpen}
+          onMouseLeave={handlePopoverClose}
+        >
+          <FitnessCenterIcon sx={{ color: theme.palette.secondary.main }} />
+        </IconButton>
+        <Popover
+          id="mouse-over-popover"
+          sx={{ pointerEvents: 'none' }}
+          open={open}
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}
+          onClose={handlePopoverClose}
+          disableRestoreFocus
+        >
+          <Box sx={{ padding: '10px' }}>
+            <Typography sx={{ fontSize: 'clamp(15px, 1vw, 20px)' }}>
+              Recommended
+              Duration: {e.duration} minutes
+            </Typography>
+            <Typography sx={{ fontSize: 'clamp(15px, 1vw, 20px)' }}>
+              Recommended Intensity: {e.intensity}% effort
+            </Typography>
+          </Box>
+        </Popover>
+        {slideIsInView ? (
+          <Dictaphone
+            timerToggle={handleTimerToggle}
+            incrementTimer={handleTimerAddition}
+            incrementTimerCustom={handleTimerCustomAddition}
+            decrementTimerCustom={handleTimerCustomSubtraction}
+            finishSet={handleFinishedSet}
+            pause={pause}
+          />
+        ) : (
+          <VoiceOverOffIcon />
+        )}
+      </Box>
     </Paper>
   );
 }
@@ -380,4 +383,5 @@ GuidedExercise.propTypes = {
   e: ExerciseShape.isRequired,
   onNext: PropTypes.func.isRequired,
   isLastExercise: PropTypes.bool.isRequired,
+  slideIsInView: PropTypes.bool.isRequired,
 };

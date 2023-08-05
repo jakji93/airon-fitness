@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable react/button-has-type */
-// import MicIcon from '@mui/icons-material/Mic';
-// import MicOffIcon from '@mui/icons-material/MicOff';
-// import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
-// import SpeakerNotesIcon from '@mui/icons-material/SpeakerNotes';
-// import VoiceOverOffIcon from '@mui/icons-material/VoiceOverOff';
+import MicIcon from '@mui/icons-material/Mic';
+import MicOffIcon from '@mui/icons-material/MicOff';
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
+import SpeakerNotesIcon from '@mui/icons-material/SpeakerNotes';
+import VoiceOverOffIcon from '@mui/icons-material/VoiceOverOff';
 import {
-  Box, Typography, Button,
+  Box, IconButton, Tooltip,
 } from '@mui/material';
 import React from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 import voiceCommands from './VoiceCommands.json';
+import theme from '../../../theme';
 
 // command (String or String Array) -> the string/phrase(s) you are listening for
 // callback (Function)              -> the function that is executed for a given command
@@ -61,7 +61,11 @@ function Dictaphone({
     },
   ];
 
-  const { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition({ commands });
+  const {
+    transcript,
+    listening,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition({ commands });
 
   if (!browserSupportsSpeechRecognition) {
     return null;
@@ -75,25 +79,52 @@ function Dictaphone({
     SpeechRecognition.stopListening();
   };
 
-  const handleResetTranscript = () => {
-    SpeechRecognition.resetTranscript();
-  };
-
   return (
-    <Box>
-      <Typography>
-        Transcript: {transcript}
-      </Typography>
-      <Button onClick={handleStartListening}> Start </Button>
-      <Button onClick={handleStopListening}> Stop </Button>
-      <Button onClick={handleResetTranscript}> Reset </Button>
+    <Box sx={{ display: 'flex' }}>
+
+      { browserSupportsSpeechRecognition ? (
+        <Tooltip title="Your browser supports voice recognition" sx={{ color: theme.palette.secondary.main }}>
+          <IconButton disableFocusRipple disableTouchRipple>
+            <RecordVoiceOverIcon />
+          </IconButton>
+        </Tooltip>
+      ) : (
+        <Tooltip title="Your browser does not support voice recognition" sx={{ color: theme.palette.secondary.main }}>
+          <IconButton disableFocusRipple disableTouchRipple>
+            <VoiceOverOffIcon />
+          </IconButton>
+        </Tooltip>
+      )}
+
+      <Tooltip
+        sx={{ color: theme.palette.secondary.main }}
+        title={(
+          <div>
+            Speech Transcript: <br />
+            {transcript}
+          </div>
+      )}
+      >
+        <IconButton disableFocusRipple disableTouchRipple>
+          <SpeakerNotesIcon />
+        </IconButton>
+      </Tooltip>
+
+      { listening ? (
+        <Tooltip title="Your microphone is on" sx={{ color: theme.palette.secondary.main }}>
+          <IconButton disableFocusRipple disableTouchRipple>
+            <MicIcon onClick={handleStopListening} />
+          </IconButton>
+        </Tooltip>
+      ) : (
+        <Tooltip title="Your microphone is off" sx={{ color: theme.palette.secondary.main }}>
+          <IconButton onClick={handleStartListening} disableFocusRipple disableTouchRipple>
+            <MicOffIcon>Voice Control Off</MicOffIcon>
+          </IconButton>
+        </Tooltip>
+      )}
+
     </Box>
-    // <div style={{ paddingBottom: '25px' }}>
-    //   <p>Transcript: {transcript}</p>
-    //   <button onClick={handleStartListening}>Start</button>
-    //   <button onClick={handleStopListening}>Stop</button>
-    //   <button onClick={handleResetTranscript}>Reset</button>
-    // </div>
   );
 }
 export default Dictaphone;
