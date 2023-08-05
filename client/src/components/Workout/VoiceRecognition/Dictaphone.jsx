@@ -87,10 +87,13 @@ function Dictaphone({
         sx={{ color: theme.palette.secondary.main }}
         title={(
           <div>
-            Troubleshooting: <br />
-            Voice control is not consistently supported across all browsers. <br />
-            The best native experience is on desktop Google Chrome. <br />
-            Ensure that you give microphone permissions to AIRON.
+            Command Phrases: <br />
+            <br />
+            {Object.entries(voiceCommands).map(([command, data]) => (
+              <div key={command}>
+                <strong>{data.description}</strong>: {data.phrases.join(', ')}
+              </div>
+            ))}
           </div>
       )}
       >
@@ -100,13 +103,37 @@ function Dictaphone({
       </Tooltip>
 
       { browserSupportsSpeechRecognition ? (
-        <Tooltip title="Your browser supports voice recognition" sx={{ color: theme.palette.secondary.main }}>
+        <Tooltip
+          title={(
+            <div>
+              Your browser supports voice recognition. <br />
+              <br />
+              Troubleshooting: <br />
+              Voice control is not supported across all browsers. <br />
+              The best native experience is on desktop Google Chrome. <br />
+              Ensure that you give microphone permissions to AIRON.
+            </div>
+          )}
+          sx={{ color: theme.palette.secondary.main }}
+        >
           <IconButton disableFocusRipple disableTouchRipple>
             <RecordVoiceOverIcon />
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Your browser does not support voice recognition" sx={{ color: theme.palette.secondary.main }}>
+        <Tooltip
+          title={(
+            <div>
+              Your browser does not support voice recognition. <br />
+              <br />
+              Troubleshooting: <br />
+              Voice control is not supported across all browsers. <br />
+              The best native experience is on desktop Google Chrome. <br />
+              Ensure that you give microphone permissions to AIRON.
+            </div>
+        )}
+          sx={{ color: theme.palette.secondary.main }}
+        >
           <IconButton disableFocusRipple disableTouchRipple>
             <VoiceOverOffIcon />
           </IconButton>
@@ -118,6 +145,7 @@ function Dictaphone({
         title={(
           <div>
             Speech Transcript: <br />
+            <br />
             {transcript}
           </div>
       )}
