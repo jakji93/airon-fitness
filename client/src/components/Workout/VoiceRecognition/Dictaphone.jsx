@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import InfoIcon from '@mui/icons-material/Info';
 import MicIcon from '@mui/icons-material/Mic';
 import MicOffIcon from '@mui/icons-material/MicOff';
@@ -8,6 +7,7 @@ import VoiceOverOffIcon from '@mui/icons-material/VoiceOverOff';
 import {
   Box, IconButton, Tooltip,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 import React from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
@@ -145,3 +145,12 @@ function Dictaphone({
   );
 }
 export default Dictaphone;
+
+Dictaphone.propTypes = {
+  timerToggle: PropTypes.func.isRequired,
+  incrementTimer: PropTypes.func.isRequired,
+  incrementTimerCustom: PropTypes.func.isRequired,
+  decrementTimerCustom: PropTypes.func.isRequired,
+  finishSet: PropTypes.func.isRequired,
+  pause: PropTypes.bool.isRequired,
+};
