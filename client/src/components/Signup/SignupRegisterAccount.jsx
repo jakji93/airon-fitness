@@ -109,7 +109,10 @@ export default function SignupRegisterAccount() {
         required
         placeholder="johndoe@email.com"
         value={formik.values.email}
-        onChange={formik.handleChange}
+        onChange={(e) => {
+          formik.handleChange(e);
+          if (formik.isSubmitting) formik.setSubmitting(false);
+        }}
         onBlur={formik.handleBlur}
         error={formik.touched.email && Boolean(formik.errors.email)}
         helperText={formik.touched.email && formik.errors.email}
