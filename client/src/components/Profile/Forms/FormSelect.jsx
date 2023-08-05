@@ -55,7 +55,14 @@ export default function FormSelect(props) {
               if (setValue) setValue(e.target.value);
               if (onChange) onChange(e);
             }}
-            sx={fillHeight ? { height: '100%', backgroundColor: theme.palette.secondary.light } : { backgroundColor: theme.palette.secondary.light }}
+            sx={fillHeight
+              ? {
+                height: '100%',
+                backgroundColor: theme.palette.secondary.light,
+              }
+              : {
+                backgroundColor: theme.palette.secondary.light,
+              }}
             endAdornment={(
               <InputAdornment
                 sx={{
