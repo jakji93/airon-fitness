@@ -1,8 +1,10 @@
+/* eslint-disable no-await-in-loop */
 const asyncHandler = require('express-async-handler');
 const openAI = require('../../utils/openaiUtil');
 const userUtil = require('../../utils/userUtil');
 const MealSchema = require('../../models/MealScheduleModel');
 const UserProfile = require('../../models/UserProfileModel');
+const { sleep } = require('../../utils/util');
 
 /**
  * @desc    get meal schedule for user (userID)
@@ -10,11 +12,18 @@ const UserProfile = require('../../models/UserProfileModel');
  * @access  Private
  */
 const getMealScheduleByUser = asyncHandler(async (req, res) => {
-  const userMealSchedule = await MealSchema
+  let userMealSchedule = await MealSchema
     .findOne({ userInfoID: req.user._id })
     .sort({ _id: -1 });
 
-  if (!userMealSchedule || !userMealSchedule.schedule) {
+  while (userMealSchedule.isLoading) {
+    sleep(3000);
+    userMealSchedule = await MealSchema
+      .findOne({ userInfoID: req.user._id })
+      .sort({ _id: -1 });
+  }
+
+  if (!userMealSchedule?.schedule) {
     res.status(404).json({ message: 'Meal schedule not found' });
   } else {
     const { userInfoID, schedule, inputs } = userMealSchedule;
@@ -32,17 +41,22 @@ const getMealScheduleByUser = asyncHandler(async (req, res) => {
 const generateMealScheduleHelper = async (id) => {
   const userProfile = await UserProfile.findOne({ userInfoID: id });
 
+  const mealSchedule = await MealSchema.create({
+    userInfoID: id,
+    schedule: {},
+    inputs: [],
+    isLoading: true,
+  });
+
   const userData = userUtil.generateUserObject(userProfile);
   const generatedSchedule = await openAI.generateMealSchedule(userData);
 
   try {
     const parsedSchedule = JSON.parse(generatedSchedule);
-    const mealSchedule = await MealSchema.create({
-      userInfoID: id,
-      schedule: parsedSchedule,
-      inputs: [],
-    });
-    return mealSchedule;
+    mealSchedule.schedule = parsedSchedule;
+    mealSchedule.isLoading = false;
+    const savedSchedule = await mealSchedule.save();
+    return savedSchedule;
   } catch {
     return false;
   }
@@ -60,7 +74,7 @@ const createMealScheduleForUser = asyncHandler(async (req, res) => {
 
   if (mealSchedule) {
     res.status(201).json({
-      userInfoID: mealSchedule.id,
+      userInfoID: id,
       schedule: mealSchedule.schedule,
       inputs: mealSchedule.inputs,
     });
@@ -91,9 +105,15 @@ const updateMealScheduleForUser = asyncHandler(async (req, res) => {
   const updatedInputs = mealSchedule.inputs;
   updatedInputs.push(req.body.customInput);
 
+  const newMealSchedule = await MealSchema.create({
+    userInfoID: id,
+    schedule: {},
+    inputs: updatedInputs,
+    isLoading: true,
+  });
+
   // Look up the profile of the user
   const userProfile = await UserProfile.findOne({ userInfoID: id });
-
   // Update the schedule with OpenAI
   const userData = userUtil.generateUserObject(userProfile);
   const updatedMealSchedule = await openAI.updateMealSchedule(userData, updatedInputs, schedule);
@@ -101,14 +121,14 @@ const updateMealScheduleForUser = asyncHandler(async (req, res) => {
   try {
     // Update the MongoDB document
     const parsedSchedule = JSON.parse(updatedMealSchedule);
-    mealSchedule.schedule = parsedSchedule;
-    mealSchedule.inputs = updatedInputs;
-    const savedMealSchedule = await mealSchedule.save();
+    newMealSchedule.schedule = parsedSchedule;
+    newMealSchedule.isLoading = false;
+    const savedMealSchedule = await newMealSchedule.save();
 
     // Send updated result
     if (savedMealSchedule) {
       res.status(200).json({
-        userInfoID: savedMealSchedule.id,
+        userInfoID: id,
         schedule: savedMealSchedule.schedule,
         inputs: savedMealSchedule.inputs,
       });

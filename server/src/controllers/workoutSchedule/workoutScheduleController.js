@@ -1,8 +1,10 @@
+/* eslint-disable no-await-in-loop */
 const asyncHandler = require('express-async-handler');
 const openAI = require('../../utils/openaiUtil');
 const WorkoutSchema = require('../../models/WorkoutScheduleModel');
 const UserProfile = require('../../models/UserProfileModel');
 const userUtil = require('../../utils/userUtil');
+const { sleep } = require('../../utils/util');
 
 /**
  * @desc    get latest workout schedule for user (userID)
@@ -10,9 +12,16 @@ const userUtil = require('../../utils/userUtil');
  * @access  Private
  */
 const getLatestWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
-  const userWorkoutSchedule = await WorkoutSchema.findOne(
+  let userWorkoutSchedule = await WorkoutSchema.findOne(
     { userInfoID: req.user._id },
   ).sort({ _id: -1 });
+
+  while (userWorkoutSchedule.isLoading) {
+    sleep(3000);
+    userWorkoutSchedule = await WorkoutSchema
+      .findOne({ userInfoID: req.user._id })
+      .sort({ _id: -1 });
+  }
 
   if (!userWorkoutSchedule || !userWorkoutSchedule.schedule) {
     res.status(404).json({ message: 'Workout schedule not found' });
@@ -51,17 +60,22 @@ const getAllWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
 const generateWorkoutScheduleHelper = async (id) => {
   const userProfile = await UserProfile.findOne({ userInfoID: id });
 
+  const workoutSchedule = await WorkoutSchema.create({
+    userInfoID: id,
+    schedule: {},
+    inputs: [],
+    isLoading: true,
+  });
+
   const userData = userUtil.generateUserObject(userProfile);
   const generatedSchedule = await openAI.generateWorkoutSchedule(userData);
 
   try {
     const parsedSchedule = JSON.parse(generatedSchedule);
-    const workoutSchedule = await WorkoutSchema.create({
-      userInfoID: id,
-      schedule: parsedSchedule,
-      inputs: [],
-    });
-    return workoutSchedule;
+    workoutSchedule.schedule = parsedSchedule;
+    workoutSchedule.isLoading = false;
+    const savedSchedule = await workoutSchedule.save();
+    return savedSchedule;
   } catch {
     return false;
   }
@@ -79,7 +93,7 @@ const createWorkoutSchedule = asyncHandler(async (req, res) => {
 
   if (workoutSchedule) {
     res.status(201).json({
-      userInfoID: workoutSchedule.id,
+      userInfoID: id,
       schedule: workoutSchedule.schedule,
       inputs: workoutSchedule.inputs,
     });
@@ -105,8 +119,14 @@ const updateUserWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
   const updatedInputs = workoutSchedule.inputs;
   updatedInputs.push(req.body.customInput);
 
-  const userProfile = await UserProfile.findOne({ userInfoID: id });
+  const newWorkoutSchedule = await WorkoutSchema.create({
+    userInfoID: id,
+    schedule: {},
+    inputs: updatedInputs,
+    isLoading: true,
+  });
 
+  const userProfile = await UserProfile.findOne({ userInfoID: id });
   const userData = userUtil.generateUserObject(userProfile);
   const updatedWorkoutSchedule = await openAI.updateWorkoutSchedule(
     userData,
@@ -116,13 +136,13 @@ const updateUserWorkoutScheduleByUserID = asyncHandler(async (req, res) => {
 
   try {
     const parsedSchedule = JSON.parse(updatedWorkoutSchedule);
-    workoutSchedule.schedule = parsedSchedule;
-    workoutSchedule.inputs = updatedInputs;
-    const savedWorkoutSchedule = await workoutSchedule.save();
+    newWorkoutSchedule.schedule = parsedSchedule;
+    newWorkoutSchedule.isLoading = false;
+    const savedWorkoutSchedule = await newWorkoutSchedule.save();
 
     if (savedWorkoutSchedule) {
       res.status(200).json({
-        userInfoID: savedWorkoutSchedule.id,
+        userInfoID: id,
         schedule: savedWorkoutSchedule.schedule,
         inputs: savedWorkoutSchedule.inputs,
       });

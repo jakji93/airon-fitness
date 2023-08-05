@@ -17,6 +17,10 @@ const MealSchema = new Schema(
       type: [String],
       required: false,
     },
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true },
 );
