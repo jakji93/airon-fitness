@@ -1,6 +1,7 @@
 import {
   Grid, Button,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import dayjs from 'dayjs';
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
@@ -71,6 +72,7 @@ export default function BasicProfileForm(props) {
     setUpdatingProfile,
   } = props;
   const dispatch = useDispatch();
+  const theme = useTheme();
   const profile = useSelector((state) => state.userProfile.profile);
   const initialValues = {
     firstName: profile?.firstName ?? '',
@@ -258,7 +260,11 @@ export default function BasicProfileForm(props) {
       <Grid item xs={12} sm={6} />
       <Grid item xs={12} sm={5} />
       <Grid item xs={12} sm={4}>
-        <Button variant="contained" type="submit">
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{ backgroundColor: theme.palette.secondary.main }}
+        >
           Save
         </Button>
       </Grid>
