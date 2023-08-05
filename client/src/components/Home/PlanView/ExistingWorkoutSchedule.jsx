@@ -93,7 +93,7 @@ export default function ExistingWorkoutSchedule() {
           size="medium"
           onClick={() => setUpdateBothModal(true)}
         >
-          Re-create Both Plans
+          Regenerate Both Plans
         </Button>
       </Grid>
       <Grid item xs={12}>
@@ -103,24 +103,24 @@ export default function ExistingWorkoutSchedule() {
           sx={{ mb: 1 }}
           size="medium"
           onClick={() => setUpdateWorkoutModal(true)}
-        >Re-create Workout Plan
+        >Regenerate Workout Plan
         </Button>
       </Grid>
       <ConfirmationModal
         open={updateWorkoutModal}
         setOpen={setUpdateWorkoutModal}
         onYes={() => dispatch(createWorkoutSchedule())}
-        dialogTitle="Re-create your workout plan?"
-        dialogContent="Would you like to re-create your workout plan using updated profile data
-        and/or previous custom inputs? This may take a couple minutes."
+        dialogTitle="Regenerate your workout plan?"
+        dialogContent="Would you like to regenerate your workout plan using updated profile data
+        without previous custom inputs? This may take a couple minutes."
       />
       <ConfirmationModal
         open={updateBothModal}
         setOpen={setUpdateBothModal}
         onYes={() => dispatch(createWorkoutAndMealSchedule())}
-        dialogTitle="Re-create both plans?"
-        dialogContent="Would you like to re-create both your meal plan and workout plan using updated profile data
-        and/or previous custom inputs? This may take a couple minutes."
+        dialogTitle="Regenerate both plans?"
+        dialogContent="Would you like to regenerate both your meal plan and workout plan using updated profile data
+        without previous custom inputs? This may take a couple minutes."
       />
       <Grid item xs={12}>
         <List
