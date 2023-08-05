@@ -2,6 +2,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { getErrorMessage } from './utils';
+import { createNotification } from '../services/util';
 import workoutAndMealScheduleService from '../services/WorkoutAndMealScheduleService';
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
+  loadingTime: null,
   message: '',
 };
 
@@ -125,13 +127,18 @@ const WorkoutAndMealScheduleSlice = createSlice({
     builder
       .addCase(getWorkoutAndMealSchedule.pending, (state) => {
         state.isLoading = true;
+        state.loadingTime = new Date().getTime();
       })
       .addCase(getWorkoutAndMealSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.message = 'Your schedules have been loaded!';
+        state.message = 'Your plans have been loaded!';
         state.workoutSchedule = action.payload.workoutSchedule;
         state.mealSchedule = action.payload.mealSchedule;
+        if (state.loadingTime && new Date().getTime() - state.loadingTime > 10000) {
+          createNotification('Plans Loaded!', 'Your plans have been loaded!', 'http://localhost:3000/app');
+        }
+        state.loadingTime = null;
       })
       .addCase(getWorkoutAndMealSchedule.rejected, (state) => {
         state.isLoading = false;
@@ -144,9 +151,10 @@ const WorkoutAndMealScheduleSlice = createSlice({
       .addCase(createWorkoutAndMealSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.message = 'Your schedules have been created!';
+        state.message = 'Your plans have been created!';
         state.workoutSchedule = action.payload.workoutSchedule;
         state.mealSchedule = action.payload.mealSchedule;
+        createNotification('Plans Created!', 'Your plans have been created!', 'http://localhost:3000/app');
       })
       .addCase(createWorkoutAndMealSchedule.rejected, (state, action) => {
         state.isLoading = false;
@@ -157,7 +165,7 @@ const WorkoutAndMealScheduleSlice = createSlice({
       .addCase(getWorkoutSchedule.rejected, (state) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.message = 'Please create a schedule!';
+        state.message = 'Please create a plan!';
         state.profile = null;
         state.isError = true;
       })
@@ -165,13 +173,13 @@ const WorkoutAndMealScheduleSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.message = 'Your schedule has been loaded!';
+        state.message = 'Your plan has been loaded!';
         state.workoutSchedule = action.payload.workoutSchedule;
       })
       .addCase(getMealSchedule.rejected, (state) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.message = 'Please create a schedule!';
+        state.message = 'Please create a plan!';
         state.profile = null;
         state.isError = true;
       })
@@ -179,7 +187,7 @@ const WorkoutAndMealScheduleSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.message = 'Your schedule has been loaded!';
+        state.message = 'Your plan has been loaded!';
         state.mealSchedule = action.payload.mealSchedule;
       })
       .addCase(createWorkoutSchedule.pending, (state) => {
@@ -189,8 +197,9 @@ const WorkoutAndMealScheduleSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.message = 'Your schedule has been created!';
+        state.message = 'Your plan has been created!';
         state.workoutSchedule = action.payload;
+        createNotification('Workout Plan Created!', 'Your new workout plan has been created', 'http://localhost:3000/app');
       })
       .addCase(createWorkoutSchedule.rejected, (state, action) => {
         state.isLoading = false;
@@ -205,8 +214,9 @@ const WorkoutAndMealScheduleSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.message = 'Your schedule has been created!';
+        state.message = 'Your plan has been created!';
         state.mealSchedule = action.payload;
+        createNotification('Meal Plan Created!', 'Your new meal plan has been created', 'http://localhost:3000/app');
       })
       .addCase(createMealSchedule.rejected, (state, action) => {
         state.isLoading = false;
@@ -221,8 +231,9 @@ const WorkoutAndMealScheduleSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.message = 'Your schedule has been created!';
+        state.message = 'Your plan has been created!';
         state.workoutSchedule = action.payload;
+        createNotification('Workout Plan Updated!', 'Your updated workout plan has been created', 'http://localhost:3000/app');
       })
       .addCase(updateWorkoutSchedule.rejected, (state, action) => {
         state.isLoading = false;
@@ -237,8 +248,9 @@ const WorkoutAndMealScheduleSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.message = 'Your schedule has been created!';
+        state.message = 'Your plan has been created!';
         state.mealSchedule = action.payload;
+        createNotification('Meal Plan Updated!', 'Your updated meal plan has been created', 'http://localhost:3000/app');
       })
       .addCase(updateMealSchedule.rejected, (state, action) => {
         state.isLoading = false;

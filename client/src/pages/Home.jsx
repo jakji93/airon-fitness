@@ -28,6 +28,8 @@ export default function Home() {
       || !store.workoutAndMealSchedule?.mealSchedule) {
       getSchedules();
     }
+
+    if ('Notification' in window) Notification.requestPermission();
   }, []);
 
   const animateTile = (delay) => ({
