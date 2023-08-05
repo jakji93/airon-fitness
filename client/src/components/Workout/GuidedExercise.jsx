@@ -329,6 +329,8 @@ export default function GuidedExercise({
       </Box>
       <Box sx={{ display: 'flex', paddingBottom: '10px' }}>
         <IconButton
+          disableFocusRipple
+          disableTouchRipple
           aria-owns={open ? 'mouse-over-popover' : undefined}
           aria-haspopup="true"
           onMouseEnter={handlePopoverOpen}

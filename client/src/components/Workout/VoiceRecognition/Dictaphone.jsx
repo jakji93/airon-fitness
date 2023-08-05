@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import InfoIcon from '@mui/icons-material/Info';
 import MicIcon from '@mui/icons-material/Mic';
 import MicOffIcon from '@mui/icons-material/MicOff';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
@@ -81,6 +82,22 @@ function Dictaphone({
 
   return (
     <Box sx={{ display: 'flex' }}>
+
+      <Tooltip
+        sx={{ color: theme.palette.secondary.main }}
+        title={(
+          <div>
+            Troubleshooting: <br />
+            Voice control is not consistently supported across all browsers. <br />
+            The best native experience is on desktop Google Chrome. <br />
+            Ensure that you give microphone permissions to AIRON.
+          </div>
+      )}
+      >
+        <IconButton disableFocusRipple disableTouchRipple>
+          <InfoIcon />
+        </IconButton>
+      </Tooltip>
 
       { browserSupportsSpeechRecognition ? (
         <Tooltip title="Your browser supports voice recognition" sx={{ color: theme.palette.secondary.main }}>

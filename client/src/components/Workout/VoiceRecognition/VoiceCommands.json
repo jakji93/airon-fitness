@@ -1,7 +1,7 @@
 {
     "finishSet": {
       "description": "Finish a set",
-      "phrases": ["finished set", "finish set", "completed set", "complete set", "set finished", "set complete", "set completed"]
+      "phrases": ["finished set", "finish set", "completed set", "complete set", "set finished", "set complete", "set completed", "next set"]
     },
     "startTimer": {
       "description": "Start the timer",
