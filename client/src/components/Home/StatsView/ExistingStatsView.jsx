@@ -86,8 +86,8 @@ export default function ExistingStatsView() {
 
   return (
     <div>
-      <Grid container component={Card} alignItems="center" justifyContent="center" sx={{ p: 3 }}>
-        <Grid item>
+      <Grid container component={Card} alignItems="center" justifyContent="center" sx={{ p: 3, borderRadius: '10px' }}>
+        <Grid item xs="auto">
           <Typography variant="h6" component="div" color="text.secondary">
             Fitness Plan
           </Typography>
@@ -98,7 +98,7 @@ export default function ExistingStatsView() {
             height={250}
           />
         </Grid>
-        <Grid item>
+        <Grid item xs="auto">
           <Typography variant="h6" component="div" color="text.secondary">
             Meal Plan
           </Typography>
