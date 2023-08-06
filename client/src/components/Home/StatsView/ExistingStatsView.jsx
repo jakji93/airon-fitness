@@ -122,14 +122,14 @@ export default function ExistingStatsView() {
       >
         <Grid item xs="auto" sx={{ mb: 1 }}>
           <Typography variant="h6" component="div" color="text.secondary" sx={{ mb: -2 }}>
-            Fitness & Meal Plans Calories Statistics
+            Fitness & Meal Plans Calories
           </Typography>
           <BarChart
             legend={{ direction: 'column' }}
             xAxis={[{ scaleType: 'band', data: calAxis }]}
             series={[
-              { data: calData[0], label: 'Calories burned [kcal]', color: '#355C7D' },
-              { data: calData[1], label: 'Calories consumed [kcal]', color: '#6C5B7B' },
+              { data: calData[0], label: 'Calories burned [kcal]', color: '#F67280' },
+              { data: calData[1], label: 'Calories consumed [kcal]', color: '#80E8CA' },
             ]}
             width={400}
             height={300}
@@ -137,14 +137,14 @@ export default function ExistingStatsView() {
         </Grid>
         <Grid item xs="auto" sx={{ mb: 1 }}>
           <Typography variant="h6" component="div" color="text.secondary" sx={{ mb: -5 }}>
-            Other Meal Plan Statistics
+            Macronutrients
           </Typography>
           <BarChart
             xAxis={[{ scaleType: 'band', data: mAxis }]}
             series={[
-              { data: mData[1], label: 'Protein [g]', color: '#6C5B7B' },
-              { data: mData[2], label: 'Carbs [g]', color: '#C06C84' },
-              { data: mData[3], label: 'Fat [g]', color: '#F67280' },
+              { data: mData[1], label: 'Protein [g]', color: '#C06C84' },
+              { data: mData[2], label: 'Carbs [g]', color: '#84C06C' },
+              { data: mData[3], label: 'Fat [g]', color: '#6C84C0' },
             ]}
             width={400}
             height={300}
