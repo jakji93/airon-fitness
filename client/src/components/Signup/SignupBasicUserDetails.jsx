@@ -77,7 +77,7 @@ export default function SignupBasicUserDetails() {
   return (
     <Form
       handleSubmit={handleSubmit}
-      formTitle="Welcome to Ai-ron Fitness! Let&apos;s get a profile tailored for you."
+      formTitle="Welcome to AIRON Fitness! Let&apos;s get a profile tailored for you."
       containerSx={{ width: '80vw', maxWidth: '675px' }}
       centerTitle
     >

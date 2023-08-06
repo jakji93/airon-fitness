@@ -117,7 +117,7 @@ export default function AvatarUpload() {
           component="span"
           sx={{ mt: 2, backgroundColor: theme.palette.secondary.main }}
         >
-          {imageExists ? <DeleteIcon /> : <UploadIcon />}
+          {imageExists ? <DeleteIcon sx={{ marginRight: '5px' }} /> : <UploadIcon sx={{ marginRight: '5px' }} />}
           {imageExists ? 'Delete' : 'Upload'}
         </Button>
       </label>
