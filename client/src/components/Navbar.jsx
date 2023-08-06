@@ -29,9 +29,9 @@ import theme from '../theme';
 
 const pages = [
   ['HOME', '/app', <HomeIcon fontSize="small" />],
+  ['ABOUT', 'about', <InfoIcon fontSize="small" />],
   ['PROFILE', 'profile', <PersonIcon fontSize="small" />],
   ['WORKOUT', 'workout', <TimerIcon fontSize="small" />],
-  ['ABOUT', 'about', <InfoIcon fontSize="small" />],
 ];
 
 function ResponsiveAppBar() {
