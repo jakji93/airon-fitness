@@ -1,5 +1,5 @@
 import {
-  Box, Typography,
+  Box, Typography, Button,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -85,8 +85,6 @@ export default function GuidedWorkout({ sessionDay, workoutData, onNext }) {
     <Box sx={styles.container}>
       { getWorkoutForDay(sessionDay) ? (
         <Carousel
-          // next={(next, active) => console.log(`we left ${active}, and are now at ${next}`)}
-          // prev={(prev, active) => console.log(`we left ${active}, and are now at ${prev}`)}
           onChange={(now) => setCurrentSlideIndex(now)}
           sx={styles.carouselContainer}
           autoPlay={false}
@@ -119,9 +117,18 @@ export default function GuidedWorkout({ sessionDay, workoutData, onNext }) {
           }
         </Carousel>
       ) : (
-        <Typography>
-          No workout for this day.
-        </Typography>
+        <Box sx={styles.container}>
+          <Typography sx={{ fontSize: '3vw', color: theme.palette.secondary.main }}>
+            No workout for this day.
+          </Typography>
+          <Button
+            href="/app"
+            variant="outlined"
+            sx={styles.workoutButton}
+          >
+            BACK TO HOME
+          </Button>
+        </Box>
       )}
     </Box>
 
