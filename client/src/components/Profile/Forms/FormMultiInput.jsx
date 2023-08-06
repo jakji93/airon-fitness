@@ -76,7 +76,7 @@ export default function FormMultiInput(props) {
             return (
               <TextField
                 {...params}
-                variant="outlined"
+                variant="filled"
                 label={label}
                 placeholder={label}
                 sx={{

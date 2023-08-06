@@ -1,12 +1,25 @@
 import {
   Grid, InputAdornment, TextField,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import { inputGridSizing } from './Form';
 import GridInputLabel from './GridInputLabel';
+import theme from '../../../theme';
+
+export const underlineStyle = {
+  backgroundColor: theme.palette.secondary.light,
+  '& .MuiFilledInput-underline:before': {
+    borderBottomColor: theme.palette.secondary.main,
+  },
+  '& .MuiFilledInput-underline:hover': {
+    borderBottomColor: theme.palette.secondary.main,
+  },
+  '& .MuiFilledInput-underline:after': {
+    borderBottomColor: theme.palette.secondary.main,
+  },
+};
 
 export default function FormTextFieldInput(props) {
   const {
@@ -29,8 +42,6 @@ export default function FormTextFieldInput(props) {
     helperText,
     size,
   } = props;
-
-  const theme = useTheme();
 
   return (
     <>
@@ -65,15 +76,7 @@ export default function FormTextFieldInput(props) {
           helperText={helperText}
           sx={{
             backgroundColor: theme.palette.secondary.light,
-            '& .MuiFilledInput-underline:before': {
-              borderBottomColor: theme.palette.secondary.main,
-            },
-            '& .MuiFilledInput-underline:hover:before': {
-              borderBottomColor: theme.palette.secondary.main,
-            },
-            '& .MuiFilledInput-underline:after': {
-              borderBottomColor: theme.palette.secondary.main,
-            },
+            ...underlineStyle,
           }}
         />
       </Grid>

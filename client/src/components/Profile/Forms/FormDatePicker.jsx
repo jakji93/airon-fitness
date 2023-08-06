@@ -1,4 +1,6 @@
-import { Grid } from '@mui/material';
+import {
+  Grid, TextField,
+} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { DatePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
@@ -6,7 +8,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { inputGridSizing } from './Form';
+import { underlineStyle } from './FormTextFieldInput';
 import GridInputLabel from './GridInputLabel';
+
+function FilledTextField(props) {
+  return (
+    <TextField
+      variant="filled"
+      {...props}
+    />
+  );
+}
 
 export default function FormDatePicker(props) {
   const {
@@ -28,13 +40,14 @@ export default function FormDatePicker(props) {
     <>
       {showTitleLabel && (
         <GridInputLabel
-          id={id}
+          id={`${id}-label`}
           label={label}
         />
       )}
       <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)}>
         <DatePicker
           label={label}
+          id={id}
           value={value ?? null}
           onChange={(val) => {
             if (setFieldValue) setFieldValue(name, val);
@@ -44,6 +57,10 @@ export default function FormDatePicker(props) {
           sx={{
             width: '100%',
             backgroundColor: theme.palette.secondary.light,
+            ...underlineStyle,
+          }}
+          slots={{
+            textField: FilledTextField,
           }}
         />
       </Grid>
