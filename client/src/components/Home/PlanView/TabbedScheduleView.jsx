@@ -3,7 +3,6 @@ import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import {
   Card, Grid, Tab, Tabs,
 } from '@mui/material';
-// import { Box } from '@mui/system';
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -31,7 +30,7 @@ export default function TabbedScheduleView() {
   }, [workoutSchedule, mealSchedule, isError, isSuccess, message, dispatch]);
 
   return (
-    <Grid container component={Card} alignItems="center" columns={2} sx={{ p: 3, position: 'relative' }}>
+    <Grid container component={Card} alignItems="center" columns={2} sx={{ p: 3, position: 'relative', borderRadius: '10px' }}>
       {isLoading && <RelativeSpinner />}
       <Grid item xs={10}>
         <Tabs value={value} onChange={(e, v) => setValue(v)} aria-label="icon label tabs example">

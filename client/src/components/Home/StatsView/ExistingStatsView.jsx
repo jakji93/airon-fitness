@@ -51,6 +51,10 @@ function createMChartAxis(mMacro) {
   return mAxis;
 }
 
+function createCalChartAxis(fAxis, mAxis) {
+  return fAxis.length > mAxis.length ? fAxis : mAxis;
+}
+
 function getMealData(mMacro) {
   const res = [];
   const calArray = [];
@@ -71,6 +75,22 @@ function getMealData(mMacro) {
   return res;
 }
 
+function getCalData(fData, mData) {
+  const res = [];
+  if (fData.length < mData.length) {
+    while (fData.length !== mData.length) {
+      fData.push(0);
+    }
+  } else if (fData.length > mData.length) {
+    while (fData.length !== mData.length) {
+      mData.push(0);
+    }
+  }
+  res.push(fData);
+  res.push(mData);
+  return res;
+}
+
 export default function ExistingStatsView() {
   const { workoutSchedule, mealSchedule } = useSelector(
     (state) => state.workoutAndMealSchedule,
@@ -82,30 +102,46 @@ export default function ExistingStatsView() {
   const mMacro = getMealMacro(mSchedule);
   const fAxis = createFChartAxis(fMacro);
   const mAxis = createMChartAxis(mMacro);
+  const calAxis = createCalChartAxis(fAxis, mAxis);
   const mData = getMealData(mMacro);
+  const calData = getCalData(fMacro, mData[0]);
 
   return (
     <div>
-      <Grid container component={Card} alignItems="center" justifyContent="center" sx={{ p: 3 }}>
-        <Grid item>
-          <Typography variant="h6" component="div" color="text.secondary">
-            Fitness Plan
+      <Grid
+        container
+        component={Card}
+        alignItems="center"
+        justifyContent="center"
+        sx={{
+          p: 3,
+          borderRadius: '10px',
+          maxHeight: '80vh',
+          overflow: 'auto',
+        }}
+      >
+        <Grid item xs="auto" sx={{ mb: 1 }}>
+          <Typography variant="h6" component="div" color="text.secondary" sx={{ mb: -2 }}>
+            Fitness & Meal Plans Calories Statistics
           </Typography>
           <BarChart
-            xAxis={[{ scaleType: 'band', data: fAxis }]}
-            series={[{ data: fMacro, label: 'Calories burned [kcal]', color: '#355C7D' }]}
+            legend={{ direction: 'column' }}
+            xAxis={[{ scaleType: 'band', data: calAxis }]}
+            series={[
+              { data: calData[0], label: 'Calories burned [kcal]', color: '#355C7D' },
+              { data: calData[1], label: 'Calories consumed [kcal]', color: '#6C5B7B' },
+            ]}
             width={400}
-            height={250}
+            height={300}
           />
         </Grid>
-        <Grid item>
-          <Typography variant="h6" component="div" color="text.secondary">
-            Meal Plan
+        <Grid item xs="auto" sx={{ mb: 1 }}>
+          <Typography variant="h6" component="div" color="text.secondary" sx={{ mb: -5 }}>
+            Other Meal Plan Statistics
           </Typography>
           <BarChart
             xAxis={[{ scaleType: 'band', data: mAxis }]}
             series={[
-              { data: mData[0], label: 'Cal [kcal]', color: '#355C7D' },
               { data: mData[1], label: 'Protein [g]', color: '#6C5B7B' },
               { data: mData[2], label: 'Carbs [g]', color: '#C06C84' },
               { data: mData[3], label: 'Fat [g]', color: '#F67280' },
