@@ -41,20 +41,20 @@ export default function FormSelect(props) {
           size={size}
           sx={fillHeight ? { height: '100%' } : {
             '&:hover': {
-              backgroundColor: '#ffffff',
+              backgroundColor: 'theme.palette.secondary.light',
             },
             '& .MuiSelect-filled': {
-              backgroundColor: '#ffffff',
+              backgroundColor: 'theme.palette.secondary.light',
             },
             '& .MuiSelect-iconFilled': {
-              backgroundColor: '#ffffff',
+              backgroundColor: 'theme.palette.secondary.light',
             },
             '& .MuiInputAdornment-filled.MuiInputAdornment-positionEnd': {
-              backgroundColor: '#ffffff',
+              backgroundColor: 'theme.palette.secondary.light',
             },
             borderRadius: '4px',
             '& .MuiFilledInput-root': {
-              backgroundColor: '#ffffff',
+              backgroundColor: 'theme.palette.secondary.light',
             },
             ...underlineStyle,
           }}
@@ -87,10 +87,10 @@ export default function FormSelect(props) {
               : {
                 backgroundColor: theme.palette.secondary.light,
                 '&:hover': {
-                  backgroundColor: '#ffffff',
+                  backgroundColor: 'theme.palette.secondary.light',
                 },
                 '& .MuiSelect-filled': {
-                  backgroundColor: '#ffffff',
+                  backgroundColor: 'theme.palette.secondary.light',
                 },
               }}
             endAdornment={(
