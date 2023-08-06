@@ -1,5 +1,5 @@
 import {
-  Box, Button, CssBaseline, Grid, TextField, Typography,
+  Box, Button, CssBaseline, Grid, TextField,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Container } from '@mui/system';
@@ -11,8 +11,10 @@ import jwt_decode from 'jwt-decode';
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import Typewriter from 'typewriter-effect';
 import * as yup from 'yup';
 
+import AironLogo from '../assets/design/GradientLogo1.png';
 import { ToastContext } from '../components/common/context/ToastContextProvider';
 import Spinner from '../components/common/Spinner';
 import {
@@ -124,16 +126,21 @@ export default function Login() {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5" color={theme.palette.secondary.light}>
-            Login
-          </Typography>
+          <img
+            src={AironLogo}
+            alt="logo"
+            style={{
+              width: '100%',
+            }}
+          />
+
           <Box
             component="form"
             noValidate
             onSubmit={handleSubmit}
             sx={{
               mt: 3,
-              p: 2,
+              p: 1,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -150,6 +157,7 @@ export default function Login() {
                   name="email"
                   autoComplete="email"
                   placeholder="johndoe@email.com"
+                  variant="filled"
                   value={formik.values.email}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -167,6 +175,7 @@ export default function Login() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  variant="filled"
                   value={formik.values.password}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -180,9 +189,22 @@ export default function Login() {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ width: '100%', height: '100%' }}
+                  sx={{ width: '100%', height: '100%', backgroundColor: theme.palette.secondary.main }}
                 >
-                  Login
+                  <Box
+                    sx={{
+                      color: theme.palette.secondary.light,
+                      fontFamily: theme.typography.fontFamily,
+                    }}
+                  >
+                    <Typewriter
+                      onInit={(typewriter) => {
+                        typewriter.changeDelay(40)
+                          .typeString('LOGIN')
+                          .start();
+                      }}
+                    />
+                  </Box>
                 </Button>
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -200,7 +222,7 @@ export default function Login() {
                 <Link
                   to="/signup"
                   variant="body2"
-                  style={{ color: theme.palette.secondary.main }}
+                  style={{ color: theme.palette.secondary.main, fontSize: 'calc(6px + 0.3vw' }}
                   onClick={() => {
                     dispatch(removeSignup());
                   }}
