@@ -26,7 +26,7 @@ export default function WorkoutTable() {
 
   return (
     <div>
-      <Grid container component={Card} sx={{ p: 2, borderRadius: '10px' }}>
+      <Grid container component={Card} sx={{ p: 3, borderRadius: '10px' }}>
         <Typography variant="h2" sx={{ mb: 2 }}>
           Workout Table
         </Typography>
