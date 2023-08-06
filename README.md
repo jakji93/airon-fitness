@@ -100,13 +100,13 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 - [x] Account for user illness / physical constraints
 - [x] Secure authentication system
 - [x] Login using Google Accounts
-- [ ] Allow users to log their workout history
+- [ ] Allow users to log their workout progress history
 
 ### Stretch Goals
 - [x] Chatbot personal trainer that allows for custom user inputs
 - [x] User can start a guided workout with timers tracking rest period and workout length (hands-free implementation) 
 - [ ] Dynamically update fitness plans as users log their history (user review and feedback in fitness plans) 
-- [ ] Live audio feedback during a workout
+- [x] Live audio feedback during a workout
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -135,7 +135,7 @@ By implementing Google Login, JWT authentication, a powerful chatbot, guided wor
 <!-- WHATS NEXT -->
 ## What's Next
 
-In our next steps to further improve the app, we plan to dynamically update fitness plans based on users' logged history, incorporating user reviews and feedback to provide personalized and evolving workout routines. Additionally, we aim to implement a Computer Vision feature that analyzes users' posture, offering real-time feedback to ensure proper form during exercises. Furthermore, we plan to introduce live audio feedback during workouts, creating an immersive and interactive fitness experience for our users. These additions will enhance the app's usability and help users achieve their fitness goals more effectively.
+In our next steps to further improve the app, we plan to dynamically update fitness plans based on users' logged progress history, incorporating user reviews and feedback to provide personalized and evolving workout routines. Additionally, we aim to implement a Computer Vision feature that analyzes users' posture, offering real-time feedback to ensure proper form during exercises. These additions will enhance the app's usability and help users achieve their fitness goals more effectively.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
