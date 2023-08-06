@@ -1,5 +1,4 @@
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import VoiceOverOffIcon from '@mui/icons-material/VoiceOverOff';
 import {
   Box, Button, Typography, Paper, Popover, IconButton,
 } from '@mui/material';
@@ -364,18 +363,15 @@ export default function GuidedExercise({
             </Typography>
           </Box>
         </Popover>
-        {slideIsInView ? (
-          <Dictaphone
-            timerToggle={handleTimerToggle}
-            incrementTimer={handleTimerAddition}
-            incrementTimerCustom={handleTimerCustomAddition}
-            decrementTimerCustom={handleTimerCustomSubtraction}
-            finishSet={handleFinishedSet}
-            pause={pause}
-          />
-        ) : (
-          <VoiceOverOffIcon />
-        )}
+        <Dictaphone
+          slideIsInView={slideIsInView}
+          timerToggle={handleTimerToggle}
+          incrementTimer={handleTimerAddition}
+          incrementTimerCustom={handleTimerCustomAddition}
+          decrementTimerCustom={handleTimerCustomSubtraction}
+          finishSet={handleFinishedSet}
+          pause={pause}
+        />
       </Box>
     </Paper>
   );
