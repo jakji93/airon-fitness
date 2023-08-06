@@ -44,10 +44,12 @@ const styles = {
     fontWeight: 800,
     fontSize: '4vw',
   },
+  infoContainer: {
+    padding: '15px 15px 0px 0px',
+  },
   info: {
     color: '#F3F3F0',
-    fontSize: '20px',
-    padding: '15px 15px 0px 0px',
+    fontSize: '1.5vw',
   },
   buttonContainer: {
     display: 'flex',
@@ -60,7 +62,8 @@ const styles = {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     marginTop: '25px',
     padding: '15px',
-    width: '200px',
+    fontSize: '0.75vw',
+    width: '15vw',
     '&:hover': {
       fontWeight: 'bolder',
       color: '#3F3F47',
@@ -99,8 +102,8 @@ export default function Landing() {
             />
           </div>
         </div>
-        <div className="info" style={styles.info}>
-          <Typography variant="body1">
+        <div className="info" style={styles.infoContainer}>
+          <Typography variant="body1" style={styles.info}>
             AIron Fitness is an innovative AI trainer
             designed to support individuals on their workout journey.
           </Typography>
