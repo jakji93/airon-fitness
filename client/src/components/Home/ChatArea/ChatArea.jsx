@@ -26,7 +26,7 @@ import FormMultiSelect from '../../Profile/Forms/FormMultiSelect';
 import FormSelect from '../../Profile/Forms/FormSelect';
 
 export default function ChatArea() {
-  const [messages, setMessages] = useState([{ content: 'Welcome to AI-ron Fitness! How can I help you?', isSelf: false }]);
+  const [messages, setMessages] = useState([{ content: 'Welcome to AIRON Fitness! How can I help you?', isSelf: false }]);
   const [inputMode, setInputMode] = useState(1);
   const [mode, setMode] = useState('starter');
   const [formSelect, setFormSelect] = useState('');
