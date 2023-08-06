@@ -14,7 +14,7 @@ const styles = {
     float: 'right',
     textAlign: 'right',
     color: 'white',
-    backgroundColor: '#00b2ff',
+    backgroundColor: '#B5936B',
   },
   received: {
     textAlign: 'left',

@@ -336,7 +336,7 @@ export default function ChatArea() {
 
   return (
     <div>
-      <Grid container component={Card} sx={{ p: 1 }}>
+      <Grid container component={Card} sx={{ p: 1, pt: 3, borderRadius: '10px' }}>
         <Grid item style={{ width: '100%' }}>
           <ChatMessages messages={messages} />
           <Divider />
@@ -375,8 +375,8 @@ export default function ChatArea() {
                   ) : ''
               }
             </Grid>
-            <Grid item>
-              <Fab color="primary" aria-label="add" onClick={handleSendButton}><SendIcon /></Fab>
+            <Grid item style={{ marginLeft: '20px' }}>
+              <Fab color="secondary" aria-label="add" onClick={handleSendButton}><SendIcon /></Fab>
             </Grid>
           </Grid>
         </Grid>
