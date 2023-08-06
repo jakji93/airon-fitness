@@ -6,7 +6,7 @@ import {
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import CalorieDial from './CalorieDial';
+import NumberDial from './NumberDial';
 import Dictaphone from './VoiceRecognition/Dictaphone';
 import WorkoutStatesEnum from './WorkoutFlowStates';
 import { ExerciseShape } from './WorkoutPropTypes';
@@ -227,7 +227,7 @@ export default function GuidedExercise({
           <Paper sx={[styles.circularDataDisplay, styles.circularDataSets]}>
             {slideIsInView ? (
               <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
-                <CalorieDial maxValue={currentExerciseSetCount} />
+                <NumberDial maxValue={currentExerciseSetCount} />
               </Typography>
             ) : (
               <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
@@ -244,7 +244,7 @@ export default function GuidedExercise({
           <Paper sx={[styles.circularDataDisplay, styles.circularDataReps]}>
             {slideIsInView ? (
               <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
-                <CalorieDial maxValue={e.reps} />
+                <NumberDial maxValue={e.reps} />
               </Typography>
             ) : (
               <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
@@ -260,7 +260,7 @@ export default function GuidedExercise({
         <Box sx={styles.middleDataDialsContainer}>
           <Paper sx={[styles.circularDataDisplay, styles.circularDataCalories]}>
             <Typography sx={{ fontSize: 'clamp(20px, 6vw, 90px)' }}>
-              <CalorieDial maxValue={calorieCount} />
+              <NumberDial maxValue={calorieCount} />
             </Typography>
           </Paper>
           <Typography sx={{ fontSize: 'clamp(15px, 0.5vw, 30px)' }}>
