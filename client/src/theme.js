@@ -47,7 +47,6 @@ const theme = createTheme({
       transition: 'background-color 0.3s ease',
     },
   },
-  // change the textfield border radius throughout the entire app to be slightly rounded
   components: {
     MuiTextField: {
       styleOverrides: {

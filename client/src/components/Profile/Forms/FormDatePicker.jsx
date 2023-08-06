@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { inputGridSizing } from './Form';
+import { underlineStyle } from './FormTextFieldInput';
 import GridInputLabel from './GridInputLabel';
 
 function FilledTextField(props) {
@@ -56,6 +57,7 @@ export default function FormDatePicker(props) {
           sx={{
             width: '100%',
             backgroundColor: theme.palette.secondary.light,
+            ...underlineStyle,
           }}
           slots={{
             textField: FilledTextField,

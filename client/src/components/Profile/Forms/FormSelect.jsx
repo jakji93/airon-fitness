@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { inputGridSizing } from './Form';
+import { underlineStyle } from './FormTextFieldInput';
 import GridInputLabel from './GridInputLabel';
 
 export default function FormSelect(props) {
@@ -35,7 +36,30 @@ export default function FormSelect(props) {
     <>
       { showTitleLabel && <GridInputLabel id={id} label={label} /> }
       <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)} sx={fillHeight ? { height: '100%' } : ''}>
-        <FormControl fullWidth size={size} sx={fillHeight ? { height: '100%' } : ''}>
+        <FormControl
+          fullWidth
+          size={size}
+          sx={fillHeight ? { height: '100%' } : {
+            '&:hover': {
+              backgroundColor: '#ffffff',
+            },
+            '& .MuiSelect-filled': {
+              backgroundColor: '#ffffff',
+            },
+            '& .MuiSelect-iconFilled': {
+              backgroundColor: '#ffffff',
+            },
+            '& .MuiInputAdornment-filled.MuiInputAdornment-positionEnd': {
+              backgroundColor: '#ffffff',
+            },
+            borderRadius: '4px',
+            '& .MuiFilledInput-root': {
+              backgroundColor: '#ffffff',
+            },
+            ...underlineStyle,
+          }}
+          variant="filled"
+        >
           <InputLabel
             id={`${id}-label`}
             sx={{
@@ -62,6 +86,12 @@ export default function FormSelect(props) {
               }
               : {
                 backgroundColor: theme.palette.secondary.light,
+                '&:hover': {
+                  backgroundColor: '#ffffff',
+                },
+                '& .MuiSelect-filled': {
+                  backgroundColor: '#ffffff',
+                },
               }}
             endAdornment={(
               <InputAdornment
