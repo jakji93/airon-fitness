@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ConfirmationModal from './ConfirmationModal';
 import { createWorkoutAndMealSchedule, createWorkoutSchedule } from '../../../reducers/WorkoutAndMealSchedule';
+import theme from '../../../theme';
 
 function InstructionString(exercise, set, rep, rest, duration) {
   if (exercise === 'Rest') {
@@ -123,9 +124,13 @@ export default function ExistingWorkoutSchedule() {
         <Button
           fullWidth
           variant="contained"
-          sx={{ mb: 1 }}
+          sx={{
+            mb: 1,
+            backgroundColor: theme.palette.secondary.main,
+          }}
           size="medium"
           onClick={() => setUpdateBothModal(true)}
+          color="primary"
         >
           Regenerate Both Plans
         </Button>
@@ -134,9 +139,13 @@ export default function ExistingWorkoutSchedule() {
         <Button
           fullWidth
           variant="contained"
-          sx={{ mb: 1 }}
+          sx={{
+            mb: 1,
+            backgroundColor: theme.palette.secondary.main,
+          }}
           size="medium"
           onClick={() => setUpdateWorkoutModal(true)}
+          color="primary"
         >Regenerate Workout Plan
         </Button>
       </Grid>
