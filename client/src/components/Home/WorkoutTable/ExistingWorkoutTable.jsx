@@ -1,14 +1,19 @@
 import {
-  Grid, Typography,
+  Grid,
 } from '@mui/material';
 import React from 'react';
+import { useSelector } from 'react-redux';
+
+import WorkoutBrowserCarousel from './WorkoutBrowserCarousel';
 
 export default function ExistingWorkoutTable() {
+  const { workoutSchedule } = useSelector(
+    (state) => state.workoutAndMealSchedule,
+  );
+
   return (
     <Grid container alignItems="center" justifyContent="center" sx={{ p: 2 }}>
-      <Typography variant="h5" component="span" color="text.secondary">
-        Click here to start your workout!
-      </Typography>
+      <WorkoutBrowserCarousel workoutData={workoutSchedule} />
     </Grid>
   );
 }

@@ -34,7 +34,7 @@ export default function ExercisesTable({ exercises }) {
   }));
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -47,10 +47,11 @@ export default function ExercisesTable({ exercises }) {
 
   return (
     <Paper sx={{
-      width: '100%',
+      width: '95%',
       paddingLeft: '50px',
       paddingRight: '50px',
       overflow: 'hidden',
+      boxShadow: 'none',
     }}
     >
       <TableContainer sx={{ maxHeight: 440 }}>
