@@ -162,8 +162,8 @@ function Dictaphone({
 
       { listening ? (
         <Tooltip title="Your microphone is on" sx={{ color: theme.palette.secondary.main }}>
-          <IconButton disableFocusRipple disableTouchRipple>
-            <MicIcon onClick={handleStopListening} />
+          <IconButton onClick={handleStopListening} disableFocusRipple disableTouchRipple>
+            <MicIcon />
           </IconButton>
         </Tooltip>
       ) : (
