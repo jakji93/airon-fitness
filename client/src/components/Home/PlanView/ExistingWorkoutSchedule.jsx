@@ -12,11 +12,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import ConfirmationModal from './ConfirmationModal';
 import { createWorkoutAndMealSchedule, createWorkoutSchedule } from '../../../reducers/WorkoutAndMealSchedule';
 
-function InstructionString(exercise, set, rep, rest) {
+function InstructionString(exercise, set, rep, rest, duration) {
   let resString = '';
   if (set === 1) {
     if (rep === 1) {
-      resString = `Do ${exercise} for ${set} set with ${rep} rep`;
+      resString = `Do ${exercise} for ${duration} minuts`;
     } else {
       resString = `Do ${exercise} for ${set} set with ${rep} reps`;
     }
@@ -30,6 +30,9 @@ function InstructionString(exercise, set, rep, rest) {
     resString = `Do ${exercise} for ${set} sets, ${rep} rep with a ${rest}-second rest between sets`;
   } else {
     resString = `Do ${exercise} for ${set} sets, ${rep} reps with a ${rest}-second rest between sets`;
+  }
+  if (exercise === 'Rest') {
+    resString = 'Rest day';
   }
   return resString;
 }
@@ -59,7 +62,13 @@ function WorkoutScheduleCollapse(props) {
           <ListItem>
             <ListItemText
               secondary={
-                InstructionString(workout.exercise, workout.sets, workout.reps, workout.rest)
+                InstructionString(
+                  workout.exercise,
+                  workout.sets,
+                  workout.reps,
+                  workout.rest,
+                  workout.duration,
+                )
               }
             />
           </ListItem>
