@@ -27,7 +27,6 @@ function Dictaphone({
   decrementTimerCustom,
   finishSet,
   pause,
-  slideIsInView,
 }) {
   const commands = [
     {
@@ -87,117 +86,94 @@ function Dictaphone({
   };
 
   return (
-    <Box>
-      {slideIsInView ? (
-        <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }}>
 
-          <Tooltip
-            sx={{ color: theme.palette.secondary.main }}
-            title={(
-              <div>
-                Command Phrases: <br />
-                <br />
-                {Object.entries(voiceCommands).map(([command, data]) => (
-                  <div key={command}>
-                    <strong>{data.description}</strong>: {data.phrases.join(', ')}
-                  </div>
-                ))}
+      <Tooltip
+        sx={{ color: theme.palette.secondary.main }}
+        title={(
+          <div>
+            Command Phrases: <br />
+            <br />
+            {Object.entries(voiceCommands).map(([command, data]) => (
+              <div key={command}>
+                <strong>{data.description}</strong>: {data.phrases.join(', ')}
               </div>
-        )}
-          >
-            <IconButton disableFocusRipple disableTouchRipple>
-              <InfoIcon />
-            </IconButton>
-          </Tooltip>
+            ))}
+          </div>
+)}
+      >
+        <IconButton disableFocusRipple disableTouchRipple>
+          <InfoIcon />
+        </IconButton>
+      </Tooltip>
 
-          { browserSupportsSpeechRecognition ? (
-            <Tooltip
-              title={(
-                <div>
-                  Your browser supports voice recognition. <br />
-                  <br />
-                  Troubleshooting: <br />
-                  Voice control is not supported across all browsers. <br />
-                  The best native experience is on desktop Google Chrome. <br />
-                  Ensure that you give microphone permissions to AIRON.
-                </div>
-            )}
-              sx={{ color: theme.palette.secondary.main }}
-            >
-              <IconButton disableFocusRipple disableTouchRipple>
-                <RecordVoiceOverIcon />
-              </IconButton>
-            </Tooltip>
-          ) : (
-            <Tooltip
-              title={(
-                <div>
-                  Your browser does not support voice recognition. <br />
-                  <br />
-                  Troubleshooting: <br />
-                  Voice control is not supported across all browsers. <br />
-                  The best native experience is on desktop Google Chrome. <br />
-                  Ensure that you give microphone permissions to AIRON.
-                </div>
-          )}
-              sx={{ color: theme.palette.secondary.main }}
-            >
-              <IconButton disableFocusRipple disableTouchRipple>
-                <VoiceOverOffIcon />
-              </IconButton>
-            </Tooltip>
-          )}
-
-          <Tooltip
-            sx={{ color: theme.palette.secondary.main }}
-            title={(
-              <div>
-                Speech Transcript: <br />
-                <br />
-                {transcript}
-              </div>
-        )}
-          >
-            <IconButton disableFocusRipple disableTouchRipple>
-              <SpeakerNotesIcon />
-            </IconButton>
-          </Tooltip>
-
-          { listening ? (
-            <Tooltip title="Your microphone is on" sx={{ color: theme.palette.secondary.main }}>
-              <IconButton disableFocusRipple disableTouchRipple>
-                <MicIcon onClick={handleStopListening} />
-              </IconButton>
-            </Tooltip>
-          ) : (
-            <Tooltip title="Your microphone is off" sx={{ color: theme.palette.secondary.main }}>
-              <IconButton onClick={handleStartListening} disableFocusRipple disableTouchRipple>
-                <MicOffIcon>Voice Control Off</MicOffIcon>
-              </IconButton>
-            </Tooltip>
-          )}
-
-        </Box>
-      ) : (
-        <Box sx={{ display: 'flex' }}>
-
-          <IconButton disabled>
-            <InfoIcon />
-          </IconButton>
-
-          <IconButton disabled>
+      { browserSupportsSpeechRecognition ? (
+        <Tooltip
+          title={(
+            <div>
+              Your browser supports voice recognition. <br />
+              <br />
+              Troubleshooting: <br />
+              Voice control is not supported across all browsers. <br />
+              The best native experience is on desktop Google Chrome. <br />
+              Ensure that you give microphone permissions to AIRON.
+            </div>
+  )}
+          sx={{ color: theme.palette.secondary.main }}
+        >
+          <IconButton disableFocusRipple disableTouchRipple>
             <RecordVoiceOverIcon />
           </IconButton>
-
-          <IconButton disabled>
-            <SpeakerNotesIcon />
+        </Tooltip>
+      ) : (
+        <Tooltip
+          title={(
+            <div>
+              Your browser does not support voice recognition. <br />
+              <br />
+              Troubleshooting: <br />
+              Voice control is not supported across all browsers. <br />
+              The best native experience is on desktop Google Chrome. <br />
+              Ensure that you give microphone permissions to AIRON.
+            </div>
+)}
+          sx={{ color: theme.palette.secondary.main }}
+        >
+          <IconButton disableFocusRipple disableTouchRipple>
+            <VoiceOverOffIcon />
           </IconButton>
-
-          <IconButton disabled>
-            <MicOffIcon />
-          </IconButton>
-        </Box>
+        </Tooltip>
       )}
+
+      <Tooltip
+        sx={{ color: theme.palette.secondary.main }}
+        title={(
+          <div>
+            Speech Transcript: <br />
+            <br />
+            {transcript}
+          </div>
+)}
+      >
+        <IconButton disableFocusRipple disableTouchRipple>
+          <SpeakerNotesIcon />
+        </IconButton>
+      </Tooltip>
+
+      { listening ? (
+        <Tooltip title="Your microphone is on" sx={{ color: theme.palette.secondary.main }}>
+          <IconButton disableFocusRipple disableTouchRipple>
+            <MicIcon onClick={handleStopListening} />
+          </IconButton>
+        </Tooltip>
+      ) : (
+        <Tooltip title="Your microphone is off" sx={{ color: theme.palette.secondary.main }}>
+          <IconButton onClick={handleStartListening} disableFocusRipple disableTouchRipple>
+            <MicOffIcon>Voice Control Off</MicOffIcon>
+          </IconButton>
+        </Tooltip>
+      )}
+
     </Box>
 
   );
@@ -211,5 +187,4 @@ Dictaphone.propTypes = {
   decrementTimerCustom: PropTypes.func.isRequired,
   finishSet: PropTypes.func.isRequired,
   pause: PropTypes.bool.isRequired,
-  slideIsInView: PropTypes.bool.isRequired,
 };
