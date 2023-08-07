@@ -1,14 +1,13 @@
+/* eslint-disable react/prop-types */
 import {
   Box, Button, Paper, Typography,
 } from '@mui/material';
-import PropTypes from 'prop-types';
 import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 import Typewriter from 'typewriter-effect';
 
 import ExercisesTable from './ExercisesTable';
 import WorkoutStatesEnum from './WorkoutFlowStates';
-import { ExerciseShape, WorkoutScheduleShape } from './WorkoutPropTypes';
 import theme from '../../theme';
 
 const styles = {
@@ -141,15 +140,3 @@ export default function WorkoutCarousel({ handleDay, workoutData, onNext }) {
     </Box>
   );
 }
-
-WorkoutCarousel.propTypes = {
-  handleDay: PropTypes.func.isRequired,
-  workoutData: WorkoutScheduleShape.isRequired,
-  onNext: PropTypes.func.isRequired,
-};
-
-Item.propTypes = {
-  handleDay: PropTypes.func.isRequired,
-  workout: PropTypes.arrayOf(ExerciseShape).isRequired,
-  onNext: PropTypes.func.isRequired,
-};

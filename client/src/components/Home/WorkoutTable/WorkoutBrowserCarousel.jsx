@@ -1,13 +1,12 @@
+/* eslint-disable react/prop-types */
 import {
   Box, Paper, Typography,
 } from '@mui/material';
-import PropTypes from 'prop-types';
 import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 
 import theme from '../../../theme';
 import ExercisesTable from '../../Workout/ExercisesTable';
-import { ExerciseShape, WorkoutScheduleShape } from '../../Workout/WorkoutPropTypes';
 
 const styles = {
   container: {
@@ -81,11 +80,3 @@ export default function WorkoutBrowserCarousel({ workoutData }) {
     </Box>
   );
 }
-
-WorkoutBrowserCarousel.propTypes = {
-  workoutData: WorkoutScheduleShape.isRequired,
-};
-
-Item.propTypes = {
-  workout: PropTypes.arrayOf(ExerciseShape).isRequired,
-};
