@@ -16,8 +16,8 @@ export default function NoSchedule() {
   const createSchedules = () => dispatch(createWorkoutAndMealSchedule());
 
   return (
-    <Grid container alignItems="center" sx={{ p: 2, borderRadius: '10px' }}>
-      <Grid item xs={12}>
+    <Grid container justifyContent="center" alignItems="center" sx={{ p: 2, borderRadius: '10px' }}>
+      <Grid item xs={12} textAlign="center">
         <Box sx={{ fontSize: '1.5vw', paddingBottom: '2vh' }}>
           <Typewriter
             onInit={(typewriter) => {
@@ -28,15 +28,17 @@ export default function NoSchedule() {
           />
         </Box>
       </Grid>
-      <Grid item xs>
+      <Grid item xs textAlign="center">
         <Button
           sx={{
             fontSize: '1vw',
             '&:hover': {
+              color: theme.palette.secondary.light,
+              borderColor: theme.palette.secondary.light,
               backgroundColor: theme.palette.secondary.main,
             },
           }}
-          variant="contained"
+          variant="outlined"
           onClick={() => setConfirmationModal(true)}
         >
           Generate My Personal Schedules
