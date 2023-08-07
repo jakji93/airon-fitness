@@ -16,7 +16,7 @@ import * as yup from 'yup';
 
 import AironLogo from '../assets/design/GradientLogo1.png';
 import { ToastContext } from '../components/common/context/ToastContextProvider';
-import Spinner from '../components/common/Spinner';
+import RelativeSpinner from '../components/common/RelativeSpinner';
 import {
   googleLogin, login, register, resetAuth,
 } from '../reducers/Auth';
@@ -111,7 +111,7 @@ export default function Login() {
   };
 
   if (isLoading) {
-    return <Spinner />;
+    return <RelativeSpinner />;
   }
 
   return (
