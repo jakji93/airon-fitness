@@ -76,7 +76,7 @@ export default function Landing() {
     <div className="video-container" style={styles.container}>
       <div className="overlay" style={styles.overlay} />
       <div className="action-container" style={styles.actionContainer}>
-        <img alt="banner" style={styles.banner} src={banner} />
+        <img alt="AIron Fitness Logo" style={styles.banner} src={banner} />
         <div className="typewriter-container">
           <div className="typewriter" style={styles.typewriter}>
             <TypewriterComponent

@@ -29,16 +29,17 @@ export default function FormTextFieldInput(props) {
     helperText,
     size,
   } = props;
-
+  const ariaLabel = endAdornment ? `${label} with units ${endAdornment}` : label;
   const theme = useTheme();
 
   return (
     <>
-      { showTitleLabel && <GridInputLabel id={id} label={label} /> }
+      { showTitleLabel && <GridInputLabel id={id} label={label} aria-label="test" /> }
       <Grid
         item
         xs={12}
         sm={inputGridSizing(half, customTextFieldGridSize)}
+        aria-label="test"
       >
         <TextField
           required={required}
@@ -75,6 +76,7 @@ export default function FormTextFieldInput(props) {
               borderBottomColor: theme.palette.secondary.main,
             },
           }}
+          InputLabelProps={{ 'aria-label': ariaLabel }}
         />
       </Grid>
     </>

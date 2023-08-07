@@ -39,6 +39,7 @@ export default function ScheduleItem({ details, token }) {
           width: '100%', height: '100px', cursor: 'pointer', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center',
         }}
         onClick={() => setShowDetails(!showDetails)}
+        aria-expanded={showDetails}
       >
         <Box>
           Generated { Object.values(details.schedule)[0].breakfast ? 'Meal Schedule' : 'Workout Schedule' } on {getDateString()}

@@ -120,6 +120,7 @@ export default function SignupRegisterAccount() {
         sx={{
           color: theme.palette.secondary.light,
         }}
+        aria-label={formik.errors?.email ? formik.errors.email : ''}
       />
       <FormTextFieldInput
         id="password"

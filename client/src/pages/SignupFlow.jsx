@@ -48,7 +48,7 @@ export default function SignupFlow() {
     <Box>
       <CssBaseline />
       <Stepper activeStep={step} sx={{ margin: '3%' }} alternativeLabel>
-        {stepTitles.map((label) => (
+        {stepTitles.map((label, idx) => (
           <Step
             key={label}
             sx={{
@@ -75,7 +75,7 @@ export default function SignupFlow() {
               },
             }}
           >
-            <StepLabel>{label}</StepLabel>
+            <StepLabel aria-label={`Step ${idx + 1}, ${label}`}>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>

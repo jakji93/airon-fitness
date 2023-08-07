@@ -38,7 +38,7 @@ export default function ToastContextProvider(props) {
           maxWidth: '20rem',
         }}
       >
-        <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
+        <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }} aria-live="assertive">
           {message}
         </Alert>
       </Snackbar>

@@ -68,7 +68,7 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Icon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-            <img src={AironLogo} alt="Airon Icon" style={styles.logo} />
+            <img src={AironLogo} alt="Airon Fitness Icon" style={styles.logo} />
           </Icon>
           <Typography
             variant="h6"
@@ -184,7 +184,7 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0 }} aria-expanded={Boolean(anchorElUser)} aria-controls="menu-appbar">
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
@@ -216,6 +216,7 @@ function ResponsiveAppBar() {
                     setting[1]();
                     handleCloseUserMenu();
                   }}
+                  role="menuitem"
                 >
                   <Typography textAlign="center">{setting[0]}</Typography>
                 </MenuItem>

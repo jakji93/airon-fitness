@@ -376,7 +376,7 @@ export default function ChatArea() {
               }
             </Grid>
             <Grid item>
-              <Fab color="primary" aria-label="add" onClick={handleSendButton}><SendIcon /></Fab>
+              <Fab color="primary" aria-label="send" onClick={handleSendButton}><SendIcon /></Fab>
             </Grid>
           </Grid>
         </Grid>

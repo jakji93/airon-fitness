@@ -28,13 +28,14 @@ export default function FormSelect(props) {
     helperText,
     size,
   } = props;
+  const ariaLabel = endAdornment ? `${label} with units ${endAdornment}` : label;
 
   const theme = useTheme();
 
   return (
     <>
       { showTitleLabel && <GridInputLabel id={id} label={label} /> }
-      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)} sx={fillHeight ? { height: '100%' } : ''}>
+      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)} sx={fillHeight ? { height: '100%' } : ''} role="option">
         <FormControl fullWidth size={size} sx={fillHeight ? { height: '100%' } : ''}>
           <InputLabel
             id={`${id}-label`}
@@ -42,6 +43,7 @@ export default function FormSelect(props) {
               wordWrap: 'break-word',
               whiteSpace: 'normal',
             }}
+            inputProps={{ 'aria-label': ariaLabel }}
           >
             {label}
           </InputLabel>
@@ -79,7 +81,7 @@ export default function FormSelect(props) {
             error={error}
           >
             {options.map((val) => (
-              <MenuItem value={val} key={val}>{val}</MenuItem>
+              <MenuItem value={val} key={val} aria-label={endAdornment ? `${val} ${endAdornment}` : val}>{val}</MenuItem>
             ))}
           </Select>
           {helperText && <FormHelperText>{helperText}</FormHelperText>}
