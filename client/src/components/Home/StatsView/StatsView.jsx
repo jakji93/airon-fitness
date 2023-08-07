@@ -25,7 +25,11 @@ export default function StatsView() {
 
   return (
     <div>
-      {schedulesExist ? <ExistingStatsView /> : <NoStatsView />}
+      {schedulesExist ? (
+        <ExistingStatsView />
+      ) : (
+        <NoStatsView />
+      ) }
     </div>
   );
 }

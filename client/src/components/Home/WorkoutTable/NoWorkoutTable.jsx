@@ -5,9 +5,9 @@ import React from 'react';
 
 export default function NoWorkoutTable() {
   return (
-    <Grid container alignItems="center" justifyContent="center" sx={{ p: 2 }}>
+    <Grid container alignItems="center" justifyContent="center" sx={{ p: 2, height: '15vw' }}>
       <Typography variant="h5" component="span" color="text.secondary">
-        Workout plan data not available.
+        Workout data not available. Please generate a plan first.
       </Typography>
     </Grid>
   );

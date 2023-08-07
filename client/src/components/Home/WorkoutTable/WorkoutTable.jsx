@@ -1,5 +1,5 @@
 import {
-  Card, Grid, Typography,
+  Card, Grid,
 } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,10 +27,11 @@ export default function WorkoutTable() {
   return (
     <div>
       <Grid container component={Card} sx={{ p: 3, borderRadius: '10px' }}>
-        <Typography variant="h2" sx={{ mb: 2 }}>
-          Workout Table
-        </Typography>
-        {workoutSchedule ? <ExistingWorkoutTable /> : <NoWorkoutTable />}
+        {workoutSchedule ? (
+          <ExistingWorkoutTable />
+        ) : (
+          <NoWorkoutTable />
+        )}
       </Grid>
     </div>
   );
