@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const asyncHandler = require('express-async-handler');
 const UserProfile = require('../models/UserProfileModel');
 const WorkoutSchema = require('../models/WorkoutScheduleModel');
@@ -181,25 +182,20 @@ const getPaginatedScheduleHistory = asyncHandler(async (req, res) => {
   const { page } = req.body;
 
   const docsPerPage = 6;
-  const numDocsToRetrieve = docsPerPage * page;
   const skip = page !== 0 ? docsPerPage * (page - 1) : 0;
-
   const query = { userInfoID: req.user._id };
-  const options = { sort: { createdBy: -1 }, limit: numDocsToRetrieve };
-
-  let combinedSchedules = await Promise.all([
-    WorkoutSchema.find(query, 'createdAt schedule inputs', options),
-    MealSchedule.find(query, 'createdAt schedule inputs', options),
-  ]);
 
   const countWorkouts = await WorkoutSchema.countDocuments(query);
   const countMeals = await MealSchedule.countDocuments(query);
-
   const totalPages = Math.ceil((countWorkouts + countMeals) / docsPerPage);
 
-  combinedSchedules = combinedSchedules.flat();
-  combinedSchedules.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-  combinedSchedules = combinedSchedules.slice(skip, skip + docsPerPage);
+  const combinedSchedules = await WorkoutSchema.aggregate([
+    { $unionWith: { coll: 'meals' } },
+    { $match: { userInfoID: new mongoose.Types.ObjectId(req.user._id) } },
+    { $sort: { createdAt: -1 } },
+    { $skip: skip },
+    { $limit: docsPerPage },
+  ]);
 
   res.status(200).json({
     pagination: {
