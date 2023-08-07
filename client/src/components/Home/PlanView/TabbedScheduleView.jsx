@@ -33,7 +33,13 @@ export default function TabbedScheduleView() {
     <Grid container component={Card} alignItems="center" columns={2} sx={{ p: 3, position: 'relative', borderRadius: '10px' }}>
       {isLoading && <RelativeSpinner />}
       <Grid item xs={10}>
-        <Tabs value={value} onChange={(e, v) => setValue(v)} aria-label="icon label tabs example">
+        <Tabs
+          value={value}
+          onChange={(e, v) => setValue(v)}
+          aria-label="icon label tabs example"
+          textColor="secondary"
+          indicatorColor="secondary"
+        >
           <Tab
             icon={<FitnessCenterIcon fontSize="large" />}
             label="Fitness Plan"

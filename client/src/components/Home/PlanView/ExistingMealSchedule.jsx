@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ConfirmationModal from './ConfirmationModal';
 import { createMealSchedule, createWorkoutAndMealSchedule } from '../../../reducers/WorkoutAndMealSchedule';
+import theme from '../../../theme';
 
 function GetProperLabel(str) {
   let resStr = '';
@@ -106,9 +107,13 @@ export default function ExistingMealSchedule() {
         <Button
           fullWidth
           variant="contained"
-          sx={{ mb: 1 }}
+          sx={{
+            mb: 1,
+            backgroundColor: theme.palette.secondary.main,
+          }}
           size="medium"
           onClick={() => setUpdateBothModal(true)}
+          color="primary"
         >
           Regenerate Both Plans
         </Button>
@@ -117,9 +122,10 @@ export default function ExistingMealSchedule() {
         <Button
           fullWidth
           variant="contained"
-          sx={{ mb: 1 }}
+          sx={{ mb: 1, backgroundColor: theme.palette.secondary.main }}
           size="medium"
           onClick={() => setUpdateMealModal(true)}
+          color="primary"
         >
           Regenerate Meal Plan
         </Button>
