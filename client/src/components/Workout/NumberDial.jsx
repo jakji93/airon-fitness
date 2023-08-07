@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
 
-function CalorieDial({ maxValue }) {
+function NumberDial({ maxValue }) {
   const { number } = useSpring({
     from: { number: 0 },
     number: maxValue,
@@ -12,8 +12,8 @@ function CalorieDial({ maxValue }) {
   return <animated.div>{number.interpolate((val) => Math.floor(val))}</animated.div>;
 }
 
-CalorieDial.propTypes = {
+NumberDial.propTypes = {
   maxValue: PropTypes.number.isRequired,
 };
 
-export default CalorieDial;
+export default NumberDial;

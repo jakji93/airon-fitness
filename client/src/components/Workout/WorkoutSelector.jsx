@@ -73,10 +73,20 @@ const styles = {
 };
 
 export default function WorkoutSelector({ currentDay, workoutData, onNext }) {
+  const workouts = Object.entries(workoutData.schedule)
+    .map(([day, { exercises }]) => ({
+      [day]: exercises,
+    }));
+
+  const getWorkoutForDay = (day) => {
+    const foundWorkout = workouts.find((workoutObj) => day in workoutObj);
+    return foundWorkout ? foundWorkout[day] : null;
+  };
+
   return (
     <Box sx={styles.container}>
       <Box sx={styles.typewriterContainer}>
-        {workoutData ? (
+        {getWorkoutForDay(currentDay) ? (
           <Typewriter
             onInit={(typewriter) => {
               typewriter.changeDelay(40)
@@ -109,7 +119,7 @@ export default function WorkoutSelector({ currentDay, workoutData, onNext }) {
         style={styles.logo}
       />
 
-      {workoutData ? (
+      {getWorkoutForDay(currentDay) ? (
         <Button onClick={() => onNext(WorkoutStatesEnum.IN_SESSION)} variant="outlined" sx={styles.startButton}>
           START WORKOUT
         </Button>
