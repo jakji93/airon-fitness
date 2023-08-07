@@ -1,6 +1,4 @@
-import {
-  Card, Grid,
-} from '@mui/material';
+import { Card, Grid } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 

@@ -1,6 +1,4 @@
-import {
-  Card, Grid, Typography,
-} from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { BarChart } from '@mui/x-charts';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -110,7 +108,6 @@ export default function ExistingStatsView() {
     <div>
       <Grid
         container
-        component={Card}
         alignItems="center"
         justifyContent="center"
         sx={{
