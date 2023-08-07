@@ -226,9 +226,7 @@ export default function GuidedExercise({
         <Box sx={styles.middleDataDialsContainer}>
           <Paper sx={[styles.circularDataDisplay, styles.circularDataSets]}>
             {slideIsInView ? (
-              <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
-                <NumberDial maxValue={currentExerciseSetCount} />
-              </Typography>
+              <NumberDial styles={{ fontSize: 'clamp(20px, 6vw, 120px)' }} maxValue={currentExerciseSetCount} />
             ) : (
               <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
                 {currentExerciseSetCount}
@@ -243,9 +241,7 @@ export default function GuidedExercise({
         <Box sx={styles.middleDataDialsContainer}>
           <Paper sx={[styles.circularDataDisplay, styles.circularDataReps]}>
             {slideIsInView ? (
-              <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
-                <NumberDial maxValue={e.reps} />
-              </Typography>
+              <NumberDial styles={{ fontSize: 'clamp(20px, 6vw, 120px)' }} maxValue={e.reps} />
             ) : (
               <Typography sx={{ fontSize: 'clamp(20px, 6vw, 120px)' }}>
                 {e.reps}
@@ -259,9 +255,7 @@ export default function GuidedExercise({
 
         <Box sx={styles.middleDataDialsContainer}>
           <Paper sx={[styles.circularDataDisplay, styles.circularDataCalories]}>
-            <Typography sx={{ fontSize: 'clamp(20px, 6vw, 90px)' }}>
-              <NumberDial maxValue={calorieCount} />
-            </Typography>
+            <NumberDial styles={{ fontSize: 'clamp(20px, 6vw, 90px)' }} maxValue={calorieCount} />
           </Paper>
           <Typography sx={{ fontSize: 'clamp(15px, 0.5vw, 30px)' }}>
             Calories Burnt
