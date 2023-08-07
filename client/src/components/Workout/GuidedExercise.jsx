@@ -7,6 +7,7 @@ import React from 'react';
 
 import NumberDial from './NumberDial';
 import Dictaphone from './VoiceRecognition/Dictaphone';
+import DictaphoneDisabled from './VoiceRecognition/DictaphoneDisabled';
 import WorkoutStatesEnum from './WorkoutFlowStates';
 import { ExerciseShape } from './WorkoutPropTypes';
 import theme from '../../theme';
@@ -363,15 +364,22 @@ export default function GuidedExercise({
             </Typography>
           </Box>
         </Popover>
-        <Dictaphone
-          slideIsInView={slideIsInView}
-          timerToggle={handleTimerToggle}
-          incrementTimer={handleTimerAddition}
-          incrementTimerCustom={handleTimerCustomAddition}
-          decrementTimerCustom={handleTimerCustomSubtraction}
-          finishSet={handleFinishedSet}
-          pause={pause}
-        />
+        <Box>
+          {slideIsInView ? (
+            <Dictaphone
+              slideIsInView={slideIsInView}
+              timerToggle={handleTimerToggle}
+              incrementTimer={handleTimerAddition}
+              incrementTimerCustom={handleTimerCustomAddition}
+              decrementTimerCustom={handleTimerCustomSubtraction}
+              finishSet={handleFinishedSet}
+              pause={pause}
+            />
+          ) : (
+            <DictaphoneDisabled />
+          )}
+        </Box>
+
       </Box>
     </Paper>
   );
