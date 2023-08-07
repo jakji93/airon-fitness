@@ -15,13 +15,25 @@ export const createWorkoutString = (schedule, newMessages) => {
   });
 };
 
+function GetProperLabel(str) {
+  let resStr = '';
+  if (str === 'snack1') {
+    resStr = 'Morning Snack';
+  } else if (str === 'snack2') {
+    resStr = 'Afternoon Snack';
+  } else {
+    resStr = str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  return resStr;
+}
+
 export const createMealString = (schedule, newMessages) => {
   Object.entries(schedule.schedule).forEach(([day, meals]) => {
     const meal = Object.entries(meals);
     newMessages.push({ content: `${day}\n`, isSelf: false });
 
     meal.forEach((ex, idx) => {
-      newMessages.push({ content: idx !== 5 ? `${ex[0]}: ${ex[1]}\n` : '', isSelf: false });
+      newMessages.push({ content: idx !== 5 ? `${GetProperLabel(ex[0])}: ${ex[1]}\n` : '', isSelf: false });
     });
   });
 };

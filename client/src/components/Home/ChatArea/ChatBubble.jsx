@@ -19,7 +19,7 @@ const styles = {
   received: {
     textAlign: 'left',
     color: 'black',
-    backgroundColor: '#c4c4c4',
+    backgroundColor: '#d9d9d9',
   },
 };
 
