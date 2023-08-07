@@ -58,11 +58,11 @@ const createUserProfile = asyncHandler(async (req, res) => {
     res.status(400).json({ message: 'Please include all required fields' });
     throw new Error('Please include all required fields');
   }
-  // const verifyKey = await openAI.verifyAPIKey(userProfile.apiKey);
-  // if (!verifyKey) {
-  //   res.status(400).json({ message: 'Please include a valid GPT API key' });
-  //   throw new Error('Please include a valid GPT API key');
-  // }
+  const verifyKey = await openAI.verifyAPIKey(userProfile.apiKey);
+  if (!verifyKey) {
+    res.status(400).json({ message: 'Please include a valid GPT API key' });
+    throw new Error('Please include a valid GPT API key');
+  }
   userProfile.userInfoID = req.user._id;
   if (req.file) {
     userProfile.profileImage = {
@@ -183,13 +183,12 @@ const getPaginatedScheduleHistory = asyncHandler(async (req, res) => {
 
   const docsPerPage = 6;
   const skip = page !== 0 ? docsPerPage * (page - 1) : 0;
-
   const query = { userInfoID: req.user._id };
 
   const countWorkouts = await WorkoutSchema.countDocuments(query);
   const countMeals = await MealSchedule.countDocuments(query);
-
   const totalPages = Math.ceil((countWorkouts + countMeals) / docsPerPage);
+
   const combinedSchedules = await WorkoutSchema.aggregate([
     { $unionWith: { coll: 'meals' } },
     { $match: { userInfoID: new mongoose.Types.ObjectId(req.user._id) } },
