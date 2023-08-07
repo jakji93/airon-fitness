@@ -1,11 +1,13 @@
 import {
-  Button, Grid, Typography,
+  Button, Grid, Box,
 } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Typewriter from 'typewriter-effect';
 
 import ConfirmationModal from './ConfirmationModal';
 import { createWorkoutAndMealSchedule } from '../../../reducers/WorkoutAndMealSchedule';
+import theme from '../../../theme';
 
 export default function NoSchedule() {
   const dispatch = useDispatch();
@@ -16,12 +18,29 @@ export default function NoSchedule() {
   return (
     <Grid container alignItems="center" sx={{ p: 2, borderRadius: '10px' }}>
       <Grid item xs={12}>
-        <Typography variant="h5" component="span" color="text.secondary">
-          Get started by creating a plan!
-        </Typography>
+        <Box sx={{ fontSize: '1.5vw', paddingBottom: '2vh' }}>
+          <Typewriter
+            onInit={(typewriter) => {
+              typewriter.changeDelay(40)
+                .typeString('Get started by creating a plan.')
+                .start();
+            }}
+          />
+        </Box>
       </Grid>
       <Grid item xs>
-        <Button variant="outlined" onClick={() => setConfirmationModal(true)}>Create My Plans</Button>
+        <Button
+          sx={{
+            fontSize: '1.5vw',
+            '&:hover': {
+              backgroundColor: theme.palette.secondary.main,
+            },
+          }}
+          variant="contained"
+          onClick={() => setConfirmationModal(true)}
+        >
+          Generate My Personal Schedules
+        </Button>
         <ConfirmationModal
           open={confirmationModal}
           setOpen={setConfirmationModal}
