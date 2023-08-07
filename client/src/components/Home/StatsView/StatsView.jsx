@@ -1,3 +1,4 @@
+import { Card, Grid } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -24,12 +25,12 @@ export default function StatsView() {
   }, [workoutSchedule, mealSchedule, isError, isSuccess, message, dispatch]);
 
   return (
-    <div>
+    <Grid container component={Card} sx={{ p: 3, borderRadius: '10px' }}>
       {schedulesExist ? (
         <ExistingStatsView />
       ) : (
         <NoStatsView />
       ) }
-    </div>
+    </Grid>
   );
 }
