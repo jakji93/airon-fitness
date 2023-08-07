@@ -12,6 +12,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import ConfirmationModal from './ConfirmationModal';
 import { createWorkoutAndMealSchedule, createWorkoutSchedule } from '../../../reducers/WorkoutAndMealSchedule';
 
+function InstructionString(exercise, set, rep, rest) {
+  let resString = '';
+  if (set === 1) {
+    if (rep === 1) {
+      resString = `Do ${exercise} for ${set} set with ${rep} rep`;
+    } else {
+      resString = `Do ${exercise} for ${set} set with ${rep} reps`;
+    }
+  } else if (rest === 0) {
+    if (rep === 1) {
+      resString = `Do ${exercise} for ${set} sets, ${rep} rep with no rest between sets`;
+    } else {
+      resString = `Do ${exercise} for ${set} sets, ${rep} reps with no rest between sets`;
+    }
+  } else if (rep === 1) {
+    resString = `Do ${exercise} for ${set} sets, ${rep} rep with a ${rest}-second rest between sets`;
+  } else {
+    resString = `Do ${exercise} for ${set} sets, ${rep} reps with a ${rest}-second rest between sets`;
+  }
+  return resString;
+}
+
 function WorkoutScheduleCollapse(props) {
   const {
     index,
@@ -36,9 +58,9 @@ function WorkoutScheduleCollapse(props) {
         >
           <ListItem>
             <ListItemText
-              secondary={`Do ${workout.exercise} for ${workout.sets} sets, 
-                      ${workout.reps} reps with a ${workout.rest} 
-                      second break between sets.`}
+              secondary={
+                InstructionString(workout.exercise, workout.sets, workout.reps, workout.rest)
+              }
             />
           </ListItem>
         </Collapse>
