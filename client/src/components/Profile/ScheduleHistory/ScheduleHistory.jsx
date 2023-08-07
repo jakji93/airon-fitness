@@ -36,7 +36,7 @@ export default function ScheduleHistory() {
         {
           history
             // eslint-disable-next-line react/no-array-index-key
-            ? history.schedules.map((i, idx) => <ScheduleItem key={`schedule-${idx}`} details={i} token={token} />) : ''
+            ? history.schedules.map((i, idx) => (i.schedule ? <ScheduleItem key={`schedule-${idx}`} details={i} token={token} /> : '')) : ''
         }
       </Grid>
       <Pagination
