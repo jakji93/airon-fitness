@@ -1,12 +1,11 @@
+/* eslint-disable react/prop-types */
 import {
   Box, Typography, Button,
 } from '@mui/material';
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import Carousel from 'react-material-ui-carousel';
 
 import GuidedExercise from './GuidedExercise';
-import { WorkoutScheduleShape } from './WorkoutPropTypes';
 import theme from '../../theme';
 
 const styles = {
@@ -108,6 +107,7 @@ export default function GuidedWorkout({ sessionDay, workoutData, onNext }) {
           {
             getWorkoutForDay(sessionDay).map((e, index) => (
               <GuidedExercise
+                key={e.exercise}
                 e={e}
                 onNext={onNext}
                 isLastExercise={(index === getWorkoutForDay(sessionDay).length - 1)}
@@ -134,9 +134,3 @@ export default function GuidedWorkout({ sessionDay, workoutData, onNext }) {
 
   );
 }
-
-GuidedWorkout.propTypes = {
-  sessionDay: PropTypes.string.isRequired,
-  workoutData: WorkoutScheduleShape.isRequired,
-  onNext: PropTypes.func.isRequired,
-};

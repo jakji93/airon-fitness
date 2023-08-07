@@ -1,13 +1,12 @@
+/* eslint-disable react/prop-types */
 import {
   Box,
   Button,
 } from '@mui/material';
-import PropTypes from 'prop-types';
 import React from 'react';
 import Typewriter from 'typewriter-effect';
 
 import WorkoutStatesEnum from './WorkoutFlowStates';
-import { WorkoutScheduleShape } from './WorkoutPropTypes';
 import AironLogo from '../../assets/design/LogoTan.png';
 import theme from '../../theme';
 
@@ -131,9 +130,3 @@ export default function WorkoutSelector({ currentDay, workoutData, onNext }) {
     </Box>
   );
 }
-
-WorkoutSelector.propTypes = {
-  currentDay: PropTypes.string.isRequired,
-  workoutData: WorkoutScheduleShape.isRequired,
-  onNext: PropTypes.func.isRequired,
-};
