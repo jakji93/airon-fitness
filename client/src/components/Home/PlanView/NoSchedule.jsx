@@ -31,7 +31,7 @@ export default function NoSchedule() {
       <Grid item xs>
         <Button
           sx={{
-            fontSize: '1.5vw',
+            fontSize: '1vw',
             '&:hover': {
               backgroundColor: theme.palette.secondary.main,
             },
