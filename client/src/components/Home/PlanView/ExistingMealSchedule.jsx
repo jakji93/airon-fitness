@@ -17,6 +17,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import ConfirmationModal from './ConfirmationModal';
 import { createMealSchedule, createWorkoutAndMealSchedule } from '../../../reducers/WorkoutAndMealSchedule';
 
+function Capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 function MealScheduleCollapse(props) {
   const {
     index,
@@ -42,7 +46,7 @@ function MealScheduleCollapse(props) {
         >
           <ListItem>
             <ListItemText
-              secondary={`${meal.toString()}: ${mealSchedule[meal]}`}
+              secondary={`${Capitalize(meal.toString())}: ${mealSchedule[meal]}`}
             />
           </ListItem>
         </Collapse>
