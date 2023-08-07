@@ -79,7 +79,7 @@ export default function ExercisesTable({ exercises }) {
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.exercise}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
