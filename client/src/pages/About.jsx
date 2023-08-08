@@ -44,7 +44,6 @@ export default function About() {
       linkedIn: 'https://www.linkedin.com/in/kevin-wu1/',
       profilePicture: logo, // Replace with the actual image URL
     },
-    // Add more team members here
   ];
 
   const theme = useTheme();
