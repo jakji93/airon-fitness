@@ -332,7 +332,7 @@ export default function About() {
                 <br />
                 7. Accessibility Support:<br />
                 We&apos;re here to listen. If you encounter any accessibility challenges or have ideas for making our app even more inclusive,
-                please reach out to our contacts that can be found on the About Page or create an issue on our <a id="github" href="https://github.com/" style={{ color: theme.palette.secondary.light, textDecoration: 'none' }}>Github Repository</a>.
+                please reach out to our contacts that can be found on the About Page or create an issue on our <a id="github" href="https://github.com/jakji93/airon-fitness/issues" style={{ color: theme.palette.secondary.light, textDecoration: 'none' }}>Github Repository</a>.
                 Creating an accessible app is an ongoing journey for us. We&apos;re grateful for your feedback and eager to make AIRON Fitness a place where everyone can thrive. Your fitness goals matter, and we&apos;re here to provide support that&apos;s as inclusive as it is empowering.
               </Typography>
             </Grid>
