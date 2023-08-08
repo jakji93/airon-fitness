@@ -133,7 +133,7 @@ export default function ChatArea() {
   const handleStarterResponse = async (newMessages, input) => {
     if (input === 'Edit Profile') {
       newMessages.push({ content: 'For sure. Which of the following values would you like to update?', isSelf: false });
-      setFormOptions(['Height', 'Weight', 'Avaibility', 'Allergies', 'Health Conditions', 'Dietary Restrictions', 'Goals']);
+      setFormOptions(['Height', 'Weight', 'Availability', 'Allergies', 'Health Conditions', 'Dietary Restrictions', 'Goals']);
       setInputMode(1);
       setInputLabel('Profile');
       setMode('edit');
@@ -352,7 +352,7 @@ export default function ChatArea() {
         <Grid container style={{ padding: '20px', alignItems: 'center', flexWrap: 'nowrap' }}>
           <Grid item xs={11}>
             { inputMode === 0
-              ? <TextField id="chatbox-inputfield" label="Provide a valid value" onKeyDown={handleSubmit} fullWidth />
+              ? <TextField id="chatbox-inputfield" label="Provide a valid value" sx={{ backgroundColor: theme.palette.secondary.light }} onKeyDown={handleSubmit} variant="filled" fullWidth />
               : ''}
             {
                 inputMode === 1
