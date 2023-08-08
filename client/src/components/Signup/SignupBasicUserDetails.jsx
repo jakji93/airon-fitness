@@ -1,5 +1,5 @@
 import {
-  Grid, Button,
+  Grid,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import dayjs from 'dayjs';
@@ -10,6 +10,7 @@ import * as yup from 'yup';
 
 import { genderOptions } from '../../constants/BasicProfile';
 import { setSignup } from '../../reducers/Signup';
+import { StyledButton } from '../../styled';
 import { ToastContext } from '../common/context/ToastContextProvider';
 import Form from '../Profile/Forms/Form';
 import FormDatePicker from '../Profile/Forms/FormDatePicker';
@@ -148,14 +149,14 @@ export default function SignupBasicUserDetails() {
         xs={12}
         sm={6}
       >
-        <Button
+        <StyledButton
           type="submit"
           variant="contained"
           fullWidth
           sx={{ backgroundColor: theme.palette.secondary.main }}
         >
           Next
-        </Button>
+        </StyledButton>
       </Grid>
     </Form>
   );

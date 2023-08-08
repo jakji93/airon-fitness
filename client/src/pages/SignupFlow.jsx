@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { ToastContext } from '../components/common/context/ToastContextProvider';
-import Spinner from '../components/common/Spinner';
+import RelativeSpinner from '../components/common/RelativeSpinner';
 import SignupAdditionalDetails from '../components/Signup/SignupAdditionalDetails';
 import SignupAPIKey from '../components/Signup/SignupAPIKey';
 import SignupBasicUserDetails from '../components/Signup/SignupBasicUserDetails';
@@ -14,6 +14,7 @@ import SignupRegisterAccount from '../components/Signup/SignupRegisterAccount';
 import SignupRequireUserDetails from '../components/Signup/SignupRequireUserDetails';
 import { removeSignup } from '../reducers/Signup';
 import { resetUserProfileStates } from '../reducers/UserProfile';
+import theme from '../theme';
 
 export default function SignupFlow() {
   const openToast = useContext(ToastContext);
@@ -40,12 +41,9 @@ export default function SignupFlow() {
     dispatch(resetUserProfileStates);
   }, [profile, isError, isSuccess, message, dispatch]);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
   return (
     <Box>
+      {isLoading && <RelativeSpinner />}
       <CssBaseline />
       <Stepper activeStep={step} sx={{ margin: '3%' }} alternativeLabel>
         {stepTitles.map((label, idx) => (
@@ -72,6 +70,16 @@ export default function SignupFlow() {
               '& .MuiStepLabel-label.Mui-disabled.MuiStepLabel-alternativeLabel':
               {
                 color: 'secondary.light', // Just text label (INACTIVE)
+              },
+              '& .Mui-active text': {
+                fill: theme.palette.secondary.dark,
+              },
+              '& .MuiStepIcon-root': {
+                width: '2rem',
+                height: '2rem',
+              },
+              '& text': {
+                fontSize: '1rem',
               },
             }}
           >

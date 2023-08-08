@@ -3,7 +3,7 @@ import { Backdrop, CircularProgress } from '@mui/material';
 import React from 'react';
 
 /**
- * Parent using this element must have this styling
+ * Parent using this element may need this styling
  * for backdrop to be contained within component
  */
 // const BackdropWrapper = styled('div')(() => ({
@@ -16,6 +16,7 @@ import React from 'react';
 const BackdropAbsolute = styled(Backdrop)(() => ({
   position: 'absolute',
   zIndex: 10,
+  borderRadius: '4px',
 }));
 
 export default function RelativeSpinner() {

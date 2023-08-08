@@ -9,6 +9,25 @@ import { inputGridSizing } from './Form';
 import { underlineStyle } from './FormTextFieldInput';
 import GridInputLabel from './GridInputLabel';
 
+const selectStyle = {
+  '&:hover': {
+    backgroundColor: 'theme.palette.secondary.light',
+  },
+  '& .MuiSelect-filled': {
+    backgroundColor: 'theme.palette.secondary.light',
+  },
+  '& .MuiSelect-iconFilled': {
+    backgroundColor: 'theme.palette.secondary.light',
+  },
+  '& .MuiInputAdornment-filled.MuiInputAdornment-positionEnd': {
+    backgroundColor: 'theme.palette.secondary.light',
+  },
+  borderRadius: '4px',
+  '& .MuiFilledInput-root': {
+    backgroundColor: 'theme.palette.secondary.light',
+  },
+};
+
 export default function FormSelect(props) {
   const {
     id,
@@ -36,29 +55,19 @@ export default function FormSelect(props) {
   return (
     <>
       { showTitleLabel && <GridInputLabel id={id} label={label} /> }
-      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)} sx={fillHeight ? { height: '100%' } : ''}>
+      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)} sx={fillHeight ? { height: '100%' } : {}}>
         <FormControl
           fullWidth
           size={size}
-          sx={fillHeight ? { height: '100%' } : {
-            '&:hover': {
-              backgroundColor: 'theme.palette.secondary.light',
-            },
-            '& .MuiSelect-filled': {
-              backgroundColor: 'theme.palette.secondary.light',
-            },
-            '& .MuiSelect-iconFilled': {
-              backgroundColor: 'theme.palette.secondary.light',
-            },
-            '& .MuiInputAdornment-filled.MuiInputAdornment-positionEnd': {
-              backgroundColor: 'theme.palette.secondary.light',
-            },
-            borderRadius: '4px',
-            '& .MuiFilledInput-root': {
-              backgroundColor: 'theme.palette.secondary.light',
-            },
-            ...underlineStyle,
-          }}
+          sx={fillHeight
+            ? {
+              height: '100%',
+              ...selectStyle,
+              ...underlineStyle,
+            } : {
+              ...selectStyle,
+              ...underlineStyle,
+            }}
           variant="filled"
         >
           <InputLabel
@@ -137,7 +146,7 @@ FormSelect.propTypes = {
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
   error: PropTypes.bool,
-  helperText: PropTypes.string,
+  helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   size: PropTypes.string,
 };
 

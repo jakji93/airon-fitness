@@ -1,5 +1,4 @@
 import {
-  Button,
   Link,
   Grid,
 } from '@mui/material';
@@ -15,6 +14,7 @@ import * as yup from 'yup';
 
 import { register, resetAuth } from '../../reducers/Auth';
 import { setSignup } from '../../reducers/Signup';
+import { StyledButton } from '../../styled';
 import { ToastContext } from '../common/context/ToastContextProvider';
 import Spinner from '../common/Spinner';
 import Form from '../Profile/Forms/Form';
@@ -153,15 +153,15 @@ export default function SignupRegisterAccount() {
         size="medium"
       />
       <Grid item xs={12} sm={6}>
-        <Button
+        <StyledButton
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ width: '100%', height: '100%', backgroundColor: theme.palette.secondary.main }}
+          sx={{ width: '100%', height: '100%' }}
           disabled={formik.isSubmitting}
         >
           Create Account
-        </Button>
+        </StyledButton>
       </Grid>
       <Grid item xs={12} sm={6}>
         <GoogleLogin
