@@ -396,7 +396,7 @@ export default function ChatArea() {
                 },
               }}
             >
-              <SendIcon />
+              <SendIcon sx={{ color: theme.palette.secondary.dark }} />
             </Fab>
           </Grid>
         </Grid>
