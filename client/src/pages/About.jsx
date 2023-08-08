@@ -63,21 +63,21 @@ const teamMembers = [
     github: 'https://github.com/d-x-s',
     linkedIn: 'https://www.linkedin.com/in/davissong/',
     profilePicture: DavisSongIcon,
-    contributions: 'Frontend Design & Styling, Guided Workouts, Data Generation Controllers',
+    contributions: 'OpenAI Data Generation, Frontend Design & Styling, Guided Workouts',
   },
   {
     name: 'Jack Ji',
     github: 'https://github.com/jakji93',
     linkedIn: 'https://www.linkedin.com/in/jack-ji-5643a011a/',
     profilePicture: JackJiIcon,
-    contributions: 'Database Design, Prompt Engineering, Deployments, Express Routing',
+    contributions: 'Database Design, Prompt Engineering, Express Routing, Deployments',
   },
   {
     name: 'Kenny Cheng',
     github: 'https://github.com/kennyjhcheng',
     linkedIn: 'https://www.linkedin.com/in/kennyjhcheng/',
     profilePicture: KennyChengIcon,
-    contributions: 'Secure Authentication, Profile System, Redux Structure, Google Accounts',
+    contributions: 'Secure Authentication, Profile System, Redux States, Google Accounts',
   },
   {
     name: 'Kevin Chung',
@@ -213,7 +213,7 @@ export default function About() {
             <Margin />
             <Grid item sm={textSize} xs={12}>
               <Typography variant="h6" align="justify" gutterBottom sx={{ color: theme.palette.secondary.main }}>
-                Introducing AIron Fitness, your ultimate fitness companion,
+                Introducing AIRON Fitness, your ultimate fitness companion,
                 powered by cutting-edge artificial intelligence.
                 Get ready to embark on a fitness journey like no other!
               </Typography>
@@ -221,7 +221,7 @@ export default function About() {
             <Margin /><Margin />
             <Grid item sm={textSize} xs={12}>
               <Typography variant="h6" align="justify" gutterBottom sx={{ color: theme.palette.secondary.main }}>
-                AIron Fitness is more than just a fitness app;
+                AIRON Fitness is more than just a fitness app;
                 it&apos;s your personalized fitness guru,
                 here to empower you every step of the way.
                 We understand that every individual&apos;s fitness needs are unique,
@@ -235,7 +235,7 @@ export default function About() {
                 Whether you&apos;re a fitness beginner,
                 looking to take your first steps into a healthier lifestyle,
                 or a seasoned enthusiast aiming to reach new heights,
-                AIron Fitness has your back.
+                AIRON Fitness has your back.
                 Get ready to say goodbye to one-size-fits-all workouts
                 and embrace a fitness solution that&apos;s tailor-made just for you.
               </Typography>
@@ -244,9 +244,9 @@ export default function About() {
             <Grid item sm={textSize} xs={12}>
               <Typography variant="h6" align="justify" gutterBottom sx={{ color: theme.palette.secondary.main }}>
                 Creating your profile is just the beginning.
-                Input your fitness goals, and let AIron Fitness work its magic.
+                Input your fitness goals, and let AIRON Fitness work its magic.
                 You&apos;ll receive a comprehensive fitness plan,
-                complete with guided workouts and a handy timer to keep you on track and motivated.
+                complete with guided workouts and a voice-controlled display to keep you on track and motivated.
                 It&apos;s like having your very own fitness coach available 24/7!
               </Typography>
             </Grid>
@@ -254,7 +254,7 @@ export default function About() {
             <Grid item sm={textSize} xs={12}>
               <Typography variant="h6" align="justify" gutterBottom sx={{ color: theme.palette.secondary.main }}>
                 But that&apos;s not all,
-                AIron Fitness goes beyond the surface.
+                AIRON Fitness goes beyond the surface.
                 Our platform stores your valuable fitness data,
                 including personal profiles and progress,
                 allowing you to witness your achievements and growth over time.
@@ -265,7 +265,7 @@ export default function About() {
             <Margin /><Margin />
             <Grid item sm={textSize} xs={12}>
               <Typography variant="h6" align="justify" gutterBottom sx={{ color: theme.palette.secondary.main }}>
-                With AIron Fitness, you&apos;re in control.
+                With AIRON Fitness, you&apos;re in control.
                 Embrace a fitness journey that is uniquely yours,
                 and experience the thrill of a personalized fitness adventure.
                 Are you ready to unleash the full potential of your fitness goals?
@@ -274,6 +274,69 @@ export default function About() {
               </Typography>
             </Grid>
             <Margin />
+          </Grid>
+        </Box>
+
+        <Box sx={styles.sectionContainer}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: '5rem',
+              color: theme.palette.secondary.light,
+              fontFamily: theme.typography.fontFamily,
+            }}
+          >
+            Accessibility
+          </Typography>
+
+          <Grid
+            container
+            spacing={2}
+            sx={{ p: 2 }}
+            style={{
+              height: '100%',
+              width: '75vw',
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <Margin />
+            <Grid item sm={textSize} xs={12}>
+              <Typography variant="h6" align="justify" gutterBottom sx={{ color: theme.palette.secondary.main }}>
+                At AIRON Fitness, our goal is to create an app that is accessible and welcoming to all users, regardless of their abilities. We&apos;ve taken steps to ensure that our app is designed with accessibility in mind, and we&apos;re here to humbly share how we&apos;ve done so:
+                <br />
+                <br />
+                1. Contrast Standards: <br />
+                We&apos;ve put thought into the contrast of our app&apos;s elements, keeping acceptable contrast standards at the forefront. This way, text, icons, and visuals are distinguishable, offering a more readable experience for those with low vision or color vision impairments.
+                <br />
+                <br />
+                2. Screen Reader Support: <br />
+                AIRON Fitness is compatible with screen readers. Our approach involves crafting our app using semantic HTML and proper labeling. This way, screen reader users can seamlessly navigate, understand, and engage with all app features.
+                <br />
+                <br />
+                3. Alternative Text for Images: <br />
+                For images, we&apos;ve added descriptive alternative text (alt text). This helps screen reader users understand the content and context of images, from icons to graphics.
+                <br />
+                <br />
+                4. Clear and Consistent Layout: <br />
+                We&apos;ve taken care to keep our app&apos;s layout consistent and easy to follow. Users can effortlessly move through menus, buttons, and options using keyboard shortcuts, touch gestures, or screen readers.
+                <br />
+                <br />
+                5. Keyboard Navigation: <br />
+                We&apos;ve made sure that AIRON Fitness supports keyboard navigation, providing an avenue for users who prefer keyboard commands or have motor disabilities to navigate without a mouse.
+                <br />
+                <br />
+                6. User Personalization: <br />
+                AIRON Fitness is about your journey. Our app empowers you to personalize your fitness plans according to your preferences and abilities. We understand that each journey is unique, and our aim is to make the app adaptable for all.
+                <br />
+                <br />
+                7. Accessibility Support:<br />
+                We&apos;re here to listen. If you encounter any accessibility challenges or have ideas for making our app even more inclusive,
+                please reach out to our contacts that can be found on the About Page or create an issue on our <a id="github" href="https://github.com/" style={{ color: theme.palette.secondary.light, textDecoration: 'none' }}>Github Repository</a>.
+                Creating an accessible app is an ongoing journey for us. We&apos;re grateful for your feedback and eager to make AIRON Fitness a place where everyone can thrive. Your fitness goals matter, and we&apos;re here to provide support that&apos;s as inclusive as it is empowering.
+              </Typography>
+            </Grid>
+            <Margin /><Margin />
           </Grid>
         </Box>
 
