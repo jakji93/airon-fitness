@@ -6,7 +6,7 @@ import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 
 import theme from '../../../theme';
-import ExercisesTableBrowser from '../../Workout/ExercisesTableBrowser';
+import ExercisesTable from '../../Workout/ExercisesTable';
 
 const styles = {
   container: {
@@ -39,7 +39,7 @@ function Item({ workout }) {
         <Typography variant="h6" component="div" color={theme.palette.secondary.main} sx={{ mb: 3 }}>
           {day}
         </Typography>
-        <ExercisesTableBrowser exercises={exercisesArray} />
+        <ExercisesTable exercises={exercisesArray} />
       </Paper>
     </Box>
   );

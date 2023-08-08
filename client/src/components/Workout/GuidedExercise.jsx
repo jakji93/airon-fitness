@@ -2,8 +2,11 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import {
   Box, Button, Typography, Paper, Popover, IconButton,
 } from '@mui/material';
+import { Container } from '@mui/system';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {
+  useContext, useEffect, useRef, useState,
+} from 'react';
 
 import NumberDial from './NumberDial';
 import Dictaphone from './VoiceRecognition/Dictaphone';
@@ -15,7 +18,7 @@ import { ToastContext } from '../common/context/ToastContextProvider';
 
 const styles = {
   guidedExerciseContainer: {
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: theme.palette.secondary.dark,
     color: theme.palette.secondary.main,
     display: 'flex',
     flexDirection: 'column',
@@ -33,7 +36,7 @@ const styles = {
     paddingBottom: '15px',
     paddingLeft: '7.5px',
     paddingRight: '7.5px',
-    color: theme.palette.secondary.dark,
+    color: theme.palette.secondary.main,
     fontSize: '4vw',
     flex: '1',
     maxWidth: '100%',
@@ -116,10 +119,10 @@ const styles = {
 export default function GuidedExercise({
   e, onNext, isLastExercise, slideIsInView,
 }) {
-  const openToast = React.useContext(ToastContext);
+  const openToast = useContext(ToastContext);
 
   // Popover state
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -130,25 +133,25 @@ export default function GuidedExercise({
   };
 
   // Set count state
-  const [currentExerciseSetCount, setCurrentExerciseSetCount] = React.useState(0);
+  const [currentExerciseSetCount, setCurrentExerciseSetCount] = useState(0);
 
   const initExerciseSetCount = (n) => {
     setCurrentExerciseSetCount(n);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     initExerciseSetCount(e.sets);
   }, [e.sets]);
 
   // Calorie counter state
-  const [calorieCount, setCalorieCount] = React.useState(0);
+  const [calorieCount, setCalorieCount] = useState(0);
 
   // Rest timer state
-  const [restTimer, setRestTimer] = React.useState(e.rest);
-  const [pause, setPause] = React.useState(true);
+  const [restTimer, setRestTimer] = useState(e.rest);
+  const [pause, setPause] = useState(true);
 
-  const initialRestTimer = React.useRef(e.rest);
-  const intervalRef = React.useRef();
+  const initialRestTimer = useRef(e.rest);
+  const intervalRef = useRef();
 
   const MAX_TIMER_VALUE = 999;
 
@@ -159,7 +162,7 @@ export default function GuidedExercise({
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!pause && restTimer > 0) {
       intervalRef.current = setInterval(decrementTimer, 1000);
     } else if (restTimer === 0) {
@@ -215,7 +218,7 @@ export default function GuidedExercise({
   };
 
   return (
-    <Paper sx={styles.guidedExerciseContainer}>
+    <Container sx={styles.guidedExerciseContainer}>
       <Box sx={styles.topRowTopographyContainer}>
         <Typography sx={styles.exerciseTypography}>
           {e.exercise}
@@ -375,7 +378,7 @@ export default function GuidedExercise({
         </Box>
 
       </Box>
-    </Paper>
+    </Container>
   );
 }
 

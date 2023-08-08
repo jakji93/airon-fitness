@@ -51,12 +51,13 @@ export default function TabbedScheduleView() {
           aria-label="icon label tabs example"
           textColor="secondary"
           indicatorColor="secondary"
+          variant="fullWidth"
         >
           <Tab
             icon={<FitnessCenterIcon fontSize="large" />}
             label="Fitness Plan"
             sx={{
-              width: '50%',
+              width: '100%',
               color: 'white',
             }}
           />
@@ -64,7 +65,7 @@ export default function TabbedScheduleView() {
             icon={<LocalDiningIcon fontSize="large" />}
             label="Meal Plan"
             sx={{
-              width: '50%',
+              width: '100%',
               color: 'white',
             }}
           />

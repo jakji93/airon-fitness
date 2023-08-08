@@ -120,7 +120,7 @@ export default function ExistingStatsView() {
       }}
     >
       <Grid item xs="auto" sx={{ mb: 1 }}>
-        <Typography variant="h6" component="div" color={theme.palette.secondary.main} sx={{ mb: -2 }}>
+        <Typography variant="h6" component="div" color={theme.palette.secondary.light} sx={{ mb: -2 }}>
           Fitness & Meal Plans Calories
         </Typography>
         <BarChart
@@ -134,16 +134,16 @@ export default function ExistingStatsView() {
           height={300}
           sx={{
             '& line': {
-              stroke: theme.palette.secondary.main,
+              stroke: theme.palette.secondary.light,
             },
             '& text': {
-              fill: theme.palette.secondary.main,
+              fill: theme.palette.secondary.light,
             },
           }}
         />
       </Grid>
       <Grid item xs="auto" sx={{ mb: 1 }}>
-        <Typography variant="h6" component="div" color={theme.palette.secondary.main} sx={{ mb: -5 }}>
+        <Typography variant="h6" component="div" color={theme.palette.secondary.light} sx={{ mb: -5 }}>
           Macronutrients
         </Typography>
         <BarChart
@@ -157,10 +157,10 @@ export default function ExistingStatsView() {
           height={300}
           sx={{
             '& line': {
-              stroke: theme.palette.secondary.main,
+              stroke: theme.palette.secondary.light,
             },
             '& text': {
-              fill: theme.palette.secondary.main,
+              fill: theme.palette.secondary.light,
             },
           }}
         />

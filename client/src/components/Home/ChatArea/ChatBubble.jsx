@@ -2,6 +2,8 @@ import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import theme from '../../../theme';
+
 const styles = {
   content: {
     display: 'inline-block',
@@ -13,8 +15,8 @@ const styles = {
   sent: {
     float: 'right',
     textAlign: 'right',
-    color: 'white',
-    backgroundColor: '#B5936B',
+    color: theme.palette.secondary.dark,
+    backgroundColor: theme.palette.secondary.main,
   },
   received: {
     textAlign: 'left',
