@@ -2,10 +2,9 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import {
   Box, Button, Typography, Paper, Popover, IconButton,
 } from '@mui/material';
-import { Container } from '@mui/system';
 import PropTypes from 'prop-types';
 import React, {
-  useContext, useEffect, useRef, useState,
+  useContext, useEffect, useState, useRef,
 } from 'react';
 
 import NumberDial from './NumberDial';
@@ -18,7 +17,7 @@ import { ToastContext } from '../common/context/ToastContextProvider';
 
 const styles = {
   guidedExerciseContainer: {
-    backgroundColor: theme.palette.secondary.dark,
+    backgroundColor: theme.palette.secondary.light,
     color: theme.palette.secondary.main,
     display: 'flex',
     flexDirection: 'column',
@@ -36,7 +35,7 @@ const styles = {
     paddingBottom: '15px',
     paddingLeft: '7.5px',
     paddingRight: '7.5px',
-    color: theme.palette.secondary.main,
+    color: theme.palette.secondary.dark,
     fontSize: '4vw',
     flex: '1',
     maxWidth: '100%',
@@ -218,7 +217,7 @@ export default function GuidedExercise({
   };
 
   return (
-    <Container sx={styles.guidedExerciseContainer}>
+    <Paper sx={styles.guidedExerciseContainer}>
       <Box sx={styles.topRowTopographyContainer}>
         <Typography sx={styles.exerciseTypography}>
           {e.exercise}
@@ -378,7 +377,7 @@ export default function GuidedExercise({
         </Box>
 
       </Box>
-    </Container>
+    </Paper>
   );
 }
 
