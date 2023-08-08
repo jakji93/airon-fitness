@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { ToastContext } from '../components/common/context/ToastContextProvider';
-import Spinner from '../components/common/Spinner';
+import RelativeSpinner from '../components/common/RelativeSpinner';
 import SignupAdditionalDetails from '../components/Signup/SignupAdditionalDetails';
 import SignupAPIKey from '../components/Signup/SignupAPIKey';
 import SignupBasicUserDetails from '../components/Signup/SignupBasicUserDetails';
@@ -41,12 +41,9 @@ export default function SignupFlow() {
     dispatch(resetUserProfileStates);
   }, [profile, isError, isSuccess, message, dispatch]);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
   return (
     <Box>
+      {isLoading && <RelativeSpinner />}
       <CssBaseline />
       <Stepper activeStep={step} sx={{ margin: '3%' }} alternativeLabel>
         {stepTitles.map((label) => (
