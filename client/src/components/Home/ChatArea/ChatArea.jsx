@@ -3,7 +3,7 @@ import {
   Grid, Divider, TextField, Fab,
 } from '@mui/material';
 import React, { useState, useEffect, useReducer } from 'react';
-import { useDispatch, useStore } from 'react-redux';
+import { useDispatch, useSelector, useStore } from 'react-redux';
 
 import ChatMessages from './ChatMessages';
 import {
@@ -23,6 +23,7 @@ import {
   updateMealSchedule, createWorkoutAndMealSchedule,
 } from '../../../reducers/WorkoutAndMealSchedule';
 import theme from '../../../theme';
+import RelativeSpinner from '../../common/RelativeSpinner';
 import FormMultiSelect from '../../Profile/Forms/FormMultiSelect';
 import FormSelect from '../../Profile/Forms/FormSelect';
 
@@ -40,6 +41,9 @@ export default function ChatArea() {
   const dispatch = useDispatch();
   const store = useStore();
   const [token, forceUpdate] = useReducer((x) => x + 1, 0);
+  const {
+    isLoading: isSchedulesLoading,
+  } = useSelector((state) => state.workoutAndMealSchedule);
 
   const resetValues = () => {
     const state = store.getState();
@@ -344,8 +348,11 @@ export default function ChatArea() {
         borderRadius: '10px',
         border: `1px solid ${theme.palette.secondary.main}`,
         bgcolor: theme.palette.secondary.dark,
+        position: 'relative',
+        zIndex: 0,
       }}
     >
+      {isSchedulesLoading && <RelativeSpinner />}
       <Grid item style={{ width: '100%' }}>
         <ChatMessages messages={messages} />
         <Divider />
