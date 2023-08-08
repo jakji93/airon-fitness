@@ -77,7 +77,7 @@ const teamMembers = [
     github: 'https://github.com/kennyjhcheng',
     linkedIn: 'https://www.linkedin.com/in/kennyjhcheng/',
     profilePicture: KennyChengIcon,
-    contributions: 'Secure Authentication, Profile System, Redux States, Google Accounts',
+    contributions: 'Authentication, Reusable Form, Redux, Google Login, Accessibility',
   },
   {
     name: 'Kevin Chung',
