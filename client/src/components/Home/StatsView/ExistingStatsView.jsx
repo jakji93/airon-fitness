@@ -3,6 +3,8 @@ import { BarChart } from '@mui/x-charts';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import theme from '../../../theme';
+
 function getFitnessMacro(fitnessSchedule) {
   const fData = [];
   Object.keys(fitnessSchedule).map((day) => {
@@ -105,49 +107,64 @@ export default function ExistingStatsView() {
   const calData = getCalData(fMacro, mData[0]);
 
   return (
-    <div>
-      <Grid
-        container
-        alignItems="center"
-        justifyContent="center"
-        sx={{
-          p: 3,
-          borderRadius: '10px',
-          maxHeight: '80vh',
-          overflow: 'auto',
-        }}
-      >
-        <Grid item xs="auto" sx={{ mb: 1 }}>
-          <Typography variant="h6" component="div" color="text.secondary" sx={{ mb: -2 }}>
-            Fitness & Meal Plans Calories
-          </Typography>
-          <BarChart
-            legend={{ direction: 'column' }}
-            xAxis={[{ scaleType: 'band', data: calAxis }]}
-            series={[
-              { data: calData[0], label: 'Calories burned [kcal]', color: '#F67280' },
-              { data: calData[1], label: 'Calories consumed [kcal]', color: '#80E8CA' },
-            ]}
-            width={400}
-            height={300}
-          />
-        </Grid>
-        <Grid item xs="auto" sx={{ mb: 1 }}>
-          <Typography variant="h6" component="div" color="text.secondary" sx={{ mb: -5 }}>
-            Macronutrients
-          </Typography>
-          <BarChart
-            xAxis={[{ scaleType: 'band', data: mAxis }]}
-            series={[
-              { data: mData[1], label: 'Protein [g]', color: '#C06C84' },
-              { data: mData[2], label: 'Carbs [g]', color: '#84C06C' },
-              { data: mData[3], label: 'Fat [g]', color: '#6C84C0' },
-            ]}
-            width={400}
-            height={300}
-          />
-        </Grid>
+    <Grid
+      container
+      alignItems="center"
+      justifyContent="center"
+      sx={{
+        p: 3,
+        borderRadius: '10px',
+        maxHeight: '80vh',
+        overflow: 'auto',
+        bgcolor: theme.palette.secondary.dark,
+      }}
+    >
+      <Grid item xs="auto" sx={{ mb: 1 }}>
+        <Typography variant="h6" component="div" color={theme.palette.secondary.main} sx={{ mb: -2 }}>
+          Fitness & Meal Plans Calories
+        </Typography>
+        <BarChart
+          legend={{ direction: 'column' }}
+          xAxis={[{ scaleType: 'band', data: calAxis }]}
+          series={[
+            { data: calData[0], label: 'Calories burned [kcal]', color: '#F67280' },
+            { data: calData[1], label: 'Calories consumed [kcal]', color: '#80E8CA' },
+          ]}
+          width={400}
+          height={300}
+          sx={{
+            '& line': {
+              stroke: theme.palette.secondary.main,
+            },
+            '& text': {
+              fill: theme.palette.secondary.main,
+            },
+          }}
+        />
       </Grid>
-    </div>
+      <Grid item xs="auto" sx={{ mb: 1 }}>
+        <Typography variant="h6" component="div" color={theme.palette.secondary.main} sx={{ mb: -5 }}>
+          Macronutrients
+        </Typography>
+        <BarChart
+          xAxis={[{ scaleType: 'band', data: mAxis }]}
+          series={[
+            { data: mData[1], label: 'Protein [g]', color: '#C06C84' },
+            { data: mData[2], label: 'Carbs [g]', color: '#84C06C' },
+            { data: mData[3], label: 'Fat [g]', color: '#6C84C0' },
+          ]}
+          width={400}
+          height={300}
+          sx={{
+            '& line': {
+              stroke: theme.palette.secondary.main,
+            },
+            '& text': {
+              fill: theme.palette.secondary.main,
+            },
+          }}
+        />
+      </Grid>
+    </Grid>
   );
 }

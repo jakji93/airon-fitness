@@ -37,6 +37,7 @@ function MealScheduleCollapse(props) {
     handleClick,
     selectedIndices,
     daySchedule,
+    day,
   } = props;
   const mealSchedule = { ...daySchedule };
   delete mealSchedule.nutrition_totals;
@@ -52,7 +53,7 @@ function MealScheduleCollapse(props) {
           borderColor: theme.palette.secondary.main,
         }}
       >
-        <ListItemText primary={`Day ${index + 1}`} />
+        <ListItemText primary={day} />
         {isExpanded ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       {mealSchedule && Object.keys(mealSchedule).map((meal) => (
@@ -101,6 +102,7 @@ MealScheduleCollapse.propTypes = {
       fat: PropTypes.number,
     }),
   }).isRequired,
+  day: PropTypes.string.isRequired,
 };
 
 export default function ExistingMealSchedule() {
@@ -179,6 +181,7 @@ export default function ExistingMealSchedule() {
               index={index}
               key={`${day} meal`}
               selectedIndices={selectedIndices}
+              day={day}
             />
           ))}
         </List>
