@@ -40,7 +40,7 @@ export default function Form(props) {
       <Box sx={{ padding: 5, ...centerStyle }}>
         {formTitle && <Typography variant="h6" gutterBottom sx={{ paddingBottom: 5, color: theme.palette.secondary.light }}> {formTitle}</Typography>}
         <form onSubmit={handleSubmit} onKeyPress={handleKeyPress}>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} xs={12}>
             {children}
           </Grid>
         </form>

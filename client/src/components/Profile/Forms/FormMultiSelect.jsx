@@ -29,7 +29,7 @@ export default function FormMultiSelect(props) {
   return (
     <>
       { showTitleLabel && <GridInputLabel id={id} label={label} /> }
-      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)}>
+      <Grid item xs={12} md={inputGridSizing(half, customTextFieldGridSize)}>
         <Autocomplete
           limitTags={limitTags}
           value={value}

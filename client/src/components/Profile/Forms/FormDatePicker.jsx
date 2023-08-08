@@ -44,7 +44,7 @@ export default function FormDatePicker(props) {
           label={label}
         />
       )}
-      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)}>
+      <Grid item xs={12} md={inputGridSizing(half, customTextFieldGridSize)}>
         <DatePicker
           label={label}
           id={id}
