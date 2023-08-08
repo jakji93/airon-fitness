@@ -123,10 +123,6 @@ function ResponsiveAppBar() {
                   textDecoration: 'none',
                   color: theme.palette.secondary.main,
                   display: 'block',
-                  '&:hover': {
-                    color: 'white',
-                    transition: 'background-color 1.0s ease-in-out',
-                  },
                   my: 2,
                 }}
                 to={page[1]}
@@ -135,6 +131,10 @@ function ResponsiveAppBar() {
                 <Button
                   sx={{
                     color: 'inherit',
+                    '&:hover': {
+                      color: theme.palette.secondary.light,
+                      transition: 'background-color 1.0s ease-in-out',
+                    },
                   }}
                 >
                   {page[0]}
@@ -181,7 +181,6 @@ function ResponsiveAppBar() {
                         <ListItemIcon
                           sx={{
                             color: theme.palette.secondary.main,
-                            // make the spacing between icon and text smaller
                             minWidth: '30px',
                           }}
                         >
