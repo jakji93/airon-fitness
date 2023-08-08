@@ -93,7 +93,6 @@ export default function Login() {
   };
 
   useEffect(() => {
-    // load and init google api scripts
     gapi.load('client:auth2', initializeGapi);
   });
 

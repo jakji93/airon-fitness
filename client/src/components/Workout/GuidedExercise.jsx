@@ -51,8 +51,8 @@ const styles = {
     padding: '15px',
     fontSize: 'clamp(7.5px, 0.75vw, 50px)',
     width: 'clamp(50px, 15vw, 1000px)',
-    position: 'relative', // Set the position to relative for the pseudo-element
-    overflow: 'hidden', // Hide any overflow from the pseudo-element
+    position: 'relative',
+    overflow: 'hidden',
     '&:hover': {
       color: theme.palette.secondary.light,
       borderColor: '#F3F3F0',
@@ -120,7 +120,6 @@ export default function GuidedExercise({
 }) {
   const openToast = useContext(ToastContext);
 
-  // Popover state
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handlePopoverOpen = (event) => {
@@ -131,7 +130,6 @@ export default function GuidedExercise({
     setAnchorEl(null);
   };
 
-  // Set count state
   const [currentExerciseSetCount, setCurrentExerciseSetCount] = useState(0);
 
   const initExerciseSetCount = (n) => {
@@ -142,10 +140,8 @@ export default function GuidedExercise({
     initExerciseSetCount(e.sets);
   }, [e.sets]);
 
-  // Calorie counter state
   const [calorieCount, setCalorieCount] = useState(0);
 
-  // Rest timer state
   const [restTimer, setRestTimer] = useState(e.rest);
   const [pause, setPause] = useState(true);
 
@@ -181,7 +177,7 @@ export default function GuidedExercise({
       setRestTimer(initialRestTimer.current);
       setPause(true);
     } else {
-      if (pause) { // for improved UX, immediately subtract 1 second when starting up a paused timer
+      if (pause) {
         setRestTimer((prev) => (prev - 1 > 0 ? prev - 1 : 0));
       }
       setPause((prev) => !prev);
@@ -202,7 +198,6 @@ export default function GuidedExercise({
 
   const open = Boolean(anchorEl);
 
-  // Set, Rest, Calorie shared handler
   const handleFinishedSet = () => {
     if (currentExerciseSetCount > 0) {
       setRestTimer(e.rest);

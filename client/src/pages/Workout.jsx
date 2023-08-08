@@ -17,9 +17,9 @@ const styles = {
     backgroundColor: theme.palette.secondary.dark,
     flexGrow: 1,
     display: 'flex',
-    flexDirection: 'column', // Arrange children vertically
-    justifyContent: 'center', // Vertically center the content
-    alignItems: 'center', // Horizontally center the content
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     minHeight: '95vh',
   },
   workoutButton: {
@@ -32,8 +32,8 @@ const styles = {
     padding: '15px',
     fontSize: 'clamp(7.5px, 0.75vw, 50px)',
     width: 'clamp(50px, 15vw, 1000px)',
-    position: 'relative', // Set the position to relative for the pseudo-element
-    overflow: 'hidden', // Hide any overflow from the pseudo-element
+    position: 'relative',
+    overflow: 'hidden',
     '&:hover': {
       color: theme.palette.secondary.dark,
       borderColor: theme.palette.secondary.main,
@@ -71,7 +71,6 @@ export default function Workout() {
     }
   }, []);
 
-  // States: START_WORKOUT, SELECT_WORKOUT, IN_SESSION
   const handleNext = (nextStep) => {
     setStep(nextStep);
   };

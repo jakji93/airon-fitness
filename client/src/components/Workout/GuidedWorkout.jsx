@@ -48,8 +48,8 @@ const styles = {
     padding: '15px',
     fontSize: 'clamp(7.5px, 0.75vw, 50px)',
     width: 'clamp(50px, 15vw, 1000px)',
-    position: 'relative', // Set the position to relative for the pseudo-element
-    overflow: 'hidden', // Hide any overflow from the pseudo-element
+    position: 'relative',
+    overflow: 'hidden',
     '&:hover': {
       color: theme.palette.secondary.light,
       borderColor: '#F3F3F0',

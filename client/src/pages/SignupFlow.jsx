@@ -51,25 +51,25 @@ export default function SignupFlow() {
             key={label}
             sx={{
               '& .MuiStepLabel-root .Mui-completed': {
-                color: 'secondary.main', // circle color (COMPLETED)
+                color: 'secondary.main',
               },
               '& .MuiStepLabel-label.Mui-completed.MuiStepLabel-alternativeLabel':
                 {
-                  color: 'secondary.main', // Just text label (COMPLETED)
+                  color: 'secondary.main',
                 },
               '& .MuiStepLabel-root .Mui-active': {
-                color: 'secondary.main', // circle color (ACTIVE)
+                color: 'secondary.main',
               },
               '& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel':
                 {
-                  color: 'secondary.light', // Just text label (ACTIVE)
+                  color: 'secondary.light',
                 },
               '& .MuiStepLabel-root .Mui-active .MuiStepIcon-text': {
-                fill: 'secondary.light', // circle's number (ACTIVE)
+                fill: 'secondary.light',
               },
               '& .MuiStepLabel-label.Mui-disabled.MuiStepLabel-alternativeLabel':
               {
-                color: 'secondary.light', // Just text label (INACTIVE)
+                color: 'secondary.light',
               },
               '& .Mui-active text': {
                 fill: theme.palette.secondary.dark,

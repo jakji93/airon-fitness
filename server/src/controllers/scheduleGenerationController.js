@@ -10,7 +10,6 @@ const { generateWorkoutScheduleHelper } = require('./workoutSchedule/workoutSche
 const generateSchedules = asyncHandler(async (req, res) => {
   const id = req.user._id;
 
-  // parallel generation and database storage of schedules
   const [meals, workouts] = await
   Promise.all([generateMealScheduleHelper(id), generateWorkoutScheduleHelper(id)]);
 

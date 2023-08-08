@@ -110,7 +110,6 @@ export default function BasicProfileForm(props) {
   useEffect(() => {
     Object.entries(initialValues).forEach(([fieldName, value]) => {
       formik.setFieldValue(fieldName, value);
-      // need this line due to formik bug: https://github.com/jaredpalmer/formik/issues/2059
       formik.setFieldTouched(fieldName, false, false);
     });
   }, [profile]);
