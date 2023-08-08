@@ -26,7 +26,7 @@ import FormMultiSelect from '../../Profile/Forms/FormMultiSelect';
 import FormSelect from '../../Profile/Forms/FormSelect';
 
 export default function ChatArea() {
-  const [messages, setMessages] = useState([{ content: 'Welcome to AI-ron Fitness! How can I help you?', isSelf: false }]);
+  const [messages, setMessages] = useState([{ content: 'Welcome to AIRON Fitness! How can I help you?', isSelf: false }]);
   const [inputMode, setInputMode] = useState(1);
   const [mode, setMode] = useState('starter');
   const [formSelect, setFormSelect] = useState('');
@@ -336,7 +336,7 @@ export default function ChatArea() {
 
   return (
     <div>
-      <Grid container component={Card} sx={{ p: 1 }}>
+      <Grid container component={Card} sx={{ p: 1, pt: 3, borderRadius: '10px' }}>
         <Grid item style={{ width: '100%' }}>
           <ChatMessages messages={messages} />
           <Divider />
@@ -375,8 +375,8 @@ export default function ChatArea() {
                   ) : ''
               }
             </Grid>
-            <Grid item>
-              <Fab color="primary" aria-label="send" onClick={handleSendButton}><SendIcon /></Fab>
+            <Grid item style={{ marginLeft: '20px' }}>
+              <Fab color="secondary" aria-label="send" onClick={handleSendButton}><SendIcon sx={{ color: 'white' }} /></Fab>
             </Grid>
           </Grid>
         </Grid>

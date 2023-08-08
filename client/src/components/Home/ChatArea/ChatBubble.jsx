@@ -14,12 +14,12 @@ const styles = {
     float: 'right',
     textAlign: 'right',
     color: 'white',
-    backgroundColor: '#00b2ff',
+    backgroundColor: '#B5936B',
   },
   received: {
     textAlign: 'left',
     color: 'black',
-    backgroundColor: '#c4c4c4',
+    backgroundColor: '#d9d9d9',
   },
 };
 

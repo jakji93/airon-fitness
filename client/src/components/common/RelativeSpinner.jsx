@@ -21,7 +21,7 @@ const BackdropAbsolute = styled(Backdrop)(() => ({
 export default function RelativeSpinner() {
   return (
     <BackdropAbsolute open>
-      <CircularProgress color="inherit" />
+      <CircularProgress color="secondary" />
     </BackdropAbsolute>
   );
 }

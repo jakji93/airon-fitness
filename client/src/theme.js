@@ -47,6 +47,15 @@ const theme = createTheme({
       transition: 'background-color 0.3s ease',
     },
   },
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          borderRadius: '4px',
+        },
+      },
+    },
+  },
 });
 
 export default theme;

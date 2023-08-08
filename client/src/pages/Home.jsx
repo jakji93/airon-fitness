@@ -6,7 +6,7 @@ import RelativeSpinner from '../components/common/RelativeSpinner';
 import ChatArea from '../components/Home/ChatArea/ChatArea';
 import TabbedScheduleView from '../components/Home/PlanView/TabbedScheduleView';
 import StatsView from '../components/Home/StatsView/StatsView';
-import WorkoutTable from '../components/Home/WorkoutTable';
+import WorkoutTable from '../components/Home/WorkoutTable/WorkoutTable';
 import { getWorkoutAndMealSchedule } from '../reducers/WorkoutAndMealSchedule';
 
 export default function Home() {
@@ -52,11 +52,12 @@ export default function Home() {
     loading
       ? <RelativeSpinner />
       : (
-        <Grid container sx={{ p: 3 }} spacing={5}>
+        <Grid container sx={{ p: 3 }} spacing={5} justifyContent="center">
           <Grid
             item
             xs={12}
-            sm={6}
+            sm={10}
+            md={6}
             sx={animateTile(0)}
           >
             <TabbedScheduleView />
@@ -64,7 +65,8 @@ export default function Home() {
           <Grid
             item
             xs={12}
-            sm={6}
+            sm={10}
+            md={6}
             sx={animateTile(0.15)}
           >
             <StatsView />
@@ -72,7 +74,8 @@ export default function Home() {
           <Grid
             item
             xs={12}
-            sm={6}
+            sm={10}
+            md={6}
             sx={animateTile(0.30)}
           >
             <WorkoutTable />
@@ -80,7 +83,8 @@ export default function Home() {
           <Grid
             item
             xs={12}
-            sm={6}
+            sm={10}
+            md={6}
             sx={animateTile(0.45)}
           >
             <ChatArea />

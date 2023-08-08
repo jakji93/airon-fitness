@@ -11,6 +11,33 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ConfirmationModal from './ConfirmationModal';
 import { createWorkoutAndMealSchedule, createWorkoutSchedule } from '../../../reducers/WorkoutAndMealSchedule';
+import theme from '../../../theme';
+
+function InstructionString(exercise, set, rep, rest, duration) {
+  if (exercise === 'Rest') {
+    return 'Rest day';
+  }
+  let resString = '';
+  if (set === 1) {
+    if (rep === 1) {
+      resString = `Do ${exercise} for ${duration} minutes`;
+    } else {
+      resString = `Do ${exercise} for ${set} set with ${rep} reps`;
+    }
+  } else if (rest === 0) {
+    if (rep === 1) {
+      resString = `Do ${exercise} for ${set} sets, ${rep} rep with no rest between sets`;
+    } else {
+      resString = `Do ${exercise} for ${set} sets, ${rep} reps with no rest between sets`;
+    }
+  } else if (rep === 1) {
+    resString = `Do ${exercise} for ${set} sets, ${rep} rep with a ${rest}-second rest between sets`;
+  } else {
+    resString = `Do ${exercise} for ${set} sets, ${rep} reps with a ${rest}-second rest between sets`;
+  }
+
+  return resString;
+}
 
 function WorkoutScheduleCollapse(props) {
   const {
@@ -18,13 +45,14 @@ function WorkoutScheduleCollapse(props) {
     handleClick,
     selectedIndices,
     daySchedule,
+    day,
   } = props;
   const workoutSchedule = daySchedule.exercises;
   const isExpanded = selectedIndices.includes(index);
   return (
     <div>
       <ListItemButton key={index} onClick={() => { handleClick(index); }} divider>
-        <ListItemText primary={`Day ${index + 1}`} />
+        <ListItemText primary={day} />
         {isExpanded ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       {workoutSchedule && workoutSchedule.map((workout) => (
@@ -37,9 +65,15 @@ function WorkoutScheduleCollapse(props) {
         >
           <ListItem>
             <ListItemText
-              secondary={`Do ${workout.exercise} for ${workout.sets} sets, 
-                      ${workout.reps} reps with a ${workout.rest} 
-                      second break between sets.`}
+              secondary={(
+                  InstructionString(
+                    workout.exercise,
+                    workout.sets,
+                    workout.reps,
+                    workout.rest,
+                    workout.duration,
+                  )
+              )}
             />
           </ListItem>
         </Collapse>
@@ -66,6 +100,7 @@ WorkoutScheduleCollapse.propTypes = {
     })),
     total_calories: PropTypes.number,
   }).isRequired,
+  day: PropTypes.string.isRequired,
 };
 
 export default function ExistingWorkoutSchedule() {
@@ -90,9 +125,13 @@ export default function ExistingWorkoutSchedule() {
         <Button
           fullWidth
           variant="contained"
-          sx={{ mb: 1 }}
+          sx={{
+            mb: 1,
+            backgroundColor: theme.palette.secondary.main,
+          }}
           size="medium"
           onClick={() => setUpdateBothModal(true)}
+          color="primary"
         >
           Regenerate Both Plans
         </Button>
@@ -101,9 +140,13 @@ export default function ExistingWorkoutSchedule() {
         <Button
           fullWidth
           variant="contained"
-          sx={{ mb: 1 }}
+          sx={{
+            mb: 1,
+            backgroundColor: theme.palette.secondary.main,
+          }}
           size="medium"
           onClick={() => setUpdateWorkoutModal(true)}
+          color="primary"
         >Regenerate Workout Plan
         </Button>
       </Grid>
@@ -136,6 +179,7 @@ export default function ExistingWorkoutSchedule() {
               selectedIndices={selectedIndices}
               daySchedule={workoutSchedule.schedule[day]}
               key={`${day} workout`}
+              day={day}
             />
           ))}
         </List>

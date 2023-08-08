@@ -61,7 +61,7 @@ export default function SignupRegisterAccount() {
     }
 
     if (isSuccess && user) {
-      openToast('success', 'Your account has been created! Please setup your user profile 🫡');
+      openToast('success', 'Your account has been created! Please setup your user profile.');
     }
 
     if (user) dispatch(setSignup({ step: step + 1 }));

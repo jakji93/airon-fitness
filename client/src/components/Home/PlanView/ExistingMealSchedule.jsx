@@ -16,6 +16,19 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ConfirmationModal from './ConfirmationModal';
 import { createMealSchedule, createWorkoutAndMealSchedule } from '../../../reducers/WorkoutAndMealSchedule';
+import theme from '../../../theme';
+
+function GetProperLabel(str) {
+  let resStr = '';
+  if (str === 'snack1') {
+    resStr = 'Morning Snack';
+  } else if (str === 'snack2') {
+    resStr = 'Afternoon Snack';
+  } else {
+    resStr = str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  return resStr;
+}
 
 function MealScheduleCollapse(props) {
   const {
@@ -42,7 +55,7 @@ function MealScheduleCollapse(props) {
         >
           <ListItem>
             <ListItemText
-              secondary={`${meal.toString()}: ${mealSchedule[meal]}`}
+              secondary={`${GetProperLabel(meal.toString())}: ${mealSchedule[meal]}`}
             />
           </ListItem>
         </Collapse>
@@ -94,9 +107,13 @@ export default function ExistingMealSchedule() {
         <Button
           fullWidth
           variant="contained"
-          sx={{ mb: 1 }}
+          sx={{
+            mb: 1,
+            backgroundColor: theme.palette.secondary.main,
+          }}
           size="medium"
           onClick={() => setUpdateBothModal(true)}
+          color="primary"
         >
           Regenerate Both Plans
         </Button>
@@ -105,9 +122,10 @@ export default function ExistingMealSchedule() {
         <Button
           fullWidth
           variant="contained"
-          sx={{ mb: 1 }}
+          sx={{ mb: 1, backgroundColor: theme.palette.secondary.main }}
           size="medium"
           onClick={() => setUpdateMealModal(true)}
+          color="primary"
         >
           Regenerate Meal Plan
         </Button>
