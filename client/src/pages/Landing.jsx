@@ -21,7 +21,7 @@ const styles = {
   },
   banner: {
     paddingBottom: '2%',
-    minWidth: '400px',
+    minWidth: '200px',
     maxWidth: '50%',
     maxHeight: '50%',
   },
