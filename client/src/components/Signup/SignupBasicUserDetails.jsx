@@ -141,7 +141,7 @@ export default function SignupBasicUserDetails() {
       />
       <Grid
         item
-        xs={12}
+        xs={0}
         sm={6}
       />
       <Grid
