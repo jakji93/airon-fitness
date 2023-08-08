@@ -114,7 +114,7 @@ FormTextFieldWithRadio.propTypes = {
   placeholder: PropTypes.string,
   onBlur: PropTypes.func,
   error: PropTypes.bool,
-  helperText: PropTypes.string,
+  helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   size: PropTypes.string,
 };
 
