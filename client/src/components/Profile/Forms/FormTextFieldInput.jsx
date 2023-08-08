@@ -42,6 +42,7 @@ export default function FormTextFieldInput(props) {
     helperText,
     size,
   } = props;
+  const ariaLabel = endAdornment ? `${label} with units ${endAdornment}` : label;
 
   return (
     <>
@@ -50,6 +51,7 @@ export default function FormTextFieldInput(props) {
         item
         xs={12}
         md={inputGridSizing(half, customTextFieldGridSize)}
+        aria-label={ariaLabel}
       >
         <TextField
           required={required}
@@ -78,6 +80,8 @@ export default function FormTextFieldInput(props) {
             backgroundColor: theme.palette.secondary.light,
             ...underlineStyle,
           }}
+          // eslint-disable-next-line react/jsx-no-duplicate-props
+          inputProps={{ 'aria-label': ariaLabel }}
         />
       </Grid>
     </>

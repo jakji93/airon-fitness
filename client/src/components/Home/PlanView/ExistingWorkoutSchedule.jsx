@@ -69,6 +69,7 @@ function WorkoutScheduleCollapse(props) {
           in={isExpanded}
           timeout="auto"
           unmountOnExit
+          tabIndex={0}
         >
           <ListItem>
             <ListItemText

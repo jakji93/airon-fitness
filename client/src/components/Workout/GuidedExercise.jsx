@@ -218,13 +218,13 @@ export default function GuidedExercise({
 
   return (
     <Paper sx={styles.guidedExerciseContainer}>
-      <Box sx={styles.topRowTopographyContainer}>
+      <Box sx={styles.topRowTopographyContainer} tabIndex={0}>
         <Typography sx={styles.exerciseTypography}>
           {e.exercise}
         </Typography>
       </Box>
 
-      <Box sx={styles.middleDataRowContainer}>
+      <Box sx={styles.middleDataRowContainer} tabIndex={0}>
         <Box sx={styles.middleDataDialsContainer}>
           <Paper sx={[styles.circularDataDisplay, styles.circularDataSets]}>
             {slideIsInView ? (
@@ -332,6 +332,7 @@ export default function GuidedExercise({
           aria-haspopup="true"
           onMouseEnter={handlePopoverOpen}
           onMouseLeave={handlePopoverClose}
+          aria-label="Recommended effort popover"
         >
           <FitnessCenterIcon sx={{ color: theme.palette.secondary.main }} />
         </IconButton>

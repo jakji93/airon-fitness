@@ -386,7 +386,7 @@ export default function ChatArea() {
           </Grid>
           <Grid item style={{ marginLeft: '20px' }}>
             <Fab
-              aria-label="add"
+              aria-label="send"
               onClick={handleSendButton}
               sx={{
                 backgroundColor: theme.palette.secondary.main,

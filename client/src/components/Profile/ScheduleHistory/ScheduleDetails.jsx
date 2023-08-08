@@ -49,7 +49,7 @@ export default function ScheduleDetails({ details, day }) {
   };
 
   return (
-    <Box key={`ScheduleDetails-${day}`}>
+    <Box key={`ScheduleDetails-${day}`} tabIndex={0}>
       <Typography variant="h4">
         Day {day + 1}
       </Typography>

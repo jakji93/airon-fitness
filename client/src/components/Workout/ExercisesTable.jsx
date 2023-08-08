@@ -65,7 +65,7 @@ export default function ExercisesTable({ exercises }) {
           border: `1px solid ${theme.palette.secondary.main}`,
         }}
       >
-        <Table stickyHeader aria-label="sticky table">
+        <Table stickyHeader aria-label="exercises table">
           <TableHead>
             <TableRow>
               {columns.map((column, index) => (
@@ -89,27 +89,30 @@ export default function ExercisesTable({ exercises }) {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.exercise}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell
-                        key={column.id}
-                        align={column.align}
-                        style={{
-                          color: theme.palette.secondary.light,
-                          borderBottom: `1px solid ${theme.palette.secondary.main}`,
-                        }}
-                      >
-                        {column.format && typeof value === 'number'
-                          ? column.format(value)
-                          : value}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              ))}
+              .map((row) => {
+                const aria = `${row.exercise} with ${row.sets} sets, ${row.reps} reps, ${row.rest} rest, ${row.duration} duration, ${row.intensity} intensity`;
+                return (
+                  <TableRow hover role="checkbox" tabIndex={0} key={row.exercise} aria-label={aria}>
+                    {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          style={{
+                            color: theme.palette.secondary.light,
+                            borderBottom: `1px solid ${theme.palette.secondary.main}`,
+                          }}
+                        >
+                          {column.format && typeof value === 'number'
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>

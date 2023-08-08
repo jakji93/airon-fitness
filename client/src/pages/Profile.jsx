@@ -58,14 +58,17 @@ export default function Profile() {
         <Tab
           label="Basic Profile"
           sx={{ width: '100%', color: 'white' }}
+          aria-label="Basic Profile"
         />
         <Tab
           label="Additional Profile"
           sx={{ width: '100%', color: 'white' }}
+          aria-label="Additional Profile"
         />
         <Tab
           label="Schedule History"
           sx={{ width: '100%', color: 'white' }}
+          aria-label="Schedule History"
         />
       </Tabs>
       <TabPanel value={value} index={0}>
