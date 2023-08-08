@@ -14,12 +14,6 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import voiceCommands from './VoiceCommands.json';
 import theme from '../../../theme';
 
-// command (String or String Array) -> the string/phrase(s) you are listening for
-// callback (Function)              -> the function that is executed for a given command
-// matchInterim (Boolean)           -> determines if interim results should be matched
-// isFuzzyMatch (Boolean)           -> matches on % similarity instead of exact words
-// fuzzyMatchingThreshold (Number)  -> 0 (matches anything) to 1 (exact match) with default 0.8
-// bestMatchOnly (Boolean)          -> trigger callbacks when command phrase best matches speech
 function Dictaphone({
   timerToggle,
   incrementTimer,

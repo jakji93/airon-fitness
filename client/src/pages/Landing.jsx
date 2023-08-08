@@ -17,7 +17,7 @@ const styles = {
     position: 'absolute',
     width: '100%',
     height: '100%',
-    backgroundColor: '#000000aa', // last two hex digits represent % opacity
+    backgroundColor: '#000000aa',
   },
   banner: {
     paddingBottom: '2%',

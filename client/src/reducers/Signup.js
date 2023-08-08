@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 
 import { HEIGHT_UNITS, WEIGHT_UNITS } from '../constants/BasicProfile';
 
-// Get user from localStorage
 const signup = JSON.parse(localStorage.getItem('signup'));
 
 const initialSignupUser = {

@@ -91,7 +91,6 @@ const createMealScheduleForUser = asyncHandler(async (req, res) => {
 const updateMealScheduleForUser = asyncHandler(async (req, res) => {
   const id = req.user._id;
 
-  // Retrieve the meal schedule (fail if user does not have one already)
   const mealSchedule = await MealSchema
     .findOne({ userInfoID: id })
     .sort({ _id: -1 });
@@ -100,7 +99,6 @@ const updateMealScheduleForUser = asyncHandler(async (req, res) => {
     res.status(404).json({ message: 'Cannot update a meal schedule that does not exist' });
   }
 
-  // Organize the data necessary to adjust the schedule
   const schedule = JSON.stringify(mealSchedule.schedule);
   const updatedInputs = mealSchedule.inputs;
   updatedInputs.push(req.body.customInput);
@@ -112,20 +110,16 @@ const updateMealScheduleForUser = asyncHandler(async (req, res) => {
     isLoading: true,
   });
 
-  // Look up the profile of the user
   const userProfile = await UserProfile.findOne({ userInfoID: id });
-  // Update the schedule with OpenAI
   const userData = userUtil.generateUserObject(userProfile);
   const updatedMealSchedule = await openAI.updateMealSchedule(userData, updatedInputs, schedule);
 
   try {
-    // Update the MongoDB document
     const parsedSchedule = JSON.parse(updatedMealSchedule);
     newMealSchedule.schedule = parsedSchedule;
     newMealSchedule.isLoading = false;
     const savedMealSchedule = await newMealSchedule.save();
 
-    // Send updated result
     if (savedMealSchedule) {
       res.status(200).json({
         userInfoID: id,

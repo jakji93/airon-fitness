@@ -60,7 +60,6 @@ export default function ExercisesTable({ exercises }) {
         sx={{
           maxHeight: 440,
           backgroundColor: theme.palette.secondary.dark,
-          // add a thin gold border
           borderRadius: '10px',
           border: `1px solid ${theme.palette.secondary.main}`,
         }}

@@ -19,7 +19,6 @@ export default function ScheduleDetails({ details, day }) {
     if (typeof content[1] === 'object') {
       return (
         content[1].map((c) => {
-          // if exercise lower-case is equal to rest, then return only a rest div
           if (c.exercise.toLowerCase() === 'rest') {
             return (
               <div key={c.exercise}>

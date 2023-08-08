@@ -32,13 +32,11 @@ const getUserProfileById = asyncHandler(async (req, res) => {
  * @access  Private
  */
 const createUserProfile = asyncHandler(async (req, res) => {
-  // check profile exists
   const profileExists = await UserProfile.findOne({ userInfoID: req.user._id });
   if (profileExists) {
     res.status(400).json({ message: 'Profile already exists' });
     throw new Error('Profile already exists');
   }
-  // Check for user
   if (!req.user) {
     res.status(401);
     throw new Error('User not found');
@@ -85,18 +83,15 @@ const createUserProfile = asyncHandler(async (req, res) => {
  * @access  Private
  */
 const updateUserProfile = asyncHandler(async (req, res) => {
-  // check profile exists
   const profileExists = await UserProfile.findOne({ userInfoID: req.user._id });
   if (!profileExists) {
     res.status(400).json({ message: 'Profile not found' });
     throw new Error('Profile not found');
   }
-  // Check for user
   if (!req.user) {
     res.status(401);
     throw new Error('User not found');
   }
-  // Make sure the logged in user matches the profile user
   if (profileExists.userInfoID.toString() !== req.user._id.toString()) {
     res.status(401);
     throw new Error('User not authorized');

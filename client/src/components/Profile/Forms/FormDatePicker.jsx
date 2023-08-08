@@ -71,7 +71,6 @@ export default function FormDatePicker(props) {
 export const dayjsValidator = (props, propName, componentName, location, propFullName) => {
   let error;
   const propValue = props[propName];
-  // Check if propValue is a valid Day.js object
   if (!dayjs.isDayjs(propValue) && propValue !== null) {
     error = new Error(
       `Invalid ${location} '${propFullName}' supplied to '${componentName}'.

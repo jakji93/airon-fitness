@@ -12,7 +12,6 @@ const initialState = {
   message: '',
 };
 
-// create user profile
 export const registerUserProfile = createAsyncThunk(
   'userProfile/createUserProfile',
   async (userData, thunkAPI) => {
@@ -25,7 +24,6 @@ export const registerUserProfile = createAsyncThunk(
   },
 );
 
-// update user profile
 export const updateUserProfile = createAsyncThunk(
   'userProfile/updateUserProfile',
   async (userData, thunkAPI) => {
@@ -38,7 +36,6 @@ export const updateUserProfile = createAsyncThunk(
   },
 );
 
-// get user profile
 export const getUserProfile = createAsyncThunk(
   'userProfile/getUserProfile',
   async (userData, thunkAPI) => {
@@ -51,7 +48,6 @@ export const getUserProfile = createAsyncThunk(
   },
 );
 
-// Update Profile Image
 export const updateUserProfileImage = createAsyncThunk(
   'userProfile/updateUserProfileImage',
   async (file, thunkAPI) => {
