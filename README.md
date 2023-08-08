@@ -122,9 +122,9 @@ In our MERN web application, we went above and beyond the standard requirements 
 
 Our main focus is to utilize the capability of ChatGPT, engineering prompts to generate personalized workout and meal schedules based on the user profile while minimize the cost of requesting from <span style="color: #b5936b;">OpenAI</span>. This feature customized a users' fitness experience, providing users with intelligent and adaptive recommendations. With the data from a user’s workout schedule, we provide a data-rich, <span style="color: #b5936b;">voice controlled</span> workout flow that acts as a personal trainer, guiding the user through their exercises and rest timing. We also introduced a <span style="color: #b5936b;">chat-bot</span> system that enables fine-tuning of base schedules, tailoring fitness and meal plans to individual preferences and restrictions. 
 
-To improve experience and accessibility for all users, we implemented WCAG guidelines to select an accessible color palette to guarantee readability for users of all abilities.
+To improve experience and accessibility for all users, we implemented WCAG guidelines to select an accessible color palette to guarantee readability for users of all abilities. Additionally, WAI-ARIA has been incorporated throughout the application to accommodate the utilization of screen readers for individuals who are visually impaired.
 
-By implementing <span style="color: #b5936b;">Google Login, JWT authentication, a powerful chatbot, guided workouts, ChatGPT integration and WCAG accessibility</span>, we have crafted an innovative fitness platform that redefines the way users interact with their workout and meal plans. The application's user-friendly experience, coupled with personalized features, ensures that each individual's fitness journey is tailored just for them.
+By implementing <span style="color: #b5936b;">Google Login, JWT authentication, a powerful chatbot, guided workouts, ChatGPT integration and WCAG/ARIA accessibility</span>, we have crafted an innovative fitness platform that redefines the way users interact with their workout and meal plans. The application's user-friendly experience, coupled with personalized features, ensures that each individual's fitness journey is tailored just for them.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
