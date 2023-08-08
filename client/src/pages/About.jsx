@@ -24,7 +24,7 @@ const styles = {
     flexDirection: 'column',
     padding: '10px',
     maxWidth: 300,
-    color: theme.palette.secondary.light,
+    color: theme.palette.secondary.dark,
     backgroundColor: theme.palette.secondary.main,
     borderRadius: '10px',
   },
@@ -38,6 +38,8 @@ const styles = {
     width: '200px',
     height: '200px',
     borderRadius: '50%',
+    border: '5px solid',
+    borderColor: theme.palette.secondary.light,
     marginBottom: '10px',
   },
   name: {
@@ -49,7 +51,7 @@ const styles = {
     width: '100%',
   },
   icon: {
-    color: theme.palette.secondary.light,
+    color: theme.palette.secondary.dark,
     fontSize: 20,
   },
 };
