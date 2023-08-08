@@ -159,7 +159,7 @@ export default function SignupRequireUserDetails() {
         label="Experience"
         options={experienceOptions}
         showTitleLabel={false}
-        customTextFieldGridSize={6}
+        customTextFieldGridSize={12}
         value={formik.values.experience}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -167,11 +167,6 @@ export default function SignupRequireUserDetails() {
         helperText={formik.touched.experience && formik.errors.experience}
         size="medium"
         required
-      />
-      <Grid
-        item
-        xs={12}
-        sm={6}
       />
       <Grid
         item
