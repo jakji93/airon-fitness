@@ -1,19 +1,5 @@
 <a name="readme-top"></a>
 
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-<!-- [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url] -->
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -21,7 +7,7 @@
     <img src="assets/logo.png" alt="Logo" width="150" height="150">
   </a>
 
-  <h3 align="center">AIron Fitness</h3>
+  <h3 align="center">AIRON Fitness</h3>
 
   <p align="center">
     AI-powered fitness app to help you kickstart your training journey.
@@ -107,6 +93,8 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 - [x] Chatbot personal trainer that allows for custom user inputs
 - [x] Dynamic guided workouts with rep/set counters and rest timers
 - [x] Voice recognition support in guided workouts
+  - [ ] Speech polyfill for unsupported browsers
+- [x] Responsive website layout and design
 - [ ] Dynamically update fitness plans as users log their history
 - [ ] Live audio feedback during a workout
 - [ ] Computer vision support for exercise form analysis in guided workouts
@@ -192,6 +180,8 @@ Kevin Wu has been instrumental in various aspects of our MERN project. In the fr
 - [![Redux][Redux]][Redux-url]
 - [![OpenAI][OpenAI]][OpenAI-url]
 - [![JWT][JWT]][JWT-url]
+- [![Google][Google]][Google-url]
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -200,22 +190,26 @@ Kevin Wu has been instrumental in various aspects of our MERN project. In the fr
 ## Development Tools
 
 ### Prototyping (Figma)
-
 [![Prototyping with Figma][Figma]][Figma-url]
+![image](https://github.com/jakji93/airon-fitness/assets/68035358/67b01668-4445-4216-a434-4f074d558ba4)
+
 
 ### Agile Development
-
 [![Planning with Jira][Jira]][Jira-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
 
-## License
-
+## License 
+[![MIT][MIT]][MIT-url]
+<br />
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## EULA
+ See `LEGAL.txt` for more legal information.
 
 <!-- ACKNOWLEDGMENTS -->
 
@@ -268,3 +262,7 @@ Resources we found helpful along the way!
 [Jira-url]: https://www.atlassian.com/software/jira
 [Figma]: https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white
 [Figma-url]: https://www.figma.com/
+[MIT]: https://img.shields.io/badge/License-MIT-blue.svg
+[MIT-url]: https://github.com/jakji93/airon-fitness/blob/main/LICENSE.txt
+[Google]: https://img.shields.io/badge/google-4285F4?style=for-the-badge&logo=google&logoColor=white
+[Google-url]: https://developers.google.com/identity/sign-in/web/sign-in
