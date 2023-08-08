@@ -6,7 +6,7 @@ import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 
 import theme from '../../../theme';
-import ExercisesTable from '../../Workout/ExercisesTable';
+import ExercisesTableBrowser from '../../Workout/ExercisesTableBrowser';
 
 const styles = {
   container: {
@@ -25,6 +25,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: theme.palette.secondary.dark,
   },
 };
 
@@ -35,10 +36,10 @@ function Item({ workout }) {
   return (
     <Box>
       <Paper sx={styles.paperContainer}>
-        <Typography variant="h6" component="div" color="text.secondary" sx={{ mb: 3 }}>
+        <Typography variant="h6" component="div" color={theme.palette.secondary.main} sx={{ mb: 3 }}>
           {day}
         </Typography>
-        <ExercisesTable exercises={exercisesArray} />
+        <ExercisesTableBrowser exercises={exercisesArray} />
       </Paper>
     </Box>
   );
