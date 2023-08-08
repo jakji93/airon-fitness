@@ -19,7 +19,7 @@ const styles = {
     alignItems: 'center',
   },
   carouselContainer: {
-    width: '70vw',
+    width: '80vw',
   },
   typewriterContainer: {
     fontFamily: theme.typography.fontFamily,
