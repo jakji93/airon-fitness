@@ -84,7 +84,7 @@ const teamMembers = [
     github: 'https://github.com/ckev07',
     linkedIn: 'https://www.linkedin.com/in/kevin-chung07/',
     profilePicture: KevinChungIcon,
-    contributions: 'Dashboard, Workout Statistics, Meal Plan Statistics Homepage Styling',
+    contributions: 'Homepage Design & Styling, Workout Statistics, Meal Plan Statistics',
   },
   {
     name: 'Kevin Wu',
