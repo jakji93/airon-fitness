@@ -14,7 +14,7 @@ const initialSignupUser = {
   weight: null,
   height: null,
   weightUnit: WEIGHT_UNITS.KG,
-  heightUnit: HEIGHT_UNITS.IN,
+  heightUnit: HEIGHT_UNITS.CM,
   experience: '',
   goals: [],
   apiKey: '',
