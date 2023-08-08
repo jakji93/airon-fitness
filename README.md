@@ -135,7 +135,7 @@ In our next steps to further improve the app, we plan to dynamically update fitn
 
 <!-- CONTRIBUTION -->
 
-## Group Contribution
+## Team Member Contributions
 
 ### Davis Song
 
@@ -159,7 +159,7 @@ Kevin Wu has been instrumental in various aspects of our MERN project. In the fr
 
 <!-- GROUP -->
 
-## The Team
+## Connect with Us
 
 [@Davis Song](https://www.linkedin.com/in/davissong/)<br>
 [@Jack Ji](https://www.linkedin.com/in/jack-ji-5643a011a/)<br>
@@ -208,19 +208,10 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- EULA -->
+
 ## EULA
  See `LEGAL.txt` for more legal information.
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-Resources we found helpful along the way!
-
-- [Img Shields](https://shields.io)
-- [GitHub Pages](https://pages.github.com)
-- [React Icons](https://react-icons.github.io/react-icons/search)
-- [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
