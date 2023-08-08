@@ -70,8 +70,8 @@ const styles = {
     width: 'clamp(150px, 15vw, 1000px)',
     '&:hover': {
       fontWeight: 'bolder',
-      color: theme.palette.secondary.light,
-      borderColor: theme.palette.secondary.dark,
+      color: theme.palette.secondary.dark,
+      borderColor: theme.palette.secondary.main,
       backgroundColor: theme.palette.secondary.main,
       transition: 'background-color 0.3s ease',
     },

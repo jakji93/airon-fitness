@@ -25,6 +25,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: theme.palette.secondary.dark,
   },
 };
 
@@ -35,7 +36,7 @@ function Item({ workout }) {
   return (
     <Box>
       <Paper sx={styles.paperContainer}>
-        <Typography variant="h6" component="div" color="text.secondary" sx={{ mb: 3 }}>
+        <Typography variant="h6" component="div" color={theme.palette.secondary.light} sx={{ mb: 3 }}>
           {day}
         </Typography>
         <ExercisesTable exercises={exercisesArray} />
@@ -65,6 +66,7 @@ export default function WorkoutBrowserCarousel({ workoutData }) {
         navButtonsProps={{
           style: {
             backgroundColor: theme.palette.secondary.main,
+            color: theme.palette.secondary.dark,
           },
         }}
       >

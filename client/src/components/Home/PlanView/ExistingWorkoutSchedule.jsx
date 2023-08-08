@@ -2,8 +2,7 @@ import {
   ExpandLess, ExpandMore,
 } from '@mui/icons-material';
 import {
-  Button,
-  Collapse, Grid, List, ListItem, ListItemButton, ListItemText,
+  Collapse, Grid, List, ListItem, ListItemButton, ListItemText, Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -11,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ConfirmationModal from './ConfirmationModal';
 import { createWorkoutAndMealSchedule, createWorkoutSchedule } from '../../../reducers/WorkoutAndMealSchedule';
+import { StyledButton } from '../../../styled';
 import theme from '../../../theme';
 
 function InstructionString(exercise, set, rep, rest, duration) {
@@ -51,7 +51,15 @@ function WorkoutScheduleCollapse(props) {
   const isExpanded = selectedIndices.includes(index);
   return (
     <div>
-      <ListItemButton key={index} onClick={() => { handleClick(index); }} divider>
+      <ListItemButton
+        key={index}
+        onClick={() => { handleClick(index); }}
+        divider
+        sx={{
+          color: theme.palette.secondary.main,
+          borderColor: theme.palette.secondary.main,
+        }}
+      >
         <ListItemText primary={day} />
         {isExpanded ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
@@ -64,7 +72,14 @@ function WorkoutScheduleCollapse(props) {
         >
           <ListItem>
             <ListItemText
+              disableTypography
               secondary={(
+                <Typography
+                  variant="body2"
+                  style={{
+                    color: theme.palette.secondary.light,
+                  }}
+                >{(
                   InstructionString(
                     workout.exercise,
                     workout.sets,
@@ -72,7 +87,8 @@ function WorkoutScheduleCollapse(props) {
                     workout.rest,
                     workout.duration,
                   )
-              )}
+              )}</Typography>
+)}
             />
           </ListItem>
         </Collapse>
@@ -121,7 +137,7 @@ export default function ExistingWorkoutSchedule() {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Button
+        <StyledButton
           fullWidth
           variant="contained"
           sx={{
@@ -130,24 +146,22 @@ export default function ExistingWorkoutSchedule() {
           }}
           size="medium"
           onClick={() => setUpdateBothModal(true)}
-          color="primary"
+          color="secondary"
         >
           Regenerate Both Plans
-        </Button>
+        </StyledButton>
       </Grid>
       <Grid item xs={12}>
-        <Button
+        <StyledButton
           fullWidth
           variant="contained"
           sx={{
             mb: 1,
-            backgroundColor: theme.palette.secondary.main,
           }}
           size="medium"
           onClick={() => setUpdateWorkoutModal(true)}
-          color="primary"
         >Regenerate Workout Plan
-        </Button>
+        </StyledButton>
       </Grid>
       <ConfirmationModal
         open={updateWorkoutModal}
@@ -168,7 +182,9 @@ export default function ExistingWorkoutSchedule() {
       <Grid item xs={12}>
         <List
           sx={{
-            width: '100%', maxheight: '100%', overflow: 'auto', bgcolor: 'background.paper',
+            width: '100%',
+            maxheight: '100%',
+            overflow: 'auto',
           }}
         >
           {workoutSchedule.schedule && Object.keys(workoutSchedule.schedule).map((day, index) => (

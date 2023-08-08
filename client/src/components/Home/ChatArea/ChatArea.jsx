@@ -1,6 +1,6 @@
 import SendIcon from '@mui/icons-material/Send';
 import {
-  Card, Grid, Divider, TextField, Fab,
+  Grid, Divider, TextField, Fab,
 } from '@mui/material';
 import React, { useState, useEffect, useReducer } from 'react';
 import { useDispatch, useStore } from 'react-redux';
@@ -22,6 +22,7 @@ import {
   getWorkoutSchedule, getMealSchedule, updateWorkoutSchedule,
   updateMealSchedule, createWorkoutAndMealSchedule,
 } from '../../../reducers/WorkoutAndMealSchedule';
+import theme from '../../../theme';
 import FormMultiSelect from '../../Profile/Forms/FormMultiSelect';
 import FormSelect from '../../Profile/Forms/FormSelect';
 
@@ -335,17 +336,25 @@ export default function ChatArea() {
   };
 
   return (
-    <div>
-      <Grid container component={Card} sx={{ p: 1, pt: 3, borderRadius: '10px' }}>
-        <Grid item style={{ width: '100%' }}>
-          <ChatMessages messages={messages} />
-          <Divider />
-          <Grid container style={{ padding: '20px', alignItems: 'center', flexWrap: 'nowrap' }}>
-            <Grid item xs={11}>
-              { inputMode === 0
-                ? <TextField id="chatbox-inputfield" label="Provide a valid value" onKeyDown={handleSubmit} fullWidth />
-                : ''}
-              {
+    <Grid
+      container
+      sx={{
+        p: 1,
+        pt: 3,
+        borderRadius: '10px',
+        border: `1px solid ${theme.palette.secondary.main}`,
+        bgcolor: theme.palette.secondary.dark,
+      }}
+    >
+      <Grid item style={{ width: '100%' }}>
+        <ChatMessages messages={messages} />
+        <Divider />
+        <Grid container style={{ padding: '20px', alignItems: 'center', flexWrap: 'nowrap' }}>
+          <Grid item xs={11}>
+            { inputMode === 0
+              ? <TextField id="chatbox-inputfield" label="Provide a valid value" onKeyDown={handleSubmit} fullWidth />
+              : ''}
+            {
                 inputMode === 1
                   ? (
                     <FormSelect
@@ -360,7 +369,7 @@ export default function ChatArea() {
                     />
                   ) : ''
               }
-              {
+            {
                 inputMode === 2
                   ? (
                     <FormMultiSelect
@@ -374,13 +383,24 @@ export default function ChatArea() {
                     />
                   ) : ''
               }
-            </Grid>
-            <Grid item style={{ marginLeft: '20px' }}>
-              <Fab color="secondary" aria-label="add" onClick={handleSendButton}><SendIcon sx={{ color: 'white' }} /></Fab>
-            </Grid>
+          </Grid>
+          <Grid item style={{ marginLeft: '20px' }}>
+            <Fab
+              aria-label="add"
+              onClick={handleSendButton}
+              sx={{
+                backgroundColor: theme.palette.secondary.main,
+                color: theme.palette.secondary.dark,
+                '&:hover': {
+                  backgroundColor: '#CC9F6B',
+                },
+              }}
+            >
+              <SendIcon sx={{ color: theme.palette.secondary.dark }} />
+            </Fab>
           </Grid>
         </Grid>
       </Grid>
-    </div>
+    </Grid>
   );
 }

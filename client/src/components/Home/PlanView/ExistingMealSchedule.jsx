@@ -2,13 +2,13 @@ import {
   ExpandLess, ExpandMore,
 } from '@mui/icons-material';
 import {
-  Button,
   Collapse,
   Grid,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
+  Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ConfirmationModal from './ConfirmationModal';
 import { createMealSchedule, createWorkoutAndMealSchedule } from '../../../reducers/WorkoutAndMealSchedule';
+import { StyledButton } from '../../../styled';
 import theme from '../../../theme';
 
 function GetProperLabel(str) {
@@ -36,14 +37,23 @@ function MealScheduleCollapse(props) {
     handleClick,
     selectedIndices,
     daySchedule,
+    day,
   } = props;
   const mealSchedule = { ...daySchedule };
   delete mealSchedule.nutrition_totals;
   const isExpanded = selectedIndices.includes(index);
   return (
     <div>
-      <ListItemButton key={index} onClick={() => { handleClick(index); }} divider>
-        <ListItemText primary={`Day ${index + 1}`} />
+      <ListItemButton
+        key={index}
+        onClick={() => { handleClick(index); }}
+        divider
+        sx={{
+          color: theme.palette.secondary.main,
+          borderColor: theme.palette.secondary.main,
+        }}
+      >
+        <ListItemText primary={day} />
         {isExpanded ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       {mealSchedule && Object.keys(mealSchedule).map((meal) => (
@@ -55,7 +65,16 @@ function MealScheduleCollapse(props) {
         >
           <ListItem>
             <ListItemText
-              secondary={`${GetProperLabel(meal.toString())}: ${mealSchedule[meal]}`}
+              disableTypography
+              secondary={(
+                <Typography
+                  variant="body2"
+                  style={{
+                    color: theme.palette.secondary.light,
+                  }}
+                >{`${GetProperLabel(meal.toString())}: ${mealSchedule[meal]}`}
+                </Typography>
+)}
             />
           </ListItem>
         </Collapse>
@@ -83,6 +102,7 @@ MealScheduleCollapse.propTypes = {
       fat: PropTypes.number,
     }),
   }).isRequired,
+  day: PropTypes.string.isRequired,
 };
 
 export default function ExistingMealSchedule() {
@@ -104,7 +124,7 @@ export default function ExistingMealSchedule() {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Button
+        <StyledButton
           fullWidth
           variant="contained"
           sx={{
@@ -113,22 +133,22 @@ export default function ExistingMealSchedule() {
           }}
           size="medium"
           onClick={() => setUpdateBothModal(true)}
-          color="primary"
+          color="secondary"
         >
           Regenerate Both Plans
-        </Button>
+        </StyledButton>
       </Grid>
       <Grid item xs={12}>
-        <Button
+        <StyledButton
           fullWidth
           variant="contained"
           sx={{ mb: 1, backgroundColor: theme.palette.secondary.main }}
           size="medium"
           onClick={() => setUpdateMealModal(true)}
-          color="primary"
+          color="secondary"
         >
           Regenerate Meal Plan
-        </Button>
+        </StyledButton>
       </Grid>
       <ConfirmationModal
         open={updateMealModal}
@@ -149,7 +169,9 @@ export default function ExistingMealSchedule() {
       <Grid item xs={12}>
         <List
           sx={{
-            width: '100%', maxheight: '100%', overflow: 'auto', bgcolor: 'background.paper',
+            width: '100%',
+            maxheight: '100%',
+            overflow: 'auto',
           }}
         >
           {mealSchedule.schedule && Object.keys(mealSchedule.schedule).map((day, index) => (
@@ -159,6 +181,7 @@ export default function ExistingMealSchedule() {
               index={index}
               key={`${day} meal`}
               selectedIndices={selectedIndices}
+              day={day}
             />
           ))}
         </List>

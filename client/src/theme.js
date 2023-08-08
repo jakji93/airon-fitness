@@ -8,9 +8,10 @@ const theme = createTheme({
       light: '#3F72AF',
     },
     secondary: {
-      main: '#B5936B',
+      main: '#D7B389',
       dark: '#3F3F47',
       light: '#ffffff',
+      hover: '#CC9F6B',
     },
     background: {
       default: '#3F3F47',

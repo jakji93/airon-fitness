@@ -1,5 +1,5 @@
 import {
-  Box, Button, CssBaseline, Grid, TextField,
+  Box, CssBaseline, Grid, TextField,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Container } from '@mui/system';
@@ -21,6 +21,7 @@ import {
   googleLogin, login, register, resetAuth,
 } from '../reducers/Auth';
 import { removeSignup, setSignup } from '../reducers/Signup';
+import { StyledButton } from '../styled';
 
 const validationSchema = yup.object({
   email: yup
@@ -185,15 +186,15 @@ export default function Login() {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Button
+                <StyledButton
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ width: '100%', height: '100%', backgroundColor: theme.palette.secondary.main }}
+                  sx={{ width: '100%', height: '100%' }}
                 >
                   <Box
                     sx={{
-                      color: theme.palette.secondary.light,
+                      color: theme.palette.secondary.dark,
                       fontFamily: theme.typography.fontFamily,
                     }}
                   >
@@ -205,9 +206,18 @@ export default function Login() {
                       }}
                     />
                   </Box>
-                </Button>
+                </StyledButton>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
                 <GoogleLogin
                   onSuccess={handleGoogleLoginSuccess}
                   onError={() => {
@@ -217,12 +227,20 @@ export default function Login() {
                 />
               </Grid>
             </Grid>
-            <Grid container justifyContent="flex-end">
+            <Grid
+              container
+              sx={{
+                justifyContent: {
+                  sm: 'flex-end',
+                  xs: 'center',
+                },
+              }}
+            >
               <Grid item sx={{ mt: 1 }}>
                 <Link
                   to="/signup"
                   variant="body2"
-                  style={{ color: theme.palette.secondary.main, fontSize: 'calc(6px + 0.3vw' }}
+                  style={{ color: theme.palette.secondary.main }}
                   onClick={() => {
                     dispatch(removeSignup());
                   }}

@@ -3,16 +3,16 @@ import {
   Delete as DeleteIcon,
 } from '@mui/icons-material';
 import {
-  Avatar, Box, Button, styled,
+  Avatar, Box, styled,
 } from '@mui/material';
 import { grey } from '@mui/material/colors';
-import { useTheme } from '@mui/material/styles';
 import React, {
   createRef, useContext, useEffect, useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { updateUserProfile, updateUserProfileImage } from '../../reducers/UserProfile';
+import { StyledButton } from '../../styled';
 import { ToastContext } from '../common/context/ToastContextProvider';
 
 const BigAvatar = styled(Avatar)(({ theme }) => ({
@@ -40,7 +40,6 @@ export const arrayBufferToBase64 = (buffer) => {
 export default function AvatarUpload() {
   const openToast = useContext(ToastContext);
   const dispatch = useDispatch();
-  const theme = useTheme();
   const profile = useSelector((state) => state.userProfile.profile);
   const profileImage = base64Flag + arrayBufferToBase64(profile?.profileImage?.data?.data);
   const [image, _setImage] = useState(profileImage ?? '/static/img/avatars/default-profile.svg');
@@ -110,16 +109,17 @@ export default function AvatarUpload() {
         onChange={handleOnChange}
       />
       <label htmlFor="avatar-image-upload">
-        <Button
+        <StyledButton
           variant="contained"
-          color="primary"
           onClick={handleClick}
           component="span"
-          sx={{ mt: 2, backgroundColor: theme.palette.secondary.main }}
+          sx={{
+            mt: 2,
+          }}
         >
           {imageExists ? <DeleteIcon sx={{ marginRight: '5px' }} /> : <UploadIcon sx={{ marginRight: '5px' }} />}
           {imageExists ? 'Delete' : 'Upload'}
-        </Button>
+        </StyledButton>
       </label>
     </Box>
   );

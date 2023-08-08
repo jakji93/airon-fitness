@@ -9,6 +9,25 @@ import { inputGridSizing } from './Form';
 import { underlineStyle } from './FormTextFieldInput';
 import GridInputLabel from './GridInputLabel';
 
+const selectStyle = {
+  '&:hover': {
+    backgroundColor: 'theme.palette.secondary.light',
+  },
+  '& .MuiSelect-filled': {
+    backgroundColor: 'theme.palette.secondary.light',
+  },
+  '& .MuiSelect-iconFilled': {
+    backgroundColor: 'theme.palette.secondary.light',
+  },
+  '& .MuiInputAdornment-filled.MuiInputAdornment-positionEnd': {
+    backgroundColor: 'theme.palette.secondary.light',
+  },
+  borderRadius: '4px',
+  '& .MuiFilledInput-root': {
+    backgroundColor: 'theme.palette.secondary.light',
+  },
+};
+
 export default function FormSelect(props) {
   const {
     id,
@@ -39,25 +58,15 @@ export default function FormSelect(props) {
         <FormControl
           fullWidth
           size={size}
-          sx={fillHeight ? { height: '100%' } : {
-            '&:hover': {
-              backgroundColor: 'theme.palette.secondary.light',
-            },
-            '& .MuiSelect-filled': {
-              backgroundColor: 'theme.palette.secondary.light',
-            },
-            '& .MuiSelect-iconFilled': {
-              backgroundColor: 'theme.palette.secondary.light',
-            },
-            '& .MuiInputAdornment-filled.MuiInputAdornment-positionEnd': {
-              backgroundColor: 'theme.palette.secondary.light',
-            },
-            borderRadius: '4px',
-            '& .MuiFilledInput-root': {
-              backgroundColor: 'theme.palette.secondary.light',
-            },
-            ...underlineStyle,
-          }}
+          sx={fillHeight
+            ? {
+              height: '100%',
+              ...selectStyle,
+              ...underlineStyle,
+            } : {
+              ...selectStyle,
+              ...underlineStyle,
+            }}
           variant="filled"
         >
           <InputLabel

@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
 import {
-  Box, Button, Paper, Typography,
+  Box, Typography,
 } from '@mui/material';
+import { Container } from '@mui/system';
 import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 import Typewriter from 'typewriter-effect';
 
 import ExercisesTable from './ExercisesTable';
 import WorkoutStatesEnum from './WorkoutFlowStates';
+import { StyledButton } from '../../styled';
 import theme from '../../theme';
 
 const styles = {
@@ -37,15 +39,13 @@ const styles = {
     alignItems: 'center',
   },
   dayTypography: {
-    color: theme.palette.secondary.dark,
+    color: theme.palette.secondary.main,
     fontSize: '4vw',
     paddingTop: '20px',
   },
   workoutButton: {
     fontWeight: 'normal',
-    color: theme.palette.secondary.light,
-    borderColor: '#B5936B',
-    backgroundColor: theme.palette.secondary.dark,
+    borderColor: theme.palette.secondary.main,
     marginTop: '25px',
     marginBottom: '25px',
     padding: '15px',
@@ -54,10 +54,7 @@ const styles = {
     position: 'relative', // Set the position to relative for the pseudo-element
     overflow: 'hidden', // Hide any overflow from the pseudo-element
     '&:hover': {
-      color: theme.palette.secondary.light,
-      borderColor: '#F3F3F0',
-      backgroundColor: theme.palette.secondary.main,
-      transition: 'background-color 0.5s ease',
+      borderColor: theme.palette.secondary.main,
     },
   },
 };
@@ -68,11 +65,11 @@ function Item({ handleDay, workout, onNext }) {
 
   return (
     <Box>
-      <Paper sx={styles.paperContainer}>
+      <Container sx={styles.paperContainer}>
         <Typography sx={styles.dayTypography}>
           {day}
         </Typography>
-        <Button
+        <StyledButton
           onClick={() => {
             onNext(WorkoutStatesEnum.IN_SESSION);
             handleDay(day);
@@ -81,9 +78,9 @@ function Item({ handleDay, workout, onNext }) {
           sx={styles.workoutButton}
         >
           START WORKOUT
-        </Button>
+        </StyledButton>
         <ExercisesTable exercises={exercisesArray} />
-      </Paper>
+      </Container>
     </Box>
   );
 }

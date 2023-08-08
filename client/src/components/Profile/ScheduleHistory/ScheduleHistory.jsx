@@ -49,11 +49,12 @@ export default function ScheduleHistory() {
             color: (theme) => theme.palette.secondary.light,
           },
           '& .MuiPaginationItem-page.Mui-selected': {
-            color: (theme) => theme.palette.secondary.light,
+            color: (theme) => theme.palette.secondary.dark,
             backgroundColor: (theme) => theme.palette.secondary.main,
           },
           '& .MuiPaginationItem-page.Mui-selected:hover': {
-            color: (theme) => theme.palette.secondary.light,
+            color: (theme) => theme.palette.secondary.dark,
+            backgroundColor: (theme) => theme.palette.secondary.hover,
           },
           '& .MuiPaginationItem-root:hover': {
             color: (theme) => theme.palette.secondary.main,

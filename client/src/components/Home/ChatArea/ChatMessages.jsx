@@ -4,13 +4,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import ChatBubble from './ChatBubble';
+import theme from '../../../theme';
 
 const styles = {
   textbox: {
     flex: '1 1 auto',
     overflow: 'auto',
     height: '30vh',
-    padding: '0 20px',
+    padding: '20px 20px',
+    border: `1px solid ${theme.palette.secondary.main}`,
+    borderRadius: '10px',
+    margin: '0 20px',
+    backgroundColor: 'white',
   },
   message: {
     overflow: 'auto',
