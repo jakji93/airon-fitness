@@ -101,6 +101,7 @@ function Dictaphone({
             ))}
           </div>
 )}
+        aria-label="command phrases popover"
       >
         <IconButton disableFocusRipple disableTouchRipple>
           <InfoIcon />
@@ -120,6 +121,7 @@ function Dictaphone({
             </div>
   )}
           sx={{ color: theme.palette.secondary.main }}
+          aria-label="voice recognition popover"
         >
           <IconButton disableFocusRipple disableTouchRipple>
             <RecordVoiceOverIcon />
@@ -138,6 +140,7 @@ function Dictaphone({
             </div>
 )}
           sx={{ color: theme.palette.secondary.main }}
+          aria-label="voice recognition popover"
         >
           <IconButton disableFocusRipple disableTouchRipple>
             <VoiceOverOffIcon />
@@ -154,6 +157,7 @@ function Dictaphone({
             {transcript}
           </div>
 )}
+        aria-label="speech transcript popover"
       >
         <IconButton disableFocusRipple disableTouchRipple>
           <SpeakerNotesIcon />
@@ -161,13 +165,13 @@ function Dictaphone({
       </Tooltip>
 
       { listening ? (
-        <Tooltip title="Your microphone is on" sx={{ color: theme.palette.secondary.main }}>
+        <Tooltip title="Your microphone is on" sx={{ color: theme.palette.secondary.main }} aria-label="microphone toggle">
           <IconButton onClick={handleStopListening} disableFocusRipple disableTouchRipple>
             <MicIcon />
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Your microphone is off" sx={{ color: theme.palette.secondary.main }}>
+        <Tooltip title="Your microphone is off" sx={{ color: theme.palette.secondary.main }} aria-label="microphone toggle">
           <IconButton onClick={handleStartListening} disableFocusRipple disableTouchRipple>
             <MicOffIcon>Voice Control Off</MicOffIcon>
           </IconButton>

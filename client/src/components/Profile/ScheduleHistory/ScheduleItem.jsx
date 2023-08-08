@@ -31,6 +31,12 @@ export default function ScheduleItem({ details, token }) {
     return 'No custom inputs';
   };
 
+  const checkSpacebar = (e) => {
+    if (e.key === ' ') {
+      setShowDetails(!showDetails);
+    }
+  };
+
   return (
     <Grid item xs={12} lg={6} sx={{ margin: '8px 0' }}>
       <Paper
@@ -39,7 +45,10 @@ export default function ScheduleItem({ details, token }) {
           width: '100%', height: '100px', cursor: 'pointer', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center',
         }}
         onClick={() => setShowDetails(!showDetails)}
+        onKeyDown={checkSpacebar}
         aria-expanded={showDetails}
+        tabIndex={0}
+        role="button"
       >
         <Box>
           Generated { Object.values(details.schedule)[0].breakfast ? 'Meal Schedule' : 'Workout Schedule' } on {getDateString()}

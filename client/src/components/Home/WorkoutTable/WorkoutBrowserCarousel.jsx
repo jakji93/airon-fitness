@@ -34,7 +34,7 @@ function Item({ workout }) {
 
   return (
     <Box>
-      <Paper sx={styles.paperContainer}>
+      <Paper sx={styles.paperContainer} tabIndex={0} aria-label={`exercises for ${day}`}>
         <Typography variant="h6" component="div" color="text.secondary" sx={{ mb: 3 }}>
           {day}
         </Typography>

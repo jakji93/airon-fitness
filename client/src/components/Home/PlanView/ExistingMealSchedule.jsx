@@ -52,6 +52,7 @@ function MealScheduleCollapse(props) {
           timeout="auto"
           unmountOnExit
           key={`${index}-${meal.toString()}`}
+          tabIndex={0}
         >
           <ListItem>
             <ListItemText

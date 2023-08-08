@@ -55,7 +55,7 @@ export default function ExercisesTable({ exercises }) {
     }}
     >
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table stickyHeader aria-label="table">
           <TableHead>
             <TableRow>
               {columns.map((column, index) => (
@@ -78,20 +78,23 @@ export default function ExercisesTable({ exercises }) {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.exercise}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number'
-                          ? column.format(value)
-                          : value}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              ))}
+              .map((row) => {
+                const aria = `${row.exercise} with ${row.sets} sets, ${row.reps} reps, ${row.rest} rest, ${row.duration} duration, ${row.intensity} intensity`;
+                return (
+                  <TableRow hover role="checkbox" tabIndex={0} key={row.exercise} aria-label={aria}>
+                    {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell key={column.id} align={column.align}>
+                          {column.format && typeof value === 'number'
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>

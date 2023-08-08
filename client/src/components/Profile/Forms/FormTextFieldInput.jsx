@@ -43,7 +43,6 @@ export default function FormTextFieldInput(props) {
     size,
   } = props;
   const ariaLabel = endAdornment ? `${label} with units ${endAdornment}` : label;
-  const theme = useTheme();
 
   return (
     <>
