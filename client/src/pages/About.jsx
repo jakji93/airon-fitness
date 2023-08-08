@@ -205,7 +205,7 @@ export default function About() {
             sx={{ p: 2 }}
             style={{
               height: '100%',
-              width: '50vw',
+              width: '75vw',
               display: 'flex',
               justifyContent: 'center',
             }}
@@ -295,7 +295,7 @@ export default function About() {
             sx={{ p: 2 }}
             style={{
               height: '100%',
-              width: '50vw',
+              width: '75vw',
               display: 'flex',
               justifyContent: 'center',
             }}
