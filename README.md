@@ -95,6 +95,7 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 - [x] Voice recognition support in guided workouts
   - [ ] Speech polyfill for unsupported browsers
 - [x] Responsive website layout and design
+- [x] Accessible styling and screen reader support
 - [ ] Dynamically update fitness plans as users log their history
 - [ ] Live audio feedback during a workout
 - [ ] Computer vision support for exercise form analysis in guided workouts
