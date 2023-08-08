@@ -48,25 +48,10 @@ const styles = {
     overflow: 'hidden', // Hide any overflow from the pseudo-element
     '&:hover': {
       fontWeight: 'bolder',
-      color: '#3F3F47',
-      borderColor: '#F3F3F0',
-      backgroundColor: '#ffffff',
+      color: theme.palette.secondary.dark,
+      borderColor: theme.palette.secondary.main,
+      backgroundColor: theme.palette.secondary.main,
       transition: 'background-color 0.5s ease',
-      '&::after': {
-        content: "''",
-        position: 'absolute',
-        top: '-10%', // Adjust the positioning to cover the entire button
-        left: '-10%', // Adjust  the positioning to cover the entire button
-        width: '120%',
-        height: '120%',
-        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.8), transparent)',
-        opacity: 0,
-        pointerEvents: 'none',
-        transition: 'opacity 0.3s ease',
-      },
-      '&:hover::after': {
-        opacity: 1,
-      },
     },
   },
 };

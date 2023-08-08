@@ -65,6 +65,7 @@ export default function WorkoutBrowserCarousel({ workoutData }) {
         navButtonsProps={{
           style: {
             backgroundColor: theme.palette.secondary.main,
+            color: theme.palette.secondary.dark,
           },
         }}
       >

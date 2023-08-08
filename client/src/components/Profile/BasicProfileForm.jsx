@@ -1,7 +1,6 @@
 import {
-  Grid, Button,
+  Grid,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import dayjs from 'dayjs';
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
@@ -25,6 +24,7 @@ import {
   heightUnitOptions,
 } from '../../constants/BasicProfile';
 import { updateUserProfile } from '../../reducers/UserProfile';
+import { StyledButton } from '../../styled';
 
 const validationSchema = yup.object({
   gender: yup
@@ -72,7 +72,6 @@ export default function BasicProfileForm(props) {
     setUpdatingProfile,
   } = props;
   const dispatch = useDispatch();
-  const theme = useTheme();
   const profile = useSelector((state) => state.userProfile.profile);
   const initialValues = {
     firstName: profile?.firstName ?? '',
@@ -260,13 +259,12 @@ export default function BasicProfileForm(props) {
       <Grid item xs={12} sm={6} />
       <Grid item xs={12} sm={5} />
       <Grid item xs={12} sm={4}>
-        <Button
+        <StyledButton
           variant="contained"
           type="submit"
-          sx={{ backgroundColor: theme.palette.secondary.main }}
         >
           Save
-        </Button>
+        </StyledButton>
       </Grid>
       <Grid item xs={12} sm={5} />
     </PaperForm>

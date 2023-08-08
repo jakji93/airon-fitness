@@ -66,9 +66,9 @@ const styles = {
     width: '15vw',
     '&:hover': {
       fontWeight: 'bolder',
-      color: '#3F3F47',
-      borderColor: 'F3F3F0',
-      backgroundColor: '#ffffff',
+      color: theme.palette.secondary.dark,
+      borderColor: theme.palette.secondary.main,
+      backgroundColor: theme.palette.secondary.main,
       transition: 'background-color 0.3s ease',
     },
   },

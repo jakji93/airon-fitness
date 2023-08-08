@@ -14,6 +14,7 @@ import SignupRegisterAccount from '../components/Signup/SignupRegisterAccount';
 import SignupRequireUserDetails from '../components/Signup/SignupRequireUserDetails';
 import { removeSignup } from '../reducers/Signup';
 import { resetUserProfileStates } from '../reducers/UserProfile';
+import theme from '../theme';
 
 export default function SignupFlow() {
   const openToast = useContext(ToastContext);
@@ -72,6 +73,16 @@ export default function SignupFlow() {
               '& .MuiStepLabel-label.Mui-disabled.MuiStepLabel-alternativeLabel':
               {
                 color: 'secondary.light', // Just text label (INACTIVE)
+              },
+              '& .Mui-active text': {
+                fill: theme.palette.secondary.dark,
+              },
+              '& .MuiStepIcon-root': {
+                width: '2rem',
+                height: '2rem',
+              },
+              '& text': {
+                fontSize: '1rem',
               },
             }}
           >

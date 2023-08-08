@@ -22,6 +22,7 @@ import {
   getWorkoutSchedule, getMealSchedule, updateWorkoutSchedule,
   updateMealSchedule, createWorkoutAndMealSchedule,
 } from '../../../reducers/WorkoutAndMealSchedule';
+import theme from '../../../theme';
 import FormMultiSelect from '../../Profile/Forms/FormMultiSelect';
 import FormSelect from '../../Profile/Forms/FormSelect';
 
@@ -376,7 +377,19 @@ export default function ChatArea() {
               }
             </Grid>
             <Grid item style={{ marginLeft: '20px' }}>
-              <Fab color="secondary" aria-label="add" onClick={handleSendButton}><SendIcon sx={{ color: 'white' }} /></Fab>
+              <Fab
+                aria-label="add"
+                onClick={handleSendButton}
+                sx={{
+                  backgroundColor: theme.palette.secondary.main,
+                  color: theme.palette.secondary.dark,
+                  '&:hover': {
+                    backgroundColor: '#CC9F6B',
+                  },
+                }}
+              >
+                <SendIcon />
+              </Fab>
             </Grid>
           </Grid>
         </Grid>

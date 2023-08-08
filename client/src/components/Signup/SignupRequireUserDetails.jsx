@@ -1,5 +1,5 @@
 import {
-  Grid, Button,
+  Grid,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useFormik } from 'formik';
@@ -13,6 +13,7 @@ import {
   weightUnitOptions, heightUnitOptions,
 } from '../../constants/BasicProfile';
 import { setSignup } from '../../reducers/Signup';
+import { StyledButton } from '../../styled';
 import Form from '../Profile/Forms/Form';
 import FormMultiSelect from '../Profile/Forms/FormMultiSelect';
 import FormSelect from '../Profile/Forms/FormSelect';
@@ -177,28 +178,28 @@ export default function SignupRequireUserDetails() {
         xs={12}
         sm={6}
       >
-        <Button
+        <StyledButton
           onClick={handleBack}
           variant="contained"
           fullWidth
           sx={{ backgroundColor: theme.palette.secondary.main }}
         >
           Back
-        </Button>
+        </StyledButton>
       </Grid>
       <Grid
         item
         xs={12}
         sm={6}
       >
-        <Button
+        <StyledButton
           type="submit"
           variant="contained"
           fullWidth
           sx={{ backgroundColor: theme.palette.secondary.main }}
         >
           Next
-        </Button>
+        </StyledButton>
       </Grid>
     </Form>
   );

@@ -2,7 +2,6 @@ import {
   ExpandLess, ExpandMore,
 } from '@mui/icons-material';
 import {
-  Button,
   Collapse, Grid, List, ListItem, ListItemButton, ListItemText,
 } from '@mui/material';
 import PropTypes from 'prop-types';
@@ -11,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ConfirmationModal from './ConfirmationModal';
 import { createWorkoutAndMealSchedule, createWorkoutSchedule } from '../../../reducers/WorkoutAndMealSchedule';
+import { StyledButton } from '../../../styled';
 import theme from '../../../theme';
 
 function InstructionString(exercise, set, rep, rest, duration) {
@@ -121,7 +121,7 @@ export default function ExistingWorkoutSchedule() {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Button
+        <StyledButton
           fullWidth
           variant="contained"
           sx={{
@@ -130,24 +130,22 @@ export default function ExistingWorkoutSchedule() {
           }}
           size="medium"
           onClick={() => setUpdateBothModal(true)}
-          color="primary"
+          color="secondary"
         >
           Regenerate Both Plans
-        </Button>
+        </StyledButton>
       </Grid>
       <Grid item xs={12}>
-        <Button
+        <StyledButton
           fullWidth
           variant="contained"
           sx={{
             mb: 1,
-            backgroundColor: theme.palette.secondary.main,
           }}
           size="medium"
           onClick={() => setUpdateWorkoutModal(true)}
-          color="primary"
         >Regenerate Workout Plan
-        </Button>
+        </StyledButton>
       </Grid>
       <ConfirmationModal
         open={updateWorkoutModal}

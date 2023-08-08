@@ -2,7 +2,6 @@ import {
   ExpandLess, ExpandMore,
 } from '@mui/icons-material';
 import {
-  Button,
   Collapse,
   Grid,
   List,
@@ -16,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ConfirmationModal from './ConfirmationModal';
 import { createMealSchedule, createWorkoutAndMealSchedule } from '../../../reducers/WorkoutAndMealSchedule';
+import { StyledButton } from '../../../styled';
 import theme from '../../../theme';
 
 function GetProperLabel(str) {
@@ -104,7 +104,7 @@ export default function ExistingMealSchedule() {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Button
+        <StyledButton
           fullWidth
           variant="contained"
           sx={{
@@ -113,22 +113,22 @@ export default function ExistingMealSchedule() {
           }}
           size="medium"
           onClick={() => setUpdateBothModal(true)}
-          color="primary"
+          color="secondary"
         >
           Regenerate Both Plans
-        </Button>
+        </StyledButton>
       </Grid>
       <Grid item xs={12}>
-        <Button
+        <StyledButton
           fullWidth
           variant="contained"
           sx={{ mb: 1, backgroundColor: theme.palette.secondary.main }}
           size="medium"
           onClick={() => setUpdateMealModal(true)}
-          color="primary"
+          color="secondary"
         >
           Regenerate Meal Plan
-        </Button>
+        </StyledButton>
       </Grid>
       <ConfirmationModal
         open={updateMealModal}

@@ -64,7 +64,7 @@ export default function ExercisesTable({ exercises }) {
                   align={column.align}
                   style={{
                     minWidth: column.minWidth,
-                    color: theme.palette.secondary.light,
+                    color: theme.palette.secondary.dark,
                     backgroundColor: theme.palette.secondary.main,
                     borderTopLeftRadius: index === 0 ? '10px' : '0',
                     borderTopRightRadius: index === columns.length - 1 ? '10px' : '0',
