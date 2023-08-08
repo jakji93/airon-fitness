@@ -149,7 +149,7 @@ Jack Ji made substantial contributions to our MERN project, playing a crucial ro
 
 ### Kenny Cheng
 
-Kenny contributed to the project by configuring the project with ESLint, a custom pre-commit hook for linting the monorepo project and designing numerous reusable form components with Formik + yup validation for login, signup, and updating user profiles. He also worked heavily on end-to-end integration across the entire app through setting up Redux with Thunks, JWT authentication, Google account login, and profile picture uploading. He enhanced UI/UX of the app by implementing the view for workout and meal schedules based on Figma designs, testing and fixing edge case bugs, and adjusting workflows to prevent user errors.
+Kenny contributed to the project by configuring the project with ESLint, a custom pre-commit hook for linting the monorepo project and designing numerous reusable form components with Formik + yup validation for login, signup, and updating user profiles. He also worked heavily on end-to-end integration across the entire app through setting up Redux with Thunks, JWT authentication, Google account login, and profile picture uploading. He enhanced UI/UX of the app by implementing the view for workout and meal schedules based on Figma designs, testing and fixing edge case bugs, implementing a WCAG accessible color palette across the entire platform, and adjusting workflows to prevent user errors.
 
 ### Kevin Chung
 
