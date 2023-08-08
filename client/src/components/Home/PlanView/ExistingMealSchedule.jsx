@@ -8,6 +8,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -42,7 +43,15 @@ function MealScheduleCollapse(props) {
   const isExpanded = selectedIndices.includes(index);
   return (
     <div>
-      <ListItemButton key={index} onClick={() => { handleClick(index); }} divider>
+      <ListItemButton
+        key={index}
+        onClick={() => { handleClick(index); }}
+        divider
+        sx={{
+          color: theme.palette.secondary.main,
+          borderColor: theme.palette.secondary.main,
+        }}
+      >
         <ListItemText primary={`Day ${index + 1}`} />
         {isExpanded ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
@@ -55,7 +64,16 @@ function MealScheduleCollapse(props) {
         >
           <ListItem>
             <ListItemText
-              secondary={`${GetProperLabel(meal.toString())}: ${mealSchedule[meal]}`}
+              disableTypography
+              secondary={(
+                <Typography
+                  variant="body2"
+                  style={{
+                    color: theme.palette.secondary.light,
+                  }}
+                >{`${GetProperLabel(meal.toString())}: ${mealSchedule[meal]}`}
+                </Typography>
+)}
             />
           </ListItem>
         </Collapse>
@@ -149,7 +167,9 @@ export default function ExistingMealSchedule() {
       <Grid item xs={12}>
         <List
           sx={{
-            width: '100%', maxheight: '100%', overflow: 'auto', bgcolor: 'background.paper',
+            width: '100%',
+            maxheight: '100%',
+            overflow: 'auto',
           }}
         >
           {mealSchedule.schedule && Object.keys(mealSchedule.schedule).map((day, index) => (

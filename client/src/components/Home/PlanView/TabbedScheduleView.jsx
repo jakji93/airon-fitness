@@ -1,7 +1,7 @@
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import {
-  Card, Grid, Tab, Tabs,
+  Grid, Tab, Tabs,
 } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import ExistingMealSchedule from './ExistingMealSchedule';
 import ExistingWorkoutSchedule from './ExistingWorkoutSchedule';
 import NoSchedule from './NoSchedule';
 import { resetWorkoutAndMealScheduleStates } from '../../../reducers/WorkoutAndMealSchedule';
+import theme from '../../../theme';
 import { ToastContext } from '../../common/context/ToastContextProvider';
 import RelativeSpinner from '../../common/RelativeSpinner';
 import TabPanel from '../../common/TabPanel';
@@ -30,7 +31,18 @@ export default function TabbedScheduleView() {
   }, [workoutSchedule, mealSchedule, isError, isSuccess, message, dispatch]);
 
   return (
-    <Grid container component={Card} alignItems="center" columns={2} sx={{ p: 3, position: 'relative', borderRadius: '10px' }}>
+    <Grid
+      container
+      alignItems="center"
+      columns={2}
+      sx={{
+        p: 3,
+        position: 'relative',
+        borderRadius: '4px',
+        backgroundColor: theme.palette.secondary.dark,
+        border: `1px solid ${theme.palette.secondary.main}`,
+      }}
+    >
       {isLoading && <RelativeSpinner />}
       <Grid item xs={10}>
         <Tabs
@@ -45,6 +57,7 @@ export default function TabbedScheduleView() {
             label="Fitness Plan"
             sx={{
               width: '50%',
+              color: 'white',
             }}
           />
           <Tab
@@ -52,6 +65,7 @@ export default function TabbedScheduleView() {
             label="Meal Plan"
             sx={{
               width: '50%',
+              color: 'white',
             }}
           />
         </Tabs>

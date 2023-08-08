@@ -2,7 +2,7 @@ import {
   ExpandLess, ExpandMore,
 } from '@mui/icons-material';
 import {
-  Collapse, Grid, List, ListItem, ListItemButton, ListItemText,
+  Collapse, Grid, List, ListItem, ListItemButton, ListItemText, Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -51,7 +51,15 @@ function WorkoutScheduleCollapse(props) {
   const isExpanded = selectedIndices.includes(index);
   return (
     <div>
-      <ListItemButton key={index} onClick={() => { handleClick(index); }} divider>
+      <ListItemButton
+        key={index}
+        onClick={() => { handleClick(index); }}
+        divider
+        sx={{
+          color: theme.palette.secondary.main,
+          borderColor: theme.palette.secondary.main,
+        }}
+      >
         <ListItemText primary={day} />
         {isExpanded ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
@@ -64,7 +72,14 @@ function WorkoutScheduleCollapse(props) {
         >
           <ListItem>
             <ListItemText
+              disableTypography
               secondary={(
+                <Typography
+                  variant="body2"
+                  style={{
+                    color: theme.palette.secondary.light,
+                  }}
+                >{(
                   InstructionString(
                     workout.exercise,
                     workout.sets,
@@ -72,7 +87,8 @@ function WorkoutScheduleCollapse(props) {
                     workout.rest,
                     workout.duration,
                   )
-              )}
+              )}</Typography>
+)}
             />
           </ListItem>
         </Collapse>
@@ -166,7 +182,9 @@ export default function ExistingWorkoutSchedule() {
       <Grid item xs={12}>
         <List
           sx={{
-            width: '100%', maxheight: '100%', overflow: 'auto', bgcolor: 'background.paper',
+            width: '100%',
+            maxheight: '100%',
+            overflow: 'auto',
           }}
         >
           {workoutSchedule.schedule && Object.keys(workoutSchedule.schedule).map((day, index) => (

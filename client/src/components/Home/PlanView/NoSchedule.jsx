@@ -18,7 +18,13 @@ export default function NoSchedule() {
   return (
     <Grid container justifyContent="center" alignItems="center" sx={{ p: 2, borderRadius: '10px' }}>
       <Grid item xs={12} textAlign="center">
-        <Box sx={{ fontSize: '1.5vw', paddingBottom: '2vh' }}>
+        <Box
+          sx={{
+            fontSize: '1rem',
+            paddingBottom: '1rem',
+            color: theme.palette.secondary.main,
+          }}
+        >
           <Typewriter
             onInit={(typewriter) => {
               typewriter.changeDelay(40)
@@ -31,12 +37,13 @@ export default function NoSchedule() {
       <Grid item xs textAlign="center">
         <Button
           sx={{
-            fontSize: '1vw',
             '&:hover': {
-              color: theme.palette.secondary.light,
-              borderColor: theme.palette.secondary.light,
+              color: theme.palette.secondary.dark,
+              borderColor: theme.palette.secondary.main,
               backgroundColor: theme.palette.secondary.main,
             },
+            borderColor: theme.palette.secondary.main,
+            color: theme.palette.secondary.main,
           }}
           variant="outlined"
           onClick={() => setConfirmationModal(true)}
