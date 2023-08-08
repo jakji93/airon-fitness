@@ -49,7 +49,7 @@ export default function FormTextFieldInput(props) {
       <Grid
         item
         xs={12}
-        sm={inputGridSizing(half, customTextFieldGridSize)}
+        md={inputGridSizing(half, customTextFieldGridSize)}
       >
         <TextField
           required={required}

@@ -48,7 +48,7 @@ export default function FormTextFieldWithRadio(props) {
         size={size}
         helperText={helperText}
       />
-      <Grid item xs={12} sm={half ? 3 : 6}>
+      <Grid item xs={12} md={half ? 3 : 6}>
         <FormControl>
           {radioLabel
             && <FormLabel id={`${id}-row-radio-buttons-group-label`}>{radioLabel}</FormLabel>}

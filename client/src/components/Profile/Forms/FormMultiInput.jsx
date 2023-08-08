@@ -32,7 +32,7 @@ export default function FormMultiInput(props) {
           label={label}
         />
       )}
-      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)}>
+      <Grid item xs={12} md={inputGridSizing(half, customTextFieldGridSize)}>
         <Autocomplete
           multiple
           id="tags-filled"
