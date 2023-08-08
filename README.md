@@ -1,19 +1,5 @@
 <a name="readme-top"></a>
 
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-<!-- [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url] -->
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -21,7 +7,7 @@
     <img src="assets/logo.png" alt="Logo" width="150" height="150">
   </a>
 
-  <h3 align="center">AIron Fitness</h3>
+  <h3 align="center">AIRON Fitness</h3>
 
   <p align="center">
     AI-powered fitness app to help you kickstart your training journey.
@@ -107,6 +93,9 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 - [x] Chatbot personal trainer that allows for custom user inputs
 - [x] Dynamic guided workouts with rep/set counters and rest timers
 - [x] Voice recognition support in guided workouts
+  - [ ] Speech polyfill for unsupported browsers
+- [x] Responsive website layout and design
+- [x] Accessible styling and screen reader support
 - [ ] Dynamically update fitness plans as users log their history
 - [ ] Live audio feedback during a workout
 - [ ] Computer vision support for exercise form analysis in guided workouts
@@ -129,11 +118,13 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 
 ## Above and Beyond
 
-In our MERN web application, we went above and beyond the standard requirements by incorporating advanced functionalities that elevate user experience and personalization. First, we integrated Google Login, streamlining the authentication process and ensuring a seamless user journey. Leveraging JWT token authentication, we further enforced the app's security, safeguarding any sensitive user data. Additionally, we crafted custom reusable form components using Formik and yup validation, streamlining user interactions for login, signup, and profile updates. These meticulously designed components enhance usability while maintaining robust data integrity.
+In our MERN web application, we went above and beyond the standard requirements by incorporating advanced functionalities that elevate user experience and personalization. First, we integrated <span style="color: #b5936b;">Google Login</span>, streamlining the authentication process and ensuring a seamless user journey. Leveraging <span style="color: #b5936b;" style="color: #b5936b;">JWT token authentication</span>, we further enforced the app's security, safeguarding any sensitive user data. Additionally, we crafted custom reusable form components utilizing <span style="color: #b5936b;">Formik</span> and <span style="color: #b5936b;">yup</span> validation, streamlining user interactions across 7 pages for login, signup, and profile updates. These meticulously designed components enhance usability while maintaining robust data integrity.
 
-Our main focus is to utilize the capability of ChatGPT, engineering prompts to generate personalized workout and meal schedules based on the user profile while minimize the cost of requesting from OpenAI. This feature customized a users' fitness experience, providing users with intelligent and adaptive recommendations. With the data from a user’s workout schedule, we provide a data-rich, voice controlled workout flow that acts as a personal trainer, guiding the user through their exercises and rest timing. We also introduced a chat-bot system that enables fine-tuning of base schedules, tailoring fitness and meal plans to individual preferences and restriction.
+Our main focus is to utilize the capability of ChatGPT, engineering prompts to generate personalized workout and meal schedules based on the user profile while minimize the cost of requesting from <span style="color: #b5936b;">OpenAI</span>. This feature customized a users' fitness experience, providing users with intelligent and adaptive recommendations. With the data from a user’s workout schedule, we provide a data-rich, <span style="color: #b5936b;">voice controlled</span> workout flow that acts as a personal trainer, guiding the user through their exercises and rest timing. We also introduced a <span style="color: #b5936b;">chat-bot</span> system that enables fine-tuning of base schedules, tailoring fitness and meal plans to individual preferences and restrictions. 
 
-By implementing Google Login, JWT authentication, a powerful chatbot, guided workouts, and ChatGPT integration, we have crafted an innovative fitness platform that redefines the way users interact with their workout and meal plans. The application's user-friendly experience, coupled with personalized features, ensures that each individual's fitness journey is tailored just for them.
+To improve experience and accessibility for all users, we implemented WCAG guidelines to select an accessible color palette to guarantee readability for users of all abilities.
+
+By implementing <span style="color: #b5936b;">Google Login, JWT authentication, a powerful chatbot, guided workouts, ChatGPT integration and WCAG accessibility</span>, we have crafted an innovative fitness platform that redefines the way users interact with their workout and meal plans. The application's user-friendly experience, coupled with personalized features, ensures that each individual's fitness journey is tailored just for them.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -147,7 +138,7 @@ In our next steps to further improve the app, we plan to dynamically update fitn
 
 <!-- CONTRIBUTION -->
 
-## Group Contribution
+## Team Member Contributions
 
 ### Davis Song
 
@@ -159,7 +150,7 @@ Jack Ji made substantial contributions to our MERN project, playing a crucial ro
 
 ### Kenny Cheng
 
-Kenny contributed to the project by configuring the project with ESLint, a custom pre-commit hook for linting the monorepo project and designing numerous reusable form components with Formik + yup validation for login, signup, and updating user profiles. He also worked heavily on end-to-end integration across the entire app through setting up Redux with Thunks, JWT authentication, Google account login, and profile picture uploading. He enhanced UI/UX of the app by implementing the view for workout and meal schedules based on Figma designs, testing and fixing edge case bugs, and adjusting workflows to prevent user errors.
+Kenny contributed to the project by configuring the project with ESLint, a custom pre-commit hook for linting the monorepo project and designing numerous reusable form components with Formik + yup validation for login, signup, and updating user profiles. He also worked heavily on end-to-end integration across the entire app through setting up Redux with Thunks, JWT authentication, Google account login, and profile picture uploading. He enhanced UI/UX of the app by implementing the view for workout and meal schedules based on Figma designs, testing and fixing edge case bugs, implementing a WCAG accessible color palette across the entire platform, and adjusting workflows to prevent user errors.
 
 ### Kevin Chung
 
@@ -171,7 +162,7 @@ Kevin Wu has been instrumental in various aspects of our MERN project. In the fr
 
 <!-- GROUP -->
 
-## The Team
+## Connect with Us
 
 [@Davis Song](https://www.linkedin.com/in/davissong/)<br>
 [@Jack Ji](https://www.linkedin.com/in/jack-ji-5643a011a/)<br>
@@ -192,6 +183,8 @@ Kevin Wu has been instrumental in various aspects of our MERN project. In the fr
 - [![Redux][Redux]][Redux-url]
 - [![OpenAI][OpenAI]][OpenAI-url]
 - [![JWT][JWT]][JWT-url]
+- [![Google][Google]][Google-url]
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -200,33 +193,28 @@ Kevin Wu has been instrumental in various aspects of our MERN project. In the fr
 ## Development Tools
 
 ### Prototyping (Figma)
-
 [![Prototyping with Figma][Figma]][Figma-url]
+![image](https://github.com/jakji93/airon-fitness/assets/68035358/67b01668-4445-4216-a434-4f074d558ba4)
+
 
 ### Agile Development
-
 [![Planning with Jira][Jira]][Jira-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
 
-## License
-
+## License 
+[![MIT][MIT]][MIT-url]
+<br />
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- ACKNOWLEDGMENTS -->
+<!-- EULA -->
 
-## Acknowledgments
-
-Resources we found helpful along the way!
-
-- [Img Shields](https://shields.io)
-- [GitHub Pages](https://pages.github.com)
-- [React Icons](https://react-icons.github.io/react-icons/search)
-- [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
+## EULA
+ See `LEGAL.txt` for more legal information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -268,3 +256,7 @@ Resources we found helpful along the way!
 [Jira-url]: https://www.atlassian.com/software/jira
 [Figma]: https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white
 [Figma-url]: https://www.figma.com/
+[MIT]: https://img.shields.io/badge/License-MIT-blue.svg
+[MIT-url]: https://github.com/jakji93/airon-fitness/blob/main/LICENSE.txt
+[Google]: https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white
+[Google-url]: https://developers.google.com/identity/sign-in/web/sign-in
