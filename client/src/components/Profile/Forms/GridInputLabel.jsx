@@ -14,7 +14,7 @@ export default function GridInputLabel(props) {
   const theme = useTheme();
 
   return (
-    <Grid item xs={12} sm={inputLabelSizing}>
+    <Grid item xs={12} md={inputLabelSizing}>
       <InputLabel
         id={`${id}-label`}
         sx={{
