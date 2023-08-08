@@ -47,8 +47,8 @@ const styles = {
     marginTop: '25px',
     marginBottom: '25px',
     padding: '15px',
-    fontSize: '0.75vw',
-    width: '15vw',
+    fontSize: 'clamp(7.5px, 0.75vw, 50px)',
+    width: 'clamp(50px, 15vw, 1000px)',
     position: 'relative', // Set the position to relative for the pseudo-element
     overflow: 'hidden', // Hide any overflow from the pseudo-element
     '&:hover': {
@@ -78,7 +78,7 @@ const styles = {
   middleDataRowContainer: {
     color: theme.palette.secondary.dark,
     display: 'flex',
-    gap: '50px',
+    gap: '5vw',
   },
   middleDataDialsContainer: {
     display: 'flex',
@@ -89,8 +89,8 @@ const styles = {
   },
   circularDataDisplay: {
     color: theme.palette.secondary.light,
-    width: 'clamp(100px, 15vw, 200px)',
-    height: 'clamp(100px, 15vw, 200px)',
+    width: 'clamp(40px, 15vw, 200px)',
+    height: 'clamp(40px, 15vw, 200px)',
     borderRadius: '50%',
     display: 'flex',
     justifyContent: 'center',
@@ -233,7 +233,7 @@ export default function GuidedExercise({
               </Typography>
             )}
           </Paper>
-          <Typography sx={{ fontSize: 'clamp(15px, 0.5vw, 30px)' }}>
+          <Typography sx={{ fontSize: 'clamp(12px, 2vw, 20px)' }}>
             Sets Remaining
           </Typography>
         </Box>
@@ -248,7 +248,7 @@ export default function GuidedExercise({
               </Typography>
             )}
           </Paper>
-          <Typography sx={{ fontSize: 'clamp(15px, 0.5vw, 30px)' }}>
+          <Typography sx={{ fontSize: 'clamp(12px, 2vw, 20px)' }}>
             Reps
           </Typography>
         </Box>
@@ -257,7 +257,7 @@ export default function GuidedExercise({
           <Paper sx={[styles.circularDataDisplay, styles.circularDataCalories]}>
             <NumberDial styles={{ fontSize: 'clamp(20px, 6vw, 90px)' }} maxValue={calorieCount} />
           </Paper>
-          <Typography sx={{ fontSize: 'clamp(15px, 0.5vw, 30px)' }}>
+          <Typography sx={{ fontSize: 'clamp(12px, 2vw, 20px)' }}>
             Calories Burnt
           </Typography>
         </Box>
@@ -303,10 +303,11 @@ export default function GuidedExercise({
               sx={pause ? [styles.workoutButton, styles.timerButton]
                 : [styles.workoutButton, styles.timerButton, styles.timerButtonRunning]}
             >
-              <Typography sx={{ fontSize: '2vw' }}>
+              <Typography sx={{ fontSize: 'clamp(40px, 2vw, 75px)' }}>
                 {restTimer}
               </Typography>
-              <Typography sx={{ fontSize: '0.5vw' }}>
+              <Typography sx={{ fontSize: 'clamp(7.5px, 0.5vw, 50px)' }}>
+
                 Rest Timer
               </Typography>
             </Button>
@@ -373,7 +374,6 @@ export default function GuidedExercise({
             <DictaphoneDisabled />
           )}
         </Box>
-
       </Box>
     </Paper>
   );
