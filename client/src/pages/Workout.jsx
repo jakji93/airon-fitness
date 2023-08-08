@@ -1,13 +1,15 @@
 import {
   Box, Typography, Button,
 } from '@mui/material';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import RelativeSpinner from '../components/common/RelativeSpinner';
 import GuidedWorkout from '../components/Workout/GuidedWorkout';
 import WorkoutCarousel from '../components/Workout/WorkoutCarousel';
 import StepEnum from '../components/Workout/WorkoutFlowStates';
 import WorkoutSelector from '../components/Workout/WorkoutSelector';
+import { getWorkoutAndMealSchedule } from '../reducers/WorkoutAndMealSchedule';
 import theme from '../theme';
 
 const styles = {
@@ -41,17 +43,33 @@ const styles = {
   },
 };
 
-export default function Workout() {
-  const getDayOfWeekName = () => {
-    const currentDate = new Date();
-    const dayOfWeek = currentDate.getDay();
-    const daysOfWeekNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    return daysOfWeekNames[dayOfWeek];
-  };
+const getDayOfWeekName = () => {
+  const currentDate = new Date();
+  const dayOfWeek = currentDate.getDay();
+  const daysOfWeekNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  return daysOfWeekNames[dayOfWeek];
+};
 
-  const { workoutSchedule } = useSelector((state) => state.workoutAndMealSchedule);
+export default function Workout() {
+  const { workoutSchedule, mealSchedule } = useSelector((state) => state.workoutAndMealSchedule);
   const [step, setStep] = useState(StepEnum.START_WORKOUT);
   const [day, setDay] = useState(getDayOfWeekName());
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const getSchedules = async () => {
+    try {
+      setLoading(true);
+      await dispatch(getWorkoutAndMealSchedule());
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    if (!workoutSchedule || !mealSchedule) {
+      getSchedules();
+    }
+  }, []);
 
   // States: START_WORKOUT, SELECT_WORKOUT, IN_SESSION
   const handleNext = (nextStep) => {
@@ -64,6 +82,7 @@ export default function Workout() {
 
   return (
     <Box sx={{ font: theme.typography.fontFamily }}>
+      {loading && <RelativeSpinner />}
       {workoutSchedule ? (
         <Box sx={styles.container}>
           {step === StepEnum.START_WORKOUT
