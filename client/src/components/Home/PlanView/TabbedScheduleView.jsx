@@ -58,7 +58,7 @@ export default function TabbedScheduleView() {
             label="Fitness Plan"
             sx={{
               width: '100%',
-              color: 'white',
+              color: 'LightGray',
             }}
           />
           <Tab
@@ -66,7 +66,7 @@ export default function TabbedScheduleView() {
             label="Meal Plan"
             sx={{
               width: '100%',
-              color: 'white',
+              color: 'LightGray',
             }}
           />
         </Tabs>
