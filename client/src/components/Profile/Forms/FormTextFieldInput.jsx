@@ -34,12 +34,12 @@ export default function FormTextFieldInput(props) {
 
   return (
     <>
-      { showTitleLabel && <GridInputLabel id={id} label={label} aria-label="test" /> }
+      { showTitleLabel && <GridInputLabel id={id} label={label} /> }
       <Grid
         item
         xs={12}
         sm={inputGridSizing(half, customTextFieldGridSize)}
-        aria-label="test"
+        aria-label={ariaLabel}
       >
         <TextField
           required={required}
@@ -76,7 +76,8 @@ export default function FormTextFieldInput(props) {
               borderBottomColor: theme.palette.secondary.main,
             },
           }}
-          InputLabelProps={{ 'aria-label': ariaLabel }}
+          // eslint-disable-next-line react/jsx-no-duplicate-props
+          inputProps={{ 'aria-label': ariaLabel }}
         />
       </Grid>
     </>
