@@ -257,5 +257,5 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [Figma-url]: https://www.figma.com/
 [MIT]: https://img.shields.io/badge/License-MIT-blue.svg
 [MIT-url]: https://github.com/jakji93/airon-fitness/blob/main/LICENSE.txt
-[Google]: https://img.shields.io/badge/google-4285F4?style=for-the-badge&logo=google&logoColor=white
+[Google]: https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white
 [Google-url]: https://developers.google.com/identity/sign-in/web/sign-in
