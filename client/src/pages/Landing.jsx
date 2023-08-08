@@ -8,8 +8,10 @@ import theme from '../theme';
 
 const styles = {
   container: {
+    display: 'flex',
     flexDirection: 'column',
     height: '100vh',
+    width: '100vw',
   },
   overlay: {
     position: 'absolute',
@@ -19,6 +21,7 @@ const styles = {
   },
   banner: {
     paddingBottom: '2%',
+    minWidth: '250px',
     maxWidth: '50%',
     maxHeight: '50%',
   },
@@ -34,13 +37,14 @@ const styles = {
     top: '25%',
     display: 'flex',
     flexDirection: 'column',
-    padding: '25px 50px 25px 75px',
+    paddingLeft: '5vw',
+    paddingRight: '2.5vw',
     zIndex: 9999,
   },
   typewriter: {
     width: '90%',
     fontFamily: theme.typography.fontFamily,
-    color: '#F3F3F0',
+    color: theme.palette.secondary.light,
     fontWeight: 800,
     fontSize: '4vw',
   },
@@ -48,8 +52,8 @@ const styles = {
     padding: '15px 15px 0px 0px',
   },
   info: {
-    color: '#F3F3F0',
-    fontSize: '1.5vw',
+    color: theme.palette.secondary.light,
+    fontSize: 'clamp(12px, 1.5vw, 50px)',
   },
   buttonContainer: {
     display: 'flex',
@@ -57,13 +61,13 @@ const styles = {
   },
   actionButton: {
     fontWeight: 'normal',
-    color: '#ffffff',
+    color: theme.palette.secondary.light,
     borderColor: '#B5936B',
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     marginTop: '25px',
     padding: '15px',
-    fontSize: '0.75vw',
-    width: '15vw',
+    fontSize: 'clamp(10px, 0.75vw, 50px)',
+    width: 'clamp(150px, 15vw, 1000px)',
     '&:hover': {
       fontWeight: 'bolder',
       color: theme.palette.secondary.dark,

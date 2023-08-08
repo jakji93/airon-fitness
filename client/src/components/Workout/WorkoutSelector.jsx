@@ -42,8 +42,8 @@ const styles = {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     marginTop: '25px',
     padding: '15px',
-    fontSize: '0.75vw',
-    width: '15vw',
+    fontSize: 'clamp(10px, 0.75vw, 50px)',
+    width: 'clamp(150px, 15vw, 1000px)',
     position: 'relative', // Set the position to relative for the pseudo-element
     overflow: 'hidden', // Hide any overflow from the pseudo-element
     '&:hover': {

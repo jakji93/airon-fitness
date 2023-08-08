@@ -54,7 +54,7 @@ export default function FormSelect(props) {
   return (
     <>
       { showTitleLabel && <GridInputLabel id={id} label={label} /> }
-      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)} sx={fillHeight ? { height: '100%' } : ''}>
+      <Grid item xs={12} sm={inputGridSizing(half, customTextFieldGridSize)} sx={fillHeight ? { height: '100%' } : {}}>
         <FormControl
           fullWidth
           size={size}
@@ -144,7 +144,7 @@ FormSelect.propTypes = {
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
   error: PropTypes.bool,
-  helperText: PropTypes.string,
+  helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   size: PropTypes.string,
 };
 
