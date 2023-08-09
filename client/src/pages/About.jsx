@@ -127,7 +127,7 @@ const teamMembers = [
     github: 'https://github.com/kennyjhcheng',
     linkedIn: 'https://www.linkedin.com/in/kennyjhcheng/',
     profilePicture: KennyChengIcon,
-    contributions: 'Authentication, Reusable Form, Redux, Google Login, Accessibility',
+    contributions: 'Authentication, Reusable Form, Signup, Redux, Google Login, Accessibility',
   },
   {
     name: 'Kevin Chung',
