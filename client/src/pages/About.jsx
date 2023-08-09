@@ -250,7 +250,7 @@ function FeaturesCard({
         {name}
       </Typography>
 
-      <Dialog sx={{ backgroundColor: 'none' }} open={isOpen} onClose={togglePopup} maxWidth="sm">
+      <Dialog sx={{ '& .MuiDialog-paper': { backgroundColor: 'transparent' } }} open={isOpen} onClose={togglePopup} maxWidth="sm">
         <Paper sx={styles.popupContent}>
           <Typography variant="h3">{name}</Typography>
           <Icon sx={{ color: 'inherit', fontSize: '8rem' }} />
