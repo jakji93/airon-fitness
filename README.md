@@ -69,6 +69,10 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 ### Profile Management with Schedule History
 ![image](https://github.com/jakji93/airon-fitness/assets/68035358/cb861ce7-6737-4991-ab54-a7ce7083ade2)
 
+### Google-integrated Secure Account System
+![image](https://github.com/jakji93/airon-fitness/assets/68035358/4a984044-1aba-4780-9b9a-c41bb6b7ba27)
+
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
