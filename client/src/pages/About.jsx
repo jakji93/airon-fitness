@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
-// import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import GoogleIcon from '@mui/icons-material/Google';
 import HttpsIcon from '@mui/icons-material/Https';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-// import PsychologyIcon from '@mui/icons-material/Psychology';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import StorageIcon from '@mui/icons-material/Storage';
@@ -498,16 +496,14 @@ export default function About() {
                 <br />
                 <br />
                 7. Accessibility Support:<br />
-                We&apos;re here to listen.
-                If you encounter any accessibility challenges
-                or have ideas for making our app even more inclusive,
-                please reach out to our contacts that can be found on the About Page or
-                create an issue on our <a id="github" href="https://github.com/jakji93/airon-fitness/issues" style={{ color: theme.palette.secondary.light, textDecoration: 'none' }}>Github Repository</a>.
-                Creating an accessible app is an ongoing journey for us.
-                We&apos;re grateful for your feedback and eager to make AIRON Fitness
-                a place where everyone can thrive.
-                Your fitness goals matter, and we&apos;re here
-                to provide support that&apos;s as inclusive as it is empowering.
+                We&apos;re here to listen. If you encounter any accessibility challenges or have ideas for making our app even more inclusive,
+                please reach out to our contacts that can be found on the About Page or create an issue on our <a id="github" href="https://github.com/jakji93/airon-fitness/issues" style={{ color: theme.palette.secondary.light, textDecoration: 'none' }}>Github Repository</a>.
+                Creating an accessible app is an ongoing journey for us. We&apos;re grateful for your feedback and eager to make AIRON Fitness a place where everyone can thrive. Your fitness goals matter, and we&apos;re here to provide support that&apos;s as inclusive as it is empowering.
+                <br />
+                <br />
+                8. Responsive Styling:<br />
+                We want fitness to be convenient and easy for everyone. Use our app on any device, from your smartphone to a laptop.
+                Stay fit at home or on the go, AIRON Fitness is your companion wherever and whenever.
               </Typography>
             </Grid>
             <Margin /><Margin />

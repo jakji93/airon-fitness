@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { getUserProfile, resetUserProfileStates } from '../../../reducers/UserProfile';
 
-// If there is no user saved in localStorage, then redirect to {path}
 export default function useNoProfileRedirect(path) {
   const {
     profile, isError, message,

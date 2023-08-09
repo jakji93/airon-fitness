@@ -2,8 +2,6 @@ import axios from 'axios';
 
 import { createBearerTokenHeader } from './util';
 
-/** Backend + local storage calls */
-
 const getWorkoutAndMealSchedule = async () => {
   const workoutResponse = await axios.get(`${process.env.REACT_APP_SERVER_API_BASE}/workoutSchedule/`, {
     headers: createBearerTokenHeader(),
