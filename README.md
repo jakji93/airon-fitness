@@ -35,8 +35,8 @@
     <li><a href="#utilized-technology">Utilized Technology</a></li>
     <li><a href="#above-and-beyond">Above and Beyond</a></li>
     <li><a href="#whats-next">What's Next</a></li>
-    <li><a href="#group-contribution">Group Contribution</a></li>
-    <li><a href="#the-team">The Team</a></li>
+    <li><a href="#team-member-contributions">Group Contribution</a></li>
+    <li><a href="#connect-with-us">The Team</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
