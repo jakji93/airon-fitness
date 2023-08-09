@@ -1,7 +1,16 @@
-/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
+// import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import GoogleIcon from '@mui/icons-material/Google';
+import HttpsIcon from '@mui/icons-material/Https';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+// import PsychologyIcon from '@mui/icons-material/Psychology';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
+import StorageIcon from '@mui/icons-material/Storage';
 import {
   CssBaseline,
   Grid,
@@ -9,8 +18,9 @@ import {
   IconButton,
   Paper,
   Typography,
+  Dialog,
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 
 import DavisSongIcon from '../assets/team/DavisSong.png';
 import JackJiIcon from '../assets/team/JackJi.png';
@@ -27,6 +37,41 @@ const styles = {
     maxWidth: 300,
     color: theme.palette.secondary.dark,
     backgroundColor: theme.palette.secondary.main,
+    borderRadius: '10px',
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.light,
+      transition: 'background-color 0.5s ease-in-out',
+    },
+  },
+  featureCardPaper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '10px',
+    minWidth: 200,
+    minHeight: 200,
+    maxWidth: 300,
+    width: '7.5vw',
+    height: '7.5vw',
+    color: theme.palette.secondary.dark,
+    backgroundColor: theme.palette.secondary.main,
+    borderRadius: '10px',
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.light,
+      transition: 'background-color 0.5s ease',
+    },
+  },
+  popupContent: {
+    padding: '2rem',
+    display: 'flex',
+    width: 'calc(250px + 10vw)',
+    color: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.dark,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '2rem',
     borderRadius: '10px',
   },
   sectionContainer: {
@@ -57,13 +102,20 @@ const styles = {
   },
 };
 
+const textSize = 8;
+const marginSize = 2;
+
+function Margin() {
+  return <Grid item sm={marginSize} xs={0} />;
+}
+
 const teamMembers = [
   {
     name: 'Davis Song',
     github: 'https://github.com/d-x-s',
     linkedIn: 'https://www.linkedin.com/in/davissong/',
     profilePicture: DavisSongIcon,
-    contributions: 'OpenAI Data Generation, Frontend Design & Styling, Guided Workouts',
+    contributions: 'OpenAI Data Generation, Database Integration, Voice Workouts, FE Design',
   },
   {
     name: 'Jack Ji',
@@ -95,18 +147,11 @@ const teamMembers = [
   },
 ];
 
-const textSize = 8;
-const marginSize = 2;
-
-function Margin() {
-  return <Grid item sm={marginSize} xs={0} />;
-}
-
 function TeamMemberCard({
   name, linkedIn, github, profilePicture, contributions,
 }) {
   return (
-    <Paper style={styles.root}>
+    <Paper sx={styles.root}>
 
       <Box style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <img src={profilePicture} alt={name} style={styles.profilePicture} />
@@ -141,6 +186,79 @@ function TeamMemberCard({
         </IconButton>
       </div>
 
+    </Paper>
+  );
+}
+
+const features = [
+  {
+    name: 'API Authentication',
+    description: 'JWT (JSON Web Token) keeps API endpoints protected, preventing malicious actors from stealing your data.',
+    icon: HttpsIcon,
+  },
+  {
+    name: 'Protected Database',
+    description: 'A secure MongoDB cluster holds your data. Built in encryption and authentication ensures that your data is stored safely.',
+    icon: StorageIcon,
+  },
+  {
+    name: 'AI Schedules',
+    description: 'Perfectly tailored meal and workout schedules made from OpenAI GPT models, adjusted exactly to your health profile',
+    icon: CalendarMonthIcon,
+  },
+  {
+    name: 'Voice Workouts',
+    description: 'A virtual personal trainer at your service, with a information-rich control panel and efficient voice command options',
+    icon: RecordVoiceOverIcon,
+  },
+  {
+    name: 'Dashboard Statistics',
+    description: 'Comprehensive macronutrients view with intuitive bar charts to provide insight into your weekly nutrient intake.',
+    icon: QueryStatsIcon,
+  },
+  {
+    name: 'Account System',
+    description: 'Fully customizable user profiles that allow for profile image upload, and tight control over user statistics.',
+    icon: PersonAddIcon,
+  },
+  {
+    name: 'Google Integration',
+    description: 'Integrated sign-in for a fast and secure login using your Google account.',
+    icon: GoogleIcon,
+  },
+  {
+    name: 'Accessible UI',
+    description: 'WCAG standard contrast and  design with screen-reader support and responsive web layout.',
+    icon: Diversity3Icon,
+  },
+];
+
+function FeaturesCard({
+  name, description, icon: Icon,
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <Paper sx={styles.featureCardPaper} onClick={togglePopup}>
+      <Box style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Icon sx={{ color: 'inherit', fontSize: '4rem' }} />
+      </Box>
+
+      <Typography variant="h6" align="center" style={{ color: 'inherit', marginBottom: '10px' }}>
+        {name}
+      </Typography>
+
+      <Dialog sx={{ backgroundColor: 'none' }} open={isOpen} onClose={togglePopup} maxWidth="sm">
+        <Paper sx={styles.popupContent}>
+          <Typography variant="h3">{name}</Typography>
+          <Icon sx={{ color: 'inherit', fontSize: '8rem' }} />
+          <Typography variant="h4">{description}</Typography>
+        </Paper>
+      </Dialog>
     </Paper>
   );
 }
@@ -182,6 +300,34 @@ export default function About() {
                 github={member.github}
                 profilePicture={member.profilePicture}
                 contributions={member.contributions}
+              />
+            ))}
+          </Box>
+        </Box>
+
+        <Box sx={styles.sectionContainer}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: '5rem',
+              color: theme.palette.secondary.light,
+              fontFamily: theme.typography.fontFamily,
+              paddingTop: '2.5%',
+            }}
+          >
+            Features
+          </Typography>
+
+          <Box sx={{
+            width: '50vw', flexWrap: 'wrap', paddingTop: '1%', paddingRight: '5%', paddingLeft: '5%', display: 'flex', gap: '2vw', justifyContent: 'center',
+          }}
+          >
+            {features.map((feature) => (
+              <FeaturesCard
+                key={feature.name}
+                name={feature.name}
+                description={feature.description}
+                icon={feature.icon}
               />
             ))}
           </Box>
@@ -246,7 +392,8 @@ export default function About() {
                 Creating your profile is just the beginning.
                 Input your fitness goals, and let AIRON Fitness work its magic.
                 You&apos;ll receive a comprehensive fitness plan,
-                complete with guided workouts and a voice-controlled display to keep you on track and motivated.
+                complete with guided workouts and a voice-controlled display
+                to keep you on track and motivated.
                 It&apos;s like having your very own fitness coach available 24/7!
               </Typography>
             </Grid>
@@ -303,37 +450,64 @@ export default function About() {
             <Margin />
             <Grid item sm={textSize} xs={12}>
               <Typography variant="h6" align="justify" gutterBottom sx={{ color: theme.palette.secondary.main }}>
-                At AIRON Fitness, our goal is to create an app that is accessible and welcoming to all users, regardless of their abilities. We&apos;ve taken steps to ensure that our app is designed with accessibility in mind, and we&apos;re here to humbly share how we&apos;ve done so:
+                At AIRON Fitness, our goal is to create an app that is accessible and
+                welcoming to all users, regardless of their abilities.
+                We&apos;ve taken steps to ensure that our app is designed with accessibility
+                in mind, and we&apos;re here to humbly share how we&apos;ve done so:
                 <br />
                 <br />
                 1. Contrast Standards: <br />
-                We&apos;ve put thought into the contrast of our app&apos;s elements, keeping acceptable contrast standards at the forefront. This way, text, icons, and visuals are distinguishable, offering a more readable experience for those with low vision or color vision impairments.
+                We&apos;ve put thought into the contrast of our app&apos;s elements,
+                keeping acceptable contrast standards at the forefront.
+                This way, text, icons, and visuals are distinguishable,
+                offering a more readable experience for those with low vision or
+                color vision impairments.
                 <br />
                 <br />
                 2. Screen Reader Support: <br />
-                AIRON Fitness is compatible with screen readers. Our approach involves crafting our app using semantic HTML and proper labeling. This way, screen reader users can seamlessly navigate, understand, and engage with all app features.
+                AIRON Fitness is compatible with screen readers.
+                Our approach involves crafting our app using semantic HTML and proper labeling.
+                This way, screen reader users can seamlessly navigate, understand,
+                and engage with all app features.
                 <br />
                 <br />
                 3. Alternative Text for Images: <br />
-                For images, we&apos;ve added descriptive alternative text (alt text). This helps screen reader users understand the content and context of images, from icons to graphics.
+                For images, we&apos;ve added descriptive alternative text (alt text).
+                This helps screen reader users understand the content and context of images,
+                from icons to graphics.
                 <br />
                 <br />
-                4. Clear and Consistent Layout: <br />
-                We&apos;ve taken care to keep our app&apos;s layout consistent and easy to follow. Users can effortlessly move through menus, buttons, and options using keyboard shortcuts, touch gestures, or screen readers.
+                4. Clear and Responsive Layout: <br />
+                We&apos;ve taken care to keep our app&apos;s layout consistent and responsive.
+                Users can effortlessly move through menus, buttons, and options
+                using screen readers.
                 <br />
                 <br />
                 5. Keyboard Navigation: <br />
-                We&apos;ve made sure that AIRON Fitness supports keyboard navigation, providing an avenue for users who prefer keyboard commands or have motor disabilities to navigate without a mouse.
+                We&apos;ve made sure that AIRON Fitness supports keyboard navigation,
+                providing an avenue for users who prefer keyboard commands or have motor
+                disabilities to navigate without a mouse.
                 <br />
                 <br />
                 6. User Personalization: <br />
-                AIRON Fitness is about your journey. Our app empowers you to personalize your fitness plans according to your preferences and abilities. We understand that each journey is unique, and our aim is to make the app adaptable for all.
+                AIRON Fitness is about your journey.
+                Our app empowers you to personalize your fitness plans
+                according to your preferences and abilities.
+                We understand that each journey is unique,
+                and our aim is to make the app adaptable for all.
                 <br />
                 <br />
                 7. Accessibility Support:<br />
-                We&apos;re here to listen. If you encounter any accessibility challenges or have ideas for making our app even more inclusive,
-                please reach out to our contacts that can be found on the About Page or create an issue on our <a id="github" href="https://github.com/jakji93/airon-fitness/issues" style={{ color: theme.palette.secondary.light, textDecoration: 'none' }}>Github Repository</a>.
-                Creating an accessible app is an ongoing journey for us. We&apos;re grateful for your feedback and eager to make AIRON Fitness a place where everyone can thrive. Your fitness goals matter, and we&apos;re here to provide support that&apos;s as inclusive as it is empowering.
+                We&apos;re here to listen.
+                If you encounter any accessibility challenges
+                or have ideas for making our app even more inclusive,
+                please reach out to our contacts that can be found on the About Page or
+                create an issue on our <a id="github" href="https://github.com/jakji93/airon-fitness/issues" style={{ color: theme.palette.secondary.light, textDecoration: 'none' }}>Github Repository</a>.
+                Creating an accessible app is an ongoing journey for us.
+                We&apos;re grateful for your feedback and eager to make AIRON Fitness
+                a place where everyone can thrive.
+                Your fitness goals matter, and we&apos;re here
+                to provide support that&apos;s as inclusive as it is empowering.
               </Typography>
             </Grid>
             <Margin /><Margin />
