@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import {
   Grid, Pagination, Box, Paper,
 } from '@mui/material';
@@ -37,9 +38,8 @@ export default function ScheduleHistory() {
       >
         {
           history
-            // eslint-disable-next-line react/no-array-index-key
             ? history.schedules.map((i, idx) => (i.schedule ? <ScheduleItem key={`schedule-${idx}`} details={i} token={token} /> : (
-              <Grid item xs={12} lg={6} sx={{ margin: '8px 0' }}>
+              <Grid item key={`schedule-${idx}`} xs={12} lg={6} sx={{ margin: '8px 0' }}>
                 <Paper
                   elevation={3}
                   sx={{
