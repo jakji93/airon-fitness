@@ -21,9 +21,9 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#key-features">About The Project</a></li>
+    <li><a href="#built-with">Built With</a></li>
     <li>
       <a href="#goals">Goals</a>
       <ul>
@@ -35,11 +35,9 @@
     <li><a href="#utilized-technology">Utilized Technology</a></li>
     <li><a href="#above-and-beyond">Above and Beyond</a></li>
     <li><a href="#whats-next">What's Next</a></li>
-    <li><a href="#group-contribution">Group Contribution</a></li>
-    <li><a href="#the-team">The Team</a></li>
-    <li><a href="#built-with">Built With</a></li>
+    <li><a href="#team-member-contributions">Group Contribution</a></li>
+    <li><a href="#connect-with-us">The Team</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -54,6 +52,45 @@ Introducing AIron Fitness, an innovative fitness companion designed to support i
 With AIron Fitness, users can create their profiles, input their fitness goals, and receive a comprehensive fitness plan perfectly suited to their needs, complete with guided workouts and a timer to track progress and stay motivated on their fitness journey. The platform also stores valuable user data, including personal profiles and fitness progress, allowing users to track their journey and witness their achievements over time.
 
 AIron Fitness empowers individuals to take control of their fitness goals and enjoy a personalized fitness experience. Say goodbye to generic workouts and hello to a tailored fitness solution with AIron Fitness by your side.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- Features -->
+
+## Key Features
+
+### Data-rich Dashboard with Statistics and Trainer Chatbot
+
+![image](https://github.com/jakji93/airon-fitness/assets/68035358/bd99b378-268c-4d02-a3ae-835026389090)
+
+### Voice Controlled Guided Workouts
+
+![image](https://github.com/jakji93/airon-fitness/assets/68035358/43eaeee1-d976-4da7-8e16-84b2aba6355c)
+
+### Profile Management with Schedule History
+
+![image](https://github.com/jakji93/airon-fitness/assets/68035358/cb861ce7-6737-4991-ab54-a7ce7083ade2)
+
+### Google-integrated Secure Account System
+
+![image](https://github.com/jakji93/airon-fitness/assets/68035358/4a984044-1aba-4780-9b9a-c41bb6b7ba27)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- Badges -->
+
+## Built With
+
+- [![NPM][NPM]][NPM-url]
+- [![Node.js][Node.js]][Node-url]
+- [![React][React.js]][React-url]
+- [![MaterialUI][MaterialUI]][MaterialUI-url]
+- [![MongoDB][MongoDB]][MongoDB-url]
+- [![Express][Express.js]][Express-url]
+- [![Redux][Redux]][Redux-url]
+- [![OpenAI][OpenAI]][OpenAI-url]
+- [![JWT][JWT]][JWT-url]
+- [![Google][Google]][Google-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -86,7 +123,7 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 - [x] Account for user illness / physical constraints
 - [x] Secure authentication system (JSON Web Token)
 - [x] Login using Google Accounts
-- [x] Establish product identity with consistent theme and assets 
+- [x] Establish product identity with consistent theme and assets
 
 ### Stretch Goals
 
@@ -120,7 +157,7 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 
 In our MERN web application, we went above and beyond the standard requirements by incorporating advanced functionalities that elevate user experience and personalization. First, we integrated <span style="color: #b5936b;">Google Login</span>, streamlining the authentication process and ensuring a seamless user journey. Leveraging <span style="color: #b5936b;" style="color: #b5936b;">JWT token authentication</span>, we further enforced the app's security, safeguarding any sensitive user data. Additionally, we crafted custom reusable form components utilizing <span style="color: #b5936b;">Formik</span> and <span style="color: #b5936b;">yup</span> validation, streamlining user interactions across 7 pages for login, signup, and profile updates. These meticulously designed components enhance usability while maintaining robust data integrity.
 
-Our main focus is to utilize the capability of ChatGPT, engineering prompts to generate personalized workout and meal schedules based on the user profile while minimize the cost of requesting from <span style="color: #b5936b;">OpenAI</span>. This feature customized a users' fitness experience, providing users with intelligent and adaptive recommendations. With the data from a user’s workout schedule, we provide a data-rich, <span style="color: #b5936b;">voice controlled</span> workout flow that acts as a personal trainer, guiding the user through their exercises and rest timing. We also introduced a <span style="color: #b5936b;">chat-bot</span> system that enables fine-tuning of base schedules, tailoring fitness and meal plans to individual preferences and restrictions. 
+Our main focus is to utilize the capability of ChatGPT, engineering prompts to generate personalized workout and meal schedules based on the user profile while minimize the cost of requesting from <span style="color: #b5936b;">OpenAI</span>. This feature customized a users' fitness experience, providing users with intelligent and adaptive recommendations. With the data from a user’s workout schedule, we provide a data-rich, <span style="color: #b5936b;">voice controlled</span> workout flow that acts as a personal trainer, guiding the user through their exercises and rest timing. We also introduced a <span style="color: #b5936b;">chat-bot</span> system that enables fine-tuning of base schedules, tailoring fitness and meal plans to individual preferences and restrictions.
 
 To improve experience and accessibility for all users, we implemented WCAG guidelines to select an accessible color palette to guarantee readability for users of all abilities. Additionally, WAI-ARIA has been incorporated throughout the application to accommodate the utilization of screen readers for individuals who are visually impaired. Finally, we styled the app responsively to support diverse platforms.
 
@@ -142,7 +179,7 @@ In our next steps to further improve the app, we plan to dynamically update fitn
 
 ### Davis Song
 
-Davis worked as a full stack engineer on AIRON, having significant responsibility in both the frontend and backend. He lead AIRON's product design and branding, where his contributions can be seen in the landing page implementation and guided workouts feature. He set up the global navigation bar, introduced routing, and designed a complex component flow simulating a personal trainer's workout instructions. On the backend side, he layed out and implemented essential Express.js data generation routes, ensuring seamless server-side functionality with a thorough POSTMAN test suite. These routes interacted directly with the OpenAI API and required dedicated effort to engineer and fine-tune the generation prompts. His leadership roles involved managing the team's Agile development process in Jira, creating documentation throughout development, and writing down meeting notes. 
+Davis worked as a full stack engineer on AIRON, having significant responsibility in both the frontend and backend. He lead AIRON's product design and branding, where his contributions can be seen in the landing page, about page, and guided workouts. He set up the global navigation bar, introduced routing, and designed a complex component flow simulating a personal trainer's workout instructions. On the backend side, he layed out and implemented essential Express.js data generation routes, ensuring seamless server-side functionality with a thorough POSTMAN test suite. These routes interacted directly with the OpenAI API and required dedicated effort to engineer and fine-tune the generation prompts. His leadership roles involved managing the team's Agile development process in Jira, creating documentation throughout development, and writing down meeting notes.
 
 ### Jack Ji
 
@@ -158,7 +195,7 @@ Kevin Chung made significant contributions to the project, especially in the are
 
 ### Kevin Wu
 
-Kevin Wu has been instrumental in various aspects of our MERN project. In the frontend, he was responsible for creating the user sign-up wizard and skillfully setting up UI themes using Material UI to standardize the look of the application. Additionally, Kevin played a vital role in setting up the Express backend and creating the endpoints for generating user workout and meal schedules using the OpenAI API. These endpoints can be seen powering the chat bot that Kevin also developed to enable users to customize their schedules and edit their profile. Lastly, he owned the development of the user schedule history which utilizes pagination for improved efficiency.
+Kevin Wu has been instrumental in various aspects of our MERN project. In the frontend, he was responsible for creating the user sign-up wizard, skillfully setting up UI themes using Material UI, and ensuring the application is screen reader accessible. Additionally, Kevin played a vital role in setting up the Express backend and creating the endpoints for generating user schedules using the OpenAI API. These endpoints can be seen powering the chat bot that Kevin also developed to enable users to customize their schedules and edit their profile. Lastly, he owned the development of the user schedule history which utilizes pagination for improved efficiency.
 
 <!-- GROUP -->
 
@@ -172,39 +209,25 @@ Kevin Wu has been instrumental in various aspects of our MERN project. In the fr
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Built With
-
-- [![NPM][NPM]][NPM-url]
-- [![Node.js][Node.js]][Node-url]
-- [![React][React.js]][React-url]
-- [![MaterialUI][MaterialUI]][MaterialUI-url]
-- [![MongoDB][MongoDB]][MongoDB-url]
-- [![Express][Express.js]][Express-url]
-- [![Redux][Redux]][Redux-url]
-- [![OpenAI][OpenAI]][OpenAI-url]
-- [![JWT][JWT]][JWT-url]
-- [![Google][Google]][Google-url]
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- DEVELOPMENT -->
 
 ## Development Tools
 
 ### Prototyping (Figma)
+
 [![Prototyping with Figma][Figma]][Figma-url]
 ![image](https://github.com/jakji93/airon-fitness/assets/68035358/67b01668-4445-4216-a434-4f074d558ba4)
 
-
 ### Agile Development
+
 [![Planning with Jira][Jira]][Jira-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
 
-## License 
+## License
+
 [![MIT][MIT]][MIT-url]
 <br />
 Distributed under the MIT License. See `LICENSE.txt` for more information.
@@ -214,7 +237,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- EULA -->
 
 ## EULA
- See `LEGAL.txt` for more legal information.
+
+See `LEGAL.txt` for more legal information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
