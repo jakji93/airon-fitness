@@ -243,7 +243,7 @@ function FeaturesCard({
   return (
     <Paper sx={styles.featureCardPaper} onClick={togglePopup}>
       <Box style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Icon sx={{ color: 'inherit', fontSize: '4rem' }} />
+        <Icon sx={{ color: 'inherit', fontSize: '4rem', marginBottom: '0.25rem' }} />
       </Box>
 
       <Typography variant="h6" align="center" style={{ color: 'inherit', marginBottom: '10px' }}>
