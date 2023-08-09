@@ -70,6 +70,7 @@ export default function FormTextFieldInput(props) {
           multiline={multiline}
           InputProps={{
             endAdornment: <InputAdornment position="end">{endAdornment}</InputAdornment>,
+            'aria-label': ariaLabel,
           }}
           autoComplete={autoComplete}
           placeholder={placeholder}
@@ -80,8 +81,6 @@ export default function FormTextFieldInput(props) {
             backgroundColor: theme.palette.secondary.light,
             ...underlineStyle,
           }}
-          // eslint-disable-next-line react/jsx-no-duplicate-props
-          inputProps={{ 'aria-label': ariaLabel }}
         />
       </Grid>
     </>
