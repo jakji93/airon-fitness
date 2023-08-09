@@ -21,9 +21,9 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#key-features">About The Project</a></li>
+    <li><a href="#built-with">Built With</a></li>
     <li>
       <a href="#goals">Goals</a>
       <ul>
@@ -37,9 +37,7 @@
     <li><a href="#whats-next">What's Next</a></li>
     <li><a href="#group-contribution">Group Contribution</a></li>
     <li><a href="#the-team">The Team</a></li>
-    <li><a href="#built-with">Built With</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -72,7 +70,21 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 ### Google-integrated Secure Account System
 ![image](https://github.com/jakji93/airon-fitness/assets/68035358/4a984044-1aba-4780-9b9a-c41bb6b7ba27)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- Badges -->
+
+## Built With
+- [![NPM][NPM]][NPM-url]
+- [![Node.js][Node.js]][Node-url]
+- [![React][React.js]][React-url]
+- [![MaterialUI][MaterialUI]][MaterialUI-url]
+- [![MongoDB][MongoDB]][MongoDB-url]
+- [![Express][Express.js]][Express-url]
+- [![Redux][Redux]][Redux-url]
+- [![OpenAI][OpenAI]][OpenAI-url]
+- [![JWT][JWT]][JWT-url]
+- [![Google][Google]][Google-url]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -188,22 +200,6 @@ Kevin Wu has been instrumental in various aspects of our MERN project. In the fr
 [@Kenny Cheng](https://www.linkedin.com/in/kennyjhcheng/)<br>
 [@Kevin Chung](https://www.linkedin.com/in/kevin-chung07/)<br>
 [@Kevin Wu](https://www.linkedin.com/in/kevin-wu1/)<br>
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Built With
-
-- [![NPM][NPM]][NPM-url]
-- [![Node.js][Node.js]][Node-url]
-- [![React][React.js]][React-url]
-- [![MaterialUI][MaterialUI]][MaterialUI-url]
-- [![MongoDB][MongoDB]][MongoDB-url]
-- [![Express][Express.js]][Express-url]
-- [![Redux][Redux]][Redux-url]
-- [![OpenAI][OpenAI]][OpenAI-url]
-- [![JWT][JWT]][JWT-url]
-- [![Google][Google]][Google-url]
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
