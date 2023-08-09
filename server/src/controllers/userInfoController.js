@@ -24,7 +24,6 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error('Please include an email and password');
   }
 
-  // check user exists
   const userExists = await UserInfo.findOne({ email });
 
   if (userExists) {
@@ -32,11 +31,9 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error('User already exists');
   }
 
-  // Hash password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
-  // Create user in MongoDB
   const user = await UserInfo.create({
     email,
     password: hashedPassword,
@@ -62,7 +59,6 @@ const registerUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  // Check for user email
   const user = await UserInfo.findOne({ email });
 
   if (user && (await bcrypt.compare(password, user.password))) {

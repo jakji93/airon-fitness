@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-/** Backend + local storage calls */
-
 const API_URL = `${process.env.REACT_APP_SERVER_API_BASE}/userInfo/`;
 
 const registerUser = async (userData) => {
