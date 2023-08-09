@@ -58,6 +58,7 @@ const styles = {
     '&:hover': {
       backgroundColor: theme.palette.secondary.light,
       transition: 'background-color 0.5s ease',
+      cursor: 'pointer',
     },
   },
   popupContent: {
