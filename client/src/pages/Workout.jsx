@@ -63,7 +63,7 @@ export default function Workout() {
       const timeoutPromise = new Promise((resolve) => {
         setTimeout(() => {
           resolve('Generation in progress');
-        }, 1500);
+        }, 2000);
       });
       const schedulePromise = dispatch(getWorkoutAndMealSchedule());
 
