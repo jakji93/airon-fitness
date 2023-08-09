@@ -58,6 +58,7 @@ const styles = {
     '&:hover': {
       backgroundColor: theme.palette.secondary.light,
       transition: 'background-color 0.5s ease',
+      cursor: 'pointer',
     },
   },
   popupContent: {
@@ -127,7 +128,7 @@ const teamMembers = [
     github: 'https://github.com/kennyjhcheng',
     linkedIn: 'https://www.linkedin.com/in/kennyjhcheng/',
     profilePicture: KennyChengIcon,
-    contributions: 'Authentication, Reusable Form, Redux, Google Login, Accessibility',
+    contributions: 'Authentication, Reusable Form, Signup, Redux, Google Login, Accessibility',
   },
   {
     name: 'Kevin Chung',

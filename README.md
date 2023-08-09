@@ -21,9 +21,9 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#key-features">About The Project</a></li>
+    <li><a href="#built-with">Built With</a></li>
     <li>
       <a href="#goals">Goals</a>
       <ul>
@@ -35,11 +35,9 @@
     <li><a href="#utilized-technology">Utilized Technology</a></li>
     <li><a href="#above-and-beyond">Above and Beyond</a></li>
     <li><a href="#whats-next">What's Next</a></li>
-    <li><a href="#group-contribution">Group Contribution</a></li>
-    <li><a href="#the-team">The Team</a></li>
-    <li><a href="#built-with">Built With</a></li>
+    <li><a href="#team-member-contributions">Group Contribution</a></li>
+    <li><a href="#connect-with-us">The Team</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -69,6 +67,24 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 ### Profile Management with Schedule History
 ![image](https://github.com/jakji93/airon-fitness/assets/68035358/cb861ce7-6737-4991-ab54-a7ce7083ade2)
 
+### Google-integrated Secure Account System
+![image](https://github.com/jakji93/airon-fitness/assets/68035358/4a984044-1aba-4780-9b9a-c41bb6b7ba27)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- Badges -->
+
+## Built With
+- [![NPM][NPM]][NPM-url]
+- [![Node.js][Node.js]][Node-url]
+- [![React][React.js]][React-url]
+- [![MaterialUI][MaterialUI]][MaterialUI-url]
+- [![MongoDB][MongoDB]][MongoDB-url]
+- [![Express][Express.js]][Express-url]
+- [![Redux][Redux]][Redux-url]
+- [![OpenAI][OpenAI]][OpenAI-url]
+- [![JWT][JWT]][JWT-url]
+- [![Google][Google]][Google-url]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -158,7 +174,7 @@ In our next steps to further improve the app, we plan to dynamically update fitn
 
 ### Davis Song
 
-Davis worked as a full stack engineer on AIRON, having significant responsibility in both the frontend and backend. He lead AIRON's product design and branding, where his contributions can be seen in the landing page implementation and guided workouts feature. He set up the global navigation bar, introduced routing, and designed a complex component flow simulating a personal trainer's workout instructions. On the backend side, he layed out and implemented essential Express.js data generation routes, ensuring seamless server-side functionality with a thorough POSTMAN test suite. These routes interacted directly with the OpenAI API and required dedicated effort to engineer and fine-tune the generation prompts. His leadership roles involved managing the team's Agile development process in Jira, creating documentation throughout development, and writing down meeting notes. 
+Davis worked as a full stack engineer on AIRON, having significant responsibility in both the frontend and backend. He lead AIRON's product design and branding, where his contributions can be seen in the landing page, about page, and guided workouts. He set up the global navigation bar, introduced routing, and designed a complex component flow simulating a personal trainer's workout instructions. On the backend side, he layed out and implemented essential Express.js data generation routes, ensuring seamless server-side functionality with a thorough POSTMAN test suite. These routes interacted directly with the OpenAI API and required dedicated effort to engineer and fine-tune the generation prompts. His leadership roles involved managing the team's Agile development process in Jira, creating documentation throughout development, and writing down meeting notes. 
 
 ### Jack Ji
 
@@ -184,22 +200,6 @@ Kevin Wu has been instrumental in various aspects of our MERN project. In the fr
 [@Kenny Cheng](https://www.linkedin.com/in/kennyjhcheng/)<br>
 [@Kevin Chung](https://www.linkedin.com/in/kevin-chung07/)<br>
 [@Kevin Wu](https://www.linkedin.com/in/kevin-wu1/)<br>
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Built With
-
-- [![NPM][NPM]][NPM-url]
-- [![Node.js][Node.js]][Node-url]
-- [![React][React.js]][React-url]
-- [![MaterialUI][MaterialUI]][MaterialUI-url]
-- [![MongoDB][MongoDB]][MongoDB-url]
-- [![Express][Express.js]][Express-url]
-- [![Redux][Redux]][Redux-url]
-- [![OpenAI][OpenAI]][OpenAI-url]
-- [![JWT][JWT]][JWT-url]
-- [![Google][Google]][Google-url]
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
