@@ -57,6 +57,22 @@ AIron Fitness empowers individuals to take control of their fitness goals and en
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- Features -->
+
+## Key Features
+### Data-rich Dashboard with Statistics and Trainer Chatbot
+![image](https://github.com/jakji93/airon-fitness/assets/68035358/bd99b378-268c-4d02-a3ae-835026389090)
+
+### Voice Controlled Guided Workouts
+![image](https://github.com/jakji93/airon-fitness/assets/68035358/43eaeee1-d976-4da7-8e16-84b2aba6355c)
+
+### Profile Management with Schedule History
+![image](https://github.com/jakji93/airon-fitness/assets/68035358/cb861ce7-6737-4991-ab54-a7ce7083ade2)
+
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- Roadmap -->
 
 ## Goals
@@ -163,7 +179,6 @@ Kevin Wu has been instrumental in various aspects of our MERN project. In the fr
 <!-- GROUP -->
 
 ## Connect with Us
-
 [@Davis Song](https://www.linkedin.com/in/davissong/)<br>
 [@Jack Ji](https://www.linkedin.com/in/jack-ji-5643a011a/)<br>
 [@Kenny Cheng](https://www.linkedin.com/in/kennyjhcheng/)<br>
