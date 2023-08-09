@@ -1,4 +1,6 @@
-import { Grid, Pagination, Box } from '@mui/material';
+import {
+  Grid, Pagination, Box, Paper,
+} from '@mui/material';
 import React, { useEffect, useState, useReducer } from 'react';
 
 import ScheduleItem from './ScheduleItem';
@@ -36,7 +38,19 @@ export default function ScheduleHistory() {
         {
           history
             // eslint-disable-next-line react/no-array-index-key
-            ? history.schedules.map((i, idx) => (i.schedule ? <ScheduleItem key={`schedule-${idx}`} details={i} token={token} /> : '')) : ''
+            ? history.schedules.map((i, idx) => (i.schedule ? <ScheduleItem key={`schedule-${idx}`} details={i} token={token} /> : (
+              <Grid item xs={12} lg={6} sx={{ margin: '8px 0' }}>
+                <Paper
+                  elevation={3}
+                  sx={{
+                    width: '100%', height: '100px', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'center',
+                  }}
+                  tabIndex={0}
+                >
+                  Generation in progress!
+                </Paper>
+              </Grid>
+            ))) : ''
         }
       </Grid>
       <Pagination
