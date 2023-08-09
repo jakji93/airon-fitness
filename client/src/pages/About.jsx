@@ -317,7 +317,7 @@ export default function About() {
           </Typography>
 
           <Box sx={{
-            width: '50vw', flexWrap: 'wrap', paddingTop: '1%', paddingRight: '5%', paddingLeft: '5%', display: 'flex', gap: '2vw', justifyContent: 'center',
+            width: '50vw', flexWrap: 'wrap', paddingTop: '2%', paddingRight: '5%', paddingLeft: '5%', display: 'flex', gap: '2vw', justifyContent: 'center',
           }}
           >
             {features.map((feature) => (
