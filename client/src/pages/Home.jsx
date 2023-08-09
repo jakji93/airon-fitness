@@ -17,7 +17,15 @@ export default function Home() {
   const getSchedules = async () => {
     try {
       setLoading(true);
-      await dispatch(getWorkoutAndMealSchedule());
+
+      const timeoutPromise = new Promise((resolve) => {
+        setTimeout(() => {
+          resolve('Generation in progress');
+        }, 1500);
+      });
+      const schedulePromise = dispatch(getWorkoutAndMealSchedule());
+
+      await Promise.race([schedulePromise, timeoutPromise]);
     } finally {
       setLoading(false);
     }

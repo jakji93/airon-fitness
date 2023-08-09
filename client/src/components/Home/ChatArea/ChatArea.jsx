@@ -19,7 +19,7 @@ import {
 import { goalsOptions } from '../../../constants/BasicProfile';
 import { getUserProfile, updateUserProfile } from '../../../reducers/UserProfile';
 import {
-  getWorkoutSchedule, getMealSchedule, updateWorkoutSchedule,
+  getWorkoutAndMealSchedule, getWorkoutSchedule, getMealSchedule, updateWorkoutSchedule,
   updateMealSchedule, createWorkoutAndMealSchedule,
 } from '../../../reducers/WorkoutAndMealSchedule';
 import theme from '../../../theme';
@@ -63,6 +63,16 @@ export default function ChatArea() {
     }
   };
 
+  const initBot = async () => {
+    const state = store.getState();
+
+    if (!state.workoutAndMealSchedule.workoutSchedule
+      || !state.workoutAndMealSchedule.workoutSchedule) {
+      await dispatch(getWorkoutAndMealSchedule());
+    }
+    resetValues();
+  };
+
   useEffect(() => {
     const chatBox = document.getElementById('chatbox-messages');
 
@@ -76,7 +86,7 @@ export default function ChatArea() {
   }, [token]);
 
   useEffect(() => {
-    resetValues();
+    initBot();
   }, []);
 
   const validateExistingSchedule = (validateMode) => {
