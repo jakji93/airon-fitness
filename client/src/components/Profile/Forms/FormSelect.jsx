@@ -76,7 +76,6 @@ export default function FormSelect(props) {
               wordWrap: 'break-word',
               whiteSpace: 'normal',
             }}
-            inputProps={{ 'aria-label': ariaLabel }}
           >
             {label}
           </InputLabel>
@@ -118,6 +117,7 @@ export default function FormSelect(props) {
             placeholder={placeholder}
             onBlur={onBlur}
             error={error}
+            inputProps={{ 'aria-label': ariaLabel }}
           >
             {options.map((val) => (
               <MenuItem value={val} key={val} aria-label={endAdornment ? `${val} ${endAdornment}` : val}>{val}</MenuItem>
