@@ -42,11 +42,7 @@ export default function SignupFlow() {
   }, [profile, isError, isSuccess, message, dispatch]);
 
   return (
-    <Box
-      sx={{
-        position: 'relative',
-      }}
-    >
+    <Box>
       {isLoading && <RelativeSpinner />}
       <CssBaseline />
       <Stepper activeStep={step} sx={{ margin: '3%' }} alternativeLabel>
