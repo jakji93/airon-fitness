@@ -2,7 +2,9 @@ const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 const UserInfo = require('../models/UserInfoModel');
 
-// ref: https://www.youtube.com/watch?v=enopDSs3DRw
+/**
+ * ref: https://www.youtube.com/watch?v=enopDSs3DRw
+ */
 const protect = asyncHandler(async (req, res, next) => {
   let token;
 
