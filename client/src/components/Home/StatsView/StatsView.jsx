@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ExistingStatsView from './ExistingStatsView';
 import NoStatsView from './NoStatsView';
-import { resetWorkoutAndMealScheduleStates } from '../../../reducers/WorkoutAndMealSchedule';
+import { getWorkoutAndMealSchedule, resetWorkoutAndMealScheduleStates } from '../../../reducers/WorkoutAndMealSchedule';
 import theme from '../../../theme';
 
 export default function StatsView() {
@@ -14,6 +14,12 @@ export default function StatsView() {
   } = useSelector((state) => state.workoutAndMealSchedule);
   const schedulesExist = workoutSchedule && mealSchedule
     && workoutSchedule.schedule && mealSchedule.schedule;
+
+  useEffect(() => {
+    if (!workoutSchedule || !mealSchedule) {
+      dispatch(getWorkoutAndMealSchedule());
+    }
+  }, []);
 
   useEffect(() => {
     if (isError) {
