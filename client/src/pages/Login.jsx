@@ -1,5 +1,5 @@
 import {
-  Box, CssBaseline, Grid, TextField,
+  Box, CssBaseline, Grid, TextField, Typography,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Container } from '@mui/system';
@@ -249,6 +249,10 @@ export default function Login() {
               </Grid>
             </Grid>
           </Box>
+          <Typography variant="body1" color={theme.palette.secondary.light} align="center" sx={{ mt: 3 }}>
+            Disclaimer: This app is hosted on a free platform
+            so the server may need a second to wake up!
+          </Typography>
         </Box>
       </Container>
     </Box>
